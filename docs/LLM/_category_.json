@@ -1,8 +1,0 @@
-{
-  "label": "LLM & MemGPT",
-  "position": 2,
-  "link": {
-    "type": "generated-index",
-    "description": "Start here and setup the Open LLM Vtuber project."
-  }
-}
