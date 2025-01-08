@@ -1,0 +1,8 @@
+{
+  "label": "后端部署",
+  "position": 1,
+  "link": {
+    "type": "generated-index",
+    "description": "以最方便的配置为例，尝试使用 Open LLM Vtuber 后端"
+  }
+}
