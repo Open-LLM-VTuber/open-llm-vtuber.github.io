@@ -1,15 +1,10 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 ---
 
-# Web & 窗口模式
+# Web 模式
 
-Web 模式和窗口模式共享相同的界面布局和功能。两种模式的主要区别在于:
-
-- Web 模式通过浏览器访问
-- 窗口模式作为独立的桌面应用运行
-
-![](img/web-window-mode/overview.png)
+![](img/web/overview.png)
 
 ## 布局概览
 - 侧边栏 (可折叠)
@@ -40,14 +35,13 @@ Web 模式和窗口模式共享相同的界面布局和功能。两种模式的�
 
 ## 设置概览
 
-![](img/web-window-mode/setting.png)
-
 :::info 特性
 所有设置都支持保存前预览 (TODO)。
+
 个性化设置使用 localStorage 在本地存储。
 :::
 
-
+<img src={require('./img/web/setting.png').default} style={{width: '70%'}} />
 
 ### General (通用)
 - 语言设置 (TODO)
@@ -65,10 +59,10 @@ Web 模式和窗口模式共享相同的界面布局和功能。两种模式的�
 
 ### Live2D
 - 鼠标交互开关
-  - 开启后支持鼠标点击触发动作
+  - 开启后支持鼠标点击触发动作 (TODO)
   - 开启后支持视线跟随鼠标
-- 滚轮缩放开关
-  - 开启后可通过鼠标滚轮调整模型大小
+- 缩放开关
+  - 开启后可通过鼠标滚轮/双指缩放调节模型大小
 
 ### ASR (语音识别)
 - 自动麦克风控制
@@ -133,7 +127,7 @@ Web 模式和窗口模式共享相同的界面布局和功能。两种模式的�
 - 在 AI 处于 `thinking-speaking` 状态时发送消息。
 
 ### 消息记录
-![](img/web-window-mode/history.png)
+<img src={require('./img/web/history.png').default} style={{width: '70%'}} />
 - 可滚动查看消息记录
 - 支持流式响应，实时显示 AI 回复内容
 - 支持查看历史消息记录，可以加载/删除单条历史记录（存储在后端）
@@ -144,9 +138,48 @@ Web 模式和窗口模式共享相同的界面布局和功能。两种模式的�
 - 支持滚轮/双指缩放调节模型大小 (可在 Setting - General 中设置是否开启)
 - 支持模型视线跟随鼠标（可在 Settings - Live2D 中设置是否开启）
 - 支持鼠标点击触发动作（TODO: 可在 Setting - Live2D 中设置是否开启）
-  - 需要提前在后端进行配置
+  - 需要提前在后端的 `model_dict.json` 进行配置，例如:
+    ```json
+    {
+      "name": "shizuku-local",
+      "tapMotions": {
+        "body": {
+          "tap_body": 30,  // 点击身体区域触发 tap_body 动作,权重为 30
+          "shake": 30      // 点击身体区域触发 shake 动作,权重为 30
+        },
+        "head": {
+          "flick_head": 40 // 点击头部区域触发 flick_head 动作,权重为 40
+        }
+      }
+    }
+    ```
+    - 动作名称需要和模型配置文件 (`.model.json` 或 `.model3.json`) 中的动作组名对应，例如 `shizuku.model.json` 中定义了 `tap_body`、`shake`、`flick_head` 等动作组，所以在 `model_dict.json` 中也要使用相同的名称。
+    - 例如 `shizuku.model.json` 中的动作组定义:
+      ```json
+      {
+        "motions": {
+          "tap_body": [
+            {"file": "motions/tapBody_00.mtn"},
+            {"file": "motions/tapBody_01.mtn"},
+            {"file": "motions/tapBody_02.mtn"}
+          ],
+          "shake": [
+            {"file": "motions/shake_00.mtn"},
+            {"file": "motions/shake_01.mtn"},
+            {"file": "motions/shake_02.mtn"}
+          ],
+          "flick_head": [
+            {"file": "motions/flickHead_00.mtn"},
+            {"file": "motions/flickHead_01.mtn"},
+            {"file": "motions/flickHead_02.mtn"}
+          ]
+        }
+      }
+      ```
+    - 当点击模型时，会先检测点击的区域(hitTest)，然后根据该区域配置的动作和权重随机触发一个动作。如果未检测到命中区域，则会将所有区域的动作合并后随机触发。权重越大的动作被触发的概率越高（目前完全由前端控制）。
 - 支持说话时根据情感/后端指令自动应用表情/动作
   - 需要提前在后端进行配置
+  
 
 ### 背景
 - 可在 Setting - General 中选择预设的背景图片
