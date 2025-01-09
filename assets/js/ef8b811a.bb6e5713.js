@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[8947],{6600:t=>{t.exports=JSON.parse('{"authors":[{"name":"Yi-Ting Chiu","title":"yey","url":"https://github.com/t41372","page":{"permalink":"/blog/authors/tim"},"socials":{"github":"https://github.com/t41372"},"imageURL":"https://github.com/t41372.png","key":"tim","count":1}]}')}}]);
