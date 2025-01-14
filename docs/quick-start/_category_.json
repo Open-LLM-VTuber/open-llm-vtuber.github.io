@@ -1,8 +1,0 @@
-{
-  "label": "快速上手",
-  "position": 2,
-  "link": {
-    "type": "generated-index",
-    "description": "以最方便的配置为例，尝试使用 Open LLM Vtuber"
-  }
-}
