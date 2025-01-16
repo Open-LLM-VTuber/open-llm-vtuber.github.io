@@ -2,7 +2,33 @@
 sidebar_position: 5
 ---
 
-# 代理
+# 智能体 (Agent)
+智能体 (Agent) 是包含记忆，工具，人格的 AI。
+
+智能体 (Agent) 相关的设置在 `conf.yaml` 配置文件的 `agent_config` 下面，你可以透过修改 `conversation_agent_choice` 来修改与你对话的智能体实现。
+
+目前，这个项目中有以下的智能体实现:
+- Basic Memory Agent 基础记忆智能体
+- HumeAI Agent (EVI)
+
+## Basic Memory Agent
+这个项目预设，也是最主要的智能体。具有短期记忆，对话记录储存/切换/加载等能力。
+
+```yaml
+basic_memory_agent:
+  # 基础 AI 代理，没什么特别的。
+  # 从 llm_config 中选择一个 llm 提供商
+  # 并在相应的字段中设置所需的参数
+  # 例如：
+  # "openai_compatible_llm", "llama_cpp_llm", "claude_llm", "ollama_llm"
+  # "openai_llm", "gemini_llm", "zhipu_llm", "deepseek_llm", "groq_llm"
+  llm_provider: "openai_compatible_llm" # 使用的 LLM 方案
+  # 是否在第一句回应时遇上逗号就直接生成音频以减少首句延迟（默认：True）
+  faster_first_response: True
+```
+
+你可以在 `llm_provider` 切换大语言模型后端。大语言模型的细节配置，包括模型，API Key 等配置，在 `llm_configs` 下面。
+
 
 ## HumeAI Agent (EVI)
 
