@@ -32,6 +32,10 @@ Web 模式是一个独立的网页版本，通过部署后，无需安装即可�
 iOS 禁止浏览器播放音频，需要不断点击才能使说话功能正常运行。
 :::
 
+:::warning 远程访问注意事项
+当你在远程访问部署的 Web 应用时（即部署服务器与访问设备不在同一台机器上，即使使用相同局域网也视为远程访问），请注意麦克风和摄像头仅能在安全上下文（HTTPS 或 localhost）中使用。详细说明请参考 [MDN Web 文档](https://developer.mozilla.org/zh-CN/docs/Web/Security/Secure_Contexts)。因此，如需在远程设备上正常使用这些功能，你必须为 Web 服务器配置 HTTPS 协议。
+:::
+
 ![](img/mode/web.png)
 
 

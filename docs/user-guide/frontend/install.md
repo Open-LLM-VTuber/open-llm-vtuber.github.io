@@ -67,7 +67,7 @@ open-llm-vtuber-web/
 └── package.json           
 ```
 
-### 开发模式 (可选, 通常用于开发者测试)
+### 开发模式 (可选，通常用于开发者测试)
 
 <Tabs>
   <TabItem value="electron" label="Electron" default>
@@ -86,7 +86,7 @@ open-llm-vtuber-web/
 `npm run dev` 会同时启动 Electron 和 Web 模式 (默认在 5137 端口上)
 :::
 
-### 根据目标平台/模式选择相应的构建命令：
+### 根据目标平台/模式选择相应的构建命令
 
 <Tabs>
   <TabItem value="windows" label="Windows" default>
