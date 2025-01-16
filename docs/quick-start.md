@@ -9,6 +9,8 @@ import TabItem from '@theme/TabItem';
 
 本指南将帮助你快速部署并运行 Open-LLM-VTuber 项目。
 
+本指南部署的配置为 Ollama + sherpa-onnx-asr (SenseVoiceSmall) + edgeTTS。
+
 :::info
 本指南着重于使用预设选项进行基础部署。如需深入定制，请参考[用户指南](/docs/category/用户指南)的相关章节。
 :::
@@ -18,7 +20,7 @@ import TabItem from '@theme/TabItem';
 ### 安装 FFmpeg
 
 :::caution
-FFmpeg 是必需的依赖项。没有 FFmpeg 可能会导致音频播放错误。
+FFmpeg 是必需的依赖项。没有 FFmpeg 会导致音频播放错误。
 :::
 
 <Tabs groupId="operating-systems">
@@ -179,21 +181,32 @@ ollama --version
 ```
 3. 下载并运行模型（以 Qwen 2.5 7B 为例，你可以进行修改）
 ```bash
-ollama run qwen2.5 
+ollama run qwen2.5:latest
 ```
+下载其他模型，请前往 [ollama 官网](https://ollama.com/search)，找到合适的模型并运行模型页面右上角提供的命令。
+
+:::caution
+选择模型时，请考虑你的显存容量与GPU算力。如果模型文件大小大于显存容量，模型会被迫使用 CPU 运算，速度极慢。另外，模型参数量越小，对话延迟越小。如果你希望降低对话延迟，请选择一个参数量较低的模型。
+:::
 
 #### 修改配置文件
 
 编辑 `conf.yaml`:
 
-1. 将 `basic_memory_agent.llm_provider` 设置为 `ollama_llm`
-2. 在 `llm_configs.ollama_llm` 下:
+1. 将 `basic_memory_agent` 下的 `llm_provider` 设置为 `ollama_llm`
+2. 调整 `llm_configs` 选项下的 `ollama_llm` 下的设置:
    - `base_url` 本地运行保持默认即可，无需修改。
-   - 设置 `model` 为你使用的模型，比如本指南使用的 `qwen2.5:latest`
+   - 设置 `model` 为你使用的模型，比如本指南使用的 `qwen2.5:latest`。
+
+:::tip
+寻找模型名时，请使用 `ollama list` 命令，查看 ollama 中已下载的模型，并将模型名称直接复制粘贴到 `model` 选项下，避免模型名打错，全形冒号，空格之类的问题。
+:::
 
 :::tip 
 可以用 `conf.CN.yaml` 的内容覆盖 `conf.yaml` 的内容，获得更适合中文使用的预设配置。
 :::
+
+关于配置文件的详细说明，可以参考 [用户指南/配置文件](/docs/user-guide/backend/config.md)。
 
 ### 4. 启动项目
 
