@@ -3,7 +3,7 @@ sidebar_position: 5
 ---
 
 # 智能体 (Agent)
-智能体 (Agent) 是包含记忆，工具，人格的 AI。
+智能体 (Agent) 是包含记忆，工具，人格的 AI。当前版本的预设选项是 `basic_memory_agent`。
 
 智能体 (Agent) 相关的设置在 `conf.yaml` 配置文件的 `agent_config` 下面，你可以透过修改 `conversation_agent_choice` 来修改与你对话的智能体实现。
 
@@ -28,6 +28,8 @@ basic_memory_agent:
 ```
 
 你可以在 `llm_provider` 切换大语言模型后端。大语言模型的细节配置，包括模型，API Key 等配置，在 `llm_configs` 下面。
+
+关于各个大语言模型 (llm) 的具体配置，参考 [大语言模型配置](/docs/user-guide/backend/llm.md)。
 
 
 ## HumeAI Agent (EVI)
