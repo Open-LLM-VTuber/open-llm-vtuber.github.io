@@ -133,16 +133,16 @@ GGML_VULKAN=1 pip install git+https://github.com/absadiki/pywhispercpp
 - 方法二：在 [Hugging Face 仓库](https://huggingface.cochidiwilliams/whisper.cpp-coreml/tree/main) 下载已转换好的 coreML 模型。注意：下载后需要解压模型文件，否则程序无法加载并会崩溃。
 - 配置说明：在 `conf.yaml` 中配置模型时，无需包含文件名中的特殊前缀。如，当 coreML 模型文件名为 `ggml-base-encoder.mlmodelc` 时，只需在`WhisperCPP` 的 `model_name` 参数中填写 `base` 即可。
 
-## `Whisper` (本地)
+## `whisper` (本地)
 
 OpenAI 的原始 Whisper。使用 `uv pip install -U openai-whisper` 安装。推理速度很慢。
 
 
-## `GroqWhisperASR` (需要 API 密钥)
+## `groq_whisper_asr` (需要 API 密钥)
 
 Groq 的 Whisper 端点，非常准确（支持多语言）且速度快，并且每天都有很多免费使用次数。它已预安装。从 [groq](https://console.groq.com/keys) 获取 API 密钥并将其添加到 `conf.yaml` 中的 `groq_whisper_asr` 设置中。中国大陆及其他的不支持地区，需要代理（不支持香港地区）才能使用。
 
-## `AzureASR` (需要 API 密钥)
+## `azure_asr` (需要 API 密钥)
 
 - Azure 语音识别。
 - 在 `azure_asr` 选项下配置 API key 和地区
