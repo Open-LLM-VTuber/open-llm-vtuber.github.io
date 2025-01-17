@@ -73,12 +73,12 @@ const config: Config = {
 
   themeConfig: {
     // Replace with your project's social card
-    image: "img/docusaurus-social-card.jpg",
+    image: "img/Open_LLM_VTuber_Social.png",
     navbar: {
       title: "Open LLM Vtuber",
       logo: {
-        alt: "My Site Logo",
-        src: "img/logo.svg",
+        alt: "Open LLM VTuber Logo",
+        src: "img/open_llm_vtuber.png",
       },
       items: [
         {
