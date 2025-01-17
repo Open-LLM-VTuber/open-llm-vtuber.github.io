@@ -9,10 +9,19 @@ import TabItem from '@theme/TabItem';
 
 本指南将帮助你快速部署并运行 Open-LLM-VTuber 项目。
 
-本指南部署的配置为 Ollama + sherpa-onnx-asr (SenseVoiceSmall) + edgeTTS。
+本指南部署的配置为 Ollama + sherpa-onnx-asr (SenseVoiceSmall) + edgeTTS。如需深入定制，请参考[用户指南](/docs/category/用户指南)的相关章节。
 
 :::info
-本指南着重于使用预设选项进行基础部署。如需深入定制，请参考[用户指南](/docs/category/用户指南)的相关章节。
+如果用 OpenAI Compatible API 代替 Ollama，用 Groq Whisper API 代替 sherpa-onnx-asr (SenseVoiceSmall)，那么只需配置 API Key 即可使用，无需下载模型文件，也可以跳过对本地 GPU 进行配置。
+:::
+
+:::danger 关于代理
+如果你位于中国大陆，建议你开启代理后再使用本项目，确保能顺利下载所有资源。
+
+如果你遇到开启代理后本地服务无法访问，如 ollama、deeplx、gptsovits 等，但关闭代理后就能访问。请你确保你的代理绕过本地地址 (localhost)，或者再所有资源下载完毕后关闭代理进行使用。参考 [设置代理绕过
+](https://www.clashverge.dev/guide/bypass.html#_3)。
+
+Groq Whisper API、OpenAI API 等国外大模型/推理平台 API 一般无法使用香港地区的代理。
 :::
 
 ## 环境准备
@@ -20,13 +29,14 @@ import TabItem from '@theme/TabItem';
 ### 安装 FFmpeg
 
 :::caution
-FFmpeg 是必需的依赖项。没有 FFmpeg 会导致音频播放错误。
+FFmpeg 是必需的依赖项。没有 FFmpeg 会导致找不到音频文件的错误。
 :::
 
 <Tabs groupId="operating-systems">
   <TabItem value="windows" label="Windows">
 
 ```bash
+# 在命令行中运行
 winget install ffmpeg
 ```
 
@@ -34,6 +44,9 @@ winget install ffmpeg
   <TabItem value="macos" label="macOS">
 
 ```bash
+# 如果没有安装 Homebrew，请先运行这个命令进行安装，或者参考 https://brew.sh/zh-cn/ 进行安装
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# 安装 ffmpeg
 brew install ffmpeg
 ```
 
@@ -132,12 +145,14 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 更多 uv 安装方法参考：[Installing uv](https://docs.astral.sh/uv/getting-started/installation/)
 
 
-## 部署步骤
+## 手动部署指南
 
 ### 1. 获取项目代码
 
 :::info 开发版说明
 目前处于 v1.0.0 开发阶段，需要切换到 `superb-refactoring` 分支。
+
+自 `v1.0.0` 开始，前端代码已被拆分到独立仓库中。我们建立了完整的构建流程，并通过 git submodule 将前端代码链接到主仓库的 `frontend` 目录下。
 :::
 
 ```bash
@@ -150,7 +165,7 @@ cd Open-LLM-VTuber
 # 切换到开发分支
 git switch superb-refactoring
 
-# 获取前端代码
+# 由于 git submodule 链接的内容不会自动同步到本地目录，我们需要手动获取前端代码。
 git submodule update --init --recursive
 ```
 
@@ -165,12 +180,24 @@ uv --version
 创建环境并安装依赖:
 
 ```bash
+# 确保你在项目根目录下运行这个命令
 uv sync
+# 这个命令将创建一个 `.venv` 虚拟环境，
 ```
 
 ### 3. 配置 LLM
 
 我们以 [Ollama](https://github.com/ollama/ollama) 为例进行配置。其他选项请参考[LLM 配置指南](/docs/user-guide/backend/llm)。
+
+:::info 其他选项
+如果你不想使用 Ollama / 在 Ollama 的配置上遇到了难以解决的问题，本项目也支持：
+- OpenAI 兼容 API（智谱、DeepSeek、OpenAI、Gemini 等，如果你有 API Key，这可能会是最简单的方案）
+- LM Studio（类似 Ollama，使用更简单）
+- VLLM（性能更好，配置较复杂）
+- llama.cpp（直接运行 .gguf 格式模型）
+
+更多信息请参考[LLM 配置指南](/docs/user-guide/backend/llm)。
+:::
 
 #### 安装 Ollama
 
@@ -179,11 +206,25 @@ uv sync
 ```bash
 ollama --version
 ```
-3. 下载并运行模型（以 Qwen 2.5 7B 为例，你可以进行修改）
+
+3. 下载并运行模型（以 `qwen2.5:latest` 为例）：
 ```bash
 ollama run qwen2.5:latest
+# 运行成功后，你就可以直接跟 qwen2.5:latest 对话了
+# 可以先退出聊天界面 (Ctrl/Command + D)
+# 但一定不要关闭命令行
 ```
-下载其他模型，请前往 [ollama 官网](https://ollama.com/search)，找到合适的模型并运行模型页面右上角提供的命令。
+
+4. 查看已安装的模型：
+```bash
+ollama list
+# NAME                ID              SIZE      MODIFIED
+# qwen2.5:latest      845dbda0ea48    4.7 GB    2 minutes ago
+```
+
+:::tip
+寻找模型名时，请使用 `ollama list` 命令，查看 ollama 中已下载的模型，并将模型名称直接复制粘贴到 `model` 选项下，避免模型名打错，全形冒号，空格之类的问题。
+:::
 
 :::caution
 选择模型时，请考虑你的显存容量与GPU算力。如果模型文件大小大于显存容量，模型会被迫使用 CPU 运算，速度极慢。另外，模型参数量越小，对话延迟越小。如果你希望降低对话延迟，请选择一个参数量较低的模型。
@@ -191,37 +232,54 @@ ollama run qwen2.5:latest
 
 #### 修改配置文件
 
-编辑 `conf.yaml`:
+:::tip 
+可以用 `conf.CN.yaml` 的内容覆盖 `conf.yaml` 的内容，获得更适合中文使用的预设配置。
+:::
+
+编辑 `conf.yaml`：
 
 1. 将 `basic_memory_agent` 下的 `llm_provider` 设置为 `ollama_llm`
 2. 调整 `llm_configs` 选项下的 `ollama_llm` 下的设置:
    - `base_url` 本地运行保持默认即可，无需修改。
    - 设置 `model` 为你使用的模型，比如本指南使用的 `qwen2.5:latest`。
-
-:::tip
-寻找模型名时，请使用 `ollama list` 命令，查看 ollama 中已下载的模型，并将模型名称直接复制粘贴到 `model` 选项下，避免模型名打错，全形冒号，空格之类的问题。
-:::
-
-:::tip 
-可以用 `conf.CN.yaml` 的内容覆盖 `conf.yaml` 的内容，获得更适合中文使用的预设配置。
-:::
+   ```yaml
+   ollama_llm:
+     base_url: http://localhost:11434  # 本地运行保持默认
+     model: qwen2.5:latest            # ollama list 得到的模型名称
+     temperature: 0.7                 # 控制回答随机性，越高越随机 (0~1)
+   ```
 
 关于配置文件的详细说明，可以参考 [用户指南/配置文件](/docs/user-guide/backend/config.md)。
 
-### 4. 启动项目
+### 4. 配置其他模块
+
+本项目 `conf.yaml` 默认配置中使用了 sherpa-onnx-asr (SenseVoiceSmall) 和 edgeTTS（需要代理），并默认关闭翻译功能，你可以不用进行修改。
+
+或者你可以参考 [ASR 配置指南](./user-guide/backend/)、[TTS 配置指南](./user-guide/backend/asr.md) 和 [Translator 配置指南](./user-guide/backend/translate.md) 进行修改。
+
+### 5. 启动项目
 
 运行后端服务:
 
 ```bash
 uv run run_server.py
+# 第一次运行可能会下载一些模型，导致等待时间较久。
 ```
 
-访问 `http://localhost:12393` 打开 Web 界面。
+运行成功后，访问 `http://localhost:12393` 打开 Web 界面。
 
 :::tip 桌面应用
 如果你更喜欢 Electron 应用 (窗口模式 + 桌充模式)，可以从 [Open-LLM-VTuber-Web Releases](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web/releases) 下载对应平台 Electron 客户端，可以在后端服务运行的前提下直接使用。
-:::
 
-:::info
 有关前端的更多信息，请参考 [前端指南](./user-guide/frontend/)
 :::
+
+## 常见问题排查
+
+如果遇到 `Error calling the chat endpoint...` 错误，请检查：
+
+- http://localhost:11434/ 是否能正常访问，如果不能，可能是因为 `ollama run` 没有运行成功，或者运行成功后命令行被你关闭了，请保持运行 ollama 的命令行不要关闭。
+
+- 报错中提示`Model not found, try pulling it...`，请使用 `ollama list` 查看已安装的模型名称，确保配置文件中的模型名称与列表中的完全一致。
+
+- 如果你的代理软件没有绕过本地地址，会导致 Ollama 无法连接。尝试临时关闭代理，或参考前文设置代理绕过本地地址。
