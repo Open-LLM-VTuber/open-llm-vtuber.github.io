@@ -12,14 +12,14 @@ import TabItem from '@theme/TabItem';
 本指南部署的配置为 Ollama + sherpa-onnx-asr (SenseVoiceSmall) + edgeTTS。如需深入定制，请参考[用户指南](/docs/category/用户指南)的相关章节。
 
 :::info
-如果用 OpenAI Compatible API 代替 Ollama，用 Groq Whisper API 代替 sherpa-onnx-asr (SenseVoiceSmall)，那么只需配置 API Key 即可使用，无需下载模型文件，也可以跳过对本地 GPU 进行配置。
+如果用 OpenAI Compatible 代替 Ollama，用 GroqWhisperASR 代替 sherpa-onnx-asr (SenseVoiceSmall)，那么只需配置 API Key 即可使用，无需下载模型文件，也可以跳过对本地 GPU 进行配置。
 :::
 
 :::danger 关于代理
-如果你位于中国大陆，建议你开启代理后再使用本项目，确保能顺利下载所有资源。
+如果你位于中国大陆，建议你开启代理后再部署和使用本项目，确保能顺利下载所有资源。
 
-如果你遇到开启代理后本地服务无法访问，如 ollama、deeplx、gptsovits 等，但关闭代理后就能访问。请你确保你的代理绕过本地地址 (localhost)，或者再所有资源下载完毕后关闭代理进行使用。参考 [设置代理绕过
-](https://www.clashverge.dev/guide/bypass.html#_3)。
+如果你遇到开启代理后本地服务 (ollama、deeplx、gptsovits) 无法访问，但关闭代理后就能访问的问题。请你确保你的代理绕过本地地址 (localhost)，或者在所有资源下载完毕后关闭代理再运行本项目。更多信息参考 [设置代理绕过
+](https://www.clashverge.dev/guide/bypass.html)。
 
 Groq Whisper API、OpenAI API 等国外大模型/推理平台 API 一般无法使用香港地区的代理。
 :::
@@ -278,7 +278,7 @@ uv run run_server.py
 
 如果遇到 `Error calling the chat endpoint...` 错误，请检查：
 
-- http://localhost:11434/ 是否能正常访问，如果不能，可能是因为 `ollama run` 没有运行成功，或者运行成功后命令行被你关闭了，请保持运行 ollama 的命令行不要关闭。
+- http://localhost:11434/ 是否能正常访问，如果不能，可能是因为 `ollama run` 没有运行成功，或者运行成功后命令行被关闭了。
 
 - 报错中提示`Model not found, try pulling it...`，请使用 `ollama list` 查看已安装的模型名称，确保配置文件中的模型名称与列表中的完全一致。
 
