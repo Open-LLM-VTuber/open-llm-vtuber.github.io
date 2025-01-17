@@ -4,9 +4,11 @@ sidebar_position: 1
 
 # 模式介绍
 
-Open LLM VTuber 提供了三种使用模式，以满足不同用户的需求：[Web 模式](web-window-mode)、[窗口模式](web-window-mode)和[桌宠模式](pet-mode)。Web 模式需要通过部署或访问他人部署的网页链接来使用。
+Open LLM VTuber 提供了三种使用模式，以满足不同用户的需求：[Web 模式](web-window-mode)、[窗口模式](web-window-mode)和[桌宠模式](pet-mode)。
 
 三种模式都使用 localStorage 来存储用户的个性化设置。
+
+Web 模式需要通过部署或访问他人部署的网页链接来使用。
 
 窗口模式和桌宠模式是基于 Electron 应用的两个模式，支持 Windows 和 Mac 系统，但暂时不支持移动设备。你可以直接从 Github Release 下载对应平台的安装包（推荐），或者下载源码进行测试或打包。
 
@@ -33,7 +35,7 @@ iOS 禁止浏览器播放音频，需要不断点击才能使说话功能正常�
 :::
 
 :::warning 远程访问注意事项
-当你在远程访问部署的 Web 应用时（即部署服务器与访问设备不在同一台机器上，即使使用相同局域网也视为远程访问），请注意麦克风和摄像头仅能在安全上下文（HTTPS 或 localhost）中使用。详细说明请参考 [MDN Web 文档](https://developer.mozilla.org/zh-CN/docs/Web/Security/Secure_Contexts)。因此，如需在远程设备上正常使用这些功能，你必须为 Web 服务器配置 HTTPS 协议。
+当你在远程访问部署的 Web 应用时（即部署服务器与访问设备不在同一台机器上，即使处于相同局域网也视为远程访问），请注意麦克风和摄像头仅能在安全上下文（HTTPS 或 localhost）中使用。详细说明请参考 [MDN Web 文档](https://developer.mozilla.org/zh-CN/docs/Web/Security/Secure_Contexts)。因此，如需在远程设备上正常使用这些功能，你必须为 Web 服务器配置 HTTPS 协议。
 :::
 
 ![](img/mode/web.png)

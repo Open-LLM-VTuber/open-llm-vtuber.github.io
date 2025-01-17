@@ -191,7 +191,7 @@ uv sync
 
 :::info 其他选项
 如果你不想使用 Ollama / 在 Ollama 的配置上遇到了难以解决的问题，本项目也支持：
-- OpenAI 兼容 API（智谱、DeepSeek、OpenAI、Gemini 等，如果你有 API Key，这可能会是最简单的方案）
+- OpenAI 兼容 API（智谱、DeepSeek、OpenAI、Gemini 等；如果你有 API Key，这可能会是最简单的方案）
 - LM Studio（类似 Ollama，使用更简单）
 - VLLM（性能更好，配置较复杂）
 - llama.cpp（直接运行 .gguf 格式模型）
@@ -211,8 +211,7 @@ ollama --version
 ```bash
 ollama run qwen2.5:latest
 # 运行成功后，你就可以直接跟 qwen2.5:latest 对话了
-# 可以先退出聊天界面 (Ctrl/Command + D)
-# 但一定不要关闭命令行
+# 可以先退出聊天界面 (Ctrl/Command + D)，但一定不要关闭命令行
 ```
 
 4. 查看已安装的模型：

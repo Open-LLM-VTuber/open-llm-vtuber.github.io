@@ -3,16 +3,16 @@ sidebar_position: 5
 ---
 
 # 智能体 (Agent)
-智能体 (Agent) 是包含记忆，工具，人格的 AI。当前版本的预设选项是 `basic_memory_agent`。
+智能体 (Agent) 是包含记忆，工具，人格的 LLM 系统。当前版本的预设选项是 `basic_memory_agent`。
 
-智能体 (Agent) 相关的设置在 `conf.yaml` 配置文件的 `agent_config` 下面，你可以透过修改 `conversation_agent_choice` 来修改与你对话的智能体实现。
+智能体 (Agent) 相关的设置在 `conf.yaml` 的 `agent_config` 下面，你可以透过修改 `conversation_agent_choice` 来修改与你对话的智能体。
 
 目前，这个项目中有以下的智能体实现:
 - Basic Memory Agent 基础记忆智能体
 - HumeAI Agent (EVI)
 
 ## Basic Memory Agent
-这个项目预设，也是最主要的智能体。具有短期记忆，对话记录储存/切换/加载等能力。
+Basic Memory Agent 是项目的预设，具有短期记忆，对话记录储存/切换等能力。
 
 ```yaml
 basic_memory_agent:
@@ -27,9 +27,9 @@ basic_memory_agent:
   faster_first_response: True
 ```
 
-你可以在 `llm_provider` 切换大语言模型后端。大语言模型的细节配置，包括模型，API Key 等配置，在 `llm_configs` 下面。
+你可以通过修改 `llm_provider` 来切换不同的大语言模型后端。每个大语言模型的具体配置项（如模型选择、API Key 等）都位于 `llm_configs` 配置块下。
 
-关于各个大语言模型 (llm) 的具体配置，参考 [大语言模型配置](/docs/user-guide/backend/llm.md)。
+如需了解各个大语言模型的详细配置说明，请参考 [大语言模型配置](/docs/user-guide/backend/llm.md)。
 
 
 ## HumeAI Agent (EVI)
@@ -45,7 +45,7 @@ Hume AI 的 EVI (Empathic Voice Interface) 是世界上第一个具有情感智�
 - [Hume AI 官网](https://www.hume.ai/)
 - [Hume AI 开发者文档](https://dev.hume.ai/intro)
 
-:::tip
+:::note
 为了确保系统架构的一致性和兼容性，在使用 EVI 时仍需配置 ASR 将语音转录为文本后再进行处理。这个选择让 EVI 能够无缝集成到现有的 `conversation_chain` 流程中，但同时也意味着无法充分使用 EVI 独特的音频情绪分析功能。
 
 我们计划在未来实现一个新的架构，以完整支持像 EVI 这样具备打断检测、ASR、TTS、摄像头等实时交互功能的 API。欢迎各位开发者参与贡献。
@@ -75,6 +75,10 @@ agent_config:
 你可以在 [API keys page](https://platform.hume.ai/settings/keys) 获取 `api_key`。
 
 关于 `config_id` 和其他配置的详细说明，请参考 [Configuring EVI](https://dev.hume.ai/docs/empathic-voice-interface-evi/configuration)。
+
+:::info
+EVI 的 LLM 选择和 Prompt 需要在 `config_id` 对应的配置中进行设置，在 `persona_prompt` 设置的 Prompt 对 EVI 无效。
+:::
 
 :::warning
 由于 EVI 在 WebSocket 空闲状态下仍会持续计费，建议不要将 `idle_timeout` 设置过大。但同时也要注意，如果 `idle_timeout` 设置过小，会导致频繁断开重连，从而增加响应延迟。因此需要根据实际使用情况，合理设置这个参数。
