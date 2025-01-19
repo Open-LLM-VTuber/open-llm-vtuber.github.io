@@ -87,3 +87,24 @@ EVI 的 LLM 选择和 Prompt 需要在 `config_id` 对应的配置中进行设�
 ### 常见问题
 
 [Empathic Voice Interface FAQ](https://dev.hume.ai/docs/empathic-voice-interface-evi/faq)
+
+
+
+## Mem0 (高度实验性，而且效果不好)
+
+### Mem0 (it turns out it's not very good for our use case, but the code is here...)
+
+Another long-term memory solution. Still in development. Highly experimental.
+
+Pro
+
+- It's easier to set up compared to MemGPT
+- It's a bit faster than MemGPT (but still would take quite a lot more LLM tokens to process)
+
+Cons
+
+- It remembers your preferences and thoughts, nothing else. It doesn't remember what the LLM said.
+- It doesn't always put stuff into memory.
+- It sometimes remembers wrong stuff
+- It requires an LLM with very good function calling capability, which is quite difficult for smaller models
+- 
