@@ -169,7 +169,18 @@ git switch superb-refactoring
 git submodule update --init --recursive
 ```
 
-### 2. 创建虚拟环境
+### 2. 安装项目依赖
+
+:::info
+内地用户可以配置 Python 与 pip 的镜像源，提高下载速度。
+
+请在项目目录下的 `pyproject.toml` 文件底部添加下面内容
+```toml
+[[tool.uv.index]]
+url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"
+default = true
+```
+:::
 
 确认 uv 已正确安装:
 
@@ -191,10 +202,17 @@ uv sync
 
 :::info 其他选项
 如果你不想使用 Ollama / 在 Ollama 的配置上遇到了难以解决的问题，本项目也支持：
-- OpenAI 兼容 API（智谱、DeepSeek、OpenAI、Gemini 等；如果你有 API Key，这可能会是最简单的方案）
+- OpenAI 兼容 API
+- OpenAI 官方 API
+- Claude
+- Gemini
+- Mistral
+- 智谱
+- DeepSeek
 - LM Studio（类似 Ollama，使用更简单）
-- VLLM（性能更好，配置较复杂）
+- vLLM（性能更好，配置较复杂）
 - llama.cpp（直接运行 .gguf 格式模型）
+- 以及更多 (大部分的 LLM 推理后端和API都支持 OpenAI 格式，可以直接接入本项目)
 
 更多信息请参考[LLM 配置指南](/docs/user-guide/backend/llm)。
 :::
