@@ -1,35 +1,30 @@
-# Live2D 修改指南
+# Live2D 指南
 
-## 概览：
+:::info 概览
+要往项目中添加新的 Live2D 模型，需要完成以下三个步骤:
 
-总体来说，往项目中添加新的 live2d 模型，要进行以下几个操作:
+1. 将 Live2D 模型文件放置到 `live2d-models` 文件夹中
+2. 在 `model_dict.json` 文件中配置模型信息
+3. 在角色配置文件 (`conf.yaml` 或者 `characters` 目录下的角色设定文件) 中指定使用的 Live2D 模型
+:::
 
-1. 将 live2d 模型文件放在 `live2d-models` 文件夹中。
-2. 往 `model_dict.json` 文件中添加 live2d 模型的相关信息。
-3. 在 `conf.yaml` (或是 `characters` 目录下的角色设定文件) 中，指定角色使用的 live2d 模型。
+## 1. 放置模型文件
 
-![](./img/live2d_p1.png)
+将你的 Live2D 模型文件放在 `live2d-models` 文件夹中，如图中的 `xiao`。
 
-conf.yaml文件中的模型改成对应的模型文件夹名字：
+<img src={require('./img/live2d_p1.png').default} style={{width: '70%'}} />
 
-## 步骤1: 将 live2d 模型文件放在 `live2d-models` 文件夹中
 
-本项目中的 Live2D 模型文件都存放在 `live2d-models` 文件夹中。请把你的 Live2D 模型文件放到这个目录下。
+## 2. 添加模型配置
 
-![alt text](./img/live2d-model.jpg)
-
-## 步骤2: 前往 `model_dict.json` 文件中添加 live2d 模型的相关信息
-
-`model_dict.json` 文件中，包含了这个项目所有 Live2D 的配置。包括模型名，模型文件路径，缩放大小，中心位置以及表情定义等等内容。
-
-这里，我们以 `shizuku` 的模型为例:
+在项目根目录下的 `model_dict.json` 文件中添加模型配置。以下是一个完整的配置示例：
 
 ```json
 {
     "name": "shizuku-local",
     "description": "Orange-Haired Girl, locally available. no internet required.",
     "url": "/live2d-models/shizuku/shizuku.model.json",
-    "kScale": 0.000625,
+    "kScale": 0.5,
     "initialXshift": 0,
     "initialYshift": 0,
     "idleMotionGroupName": "idle",
@@ -57,108 +52,184 @@ conf.yaml文件中的模型改成对应的模型文件夹名字：
             "pinch_out": 20
         }
     }
-},
+}
 ```
-我们由上往下，逐行解释。
 
-### `name`
-- 模型名，这个 Live2D 模型的唯一标识符。可以随便写，建议写不带空格的英文名，避免错误。
-- 接下来的步骤中，我们需要在 `conf.yaml` 中，角色设定的设置部分，用这个名字来指定使用的 Live2D 模型。
+### 2.1 基础配置
 
-### `description`
-- 这个 Live2D 模型的描述。告诉你这模型大概长啥样。程序上没什么用，可以不填。
+| 配置项        | 说明                           | 示例值                                        |
+| ------------- | ------------------------------ | --------------------------------------------- |
+| `name`        | 模型的唯一标识符，建议使用英文 | `"shizuku-local"`                             |
+| `description` | 模型描述（可选）               | `"Orange-Haired Girl"`                        |
+| `url`         | 模型文件路径                   | `"/live2d-models/shizuku/shizuku.model.json"` |
 
-### `url`
-- 模型的 `model.json` 文件的位置。
+- 支持本地路径和远程 URL
+- 本地路径以 `/live2d-models/` 开头，而非 `./live2d-models/` 开头。
+- 远程 URL 需要指向有效的 `.model.json` 或 `.model3.json` 文件，比如 `https://cdn.jsdelivr.net/gh/guansss/pixi-live2d-display/test/assets/shizuku/shizuku.model.json`
 
-请观察你的 Live2D 模型文件的目录 (Live2D 模型是个文件夹)。
-以 `shizuku` 模型为例
-![](./img/inside_live2d_model.jpg)
+### 2.2 显示配置
 
-可以看到，模型目录下有个叫做 `shizuku.model.json` 的文件。这个文件的路径，就是我们要填写在 `url` 中的内容。
+| 配置项          | 说明             | 推荐值 |
+| --------------- | ---------------- | ------ |
+| `kScale`        | 模型初始缩放比例 | `0.3 ~ 0.5`  |
+| `initialXshift` | 模型水平位置初始偏移量   | `0`    |
+| `initialYshift` | 模型垂直位置初始偏移量   | `0`    |
 
-上面的 `shizuku` 例子中填写的路径，实际上是相对路径。
+- 当 `initialXshift` 和 `initialYshift` 都设置为 `0` 时，Live2D 模型通常会在画布中居中显示。对于某些特殊模型，可能需要手动调整这两个参数来实现理想的显示位置。
+- 关于模型大小：
+  - `kScale` 参数只决定在浏览器/设备上，初次加载某个模型的大小。并不会决定之后使用改模型时的大小。
+  - 在前端界面，**你可以通过鼠标滚轮或者触摸屏双指缩放来调节模型大小**。
+  - 当你手动调整模型大小后，系统会通过 `localStorage` 记住该模型在当前浏览器/设备、当前模式下的大小
+  - 下次在同一浏览器/设备上使用时(未清空 localStorage)，**将自动应用上次的大小**。
 
-`/live2d-models/shizuku/shizuku.model.json`
+需要注意的是，当画布大小发生变化时(如调整窗口大小、折叠/展开侧边栏或底边栏、切换显示模式等)，Live2D 模型会重置到初始位置，但会保持当前的缩放大小不变。
 
-`/live2d-models/` 是本项目存放 Live2D 模型的位置 (就是刚刚让你放模型的位置)。
+### 2.3 待机动作配置
 
-如果你想使用的 Live2D 模型文件在一个 url 上，你也可以在这里填写 `xxx.model.json` 的 url。
+Live2D 模型的动作动画一般会被分成多个动作组 (Motion Groups)。每个动作组包含一系列相关的动作动画。在 model.json 文件中，这些动作组通常定义在 `motions` 或 `Motions` 字段下。
 
-#### 碎碎念
+待机动作(Idle Motion)是模型在无交互时随机播放的基础动画。它们通常被放在名为 `idle` 或 `Idle` 的动作组中，系统会从该组中随机选择一个动作进行播放。 
 
-至于为什么叫 `url`，是因为项目早期只支持填写网址来添加 Live2D 模型。后来才添加了本地模型文件的支持。
+具体动作组名称需要根据模型配置文件 `model.json` 或 `model3.json` 中的名称，如图所示。
 
-(还有其实这个 `model_dict.json` 的结构是从[其他开源项目](https://github.com/SchwabischesBauernbrot/unsuperior-ai-waifu)偷过来的。当然，我做了一些修改。不过 MIT 协议开源的项目能叫偷吗！)
+<img src={require('./img/live2d_p3.png').default} style={{width: '100%'}} />
 
-### `kScale`
+:::tip 
+如果你理解模型的动作结构，也可以配置自己待机的动作组。但除非你知道自己在做什么，否则建议保持 `idleMotionGroupName` 的默认值(`idle` 或 `Idle`)。
+:::
 
-控制 Live2D 的初始大小。
+### 2.4 表情配置
 
-你可能已经知道，在前端页面，滚动滚轮可以直接调整 Live2D 模型的大小。
+`emotionMap` 定义了 AI 可用的表情映射。这个映射关系需要参考模型文件中的表情定义顺序。
 
-kScale 可以确保 Live2D 初始化时就是正确的大小。
+#### 配置示例
 
-我推荐你先使用实例中的数值或是随便填一个数值，之后如果觉得太大或太小再做调整。
+1. 首先查看模型文件中的表情定义:
+```json
+"expressions": [
+    {"name": "f01", "file": "expressions/f01.exp.json"}, // 索引 0
+    {"name": "f02", "file": "expressions/f02.exp.json"}, // 索引 1
+    {"name": "f03", "file": "expressions/f03.exp.json"}, // 索引 2
+    {"name": "f04", "file": "expressions/f04.exp.json"}  // 索引 3
+]
+```
 
-
-### `initialXshift` 和 `initialXshift`
-
-控制 Live2D 模型的初始位置。
-
-你可能知道，在前端页面，可以直接拖动 Live2D 模型来改变其位置。
-
-Live2D 模型一般来说会被放在中间，但每个 Live2D 模型的位置不一样(...)。这两个数值可以调整 Live2D 模型的预设位置。默认是 (0, 0) (中心)。如果你发现 Live2D 模型的位置有点怪，可以用这两个数值调整。
-
-### `idleMotionGroupName`
-
-Live2D 待机动画的动作组。基本不用管。
-
-Live2D 模型的动作动画一般会被分成一些动作组。待机动作一般是从一堆放在 `idle` (或是 `Idle`，该死的 Live2D) 组里面的动作随机选一个播放的。不需要修改，除非你知道自己在做什么。
-
-### `emotionMap`
-
-本文档的重点。
-
-`emotionMap` 是个描述 Live2D 表情的字典。
-
-看看这个例子:
-
+2. 然后在 `model_dict.json` 中配置表情映射（请不要在实际的 json 文件中写注释，这里的注释仅用来帮助理解）:
+   
 ```json
 "emotionMap": {
-    "neutral": 0,
-    "anger": 2,
-    "disgust": 2,
-    "fear": 1,
-    "joy": 3,
-    "smirk": 3,
-    "sadness": 1,
-    "surprise": 3
-},
+    "neutral": 0,  // 对应 f01 表情
+    "anger": 2,    // 对应 f03 表情
+    "disgust": 2,  // 同样使用 f03 表情
+    "fear": 1,     // 对应 f02 表情
+    "joy": 3,      // 对应 f04 表情
+    "smirk": 3,    // 同样使用 f04 表情
+    "sadness": 1,  // 同样使用 f02 表情
+    "surprise": 3  // 同样使用 f04 表情
+}
 ```
-#### 表情关键字
-![](./img/emoMap_keyword.jpg)
-左侧的文字，比如 `neutral`, `anger` 等等，是表情的关键字。AI会阅读这些关键字，并透过使用这些关键字来做表情。
 
-举个例子。当AI 想要使用愤怒表情时，他会说出这样的句子:
+![](img/emoMap_index_mapping_2.png)
+
+#### 配置说明
+
+:::caution 表情索引
+1. 表情索引值是按照模型文件中 `expressions` 数组的顺序，从 0 开始计数
+2. 多个情绪可以映射到同一个表情索引
+:::
+
+AI 会使用 `[emotion]` 格式在对话中触发表情变化，例如：
+
 ```
 噢，该死的！[anger] 你说的这番话简直比约翰森叔叔家的鸡蛋豆腐面还要难以下咽。
 ```
-当程序识别到 `[anger]` 这个关键字时，就会让 Live2D 模型做愤怒的表情。
 
-由于这些关键字是AI 对这个表情的所有理解 (AI 看不到自己做的表情具体长啥样)，所以请写的具体些，简单些，好理解些。比如，如果你写了类似 `oesivr934ri` 之类的表情关键字，AI 会不知道这是什么表情。由于 AI 需要一字不漏，正确的写出这些表情关键字，请避免写句子或是把关键字写的过于长。
+当系统识别到 [anger] 时，就会让前端的 Live2D 模型做出 `anger` 这一关键词对应的索引（在上面的例子中是 `2`）
 
-#### 表情索引数字
-![](./img/emoMap_index.jpg)
+:::tip 配置建议
+1. 使用简单、明确的英文单词作为关键字
+2. 确保关键字容易被 AI 理解和准确使用
+3. 避免使用过长或复杂的名称
+4. 根据模型的表情特点，选择合适的情绪映射
+:::
 
-右侧的数字是 Live2D 表情的索引，这个数字是对应表情在 Live2D 模型中的索引值。前端将会使用这个索引调用表情。
+### 2.5 交互动作配置
 
-![](./img/emoMap_index_mapping_1.png)
-![](./img/emoMap_index_mapping_2.png)
+`tapMotions` 定义了模型与鼠标交互时的动作映射。当用户点击模型时，系统会根据点击区域和配置的权重随机触发对应的动作。
 
+#### 配置示例
 
-## 步骤3: 在角色设定中设定 Live2D 模型
+```json
+"tapMotions": {
+    "body": {  // 身体区域
+        "tap_body": 30,   // 动作名: 权重
+        "shake": 30,
+        "pinch_in": 20,
+        "pinch_out": 20
+    },
+    "head": {  // 头部区域
+        "flick_head": 40,
+        "shake": 20,
+        "pinch_in": 20,
+        "pinch_out": 20
+    }
+}
+```
 
-前往 `conf.yaml` 文件，把 `live2d_model_name` 选项设置成你上面写在 `model_dict.json` 中的 `name`。
+#### 配置说明
 
-完成。现在你已经成功自定义 Live2D 模型了。
+1. 点击区域名称
+   - Live2D 2.0 模型：通常使用 `body`、`head` 等区域名称
+   ```json
+   "hit_areas": [
+       {"name": "head", "id": "D_REF.HEAD"},
+       {"name": "body", "id": "D_REF.BODY"}
+   ]
+   ```
+   - Live2D 3.0/4.0 模型：通常使用 `HitAreaBody`、`HitAreaHead` 等区域名称
+   ```json
+   "HitAreas": [
+       {"Id": "HitAreaHead", "Name": ""},
+       {"Id": "HitAreaBody", "Name": ""}
+   ]
+   ```
+2. 动作名称
+   - 必须与模型配置文件中定义的动作组名称完全一致
+3. 权重设置
+   - 范围：建议使用 0-100 的整数
+   - 权重越大，该动作被触发的概率越高
+   - 同一区域内的所有动作权重总和不需要等于 100
+
+#### 触发逻辑
+
+1. 当用户在前端点击模型时（可设置是否开启），系统会：
+   - 首先检测点击的区域(hitTest)
+   - 根据该区域配置的动作和权重随机触发一个动作
+   - 如果未检测到命中区域，则会将所有区域的动作合并后，按权重随机触发
+
+2. 权重计算示例：
+   ```json
+   "head": {
+       "flick_head": 40,  // 40% 概率
+       "shake": 20,       // 20% 概率
+       "pinch_in": 20,    // 20% 概率
+       "pinch_out": 20    // 20% 概率
+   }
+   ```
+
+## 3. 修改角色配置
+
+在角色配置文件中指定使用的 Live2D 模型。你可以:
+
+1. 在主配置文件 `conf.yaml` 中配置（前端默认配置）
+2. 在 `characters` 目录下，新建你想要的角色设定文件进行配置（可以在前端切换）
+
+配置方法非常简单。以 `conf.yaml` 为例，你只需要在 `character-config` 配置项下找到 `live2d_model_name` 字段，将其值设置为你想使用的 Live2D 模型名称即可。请注意，这个名称需要与 `model_dict.json` 文件中对应模型的 `name` 字段保持一致。
+
+<img src={require('./img/live2d_p2.png').default} style={{width: '70%'}} />
+
+:::info
+图中的其他配置字段说明:
+- `conf_name`: 这个名称会显示在前端界面的角色选择中，你可以理解为配置名称 / 角色名称，可以随便命名。
+- `conf_uid`: 这是角色配置的唯一标识符，请确保它的值是唯一的
+:::

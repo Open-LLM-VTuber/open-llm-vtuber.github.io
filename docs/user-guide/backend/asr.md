@@ -50,7 +50,7 @@ uv add onnxruntime-gpu sherpa-onnx==1.10.39+cuda -f https://k2-fsa.github.io/she
 
 ## `fun_asr` (本地)
 
-[FunASR](https://github.com/modelscope/FunASR?tab=readme-ov-file) 是 ModelScope 的一个基础端到端语音识别工具包，支持多种 ASR 模型。其中，阿里巴巴集团 [FunAudioLLM](https://github.com/FunAudioLLM/SenseVoice) 的 SenseVoiceSmall 模型在性能和速度上都表现不错。
+[FunASR](https://github.com/modelscope/FunASR?tab=readme-ov-file) 是 ModelScope 的一个基础端到端语音识别工具包，支持多种 ASR 模型。其中，阿里的 [FunAudioLLM](https://github.com/FunAudioLLM/SenseVoice) 的 SenseVoiceSmall 模型在性能和速度上都表现不错。
 
 :::tip
 虽然 FunASR 可以运行 SenseVoiceSmall 模型，但我们更推荐使用项目预设的 `sherpa_onnx_asr`。FunASR 项目存在一定的稳定性问题，可能在某些设备上出现异常。
@@ -78,9 +78,9 @@ uv pip install funasr modelscope huggingface_hub torch torchaudio onnx onnxconve
 :::
 
 :::warning
-即使模型文件已在本地，启动时仍需要互联网连接。详见 [FunASR Issue #1897](https://github.com/modelscope/FunASR/issues/1897)
+即使模型文件已在本地，启动时仍需要互联网连接。
 
-解决方案：在配置中直接指定模型的本地路径，这样运行时就不需要联网。但需要提前下载好模型文件。
+解决方案：在配置中直接指定模型的本地路径，这样运行时就不需要联网。但需要提前下载好模型文件。详见 [FunASR Issue #1897](https://github.com/modelscope/FunASR/issues/1897)
 :::
 
 ## `faster_whisper` (本地)
