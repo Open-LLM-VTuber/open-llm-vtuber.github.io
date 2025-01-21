@@ -31,10 +31,10 @@ sidebar_position: 1
 ## 👀 效果演示
 
 <div style={{display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap'}}>
-  <img src={require('./img/i1.png').default} style={{width: '410px'}} />
+  <img src={require('./img/i1.jpg').default} style={{width: '410px'}} />
   <img src={require('./img/i2.jpg').default} style={{width: '410px'}} />
-  <img src={require('./img/i3.png').default} style={{width: '410px'}} />
-  <img src={require('./img/i4.png').default} style={{width: '410px'}} />
+  <img src={require('./img/i3.jpg').default} style={{width: '410px'}} />
+  <img src={require('./img/i4.jpg').default} style={{width: '410px'}} />
 </div>
 
 

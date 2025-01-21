@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Web 模式
 
-![](img/web/overview.png)
+![](img/web/overview.jpg)
 
 ## 布局概览
 - 侧边栏 (可折叠)
@@ -45,7 +45,7 @@ sidebar_position: 3
 个性化设置使用 localStorage 在本地存储。
 :::
 
-<img src={require('./img/web/setting.png').default} style={{width: '70%'}} />
+<img src={require('./img/web/setting.jpg').default} style={{width: '70%'}} />
 
 ### General (通用)
 - 语言设置 (TODO)
@@ -132,7 +132,7 @@ sidebar_position: 3
 - 在 AI 处于 `thinking-speaking` 状态时发送消息。
 
 ### 消息记录
-<img src={require('./img/web/history.png').default} style={{width: '70%'}} />
+<img src={require('./img/web/history.jpg').default} style={{width: '70%'}} />
 
 - 可滚动查看消息记录
 - 支持流式响应，实时显示 AI 回复内容

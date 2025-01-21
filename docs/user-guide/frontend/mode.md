@@ -38,7 +38,7 @@ iOS 禁止浏览器播放音频，需要不断点击才能使说话功能正常�
 当你在远程访问部署的 Web 应用时（即部署服务器与访问设备不在同一台机器上，即使处于相同局域网也视为远程访问），请注意麦克风和摄像头仅能在安全上下文（HTTPS 或 localhost）中使用。详细说明请参考 [MDN Web 文档](https://developer.mozilla.org/zh-CN/docs/Web/Security/Secure_Contexts)。因此，如需在远程设备上正常使用这些功能，你必须为 Web 服务器配置 HTTPS 协议。
 :::
 
-![](img/mode/web.png)
+![](img/mode/web.jpg)
 
 
 ## 窗口模式
@@ -50,5 +50,5 @@ iOS 禁止浏览器播放音频，需要不断点击才能使说话功能正常�
 
 桌宠模式将角色转变为背景透明、全局置顶、自由拖拽的桌面伴侣，提供更加沉浸的体验。
 
-![](img/mode/pet.png)
+![](img/mode/pet.jpg)
 

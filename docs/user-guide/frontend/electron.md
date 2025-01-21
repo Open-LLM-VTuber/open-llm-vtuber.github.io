@@ -31,7 +31,7 @@ sidebar_position: 4
 
 ## 桌宠模式
 
-<img src={require('./img/electron/overview.png').default} style={{width: '70%'}} />
+<img src={require('./img/electron/overview.jpg').default} style={{width: '70%'}} />
 
 ### 功能
 以下功能与 [Web 模式](web.md) 完全一致：

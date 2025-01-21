@@ -12,7 +12,7 @@
 
 将你的 Live2D 模型文件放在 `live2d-models` 文件夹中，如图中的 `xiao`。
 
-<img src={require('./img/live2d_p1.png').default} style={{width: '70%'}} />
+<img src={require('./img/live2d_p1.jpg').default} style={{width: '70%'}} />
 
 
 ## 2. 添加模型配置
@@ -92,7 +92,7 @@ Live2D 模型的动作动画一般会被分成多个动作组 (Motion Groups)。
 
 具体动作组名称需要根据模型配置文件 `model.json` 或 `model3.json` 中的名称，如图所示。
 
-<img src={require('./img/live2d_p3.png').default} style={{width: '100%'}} />
+<img src={require('./img/live2d_p3.jpg').default} style={{width: '100%'}} />
 
 :::tip 
 如果你理解模型的动作结构，也可以配置自己待机的动作组。但除非你知道自己在做什么，否则建议保持 `idleMotionGroupName` 的默认值(`idle` 或 `Idle`)。
@@ -257,7 +257,7 @@ AI 会使用 `[emotion]` 格式在对话中触发表情变化，例如：
 
 配置方法非常简单。以 `conf.yaml` 为例，你只需要在 `character-config` 配置项下找到 `live2d_model_name` 字段，将其值设置为你想使用的 Live2D 模型名称即可。请注意，这个名称需要与 `model_dict.json` 文件中对应模型的 `name` 字段保持一致。
 
-<img src={require('./img/live2d_p2.png').default} style={{width: '70%'}} />
+<img src={require('./img/live2d_p2.jpg').default} style={{width: '70%'}} />
 
 :::info
 图中的其他配置字段说明:
