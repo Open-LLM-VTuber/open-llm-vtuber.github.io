@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[7472],{5513:e=>{e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"\u76ee\u524d v1.0.0 \u7248\u672c\u6b63\u5728\u9510\u610f\u5f00\u53d1\u4e2d\uff5e","permalink":"/blog/2024/12/28/v1-0-0-in-development","unlisted":false,"date":"2024-12-28T00:00:00.000Z"}]}')}}]);

@@ -2,39 +2,23 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://open-llm-vtuber.github.io/blog</id>
     <title>Open LLM Vtuber Blog</title>
-    <updated>2024-12-28T00:00:00.000Z</updated>
+    <updated>2025-01-21T14:11:41.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://open-llm-vtuber.github.io/blog"/>
     <subtitle>Open LLM Vtuber Blog</subtitle>
     <icon>https://open-llm-vtuber.github.io/img/favicon.ico</icon>
     <entry>
-        <title type="html"><![CDATA[目前 v1.0.0 版本正在锐意开发中～]]></title>
-        <id>https://open-llm-vtuber.github.io/blog/2024/12/28/v1-0-0-in-development</id>
-        <link href="https://open-llm-vtuber.github.io/blog/2024/12/28/v1-0-0-in-development"/>
-        <updated>2024-12-28T00:00:00.000Z</updated>
-        <summary type="html"><![CDATA[- v1.0.0 版本是一次重大重构版本，之前的版本不能直接升级上来，要重新部署。]]></summary>
-        <content type="html"><![CDATA[<ul>
-<li>v1.0.0 版本是一次重大重构版本，之前的版本不能直接升级上来，要重新部署。</li>
-<li>前端重写了。前端主要工作是 @ylxmf2005 和 @殇离 佬写的 (我主要是给他们加油打气什么的)。感谢他们的工作。</li>
-<li>@ylxmf2005佬在搓桌宠，就是那种背景透明可以拖来拖去的那种，牛的不行。</li>
-<li>@三氪沉糖.佬 在写很厉害的启动器。</li>
-<li>文档和教学视频要重新做，v1.0.0 发布之前会做出来。如果有人想做视频 (或是直播?)，可以找我聊聊天呀！这样我可以把链接放在项目主页上面让大伙看。另外，如果愿意带我个联合投稿的话，B站之前送的流量奖励包我一直用不掉...</li>
-<li>后端的工作进度，工作规划 可以在 <a href="https://github.com/users/t41372/projects/1" target="_blank" rel="noopener noreferrer">https://github.com/users/t41372/projects/1</a> 这边看到。</li>
-</ul>
-<p>对开发者：</p>
-<ul>
-<li>v1.0.0 版本的架构基本重写了。如果 pr 是基于之前的版本写的，合并起来会很头秃。</li>
-<li>目前的 v1.0.0 版本，后端在主仓库的 superb-refactoring 分支。前端在 t41372/open-llm-vtuber-web 仓库。</li>
-<li>运行的时候要先启动后端服务器，再去 web 那边启动前端。之后会用 github action 打包到一起。</li>
-<li>(小声) (superb-refactoring 分支昨天晚上 2024.12.27 不小心被我改炸了，我马上修...)</li>
-</ul>
-<p>(图是从 @ylxmf2005 那边偷的)</p>
-<p><img decoding="async" loading="lazy" src="https://open-llm-vtuber.github.io/assets/images/2024-12-28-img1-0518fc6e8771adc9dbb4479624363fe2.jpg" width="1646" height="1030" class="img_ev3q">
-<img decoding="async" loading="lazy" src="https://open-llm-vtuber.github.io/assets/images/2024-12-28-img2-ed96e19b0ae99a6ad07b4a9ca07a17a7.jpg" width="1646" height="996" class="img_ev3q">
-<img decoding="async" loading="lazy" src="https://open-llm-vtuber.github.io/assets/images/2024-12-28-img3-7492d4aa8eb773292fce11ea69e19f2f.jpg" width="1646" height="934" class="img_ev3q"></p>]]></content>
+        <title type="html"><![CDATA[v1.0.0 正式发布]]></title>
+        <id>https://open-llm-vtuber.github.io/blog/v1.0.0-release</id>
+        <link href="https://open-llm-vtuber.github.io/blog/v1.0.0-release"/>
+        <updated>2025-01-21T14:11:41.000Z</updated>
         <author>
             <name>Yi-Ting Chiu</name>
             <uri>https://github.com/t41372</uri>
+        </author>
+        <author>
+            <name>Ethan Lee</name>
+            <uri>https://github.com/ylxmf2005</uri>
         </author>
     </entry>
 </feed>
