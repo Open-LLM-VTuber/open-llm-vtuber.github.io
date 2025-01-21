@@ -26,6 +26,42 @@ Groq Whisper API、OpenAI API 等国外大模型/推理平台 API 一般无法�
 
 ## 环境准备
 
+### 安装 Git
+
+<Tabs groupId="operating-systems">
+  <TabItem value="windows" label="Windows">
+
+```bash
+# 在命令行中运行
+winget install Git.Git
+```
+
+或者从 [Git 官网](https://git-scm.com/downloads/win) 下载安装包进行安装。
+
+  </TabItem>
+  <TabItem value="macos" label="macOS">
+
+```bash
+# 如果没有安装 Homebrew，请先运行这个命令进行安装，或者参考 https://brew.sh/zh-cn/ 进行安装
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# 安装 Git
+brew install git
+```
+
+  </TabItem>
+  <TabItem value="linux" label="Linux">
+
+```bash
+# Ubuntu/Debian
+sudo apt install git
+
+# CentOS/RHEL
+sudo dnf install git
+```
+
+  </TabItem>
+</Tabs>
+
 ### 安装 FFmpeg
 
 :::caution
