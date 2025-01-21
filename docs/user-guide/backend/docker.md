@@ -2,7 +2,7 @@
 sidebar_position: 7
 ---
 
-# Docker 容器部署指南 [实验性功能]
+# Docker 部署
 
 :::danger
 由于重构幅度较大，Docker 镜像暂时还没有更新到 `v1.0.0` 版本，但是很快会更新。
@@ -21,7 +21,7 @@ sidebar_position: 7
 - 需要安装并配置 [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) 以支持 GPU 直通
 - 目前存在的问题：容器停止后部分模型需要重新下载（该问题将在后续版本修复）
 - 不建议在 ARM 架构的设备上构建镜像，因为依赖项 gRPC 可能会出现构建失败的情况（[相关 issue](https://github.com/grpc/grpc/issues/34998)）
-- 如需在远程服务器上运行，必须配置 HTTPS。这是因为前端网页的麦克风功能只能在安全上下文（localhost 或 HTTPS 环境）中使用
+- 如需在远程服务器上运行，必须配置 HTTPS。这是因为前端网页的麦克风/摄像头/屏幕录制功能只能在安全上下文（localhost 或 HTTPS 环境）中使用
 
 ## 预装模型说明
 
@@ -36,7 +36,7 @@ sidebar_position: 7
 
 ## 部署步骤
 
-1. 在构建镜像前，请先检查并调整 `conf.yaml` 配置文件（目前配置会被构建进镜像）
+1. 在构建镜像前，请先检查并调整 `conf.yaml` 配置文件（当前配置会被构建进镜像）
 
 2. 构建 Docker 镜像：
 ```bash

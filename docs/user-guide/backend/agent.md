@@ -90,21 +90,22 @@ EVI 的 LLM 选择和 Prompt 需要在 `config_id` 对应的配置中进行设�
 
 
 
-## Mem0 (高度实验性，而且效果不好)
+## Mem0 Agent（实验性）
 
-### Mem0 (it turns out it's not very good for our use case, but the code is here...)
+### 简介
 
-Another long-term memory solution. Still in development. Highly experimental.
+Mem0 是一个实验性的长期记忆解决方案。虽然目前仍在开发中，且可能不太适合本项目的使用场景，但我们仍将其代码保留以供参考。
 
-Pro
+#### 优点
+- 相比 MemGPT 配置更简单
+- 处理速度比 MemGPT 快（但仍然需要消耗较多的 LLM tokens）
 
-- It's easier to set up compared to MemGPT
-- It's a bit faster than MemGPT (but still would take quite a lot more LLM tokens to process)
+#### 局限性
+- 仅能记住用户的偏好和想法，无法记住 LLM 的回复内容
+- 记忆存储的触发机制不稳定
+- 存在记忆错误的可能
+- 需要具备优秀函数调用能力的 LLM，这对于较小的模型来说比较困难
 
-Cons
-
-- It remembers your preferences and thoughts, nothing else. It doesn't remember what the LLM said.
-- It doesn't always put stuff into memory.
-- It sometimes remembers wrong stuff
-- It requires an LLM with very good function calling capability, which is quite difficult for smaller models
-- 
+:::warning
+由于以上局限性，我们目前不推荐在生产环境中使用 Mem0 智能体。
+:::
