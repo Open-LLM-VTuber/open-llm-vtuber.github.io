@@ -100,22 +100,34 @@ Live2D 模型的动作动画一般会被分成多个动作组 (Motion Groups)。
 
 ### 2.4 表情配置
 
-`emotionMap` 定义了 AI 可用的表情映射。这个映射关系需要参考模型文件中的表情定义顺序。
+`emotionMap` 定义了 AI 可用的表情映射。支持两种映射方式:
+1. 使用表情索引 (数字)
+2. 使用表情名称 (字符串)
 
 #### 配置示例
 
 1. 首先查看模型文件中的表情定义:
 ```json
+// model.json
 "expressions": [
     {"name": "f01", "file": "expressions/f01.exp.json"}, // 索引 0
     {"name": "f02", "file": "expressions/f02.exp.json"}, // 索引 1
     {"name": "f03", "file": "expressions/f03.exp.json"}, // 索引 2
     {"name": "f04", "file": "expressions/f04.exp.json"}  // 索引 3
 ]
+
+// 或者你会在 model3.json 文件中遇到
+"Expressions" : [
+    {"Name": "f01", "File": "f01.exp3.json"}, // 索引 0
+    {"Name": "f02", "File": "f02.exp3.json"}, // 索引 1
+    {"Name": "f03", "File": "f03.exp3.json"}, // 索引 2
+    {"Name": "f04", "File": "f04.exp3.json"} // 索引 3
+]
 ```
 
-2. 然后在 `model_dict.json` 中配置表情映射（请不要在实际的 json 文件中写注释，这里的注释仅用来帮助理解）:
-   
+2. 然后在 `model_dict.json` 中配置表情映射。你可以选择以下两种方式之一:
+
+方式一: 使用表情索引
 ```json
 "emotionMap": {
     "neutral": 0,  // 对应 f01 表情
@@ -129,11 +141,26 @@ Live2D 模型的动作动画一般会被分成多个动作组 (Motion Groups)。
 }
 ```
 
+方式二: 使用表情名称
+```json
+"emotionMap": {
+    "neutral": "f01",
+    "anger": "f03",
+    "disgust": "f03",
+    "fear": "f02",
+    "joy": "f04",
+    "smirk": "f04", 
+    "sadness": "f02",
+    "surprise": "f04"
+}
+```
+
 #### 配置说明
 
-:::caution 表情索引
-1. 表情索引值是按照模型文件中 `expressions` 数组的顺序，从 0 开始计数
-2. 多个情绪可以映射到同一个表情索引
+:::caution 注意事项
+1. 如果使用索引映射，索引值是按照模型文件中 `expressions` 数组的顺序，从 0 开始计数
+2. 如果使用表情名称映射，需要确保名称与模型文件中定义的表情名称完全一致
+3. 多个情绪可以映射到同一个表情索引或名称
 :::
 
 AI 会使用 `[emotion]` 格式在对话中触发表情变化，例如：
@@ -143,6 +170,12 @@ AI 会使用 `[emotion]` 格式在对话中触发表情变化，例如：
 ```
 
 当系统识别到 [anger] 时，就会让前端的 Live2D 模型做出 `anger` 这一关键词对应的索引（在上面的例子中是 `2`）
+
+:::info
+表情会保持直到:
+   - 遇到下一个表情关键词
+   - 或对话结束后自动恢复默认表情
+:::
 
 :::tip 配置建议
 1. 使用简单、明确的英文单词作为关键字

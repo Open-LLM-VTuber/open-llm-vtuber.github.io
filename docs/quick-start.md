@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 本指南部署的配置为 Ollama + sherpa-onnx-asr (SenseVoiceSmall) + edgeTTS。如需深入定制，请参考[用户指南](/docs/category/用户指南)的相关章节。
 
 :::info
-如果用 OpenAI Compatible 代替 Ollama，用 groq_whisper_asr 代替 sherpa-onnx-asr (SenseVoiceSmall)，那么只需配置 API Key 即可使用，无需下载模型文件，也可以跳过对本地 GPU 进行配置。
+如果用 OpenAI Compatible 代替 Ollama，用 groq_whisper_asr 代替 sherpa-onnx-asr (SenseVoiceSmall)，那么只需配置 API Key 即可使用，无需下载模型文件，也可以跳过对本地 GPU 的配置。
 :::
 
 :::danger 关于代理
