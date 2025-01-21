@@ -27,11 +27,27 @@ const config: Config = {
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
   i18n: {
-    defaultLocale: "en",
-    locales: ["en"],
+    defaultLocale: "zh-Hans",
+    locales: ["zh-Hans", "en"],
+    localeConfigs: {
+      en: {
+        label: 'English',
+        direction: 'ltr',
+        htmlLang: 'en-US',
+        calendar: 'gregory',
+        path: 'en',
+      },
+      'zh-Hans': {
+        label: "简体中文",
+        direction: "ltr",
+        htmlLang: "zh-CN",
+        calendar: "gregory",
+        path: 'zh-Hans',
+      },
+    },
   },
 
-  themes: ['@docusaurus/theme-mermaid'],
+  themes: ["@docusaurus/theme-mermaid"],
   // In order for Mermaid code blocks in Markdown to work,
   // you also need to enable the Remark plugin with this option
   markdown: {
@@ -81,6 +97,10 @@ const config: Config = {
         src: "img/open_llm_vtuber.png",
       },
       items: [
+        {
+          type: "localeDropdown",
+          position: "right",
+        },
         {
           type: "docSidebar",
           sidebarId: "docSidebar",
