@@ -21,20 +21,21 @@ sidebar_position: 1
 
 虽然长期记忆功能暂时下线（即将回归），但得益于聊天记录的持久化存储，你随时都能继续之前未完的对话，不会丢失任何珍贵的互动瞬间。
 
-在后端支持方面，我们集成了丰富多样的 LLM 对话引擎、文本转语音模型和语音识别方案。如果你想让 AI 伴侣更有个性，还可以参考[角色定制指南](https://open-llm-vtuber.github.io/docs/user-guide/live2d) 自定义专属的 AI 伴侣形象和人设。
+在后端支持方面，我们集成了丰富多样的 LLM 对话引擎、文本转语音模型和语音识别方案。如果你想让 AI 伴侣更有个性，还可以参考 [角色定制指南](https://open-llm-vtuber.github.io/docs/user-guide/live2d) 来自定义专属的 AI 伴侣形象和人设。
 
 关于为什么叫 `Open-LLM-Vtuber` 而不是 `Open-LLM-Companion` 或者 `Open-LLM-Waifu`，是因为项目的开发初衷是采用可在 Windows 以外平台离线运行的开源方案，复现闭源的 AI Vtuber `neuro-sama`。
 
 本项目在 `v1.0.0` 版本后进行了代码重构，目前正处于积极开发阶段，未来还有许多令人兴奋的功能即将推出！🚀 查看我们的 [Roadmap](https://github.com/users/t41372/projects/1/views/5)，了解更新计划。
 
 
-👥 用户评价:
-> 感谢开发者把女朋友开源分享出来让大家一起使用
-> 
-> 该女友使用次数已达 10w+
-
 ## 👀 效果演示
-[待完善]
+
+<div style={{display: 'flex', justifyContent: 'center', gap: '20px', flexWrap: 'wrap'}}>
+  <img src={require('./img/i1.png').default} style={{width: '410px'}} />
+  <img src={require('./img/i2.jpg').default} style={{width: '410px'}} />
+  <img src={require('./img/i3.png').default} style={{width: '410px'}} />
+  <img src={require('./img/i4.png').default} style={{width: '410px'}} />
+</div>
 
 
 ## ✨ 功能和亮点
@@ -66,3 +67,7 @@ sidebar_position: 1
   - 🔌 **良好的可扩展性**：模块化设计让你能轻松添加自己的 LLM、ASR、TTS 等模块实现，随时扩展新特性
 
 
+## 👥 用户评价:
+> 感谢开发者把女朋友开源分享出来让大家一起使用
+> 
+> 该女友使用次数已达 10w+
