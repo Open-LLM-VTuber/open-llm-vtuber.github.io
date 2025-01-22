@@ -5,46 +5,45 @@ sidebar_position: 2
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# 快速开始
+# Quick Start
 
-本指南将帮助你快速部署并运行 Open-LLM-VTuber 项目。
+This guide will help you quickly deploy and run the Open-LLM-VTuber project.
 
-本指南部署的配置为 Ollama + sherpa-onnx-asr (SenseVoiceSmall) + edgeTTS。如需深入定制，请参考[用户指南](/docs/category/用户指南)的相关章节。
+The configuration deployed in this guide is Ollama + sherpa-onnx-asr (SenseVoiceSmall) + edge_tts. For in-depth customization, please refer to the relevant sections in the [User Guide](/docs/user-guide).
 
 :::info
-如果用 OpenAI Compatible 代替 Ollama，用 groq_whisper_asr 代替 sherpa-onnx-asr (SenseVoiceSmall)，那么只需配置 API Key 即可使用，无需下载模型文件，也可以跳过对本地 GPU 的配置。
+If you replace Ollama with OpenAI Compatible and sherpa-onnx-asr (SenseVoiceSmall) with groq_whisper_asr, you only need to configure the API Key to use it. There is no need to download model files, and you can skip configuring the local GPU.
 :::
 
-:::danger 关于代理
-如果你位于中国大陆，建议你开启代理后再部署和使用本项目，确保能顺利下载所有资源。
+:::danger About Proxies
+If you are located in mainland China, it is recommended to enable a proxy before deploying and using this project to ensure that all resources can be downloaded smoothly.
 
-如果你遇到开启代理后本地服务 (ollama、deeplx、gptsovits) 无法访问，但关闭代理后就能访问的问题。请你确保你的代理绕过本地地址 (localhost)，或者在所有资源下载完毕后关闭代理再运行本项目。更多信息参考 [设置代理绕过
-](https://www.clashverge.dev/guide/bypass.html)。
+If you encounter an issue where local services (ollama, deeplx, gptsovits) cannot be accessed after enabling the proxy but can be accessed after disabling the proxy, please ensure that your proxy bypasses local addresses (localhost), or close the proxy after all resources are downloaded before running this project. For more information, refer to [Setting Proxy Bypass](https://www.clashverge.dev/guide/bypass.html).
 
-Groq Whisper API、OpenAI API 等国外大模型/推理平台 API 一般无法使用香港地区的代理。
+Groq Whisper API, OpenAI API, and other foreign large model/inference platform APIs generally cannot use proxies from Hong Kong.
 :::
 
-## 环境准备
+## Environment Preparation
 
-### 安装 Git
+### Install Git
 
 <Tabs groupId="operating-systems">
   <TabItem value="windows" label="Windows">
 
 ```bash
-# 在命令行中运行
+# Run in the command line
 winget install Git.Git
 ```
 
-或者从 [Git 官网](https://git-scm.com/downloads/win) 下载安装包进行安装。
+Or download the installation package from the [Git official website](https://git-scm.com/downloads/win) to install.
 
   </TabItem>
   <TabItem value="macos" label="macOS">
 
 ```bash
-# 如果没有安装 Homebrew，请先运行这个命令进行安装，或者参考 https://brew.sh/zh-cn/ 进行安装
+# If Homebrew is not installed, please run this command to install it, or refer to https://brew.sh/zh-cn/ for installation
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-# 安装 Git
+# Install Git
 brew install git
 ```
 
@@ -62,17 +61,17 @@ sudo dnf install git
   </TabItem>
 </Tabs>
 
-### 安装 FFmpeg
+### Install FFmpeg
 
 :::caution
-FFmpeg 是必需的依赖项。没有 FFmpeg 会导致找不到音频文件的错误。
+FFmpeg is a required dependency. Without FFmpeg, errors related to missing audio files will occur.
 :::
 
 <Tabs groupId="operating-systems">
   <TabItem value="windows" label="Windows">
 
 ```bash
-# 在命令行中运行
+# Run in the command line
 winget install ffmpeg
 ```
 
@@ -80,9 +79,9 @@ winget install ffmpeg
   <TabItem value="macos" label="macOS">
 
 ```bash
-# 如果没有安装 Homebrew，请先运行这个命令进行安装，或者参考 https://brew.sh/zh-cn/ 进行安装
+# If Homebrew is not installed, please run this command to install it, or refer to https://brew.sh/zh-cn/ for installation
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-# 安装 ffmpeg
+# Install ffmpeg
 brew install ffmpeg
 ```
 
@@ -100,70 +99,70 @@ sudo dnf install ffmpeg
   </TabItem>
 </Tabs>
 
-### NVIDIA GPU 支持
+### NVIDIA GPU Support
 
-如果你有 NVIDIA 显卡并希望使用 GPU 运行本地模型，你需要:
+If you have an NVIDIA GPU and want to use it to run local models, you need to:
 
-1. 安装 NVIDIA 显卡驱动
-2. 安装 CUDA Toolkit (推荐 11.8 或更高版本)
-3. 安装对应版本的 cuDNN
+1. Install NVIDIA GPU drivers
+2. Install CUDA Toolkit (recommended version 11.8 or higher)
+3. Install the corresponding version of cuDNN
 
-#### Windows 安装步骤:
+#### Windows Installation Steps:
 
 :::note
-以下路径仅供参考，需要根据版本和实际安装路径进行修改。
+The following paths are for reference only and need to be modified according to the version and actual installation path.
 :::
 
-1. **检查显卡驱动版本**
-   - 右键点击桌面，选择"NVIDIA 控制面板"
-   - 帮助 -> 系统信息 -> 组件，查看驱动程序版本
-   - 或访问 [NVIDIA 驱动下载页面](https://www.nvidia.cn/drivers/lookup/) 下载最新驱动
+1. **Check GPU Driver Version**
+   - Right-click on the desktop and select "NVIDIA Control Panel"
+   - Help -> System Information -> Components, check the driver version
+   - Or visit the [NVIDIA Driver Download Page](https://www.nvidia.cn/drivers/lookup/) to download the latest driver
 
-2. **安装 CUDA Toolkit**
-   - 访问 [CUDA 版本对应关系](https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html) 查看驱动版本支持的 CUDA 版本
-   - 访问 [CUDA Toolkit 下载页面](https://developer.nvidia.com/cuda-toolkit-archive) 下载对应版本
-   - 安装完成后将以下路径添加到系统环境变量 PATH 中:
+2. **Install CUDA Toolkit**
+   - Visit [CUDA Version Compatibility](https://docs.nvidia.com/cuda/cuda-toolkit-release-notes/index.html) to check the CUDA version supported by your driver version
+   - Visit the [CUDA Toolkit Download Page](https://developer.nvidia.com/cuda-toolkit-archive) to download the corresponding version
+   - After installation, add the following paths to the system environment variable PATH:
      ```
-     C:\NVIDIA GPU Computing Toolkit\CUDA\v<版本号>\bin
-     C:\NVIDIA GPU Computing Toolkit\CUDA\v<版本号>\lib\x64
+     C:\NVIDIA GPU Computing Toolkit\CUDA\v<version>\bin
+     C:\NVIDIA GPU Computing Toolkit\CUDA\v<version>\lib\x64
      ```
 
-3. **安装 cuDNN**
-   - 访问 [cuDNN 下载页面](https://developer.nvidia.com/cudnn)（需要注册 NVIDIA 账号）
-   - 下载与 CUDA 版本匹配的 cuDNN
-   - 解压后将文件复制到 CUDA 安装目录:
-     - 将 `cuda/bin` 中的文件复制到 `C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v<版本号>\bin`
-     - 将 `cuda/include` 中的文件复制到 `C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v<版本号>\include`
-     - 将 `cuda/lib/x64` 中的文件复制到 `C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v<版本号>\lib\x64`
+3. **Install cuDNN**
+   - Visit the [cuDNN Download Page](https://developer.nvidia.com/cudnn) (requires an NVIDIA account)
+   - Download the cuDNN version that matches your CUDA version
+   - After extracting, copy the files to the CUDA installation directory:
+     - Copy files from `cuda/bin` to `C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v<version>\bin`
+     - Copy files from `cuda/include` to `C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v<version>\include`
+     - Copy files from `cuda/lib/x64` to `C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v<version>\lib\x64`
 
-#### 验证安装:
+#### Verify Installation:
 
-1. 检查驱动安装:
+1. Check driver installation:
 ```bash
 nvidia-smi
 ```
 
-2. 检查 CUDA 安装:
+2. Check CUDA installation:
 ```bash
 nvcc --version
 ```
 
-### Python 环境管理
+### Python Environment Management
 
-从 v1.0.0 版本开始，我们推荐使用 [uv](https://docs.astral.sh/uv/) 作为依赖管理工具。
+Starting from version v1.0.0, we recommend using [uv](https://docs.astral.sh/uv/) as the dependency management tool.
 
 :::note
-如果你更希望使用 conda 或 venv，也可以使用这些工具。项目完全兼容标准的 pip 安装方式。
+If you prefer to use conda or venv, you can also use these tools. The project is fully compatible with the standard pip installation method.
 :::
 
 <Tabs groupId="operating-systems">
   <TabItem value="windows" label="Windows">
 
 ```powershell
-# 方法 1: PowerShell
+# Method 1: PowerShell
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 
-# 方法 2: winget
+# Method 2: winget
 winget install --id=astral-sh.uv -e
 ```
 
@@ -177,40 +176,38 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
   </TabItem>
 </Tabs>
 
+For more uv installation methods, refer to: [Installing uv](https://docs.astral.sh/uv/getting-started/installation/)
 
-更多 uv 安装方法参考：[Installing uv](https://docs.astral.sh/uv/getting-started/installation/)
+## Manual Deployment Guide
 
+### 1. Get the Project Code
 
-## 手动部署指南
+:::info Development Version Note
+Currently in the v1.0.0 development phase, you need to switch to the `superb-refactoring` branch.
 
-### 1. 获取项目代码
-
-:::info 开发版说明
-目前处于 v1.0.0 开发阶段，需要切换到 `superb-refactoring` 分支。
-
-自 `v1.0.0` 开始，前端代码已被拆分到独立仓库中。我们建立了完整的构建流程，并通过 git submodule 将前端代码链接到主仓库的 `frontend` 目录下。
+Starting from `v1.0.0`, the frontend code has been split into a separate repository. We have established a complete build process and linked the frontend code to the main repository's `frontend` directory via git submodule.
 :::
 
 ```bash
-# 克隆仓库
+# Clone the repository
 git clone https://github.com/t41372/Open-LLM-VTuber
 
-# 进入项目目录
+# Enter the project directory
 cd Open-LLM-VTuber
 
-# 切换到开发分支
+# Switch to the development branch
 git switch superb-refactoring
 
-# 由于 git submodule 链接的内容不会自动同步到本地目录，我们需要手动获取前端代码。
+# Since git submodule linked content is not automatically synced to the local directory, we need to manually fetch the frontend code.
 git submodule update --init --recursive
 ```
 
-### 2. 安装项目依赖
+### 2. Install Project Dependencies
 
 :::info
-内地用户可以配置 Python 与 pip 的镜像源，提高下载速度。
+Users in mainland China can configure Python and pip mirror sources to improve download speed.
 
-请在项目目录下的 `pyproject.toml` 文件底部添加下面内容
+Please add the following content to the bottom of the `pyproject.toml` file in the project directory:
 ```toml
 [[tool.uv.index]]
 url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"
@@ -218,57 +215,57 @@ default = true
 ```
 :::
 
-确认 uv 已正确安装:
+Verify that uv is installed correctly:
 
 ```bash
 uv --version
 ```
 
-创建环境并安装依赖:
+Create the environment and install dependencies:
 
 ```bash
-# 确保你在项目根目录下运行这个命令
+# Make sure you run this command in the project root directory
 uv sync
-# 这个命令将创建一个 `.venv` 虚拟环境，
+# This command will create a `.venv` virtual environment
 ```
 
-### 3. 配置 LLM
+### 3. Configure LLM
 
-我们以 [Ollama](https://github.com/ollama/ollama) 为例进行配置。其他选项请参考[LLM 配置指南](/docs/user-guide/backend/llm)。
+We will use [Ollama](https://github.com/ollama/ollama) as an example for configuration. For other options, please refer to the [LLM Configuration Guide](/docs/user-guide/backend/llm).
 
-:::info 其他选项
-如果你不想使用 Ollama / 在 Ollama 的配置上遇到了难以解决的问题，本项目也支持：
-- OpenAI 兼容 API
-- OpenAI 官方 API
+:::info Other Options
+If you do not want to use Ollama / encounter difficult issues with Ollama configuration, this project also supports:
+- OpenAI Compatible API
+- OpenAI Official API
 - Claude
 - Gemini
 - Mistral
-- 智谱
+- Zhipu
 - DeepSeek
-- LM Studio（类似 Ollama，使用更简单）
-- vLLM（性能更好，配置较复杂）
-- llama.cpp（直接运行 .gguf 格式模型）
-- 以及更多 (大部分的 LLM 推理后端和API都支持 OpenAI 格式，可以直接接入本项目)
+- LM Studio (similar to Ollama, easier to use)
+- vLLM (better performance, more complex configuration)
+- llama.cpp (directly runs .gguf format models)
+- And more (most LLM inference backends and APIs support OpenAI format and can be directly integrated into this project)
 
-更多信息请参考[LLM 配置指南](/docs/user-guide/backend/llm)。
+For more information, refer to the [LLM Configuration Guide](/docs/user-guide/backend/llm).
 :::
 
-#### 安装 Ollama
+#### Install Ollama
 
-1. 从 [Ollama 官网](https://ollama.com/) 下载并安装
-2. 验证安装:
+1. Download and install from the [Ollama Official Website](https://ollama.com/)
+2. Verify installation:
 ```bash
 ollama --version
 ```
 
-3. 下载并运行模型（以 `qwen2.5:latest` 为例）：
+3. Download and run a model (using `qwen2.5:latest` as an example):
 ```bash
 ollama run qwen2.5:latest
-# 运行成功后，你就可以直接跟 qwen2.5:latest 对话了
-# 可以先退出聊天界面 (Ctrl/Command + D)，但一定不要关闭命令行
+# After successful execution, you can directly chat with qwen2.5:latest
+# You can exit the chat interface (Ctrl/Command + D), but do not close the command line
 ```
 
-4. 查看已安装的模型：
+4. View installed models:
 ```bash
 ollama list
 # NAME                ID              SIZE      MODIFIED
@@ -276,63 +273,63 @@ ollama list
 ```
 
 :::tip
-寻找模型名时，请使用 `ollama list` 命令，查看 ollama 中已下载的模型，并将模型名称直接复制粘贴到 `model` 选项下，避免模型名打错，全形冒号，空格之类的问题。
+When looking for model names, use the `ollama list` command to check the models downloaded in ollama, and directly copy and paste the model name into the `model` option to avoid issues like incorrect model names, full-width colons, or spaces.
 :::
 
 :::caution
-选择模型时，请考虑你的显存容量与GPU算力。如果模型文件大小大于显存容量，模型会被迫使用 CPU 运算，速度极慢。另外，模型参数量越小，对话延迟越小。如果你希望降低对话延迟，请选择一个参数量较低的模型。
+When selecting a model, consider your GPU memory capacity and computing power. If the model file size exceeds the GPU memory capacity, the model will be forced to use CPU computation, which is very slow. Additionally, the smaller the model's parameter count, the lower the conversation latency. If you want to reduce conversation latency, choose a model with a lower parameter count.
 :::
 
-#### 修改配置文件
+#### Modify Configuration File
 
-:::tip 
-可以用 `conf.CN.yaml` 的内容覆盖 `conf.yaml` 的内容，获得更适合中文使用的预设配置。
+:::tip
+You can overwrite the contents of `conf.yaml` with the contents of `conf.CN.yaml` to get preset configurations more suitable for Chinese use.
 :::
 
-编辑 `conf.yaml`：
+Edit `conf.yaml`:
 
-1. 将 `basic_memory_agent` 下的 `llm_provider` 设置为 `ollama_llm`
-2. 调整 `llm_configs` 选项下的 `ollama_llm` 下的设置:
-   - `base_url` 本地运行保持默认即可，无需修改。
-   - 设置 `model` 为你使用的模型，比如本指南使用的 `qwen2.5:latest`。
+1. Set `llm_provider` under `basic_memory_agent` to `ollama_llm`
+2. Adjust the settings under `ollama_llm` in the `llm_configs` section:
+   - `base_url` can remain default for local operation, no need to modify.
+   - Set `model` to the model you are using, such as `qwen2.5:latest` used in this guide.
    ```yaml
    ollama_llm:
-     base_url: http://localhost:11434  # 本地运行保持默认
-     model: qwen2.5:latest            # ollama list 得到的模型名称
-     temperature: 0.7                 # 控制回答随机性，越高越随机 (0~1)
+     base_url: http://localhost:11434  # Keep default for local operation
+     model: qwen2.5:latest            # Model name obtained from ollama list
+     temperature: 0.7                 # Controls response randomness, higher values are more random (0~1)
    ```
 
-关于配置文件的详细说明，可以参考 [用户指南/配置文件](/docs/user-guide/backend/config.md)。
+For detailed explanations of the configuration file, refer to [User Guide/Configuration File](/docs/user-guide/backend/config.md).
 
-### 4. 配置其他模块
+### 4. Configure Other Modules
 
-本项目 `conf.yaml` 默认配置中使用了 sherpa-onnx-asr (SenseVoiceSmall) 和 edgeTTS（需要代理），并默认关闭翻译功能，你可以不用进行修改。
+The default configuration in this project's `conf.yaml` uses sherpa-onnx-asr (SenseVoiceSmall) and edgeTTS (requires a proxy), and translation is disabled by default, so you do not need to make modifications.
 
-或者你可以参考 [ASR 配置指南](./user-guide/backend/)、[TTS 配置指南](./user-guide/backend/asr.md) 和 [Translator 配置指南](./user-guide/backend/translate.md) 进行修改。
+Alternatively, you can refer to the [ASR Configuration Guide](./user-guide/backend/asr.md), [TTS Configuration Guide](./user-guide/backend/tts.md), and [Translator Configuration Guide](./user-guide/backend/translate.md) for modifications.
 
-### 5. 启动项目
+### 5. Start the Project
 
-运行后端服务:
+Run the backend service:
 
 ```bash
 uv run run_server.py
-# 第一次运行可能会下载一些模型，导致等待时间较久。
+# The first run may take longer as some models are downloaded.
 ```
 
-运行成功后，访问 `http://localhost:12393` 打开 Web 界面。
+After successful execution, visit `http://localhost:12393` to open the web interface.
 
-:::tip 桌面应用
-如果你更喜欢 Electron 应用 (窗口模式 + 桌充模式)，可以从 [Open-LLM-VTuber-Web Releases](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web/releases) 下载对应平台 Electron 客户端，可以在后端服务运行的前提下直接使用。
+:::tip Desktop Application
+If you prefer an Electron application (window mode + desktop mode), you can download the corresponding platform Electron client from [Open-LLM-VTuber-Web Releases](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web/releases), which can be used directly while the backend service is running.
 
-有关前端的更多信息，请参考 [前端指南](./user-guide/frontend/)
+For more information about the frontend, refer to the [Frontend Guide](./user-guide/frontend/)
 :::
 
-## 常见问题排查
+## Common Issue Troubleshooting
 
-如果遇到 `Error calling the chat endpoint...` 错误，请检查：
+If you encounter the `Error calling the chat endpoint...` error, please check:
 
-- http://localhost:11434/ 是否能正常访问，如果不能，可能是因为 `ollama run` 没有运行成功，或者运行成功后命令行被关闭了。
+- Whether http://localhost:11434/ is accessible. If not, it may be because `ollama run` did not run successfully, or the command line was closed after successful execution.
 
-- 报错中提示`Model not found, try pulling it...`，请使用 `ollama list` 查看已安装的模型名称，确保配置文件中的模型名称与列表中的完全一致。
+- If the error message indicates `Model not found, try pulling it...`, use `ollama list` to check the installed model names and ensure the model name in the configuration file matches the list exactly.
 
-- 如果你的代理软件没有绕过本地地址，会导致 Ollama 无法连接。尝试临时关闭代理，或参考前文设置代理绕过本地地址。
+- If your proxy software does not bypass local addresses, Ollama will not be able to connect. Try temporarily disabling the proxy or refer to the previous section to set up proxy bypass for local addresses.

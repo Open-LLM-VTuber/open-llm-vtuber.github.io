@@ -2,9 +2,9 @@
 sidebar_position: 1
 ---
 
-To be translated in English
-
 # 项目简介
+
+To be translated in English
 
 > [常见问题文档](https://docs.qq.com/pdf/DTFZGQXdTUXhIYWRq)
 >
