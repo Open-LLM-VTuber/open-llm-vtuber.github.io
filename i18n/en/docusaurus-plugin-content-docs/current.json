@@ -1,0 +1,66 @@
+{
+  "version.label": {
+    "message": "Next",
+    "description": "The label for version current"
+  },
+  "sidebar.docSidebar.category.用户指南": {
+    "message": "User Guide",
+    "description": "The label for category User Guide in sidebar docSidebar"
+  },
+  "sidebar.docSidebar.category.后端用户指南": {
+    "message": "Backend User Guide",
+    "description": "The label for category Backend User Guide in sidebar docSidebar"
+  },
+  "sidebar.docSidebar.category.前端用户指南": {
+    "message": "Frontend User Guide",
+    "description": "The label for category Frontend User Guide in sidebar docSidebar"
+  },
+  "sidebar.docSidebar.category.API 参考": {
+    "message": "API Reference",
+    "description": "The label for category API Reference in sidebar docSidebar"
+  },
+  "sidebar.docSidebar.category.API 参考.link.generated-index.description": {
+    "message": "API Reference",
+    "description": "The generated-index page description for category API Reference in sidebar docSidebar"
+  },
+  "sidebar.docSidebar.category.后端 API": {
+    "message": "Backend API",
+    "description": "The label for category Backend API in sidebar docSidebar"
+  },
+  "sidebar.docSidebar.category.后端 API.link.generated-index.description": {
+    "message": "Backend API",
+    "description": "The generated-index page description for category Backend API in sidebar docSidebar"
+  },
+  "sidebar.docSidebar.category.frontend": {
+    "message": "Frontend",
+    "description": "The label for category Frontend in sidebar docSidebar"
+  },
+  "sidebar.docSidebar.category.frontend.link.generated-index.description": {
+    "message": "Frontend API",
+    "description": "The generated-index page description for category Frontend in sidebar docSidebar"
+  },
+  "sidebar.docSidebar.category.context": {
+    "message": "Context",
+    "description": "The label for category Context in sidebar docSidebar"
+  },
+  "sidebar.docSidebar.category.context.link.generated-index.description": {
+    "message": "Context",
+    "description": "The generated-index page description for category Context in sidebar docSidebar"
+  },
+  "sidebar.docSidebar.category.hooks": {
+    "message": "Hooks",
+    "description": "The label for category Hooks in sidebar docSidebar"
+  },
+  "sidebar.docSidebar.category.hooks.link.generated-index.description": {
+    "message": "Hooks",
+    "description": "The generated-index page description for category Hooks in sidebar docSidebar"
+  },
+  "sidebar.docSidebar.category.社区与贡献": {
+    "message": "Community and Contribution",
+    "description": "The label for category Community and Contribution in sidebar docSidebar"
+  },
+  "sidebar.docSidebar.category.社区与贡献.link.generated-index.description": {
+    "message": "Developer documentation for Open LLM Vtuber",
+    "description": "The generated-index page description for category Community and Contribution in sidebar docSidebar"
+  }
+}
