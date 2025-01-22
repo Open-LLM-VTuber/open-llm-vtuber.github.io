@@ -2,11 +2,20 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
-// This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
+// This rus in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
   title: "Open LLM Vtuber",
-  tagline: "Talk to LLM with Live2D",
+  tagline: "与你的专属 Live2D AI 虚拟伴侣进行实时语音互动",
+  customFields: {
+    thirdline: "支持所有主流大语言模型，跨平台运行",
+    showcaseImages: [
+      'img/i1.jpg',
+      'img/i2.jpg',
+      'img/i3.jpg',
+      'img/i4.jpg',
+    ],
+  },
   favicon: "img/favicon.ico",
 
   // Set the production url of your site here
@@ -31,18 +40,18 @@ const config: Config = {
     locales: ["zh-Hans", "en"],
     localeConfigs: {
       en: {
-        label: 'English',
-        direction: 'ltr',
-        htmlLang: 'en-US',
-        calendar: 'gregory',
-        path: 'en',
+        label: "English",
+        direction: "ltr",
+        htmlLang: "en-US",
+        calendar: "gregory",
+        path: "en",
       },
-      'zh-Hans': {
+      "zh-Hans": {
         label: "简体中文",
         direction: "ltr",
         htmlLang: "zh-CN",
         calendar: "gregory",
-        path: 'zh-Hans',
+        path: "zh-Hans",
       },
     },
   },

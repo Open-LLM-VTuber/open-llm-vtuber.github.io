@@ -309,5 +309,65 @@
   "theme.tags.tagsPageTitle": {
     "message": "Tags",
     "description": "The title of the tag list page"
+  },
+  "features.deploy.title": {
+    "message": "Deploy your way",
+    "description": "Title of deploy feature"
+  },
+  "features.deploy.description": {
+    "message": "Run AI locally for privacy or use APIs for power with various ASR/TTS/LLM models. Easy to configure agent, persona and Live2D body.",
+    "description": "Description of deploy feature"
+  },
+  "features.run.title": {
+    "message": "Run Everywhere",
+    "description": "Title of run everywhere feature"
+  },
+  "features.run.description": {
+    "message": "Deploy on any platform (Windows/MacOS/Linux), support multiple concurrent sessions, and access from any device (PC/Mobile).",
+    "description": "Description of run everywhere feature"
+  },
+  "features.interact.title": {
+    "message": "Interact Diversely",
+    "description": "Title of interaction feature"
+  },
+  "features.interact.description": {
+    "message": "Chat through voice or text, interrupt naturally, with AI proactively speaking, Live2D expressions, touch response and more.",
+    "description": "Description of interaction feature"
+  },
+  "features.ui.title": {
+    "message": "Enjoy Powerful UI",
+    "description": "Title of UI feature"
+  },
+  "features.ui.description": {
+    "message": "Switch mode, manage chat history, open camera or screen share, and remember preferences, and collapse UI elements - all with intuitive design.",
+    "description": "Description of UI feature"
+  },
+  "features.memory.title": {
+    "message": "Remember Your Memories",
+    "description": "Title of memory feature"
+  },
+  "features.memory.description": {
+    "message": "Navigate through chat history and support various memory agents - Mem0, EVI, and more. Use your own agent just by implementing a simple interface.",
+    "description": "Description of memory feature"
+  },
+  "features.companion.title": {
+    "message": "Stay Alongside",
+    "description": "Title of companion feature"
+  },
+  "features.companion.description": {
+    "message": "Keep your AI companion visible with desktop pet mode - transparent overlay, drag anywhere, and seamless mode switching.",
+    "description": "Description of companion feature"
+  },
+  "homepage.tagline": {
+    "message": "Your AI waifu with real-time voice interaction and Live2D body",
+    "description": "The homepage tagline"
+  },
+  "homepage.thirdline": {
+    "message": "Compatible with any LLM on Windows/Linux/MacOS",
+    "description": "The homepage third line"
+  },
+  "showcase.title": {
+    "message": "Demo Pictures",
+    "description": "Title of the showcase gallery section"
   }
 }

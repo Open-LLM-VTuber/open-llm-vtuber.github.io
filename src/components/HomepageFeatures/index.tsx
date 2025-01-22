@@ -1,42 +1,55 @@
 import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
+import Translate from '@docusaurus/Translate';
 
 type FeatureItem = {
-  title: string;
+  title: string | JSX.Element;
   Svg: React.ComponentType<React.ComponentProps<'svg'>>;
   description: JSX.Element;
 };
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: <Translate>features.deploy.title</Translate>,
+    Svg: require("@site/static/img/undraw_control-panel_j1wf.svg").default,
     description: (
-      <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
-      </>
+      <Translate>features.deploy.description</Translate>
     ),
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: <Translate>features.run.title</Translate>,
+    Svg: require("@site/static/img/undraw_real-time-sync_ro77.svg").default,
     description: (
-      <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
-      </>
+      <Translate>features.run.description</Translate>
     ),
   },
   {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: <Translate>features.interact.title</Translate>,
+    Svg: require("@site/static/img/undraw_chat-bot_44el.svg").default,
     description: (
-      <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
-      </>
+      <Translate>features.interact.description</Translate>
+    ),
+  },
+  {
+    title: <Translate>features.ui.title</Translate>,
+    Svg: require("@site/static/img/undraw_experience-design_d4md.svg").default,
+    description: (
+      <Translate>features.ui.description</Translate>
+    ),
+  },
+  {
+    title: <Translate>features.memory.title</Translate>,
+    Svg: require("@site/static/img/undraw_moments_4a32.svg").default,
+    description: (
+      <Translate>features.memory.description</Translate>
+    ),
+  },
+  {
+    title: <Translate>features.companion.title</Translate>,
+    Svg: require("@site/static/img/undraw_friendship_chd3.svg").default,
+    description: (
+      <Translate>features.companion.description</Translate>
     ),
   },
 ];

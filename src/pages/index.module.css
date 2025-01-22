@@ -4,15 +4,17 @@
  */
 
 .heroBanner {
-  padding: 4rem 0;
+  padding: 2rem 0;
   text-align: center;
   position: relative;
   overflow: hidden;
+  background: -webkit-linear-gradient(180deg, #f7eee1, #f9e4e6, #f9dde9); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(180deg, #f7eee1, #f9e4e6, #f9dde9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 @media screen and (max-width: 996px) {
   .heroBanner {
-    padding: 2rem;
+    padding: 1.5rem;
   }
 }
 
@@ -20,4 +22,31 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 0.3rem;
+}
+
+.heroBanner h1 {
+  color: #333333;
+  font-weight: 800;
+  margin-bottom: 1rem;
+}
+
+.heroBanner .hero__subtitle {
+  margin-bottom: 0rem;
+}
+
+.heroBanner p {
+  color: #666666;
+}
+
+.compatibility {
+  color: #666666;
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  margin-top: -0.5rem;
+}
+
+.headerImage {
+  width: 200px;
+  margin-bottom: 0.5rem;
 }
