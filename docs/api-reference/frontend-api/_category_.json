@@ -3,6 +3,7 @@
   "position": 2,
   "link": {
     "type": "generated-index",
-    "description": "frontend API"
+    "description": "frontend API",
+    "slug": "/api-reference/frontend-api"
   }
 } 

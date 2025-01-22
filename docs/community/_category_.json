@@ -3,6 +3,7 @@
   "position": 5,
   "link": {
     "type": "generated-index",
-    "description": "Developer documentation for Open LLM Vtuber"
+    "description": "Developer documentation for Open LLM Vtuber",
+    "slug": "/community"
   }
 } 
