@@ -3,6 +3,7 @@
   "position": 2,
   "link": {
     "type": "generated-index",
-    "description": "context"
+    "description": "context",
+    "slug": "/api-reference/frontend-api/context"
   }
 } 
