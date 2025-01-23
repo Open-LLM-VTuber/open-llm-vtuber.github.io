@@ -2,26 +2,26 @@
 sidebar_position: 2
 ---
 
-# 安装部署
+# Installation and Deployment
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 :::info
-Web 模式、Window 模式和 Pet 模式共享同一个代码仓库和项目结构，开发者/用户只需要维护/配置一套代码即可支持所有模式的部署与使用。
+Web mode, Window mode, and Pet mode share the same code repository and project structure. Developers/users only need to maintain/configure one set of code to support deployment and use of all modes.
 :::
 
 :::tip
-对于 Electron 应用，你可以从 Github Release 下载对应平台的安装包。
+For Electron applications, you can download the installation package for your platform from Github Release.
 :::
 
-如果你想从源码构建应用，请按照以下步骤操作：
+If you want to build the application from source code, please follow these steps:
 
-### 前置要求
+### Prerequisites
 
-- Node.js 18.0 或更高版本 (可通过运行 `node -v` 检查版本)。建议使用 nvm 管理多个 Node.js 版本
+- Node.js 18.0 or higher (check version by running `node -v`). It's recommended to use nvm to manage multiple Node.js versions
 
-### 克隆仓库并安装依赖
+### Clone the repository and install dependencies
 
 ```bash
 git clone [placeholder]
@@ -29,7 +29,7 @@ cd [placeholder]
 npm install
 ```
 
-### 项目结构
+### Project Structure
 
 ```
 open-llm-vtuber-web/
@@ -67,7 +67,7 @@ open-llm-vtuber-web/
 └── package.json           
 ```
 
-### 开发模式 (可选，通常用于开发者测试)
+### Development Mode (Optional, typically used for developer testing)
 
 <Tabs>
   <TabItem value="electron" label="Electron" default>
@@ -83,10 +83,10 @@ open-llm-vtuber-web/
 </Tabs>
 
 :::info 
-`npm run dev` 会同时启动 Electron 和 Web 模式 (默认在 5137 端口上)
+`npm run dev` will start both Electron and Web modes (default on port 5137)
 :::
 
-### 根据目标平台/模式选择相应的构建命令
+### Choose the appropriate build command based on the target platform/mode
 
 <Tabs>
   <TabItem value="windows" label="Windows" default>
@@ -112,9 +112,9 @@ open-llm-vtuber-web/
 </Tabs>
 
 :::info 
-Electron 构建输出的文件将位于 `dist` 目录下。
+The output files for Electron builds will be located in the `dist` directory.
 
-Web 构建输出的文件将位于 `src/renderer/dist` 目录下。
+The output files for Web builds will be located in the `src/renderer/dist` directory.
 :::
 
 

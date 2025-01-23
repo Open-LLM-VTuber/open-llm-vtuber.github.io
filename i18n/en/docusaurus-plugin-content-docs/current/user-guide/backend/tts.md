@@ -2,188 +2,185 @@
 sidebar_position: 6
 ---
 
-# 语音合成 (TTS)
+# Speech Synthesis (TTS)
 
-安装所需的依赖并在 `conf.yaml` 进行配置后后，通过修改 `conf.yaml` 中的 `TTS_MODEL` 选项来启用相应的语音合成引擎。
+After installing the required dependencies and configuring `conf.yaml`, enable the corresponding speech synthesis engine by modifying the `TTS_MODEL` option in `conf.yaml`.
 
+## sherpa-onnx (Local & Recommended)
+> Available since version `v0.5.0-alpha.1` ([PR#50](https://github.com/t41372/Open-LLM-VTuber/pull/50))
 
-## sherpa-onnx（本地 & 推荐）
-> 自 `v0.5.0-alpha.1` 版本起可用（[PR#50](https://github.com/t41372/Open-LLM-VTuber/pull/50)）
+sherpa-onnx is a powerful inference engine that supports multiple TTS models (including MeloTTS). It is built-in supported and uses CPU inference by default.
 
-sherpa-onnx 是一个强大的推理引擎，支持多种 TTS 模型（包括 MeloTTS）。项目已内置支持，默认使用 CPU 推理。
-
-**配置步骤：**
-1. 从 [sherpa-onnx TTS models](https://github.com/k2-fsa/sherpa-onnx/releases/tag/tts-models) 下载所需模型
-2. 参考 `config_alts` 中的配置示例修改 `conf.yaml` 
+**Configuration Steps:**
+1. Download the required model from [sherpa-onnx TTS models](https://github.com/k2-fsa/sherpa-onnx/releases/tag/tts-models)
+2. Modify `conf.yaml` referring to the configuration examples in `config_alts`
 
 :::tip
-如需使用 GPU 推理（仅支持 CUDA），请参考 [CUDA推理](/docs/user-guide/backend/asr#cuda-推理)。
+For GPU inference (CUDA only), please refer to [CUDA Inference](/docs/user-guide/backend/asr#cuda-inference).
 :::
 
-## pyttsx3（轻量快速）
-简单易用的本地 TTS 引擎，使用系统默认语音合成器。使用 `py3-tts` 而不是更著名的 `pyttsx3`，因为 `pyttsx3` 似乎无人维护，且在测试电脑上无法运行。
+## pyttsx3 (Lightweight and Fast)
+A simple and easy-to-use local TTS engine that uses the system's default speech synthesizer. We use `py3-tts` instead of the more famous `pyttsx3` because `pyttsx3` seems unmaintained and failed to run on the test computer.
 
-**配置步骤：**
-1. 执行 `uv pip install py3-tts` 安装
-2. 在 `conf.yaml` 中设置 `tts_model: pyttsx3_tts`
+**Configuration Steps:**
+1. Install by running `uv pip install py3-tts`
+2. Set `tts_model: pyttsx3_tts` in `conf.yaml`
 
-- 1. 使用命令 `uv pip install py3-tts` 安装。
-- 2. 这个 TTS 引擎没有任何配置项，直接在 `conf.yaml` 中设置 `tts_model: pyttsx3_tts` 即可。
+- 1. Install using the command `uv pip install py3-tts`.
+- 2. This TTS engine has no configuration options, simply set `tts_model: pyttsx3_tts` in `conf.yaml`.
 
 :::info
-这个包将使用您系统上的默认 TTS 引擎:
-- Windows 使用 sapi5 引擎
-- macOS 使用 nsss 引擎
-- 其他平台使用 espeak 引擎
+This package will use the default TTS engine on your system:
+- Windows uses the sapi5 engine
+- macOS uses the nsss engine
+- Other platforms use the espeak engine
 :::
 
-
-## MeloTTS（本地部署）
-:::warning 重要提示
-- 强烈推荐通过 sherpa-onnx 使用 MeloTTS，而非安装较为复杂的官方版本
-- MeloTTS 与 Coqui-TTS 存在依赖冲突，请勿同时安装
-- MeloTTS 官方版本在 macOS 上可能出现 mps 相关错误（欢迎提供解决方案）
+## MeloTTS (Local Deployment)
+:::warning Important Note
+- It is strongly recommended to use MeloTTS through sherpa-onnx, rather than installing the more complex official version
+- MeloTTS has dependency conflicts with Coqui-TTS, please do not install them simultaneously
+- The official version of MeloTTS may encounter mps-related errors on macOS (solutions are welcome)
 :::
 
-### 安装步骤
-> 从项目 `v1.0.0` 版本开始，我们采用 `uv` 管理依赖，这大大简化了 MeloTTS 的安装流程。
+### Installation Steps
+> Starting from project version `v1.0.0`, we use `uv` to manage dependencies, which greatly simplifies the installation process of MeloTTS.
 
-1. 安装 MeloTTS 和必要组件：
+1. Install MeloTTS and necessary components:
 ```sh
-# 安装 MeloTTS
+# Install MeloTTS
 uv add git+https://github.com/myshell-ai/MeloTTS.git
 
-# 下载 unidic
+# Download unidic
 python -m unidic download
 ```
 
-2. 下载额外依赖：
+2. Download additional dependencies:
 ```sh
-# 进入 Python 解释器
+# Enter Python interpreter
 python
 
-# 下载必要的 NLTK 数据
+# Download necessary NLTK data
 >>> import nltk
 >>> nltk.download('averaged_perceptron_tagger_eng')
-# 完成后按 Ctrl+D 退出解释器
+# Press Ctrl+D to exit the interpreter when finished
 ```
 
-3. 配置启用：
-- 编辑项目的 `conf.yaml` 文件
-- 将 `tts_model` 设置为 `melo_tts`
+3. Configure and enable:
+- Edit the project's `conf.yaml` file
+- Set `tts_model` to `melo_tts`
 
-### 补充说明
-- 官方文档：[MeloTTS Installation Guide](https://github.com/myshell-ai/MeloTTS/blob/main/docs/install.md)
-- 如遇到 `mecab-python` 相关问题，可尝试使用此[分支](https://github.com/polm/MeloTTS)（注：截至 2024/7/16 尚未合并至主分支）
+### Additional Notes
+- Official documentation: [MeloTTS Installation Guide](https://github.com/myshell-ai/MeloTTS/blob/main/docs/install.md)
+- If encountering `mecab-python` related issues, try using this [branch](https://github.com/polm/MeloTTS) (Note: As of 2024/7/16, it has not been merged into the main branch)
 
+## Coqui-TTS (Local Deployment)
 
-## Coqui-TTS（本地部署）
+Coqui-TTS is an open-source speech synthesis toolkit that supports multiple models and languages. The inference speed depends on the size and complexity of the chosen model.
 
-Coqui-TTS 是一个开源语音合成工具包，支持多种模型和语言。推理速度取决于所选模型的大小和复杂度。
-
-### 安装步骤
+### Installation Steps
 ```sh
-# 安装 Coqui-TTS 及其语言支持
+# Install Coqui-TTS and its language support
 uv pip install "coqui-tts[languages]"
 ```
 
-### 模型配置
-1. 查看可用模型：
+### Model Configuration
+1. View available models:
 ```sh
 uv run tts --list_models
 ```
 
-2. 在 `conf.yaml` 中配置：
+2. Configure in `conf.yaml`:
 ```yaml
  coqui_tts:
-      # 要使用的 TTS 模型的名称。如果为空，将使用默认模型
-      # 执行 "tts --list_models" 以列出 coqui-tts 支持的模型
-      # 一些示例：
-      # - "tts_models/en/ljspeech/tacotron2-DDC"（单说话人）
-      # - "tts_models/zh-CN/baker/tacotron2-DDC-GST"（中文单说话人）
-      # - "tts_models/multilingual/multi-dataset/your_tts"（多说话人）
-      # - "tts_models/multilingual/multi-dataset/xtts_v2"（多说话人）
-      model_name: "tts_models/en/ljspeech/tacotron2-DDC" # 模型名称
-      speaker_wav: "" # 参考音频文件路径
-      language: "en" # 语言
-      device: "" # 设备
+      # Name of the TTS model to use. If empty, the default model will be used
+      # Run "tts --list_models" to list models supported by coqui-tts
+      # Some examples:
+      # - "tts_models/en/ljspeech/tacotron2-DDC" (single speaker)
+      # - "tts_models/zh-CN/baker/tacotron2-DDC-GST" (Chinese single speaker)
+      # - "tts_models/multilingual/multi-dataset/your_tts" (multi-speaker)
+      # - "tts_models/multilingual/multi-dataset/xtts_v2" (multi-speaker)
+      model_name: "tts_models/en/ljspeech/tacotron2-DDC" # Model name
+      speaker_wav: "" # Path to reference audio file
+      language: "en" # Language
+      device: "" # Device
 ```
 
-- **单语言模型**：
-   - 默认配置为英文单语言模型
-   - 如需中文支持，请更换为中文模型 (如 `tts_models/zh-CN/baker/tacotron2-DDC-GST`)
+- **Single Language Models**:
+   - Default configuration is for English single language model
+   - For Chinese support, please change to a Chinese model (e.g., `tts_models/zh-CN/baker/tacotron2-DDC-GST`)
 
-- **多语言模型**：
-   - `speaker_wav`：参考音频文件路径
-     - 支持相对路径（如 `./voices/reference.wav`）
-     - Windows 使用绝对路径时注意将 `\` 改为 `\\`
-     - 确保参考音频文件存在于指定位置
+- **Multilingual Models**:
+   - `speaker_wav`: Path to reference audio file
+     - Supports relative paths (e.g., `./voices/reference.wav`)
+     - For Windows, when using absolute paths, change `\` to `\\`
+     - Ensure the reference audio file exists at the specified location
    
-   - `language`：设置优先使用的语言
-     - 中文设置为 `"zh"`
-     - 英文设置为 `"en"`
-     - 此参数与 `speaker_wav` 对应
+   - `language`: Set the preferred language
+     - Set to `"zh"` for Chinese
+     - Set to `"en"` for English
+     - This parameter corresponds to `speaker_wav`
 
+## GPTSoVITS (Local Deployment, Moderate Performance)
+> Introduced in [PR #40](https://github.com/t41372/Open-LLM-VTuber/pull/40), officially released in version v0.4.0
 
-## GPTSoVITS（本地部署，性能适中）
-> 在 [PR #40](https://github.com/t41372/Open-LLM-VTuber/pull/40) 中引入，于 v0.4.0 版本正式发布
-
-GPT-SoVITS 是一个强大的语音合成引擎，可实现高质量的声音克隆。
+GPT-SoVITS is a powerful speech synthesis engine capable of high-quality voice cloning.
 
 :::note
-以下部分内容整理自 QQ 群的 [腾讯文档](https://docs.qq.com/doc/DTHR6WkZ3aU9JcXpy)
+Some of the following content is compiled from the [Tencent Document](https://docs.qq.com/doc/DTHR6WkZ3aU9JcXpy) in the QQ group
 
-GPTSoVITS 的官方教程暂时不完善，可以参考腾讯文进行部署。
+The official tutorial for GPTSoVITS is currently incomplete, you can refer to the Tencent Document for deployment.
 :::
 
-### [GPTSoVITS-V2 整合包](https://www.yuque.com/baicaigongchang1145haoyuangong/ib3g1e/dkxgpiy9zb96hob4#KTvnO)
+### [GPTSoVITS-V2 Integration Package](https://www.yuque.com/baicaigongchang1145haoyuangong/ib3g1e/dkxgpiy9zb96hob4#KTvnO)
 
-### [米哈游一键包](https://www.bilibili.com/video/BV1D7421R7Rn)
+### [miHoYo One-Click Package](https://www.bilibili.com/video/BV1D7421R7Rn)
 
-## Bark (本地部署、较慢)
-1. 安装依赖：
+## Bark (Local Deployment, Relatively Slow)
+1. Install dependencies:
     ```sh
     uv pip install git+https://github.com/suno-ai/bark.git
     ```
-2. 在 `conf.yaml` 中设置 `tts_model: bark_tts`
-3. 首次启动时会自动下载所需模型
-## CosyVoice TTS（本地部署、较慢）
-1. 按照 [CosyVoice 官方文档](https://github.com/FunAudioLLM/CosyVoice) 配置并启动 WebUI
-2. 参考 WebUI 中的 API 文档，在 `conf.yaml` 的 `cosyvoiceTTS` 部分进行相应配置
+2. Set `tts_model: bark_tts` in `conf.yaml`
+3. Required models will be automatically downloaded on first launch
 
-#### X-TTS（本地部署、较慢）
-> 自 `v0.2.4` 版本起可用（[PR#23](https://github.com/t41372/Open-LLM-VTuber/pull/23)）
+## CosyVoice TTS (Local Deployment, Relatively Slow)
+1. Configure and start the WebUI according to the [CosyVoice official documentation](https://github.com/FunAudioLLM/CosyVoice)
+2. Refer to the API documentation in the WebUI and configure accordingly in the `cosyvoiceTTS` section of `conf.yaml`
 
-推荐使用 xtts-api-server，提供了清晰的 API 文档且部署相对简单。
+#### X-TTS (Local Deployment, Relatively Slow)
+> Available since version `v0.2.4` ([PR#23](https://github.com/t41372/Open-LLM-VTuber/pull/23))
 
-## Edge TTS（在线、无需 API 密钥）
-- 特点：
-  - 响应速度快
-  - 需要保持网络连接
-- 配置：在 `conf.yaml` 中设置 `tts_model: edge_tts`
+It is recommended to use xtts-api-server, which provides clear API documentation and is relatively easy to deploy.
 
-#### Fish Audio TTS（在线、需要 API 密钥）
-> 自 `v0.3.0-beta` 版本起可用
+## Edge TTS (Online, No API Key Required)
+- Features:
+  - Fast response speed
+  - Requires maintaining network connection
+- Configuration: Set `tts_model: edge_tts` in `conf.yaml`
 
-1. 安装依赖：
+#### Fish Audio TTS (Online, API Key Required)
+> Available since version `v0.3.0-beta`
+
+1. Install dependencies:
 ```sh
 uv pip install fish-audio-sdk
 ```
-2. 配置步骤：
-   - 在 [Fish Audio](https://fish.audio/) 注册账号并获取 API 密钥
-   - 选择所需声音并复制其 Reference ID
-   - 在 `conf.yaml` 中设置：
+2. Configuration steps:
+   - Register an account on [Fish Audio](https://fish.audio/) and obtain an API key
+   - Select the desired voice and copy its Reference ID
+   - In `conf.yaml`, set:
      - `tts_model: fish_api_tts`
-     - 在 `fish_api_tts` 部分填写 `api_key` 和 `reference_id`
+     - Fill in `api_key` and `reference_id` in the `fish_api_tts` section
 
-### Azure TTS（在线、需要 API 密钥）
-> 与 neuro-sama 相同的 TTS 服务
+### Azure TTS (Online, API Key Required)
+> The same TTS service as neuro-sama
 
-1. 从 Azure 获取文本转语音服务的 API 密钥
-2. 在 `conf.yaml` 的 `azure_tts` 部分填写相关配置
+1. Obtain an API key for the text-to-speech service from Azure
+2. Fill in the relevant configuration in the `azure_tts` section of `conf.yaml`
 :::warning
-自 `v0.2.5` 版本起，`api_key.py` 已弃用，请务必在 `conf.yaml` 中设置 API 密钥
+Since version `v0.2.5`, `api_key.py` has been deprecated. Please make sure to set the API key in `conf.yaml`
 :::
 :::tip
-`conf.yaml` 中默认使用的是 neuro-sama 同款语音
+The default voice used in `conf.yaml` is the same as neuro-sama
 :::

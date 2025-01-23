@@ -2,55 +2,55 @@
 sidebar_position: 8
 ---
 
-# Docker 部署
+# Docker Deployment
 
 :::danger
-由于重构幅度较大，Docker 镜像暂时还没有更新到 `v1.0.0` 版本，但是很快会更新。
+Due to significant refactoring, the Docker image has not yet been updated to version `v1.0.0`, but it will be updated soon.
 :::
 
 :::warning
-⚠️ 请注意：此功能目前处于实验阶段，但在大多数情况下可以正常工作。
+⚠️ Please note: This feature is currently in an experimental stage but works normally in most cases.
 :::
 
-您可以选择自行构建 Docker 镜像，或者直接从 Docker Hub 拉取已构建的镜像：[![](https://img.shields.io/badge/t41372%2FOpen--LLM--VTuber-%25230db7ed.svg?logo=docker&logoColor=blue&labelColor=white&color=blue)](https://hub.docker.com/r/t41372/open-llm-vtuber)
+You can choose to build the Docker image yourself or pull the pre-built image directly from Docker Hub: [![](https://img.shields.io/badge/t41372%2FOpen--LLM--VTuber-%25230db7ed.svg?logo=docker&logoColor=blue&labelColor=white&color=blue)](https://hub.docker.com/r/t41372/open-llm-vtuber)
 
-## 使用须知
+## Usage Notes
 
-- Docker 镜像体积较大（约 13GB），且某些可选模型在使用时需要额外下载，会占用更多存储空间
-- 仅支持 NVIDIA GPU 的设备
-- 需要安装并配置 [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) 以支持 GPU 直通
-- 目前存在的问题：容器停止后部分模型需要重新下载（该问题将在后续版本修复）
-- 不建议在 ARM 架构的设备上构建镜像，因为依赖项 gRPC 可能会出现构建失败的情况（[相关 issue](https://github.com/grpc/grpc/issues/34998)）
-- 如需在远程服务器上运行，必须配置 HTTPS。这是因为前端网页的麦克风/摄像头/屏幕录制功能只能在安全上下文（localhost 或 HTTPS 环境）中使用
+- The Docker image is large (about 13GB), and some optional models require additional downloads when used, occupying more storage space
+- Only supports devices with NVIDIA GPUs
+- Requires installation and configuration of [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) to support GPU passthrough
+- Current issue: Some models need to be re-downloaded after the container stops (this will be fixed in future versions)
+- Building the image on ARM architecture devices is not recommended due to potential build failures with the gRPC dependency ([related issue](https://github.com/grpc/grpc/issues/34998))
+- If running on a remote server, HTTPS must be configured. This is because the frontend webpage's microphone/camera/screen recording features can only be used in a secure context (localhost or HTTPS environment)
 
-## 预装模型说明
+## Pre-installed Model Information
 
-默认镜像已预装大部分语音识别（ASR）和文本转语音（TTS）模型。但考虑到体积因素（约 8GB，会使总体积增加到 25GB）和性能表现，默认构建不包含以下模型：
+The default image comes with most Automatic Speech Recognition (ASR) and Text-to-Speech (TTS) models pre-installed. However, considering size factors (about 8GB, which would increase the total size to 25GB) and performance, the default build does not include the following models:
 - Bark TTS
-- 原版 OpenAI Whisper（注意：这里指的是 Whisper，而非 WhisperCPP）
+- Original OpenAI Whisper (Note: This refers to Whisper, not WhisperCPP)
 
-如需在镜像中包含这些模型，请在构建时添加参数：
+To include these models in the image, add the following parameters when building:
 ```bash
 --build-arg INSTALL_ORIGINAL_WHISPER=true --build-arg INSTALL_BARK=true
 ```
 
-## 部署步骤
+## Deployment Steps
 
-1. 在构建镜像前，请先检查并调整 `conf.yaml` 配置文件（当前配置会被构建进镜像）
+1. Before building the image, check and adjust the `conf.yaml` configuration file (the current configuration will be built into the image)
 
-2. 构建 Docker 镜像：
+2. Build the Docker image:
 ```bash
 docker build -t open-llm-vtuber .
 ```
-   > 提示：构建过程可能需要较长时间
+   > Note: The build process may take a considerable amount of time
 
-3. 准备 `conf.yaml` 配置文件
-   您可以从项目仓库获取，或直接通过此[链接](https://raw.githubusercontent.com/t41372/Open-LLM-VTuber/main/conf.yaml)下载
+3. Prepare the `conf.yaml` configuration file
+   You can obtain it from the project repository or download it directly via this [link](https://raw.githubusercontent.com/t41372/Open-LLM-VTuber/main/conf.yaml)
 
-4. 运行容器：
+4. Run the container:
 ```bash
 docker run -it --net=host --rm -v $(pwd)/conf.yaml:/app/conf.yaml -p 12393:12393 open-llm-vtuber
 ```
-   注意：请将 `$(pwd)/conf.yaml` 替换为您的配置文件实际路径
+   Note: Replace `$(pwd)/conf.yaml` with the actual path to your configuration file
 
-5. 访问 `localhost:12393` 进行测试
+5. Access `localhost:12393` for testing

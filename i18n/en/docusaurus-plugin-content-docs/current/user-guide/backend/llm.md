@@ -4,82 +4,79 @@ sidebar_position: 4
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# 语言模型 (LLM)
 
+# Language Models (LLM)
 
-本项目支持多种大语言模型后端与模型。
+This project supports multiple large language model backends and models.
 
-### 如何配置和切换不同的大语言模型后端
+### How to configure and switch between different large language model backends
 
-> 项目预设的智能体 (Agent) 是 `basic_memory_agent`，所以要切换预设 Agent 的语言模型，在 `basic_memory_agent` 的 `llm_provider` 选项下进行选择。
+> The project's default agent is `basic_memory_agent`, so to switch the language model for the default agent, make selections under the `llm_provider` option of `basic_memory_agent`.
 
+#### 1. Configure large language model settings
+Refer to the [Supported Large Language Model Backends](#supported-large-language-model-backends) section below to configure the corresponding large language model backend.
 
-#### 1. 配置大语言模型设置
-参考下方 [支持的大语言模型后端](#支持的大语言模型后端) 配置对应大语言模型后端的配置。
+For example, if you want to use Ollama, please follow the guide in the [Ollama](#ollama-ollama_llm) section to install and configure Ollama-related settings.
 
-比如，如果你想使用 Ollama，请根据 [Ollama](#ollama-ollama_llm) 部分的指南安装和配置 ollama 相关配置
+Under `agent_config` in `llm_config`, you can configure the connection settings for the backend and various LLMs.
 
-在 `agent_config` 下的 `llm_config`，可以配置后端与各个 LLM 的连接配置。
-#### 2. 在对应的 智能体(Agent) 的设置，切换到对应的大语言模型(LLM)
-> 有些 Agent 可能不支持自定义 LLM
+#### 2. Switch to the corresponding large language model (LLM) in the settings of the respective agent
+> Some agents may not support custom LLMs
 
-前往 `basic_memory_agent` 设置下
+Go to the `basic_memory_agent` settings:
 
 ```yaml
 basic_memory_agent:
     # "openai_compatible_llm", "llama_cpp_llm", "claude_llm", "ollama_llm"
     # "openai_llm", "gemini_llm", "zhipu_llm", "deepseek_llm", "groq_llm"
     # "mistral_llm"
-    llm_provider: "openai_compatible_llm" # 使用的 LLM 方案
+    llm_provider: "openai_compatible_llm" # LLM solution to use
     faster_first_response: True
 ```
 
-把 `basic_memory_agent` 换成你想使用的大语言模型(LLM)。
+Replace `basic_memory_agent` with the large language model (LLM) you want to use.
 
-注意，`llm_provider`中只能填写 `llm_configs` 下面存在的大语言模型后端，比如 `openai_compatible_llm`, `claude_llm` 等等
+Note that `llm_provider` can only be filled with large language model backends that exist under `llm_configs`, such as `openai_compatible_llm`, `claude_llm`, etc.
 
+## Supported Large Language Model Backends
 
+### OpenAI Compatible API (`openai_compatible_llm`)
+Compatible with all API endpoints that support the OpenAI Chat Completion format. This includes LM Studio, vLLM, and most inference tools and API providers.
 
+The later official OpenAI API, Gemini, Zhipu, DeepSeek, Mistral, and Groq are all wrappers of `openai_compatible_llm` (Ollama is also a wrapper, but with added special memory management mechanisms). I've just pre-filled the correct `base_url` and related configurations for you.
 
-## 支持的大语言模型后端
-
-### OpenAI 兼容的 API (`openai_compatible_llm`)
-与所有支持 OpenAI Chat Completion 格式的 API 端点兼容。这包括 LM Studio, vLLM, 以及绝大部分的推理工具和 API 提供商。
-
-后面的 OpenAI 官方API，Gemini，智谱，DeepSeek，Mistral 和 Groq 都是 `openai_compatible_llm` 的套壳 (Ollama也是套壳，不过加上了特殊的内存管理机制)，只是我帮你们把正确的 `base_url` 和相关配置提前填好了。
-
-#### 设置说明
+#### Configuration Instructions
 
 ```yaml
-# OpenAI 兼容推理后端
+# OpenAI compatible inference backend
 openai_compatible_llm:
-    base_url: "http://localhost:11434/v1" # 基础 URL
-    llm_api_key: "somethingelse" # API 密钥
-    organization_id: "org_eternity" # 组织 ID
-    project_id: "project_glass" # 项目 ID
-    model: "qwen2.5:latest" # 使用的模型
-    temperature: 1.0 # 温度，介于 0 到 2 之间
+    base_url: "http://localhost:11434/v1" # Base URL
+    llm_api_key: "somethingelse" # API key
+    organization_id: "org_eternity" # Organization ID
+    project_id: "project_glass" # Project ID
+    model: "qwen2.5:latest" # Model to use
+    temperature: 1.0 # Temperature, between 0 and 2
 ```
 
 ### Ollama (`ollama_llm`)
-Ollama 是一个流行的 LLM 推理工具，可以方便的下载和运行大语言模型。
+Ollama is a popular LLM inference tool that allows easy downloading and running of large language models.
 
-#### Ollama 安装指南
+#### Ollama Installation Guide
 
-1. 从 [Ollama 官网](https://ollama.com/) 下载并安装
-2. 验证安装:
+1. Download and install from the [Ollama official website](https://ollama.com/)
+2. Verify installation:
 ```bash
 ollama --version
 ```
 
-3. 下载并运行模型（以 `qwen2.5:latest` 为例）：
+3. Download and run the model (using `qwen2.5:latest` as an example):
 ```bash
 ollama run qwen2.5:latest
-# 运行成功后，你就可以直接跟 qwen2.5:latest 对话了
-# 可以先退出聊天界面 (Ctrl/Command + D)，但一定不要关闭命令行
+# After successful execution, you can directly chat with qwen2.5:latest
+# You can exit the chat interface (Ctrl/Command + D), but don't close the command line
 ```
 
-4. 查看已安装的模型：
+4. View installed models:
 ```bash
 ollama list
 # NAME                ID              SIZE      MODIFIED
@@ -87,125 +84,121 @@ ollama list
 ```
 
 :::tip
-寻找模型名时，请使用 `ollama list` 命令，查看 ollama 中已下载的模型，并将模型名称直接复制粘贴到 `model` 选项下，避免模型名打错，全形冒号，空格之类的问题。
+When looking for model names, please use the `ollama list` command to check the models downloaded in ollama, and directly copy and paste the model name under the `model` option to avoid issues such as misspelling the model name, full-width colons, spaces, etc.
 :::
 
 :::caution
-选择模型时，请考虑你的显存容量与GPU算力。如果模型文件大小大于显存容量，模型会被迫使用 CPU 运算，速度极慢。另外，模型参数量越小，对话延迟越小。如果你希望降低对话延迟，请选择一个参数量较低的模型。
+When selecting a model, please consider your VRAM capacity and GPU computing power. If the model file size is larger than the VRAM capacity, the model will be forced to use CPU computation, which is extremely slow. Additionally, the smaller the model parameter count, the lower the conversation latency. If you want to reduce conversation latency, please choose a model with fewer parameters.
 :::
 
-#### 修改配置文件
+#### Modify Configuration File
 
-编辑 `conf.yaml`：
+Edit `conf.yaml`:
 
-1. 将 `basic_memory_agent` 下的 `llm_provider` 设置为 `ollama_llm`
-2. 调整 `llm_configs` 选项下的 `ollama_llm` 下的设置:
-   - `base_url` 本地运行保持默认即可，无需修改。
-   - 设置 `model` 为你使用的模型，比如本指南使用的 `qwen2.5:latest`。
+1. Set `llm_provider` under `basic_memory_agent` to `ollama_llm`
+2. Adjust the settings under `ollama_llm` in the `llm_configs` option:
+   - Keep `base_url` default for local running, no need to modify.
+   - Set `model` to the model you're using, such as `qwen2.5:latest` used in this guide.
    ```yaml
    ollama_llm:
-     base_url: http://localhost:11434  # 本地运行保持默认
-     model: qwen2.5:latest            # ollama list 得到的模型名称
-     temperature: 0.7                 # 控制回答随机性，越高越随机 (0~1)
+     base_url: http://localhost:11434  # Keep default for local running
+     model: qwen2.5:latest            # Model name obtained from ollama list
+     temperature: 0.7                 # Controls answer randomness, higher is more random (0~1)
    ```
 
-### OpenAI 官方 API (`openai_llm`)
-请先去 OpenAI 官网获取 API key
+### OpenAI Official API (`openai_llm`)
+First, obtain an API key from the OpenAI official website.
 
-然后到这边调整设置
+Then adjust the settings here:
 
 ```yaml
 openai_llm:
-    llm_api_key: "Your Open AI API key" # OpenAI API 密钥
-    model: "gpt-4o" # 使用的模型
-    temperature: 1.0 # 温度，介于 0 到 2 之间
+    llm_api_key: "Your Open AI API key" # OpenAI API key
+    model: "gpt-4o" # Model to use
+    temperature: 1.0 # Temperature, between 0 and 2
 ```
 
-
 ### Gemini API (`gemini_llm`)
-前往 [Google AI Studio](https://aistudio.google.com/) 生成一个 API key。
+Go to [Google AI Studio](https://aistudio.google.com/) to generate an API key.
 
-然后在这边调整设置
+Then adjust the settings here:
 
 ```yaml
 gemini_llm:
-    llm_api_key: "Your Gemini API Key" # Gemini API 密钥
-    model: "gemini-2.0-flash-exp" # 使用的模型
-    temperature: 1.0 # 温度，介于 0 到 2 之间
+    llm_api_key: "Your Gemini API Key" # Gemini API key
+    model: "gemini-2.0-flash-exp" # Model to use
+    temperature: 1.0 # Temperature, between 0 and 2
 ```
 
-### 智谱 API (`zhipu_llm`)
-前往[智谱](https://bigmodel.cn/) 获取 API key。
+### Zhipu API (`zhipu_llm`)
+Go to [Zhipu](https://bigmodel.cn/) to obtain an API key.
 
 ```yaml
 zhipu_llm:
-    llm_api_key: "Your ZhiPu AI API key" # 智谱 AI API 密钥
-    model: "glm-4-flash" # 使用的模型
-    temperature: 1.0 # 温度，介于 0 到 2 之间
+    llm_api_key: "Your ZhiPu AI API key" # Zhipu AI API key
+    model: "glm-4-flash" # Model to use
+    temperature: 1.0 # Temperature, between 0 and 2
 ```
 
 ### DeepSeek API (`deepseek`)
-前往 [DeepSeek](#deepseek-api-deepseek) 获取 API key
+Go to [DeepSeek](#deepseek-api-deepseek) to obtain an API key.
 
 ```yaml
 zhipu_llm:
-    llm_api_key: "Your ZhiPu AI API key" # 智谱 AI API 密钥
-    model: "glm-4-flash" # 使用的模型
-    temperature: 1.0 # 温度，介于 0 到 2 之间
+    llm_api_key: "Your ZhiPu AI API key" # Zhipu AI API key
+    model: "glm-4-flash" # Model to use
+    temperature: 1.0 # Temperature, between 0 and 2
 ```
 
 ### Mistral API (`mistral_llm`)
-前往 [Mistral官网](https://example.com) 获取 API key
+Go to the [Mistral official website](https://example.com) to obtain an API key.
 
 ```yaml
 mistral_llm:
-    llm_api_key: "Your Mistral API key" # Mistral API 密钥
-    model: "pixtral-large-latest" # 使用的模型
-    temperature: 1.0 # 温度，介于 0 到 2 之间
+    llm_api_key: "Your Mistral API key" # Mistral API key
+    model: "pixtral-large-latest" # Model to use
+    temperature: 1.0 # Temperature, between 0 and 2
 ```
 
 ### Groq API (`groq_llm`)
-前往 [Groq 官网](https://console.groq.com/keys) 获取 API key
+Go to the [Groq official website](https://console.groq.com/keys) to obtain an API key.
 
 ```yaml
 groq_llm:
-    llm_api_key: "your groq API key" # Groq API 密钥
-    model: "llama-3.3-70b-versatile" # 使用的模型
-    temperature: 1.0 # 温度，介于 0 到 2 之间
+    llm_api_key: "your groq API key" # Groq API key
+    model: "llama-3.3-70b-versatile" # Model to use
+    temperature: 1.0 # Temperature, between 0 and 2
 ```
-
 
 ### Claude (`claude_llm`)
 
-在 https://github.com/t41372/Open-LLM-VTuber/pull/35 中，`v0.3.1` 版本添加了对 Claude 的支持。
+In https://github.com/t41372/Open-LLM-VTuber/pull/35, version `v0.3.1` added support for Claude.
 
-将 `LLM_PROVIDER` 更改为 `claude` 并在 `claude` 下完成设置。
+Change `LLM_PROVIDER` to `claude` and complete the settings under `claude`.
 
 ### LLama CPP (`llama_cpp_llm`)
 
-llama cpp 提供了一种**在本项目内**直接运行 LLM (gguf 文件) 的方法，无需任何外部工具（如 Ollama），不用额外启动任何服务器。您只需要一个 `.gguf` 模型文件。
+llama cpp provides a way to run LLM (gguf files) directly **within this project** without any external tools (such as Ollama) and without starting any additional servers. You only need a `.gguf` model file.
 
-#### 设备要求
+#### Device Requirements
 
-根据 [项目仓库](https://github.com/abetlen/llama-cpp-python)
+According to the [project repository](https://github.com/abetlen/llama-cpp-python)
 
-要求：
+Requirements:
 
 - Python 3.8+
-- C 编译器
-  - Linux：gcc 或 clang
-  - Windows：Visual Studio 或 MinGW
-  - MacOS：Xcode
+- C compiler
+  - Linux: gcc or clang
+  - Windows: Visual Studio or MinGW
+  - MacOS: Xcode
 
-安装过程中，将会从源代码构建 `llama.cpp` 并将其与此 Python 包一起安装。
+During installation, `llama.cpp` will be built from source and installed along with this Python package.
 
-如果后面失败，请在 `pip install` 命令中添加 `--verbose` 以查看完整的 cmake 构建日志。
+If it fails later, please add `--verbose` to the `pip install` command to view the full cmake build log.
 
+### Installation
 
-
-### 安装
-
-请根据你的设备，在项目目录下运行命令。
+Please run the command in the project directory according to your device.
 
 <Tabs>
 <TabItem value="nvidia" label="Nvidia GPU">
@@ -238,18 +231,13 @@ CMAKE_ARGS="-DGGML_BLAS=ON -DGGML_BLAS_VENDOR=OpenBLAS" uv pip install llama-cpp
 </TabItem>
 </Tabs>
 
-如果上面没有找到你的设备，可以在[此处](https://github.com/abetlen/llama-cpp-python?tab=readme-ov-file#supported-backends)查找适用于您平台的 `pip install llama-cpp-python` 命令。
+If you can't find your device above, you can look for the `pip install llama-cpp-python` command suitable for your platform [here](https://github.com/abetlen/llama-cpp-python?tab=readme-ov-file#supported-backends).
 
 :::warning
-所有 `pip` 命令都要改成 `uv pip`，这样才会安装在项目虚拟环境中。比如，如果项目页面上写 `pip install llama-cpp-python`，你要改成 `uv pip install llama-cpp-python`
+All `pip` commands should be changed to `uv pip`, so that they will be installed in the project's virtual environment. For example, if the project page says `pip install llama-cpp-python`, you should change it to `uv pip install llama-cpp-python`
 :::
 
-
-如果你在这一步遇到问题，可以看看 [Windows Note](https://github.com/abetlen/llama-cpp-python?tab=readme-ov-file#windows-notes) 和 [macOS Note](https://github.com/abetlen/llama-cpp-python?tab=readme-ov-file#macos-notes)
-
-
-
-
-
+If you encounter problems at this step, you can check out the [Windows Note](https://github.com/abetlen/llama-cpp-python?tab=readme-ov-file#windows-notes) and [macOS Note](https://github.com/abetlen/llama-cpp-python?tab=readme-ov-file#macos-notes)
+```
 
 

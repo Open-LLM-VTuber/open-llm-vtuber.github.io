@@ -2,167 +2,163 @@
 sidebar_position: 3
 ---
 
-# Web 模式
+# Web Mode
 
 ![](img/web/overview.jpg)
 
-## 布局概览
-- 侧边栏 (可折叠)
-  - 设置按钮
-    - 设置抽屉
+## Layout Overview
+- Sidebar (collapsible)
+  - Settings button
+    - Settings drawer
       - General
       - Live2D
       - ASR
       - TTS
       - Agent
       - About
-  - 对话记录
-    - 历史聊天抽屉
-  - 新建对话按钮
-  - 聊天记录区域
-  - 摄像头区域
-- 主界面
-  - Live2D 模型 (可移动/调节大小)
-  - 背景图片 / 摄像头背景 (可设置)
-  - WebSocket 连接状态显示 / 重连按钮
-  - 字幕 (可隐藏)
-- 底部控制栏 (可折叠)
-  - AI 状态显示
-  - 麦克风开关
-  - 打断按钮
-  - 输入框
+  - Conversation history
+    - Chat history drawer
+  - New conversation button
+  - Chat record area
+  - Camera area
+- Main interface
+  - Live2D model (movable/resizable)
+  - Background image / Camera background (configurable)
+  - WebSocket connection status display / Reconnect button
+  - Subtitles (can be hidden)
+- Bottom control bar (collapsible)
+  - AI status display
+  - Microphone switch
+  - Interrupt button
+  - Input box
 
+## Settings Overview
 
-## 设置概览
-
-:::tip 设置地址
-推荐先在 Setting - General 中设置 Websocket 连接地址。设置的默认值为本地地址，如果服务器在 127.0.0.1 监听，则无需修改。
+:::tip Setting Address
+It is recommended to set the WebSocket connection address in Setting - General first. The default value is the local address. If the server is listening on 127.0.0.1, no modification is needed.
 :::
 
-:::info 特性
-所有设置都支持保存前预览 (TODO)。
+:::info Features
+All settings support preview before saving (TODO).
 
-个性化设置使用 localStorage 在本地存储。
+Personalized settings are stored locally using localStorage.
 :::
 
 <img src={require('./img/web/setting.jpg').default} style={{width: '70%'}} />
 
-### General (通用)
-- 语言设置 (TODO)
+### General
+- Language settings (TODO)
   - English
-  - 中文
-- 背景设置
-  - 预设背景图片
-  - 自定义背景图片 URL
-  - 是否开启摄像头背景
-- 角色预设选择
-- WebSocket 连接地址设置
-- 基础 URL 设置
-- 字幕显示开关
-- 恢复默认设置 (TODO)
+  - Chinese
+- Background settings
+  - Preset background images
+  - Custom background image URL
+  - Enable camera background
+- Character preset selection
+- WebSocket connection address settings
+- Base URL settings
+- Subtitle display switch
+- Restore default settings (TODO)
 
 ### Live2D
-- 鼠标交互开关
-  - 开启后支持鼠标点击触发动作 (TODO)
-  - 开启后支持视线跟随鼠标
-- 缩放开关
-  - 开启后可通过鼠标滚轮/双指缩放调节模型大小
+- Mouse interaction switch
+  - When enabled, supports triggering actions by mouse clicks (TODO)
+  - When enabled, supports eye-tracking following the mouse
+- Zoom switch
+  - When enabled, allows adjusting model size via mouse wheel/two-finger zoom
 
-### ASR (语音识别)
-- 自动麦克风控制
-  - AI 开始说话时自动关闭麦克风
-  - AI 被打断后自动开启麦克风
-- 语音检测阈值设置
-  - 语音检测阈值 (Speech Prob Threshold)
-    - 范围: `1-100`
-    - 用于判断是否检测到语音的概率阈值
-    - 值越大，需要越清晰的语音才会被判定为说话
-  - 负语音检测阈值 (Negative Speech Threshold) 
-    - 范围: `0-100`
-    - 用于判断语音是否结束的概率阈值
-    - 值越小，越容易判定为语音结束
-  - 恢复帧数 (Redemption Frames)
-    - 范围: `1-100`
-    - 当检测到语音结束后,需要等待多少帧才真正结束语音识别
-    - 值越大，语音识别结束的延迟越长，但可以避免误判
-### TTS (语音合成)
-- 暂无设置项
+### ASR (Automatic Speech Recognition)
+- Automatic microphone control
+  - Automatically turn off the microphone when AI starts speaking
+  - Automatically turn on the microphone after AI is interrupted
+- Voice detection threshold settings
+  - Speech Probability Threshold
+    - Range: `1-100`
+    - Probability threshold for determining if speech is detected
+    - Higher values require clearer speech to be considered as speaking
+  - Negative Speech Threshold
+    - Range: `0-100`
+    - Probability threshold for determining if speech has ended
+    - Lower values make it easier to determine speech has ended
+  - Redemption Frames
+    - Range: `1-100`
+    - Number of frames to wait after detecting speech end before actually ending speech recognition
+    - Higher values increase the delay in ending speech recognition but can prevent misjudgments
 
-### Agent (AI 代理/智能体)
-- AI 主动说话设置
-  - 是否允许 AI 主动说话
-  - 空闲多少秒后允许 AI 主动说话
-  - 在非 thinking-speaking 状态时，是否允许使用举手按钮(打断按钮)触发 AI 主动说话
+### TTS (Text-to-Speech)
+- No settings available
 
+### Agent (AI Agent)
+- AI proactive speech settings
+  - Allow AI to speak proactively
+  - Number of seconds of idleness before allowing AI to speak proactively
+  - Allow using the raise hand button (interrupt button) to trigger AI proactive speech when not in thinking-speaking state
 
-## 功能介绍
+## Feature Introduction
 
-### WebSocket 连接
+### WebSocket Connection
 
-- 连接成功时显示绿色图标。
-- 连接断开时显示红色图标并自动变为重连按钮。
-- 连接地址设置
-  - 默认连接地址为 `ws://127.0.0.1:12393/client-ws`。
-  - 可在 Setting - General 中修改连接地址。
+- Displays a green icon when connected successfully.
+- Displays a red icon and automatically becomes a reconnect button when disconnected.
+- Connection address settings
+  - Default connection address is `ws://127.0.0.1:12393/client-ws`.
+  - Can be modified in Setting - General.
 
-### AI 状态
-- `idle` (空闲)
-- `thinkg-speaking` (思考/说话)
-- `interrupted` (被打断)
-- `loading` (加载)
-- `listening` (检测到用户说话)
-- `waiting` (检测到用户输入文本)
+### AI Status
+- `idle`
+- `thinking-speaking`
+- `interrupted`
+- `loading`
+- `listening` (user speech detected)
+- `waiting` (user text input detected)
 
-### 对话交互
-提供多种与角色的对话交互方式
-- 语音对话
-  - 可以 Setting - ASR 中设置自动麦克风控制和语音检测阈值。
-  - 确保授予麦克风权限。
-- 文字输入
-- AI 主动说话 (在 Setting - Agent 中设置是否开启) 
-  - AI 处于 `idle` 状态，开启了 AI 主动说话功能，达到设定的空闲时间阈值时触发。
-  - 在非 thinking-speaking 状态时，使用举手按钮（打断按钮）触发 AI 主动说话（在 Setting - Agent 中设置是否允许）。
-  
-### 打断功能
-用于中断 AI 的当前发言。当点击打断按钮时，AI 会立即停止发言，并且聊天记录和 AI 的记忆将只保留打断前的内容。有以下几种操作会触发打断:
-- 点击打断按钮
-  - 在 Setting - ASR 中可以设置是否在点击打断按钮后，自动打开麦克风。
-- 在 AI 处于 `thinking-speaking` 状态时说话（需要麦克风处于开启状态）。
-  - 在 Setting - ASR 中可以设置是否在 AI 切换到 `thinking-speaking` 的状态后自动关闭麦克风。
-- 在 AI 处于 `thinking-speaking` 状态时发送消息。
+### Conversation Interaction
+Provides multiple ways to interact with the character
+- Voice dialogue
+  - Automatic microphone control and voice detection thresholds can be set in Setting - ASR.
+  - Ensure microphone permission is granted.
+- Text input
+- AI proactive speech (can be enabled in Setting - Agent)
+  - Triggered when AI is in `idle` state, proactive speech is enabled, and the set idle time threshold is reached.
+  - Use the raise hand button (interrupt button) to trigger AI proactive speech when not in thinking-speaking state (can be enabled in Setting - Agent).
 
-### 消息记录
+### Interrupt Function
+Used to interrupt AI's current speech. When the interrupt button is clicked, AI will immediately stop speaking, and the chat history and AI's memory will only retain content before the interruption. The following actions trigger interruption:
+- Clicking the interrupt button
+  - In Setting - ASR, you can set whether to automatically open the microphone after clicking the interrupt button.
+- Speaking while AI is in `thinking-speaking` state (microphone must be on).
+  - In Setting - ASR, you can set whether to automatically close the microphone when AI switches to `thinking-speaking` state.
+- Sending a message while AI is in `thinking-speaking` state.
+
+### Message History
 <img src={require('./img/web/history.jpg').default} style={{width: '70%'}} />
 
-- 可滚动查看消息记录
-- 支持流式响应，实时显示 AI 回复内容
-- 支持查看历史消息记录，可以加载/删除单条历史记录（存储在后端）
-
-
-
+- Scrollable message history
+- Supports streaming responses, displaying AI replies in real-time
+- Supports viewing historical message records, can load/delete individual historical records (stored on the backend)
 
 ### Live2D
-- 支持拖拽移动模型位置
-- 支持滚轮/双指缩放调节模型大小 (可在 Setting - General 中设置是否开启)
-- 支持模型视线跟随鼠标（可在 Settings - Live2D 中设置是否开启）
-- 支持鼠标点击触发动作（TODO: 可在 Setting - Live2D 中设置是否开启）
-  - 需要提前在后端的 `model_dict.json` 进行配置，例如:
+- Supports dragging to move model position
+- Supports mouse wheel/two-finger zoom to adjust model size (can be enabled in Setting - General)
+- Supports model eye-tracking following the mouse (can be enabled in Settings - Live2D)
+- Supports triggering actions by mouse clicks (TODO: can be enabled in Setting - Live2D)
+  - Requires prior configuration in the backend's `model_dict.json`, for example:
     ```json
     {
       "name": "shizuku-local",
       "tapMotions": {
         "body": {
-          "tap_body": 30,  // 点击身体区域触发 tap_body 动作,权重为 30
-          "shake": 30      // 点击身体区域触发 shake 动作,权重为 30
+          "tap_body": 30,  // Trigger tap_body action when clicking body area, weight 30
+          "shake": 30      // Trigger shake action when clicking body area, weight 30
         },
         "head": {
-          "flick_head": 40 // 点击头部区域触发 flick_head 动作,权重为 40
+          "flick_head": 40 // Trigger flick_head action when clicking head area, weight 40
         }
       }
     }
     ```
-    - 动作名称需要和模型配置文件 (`.model.json` 或 `.model3.json`) 中的动作组名对应，例如 `shizuku.model.json` 中定义了 `tap_body`、`shake`、`flick_head` 等动作组，所以在 `model_dict.json` 中也要使用相同的名称。
-    - 例如 `shizuku.model.json` 中的动作组定义:
+    - Action names need to correspond with the action group names in the model configuration file (`.model.json` or `.model3.json`). For example, `shizuku.model.json` defines action groups like `tap_body`, `shake`, `flick_head`, so the same names should be used in `model_dict.json`.
+    - For example, action group definitions in `shizuku.model.json`:
       ```json
       {
         "motions": {
@@ -184,20 +180,19 @@ sidebar_position: 3
         }
       }
       ```
-    - 当点击模型时，会先检测点击的区域(hitTest)，然后根据该区域配置的动作和权重随机触发一个动作。如果未检测到命中区域，则会将所有区域的动作合并后随机触发。权重越大的动作被触发的概率越高（目前完全由前端控制）。
-- 支持说话时根据情感/后端指令自动应用表情/动作
-  - 需要提前在后端进行配置
-  
+    - When clicking the model, it first detects the clicked area (hitTest), then randomly triggers an action based on the configured actions and weights for that area. If no hit area is detected, it merges actions from all areas and triggers randomly. Actions with higher weights have a higher probability of being triggered (currently controlled entirely by the frontend).
+- Supports automatically applying expressions/actions based on emotions/backend instructions while speaking
+  - Requires prior configuration in the backend
 
-### 背景
-- 可在 Setting - General 中选择预设的背景图片
-- 可在 Setting - General 中输入图片 URL 作为背景
-- 摄像头实时画面 
-  - 可在 Setting - General 中开启摄像头作为背景
-  - 需要授予摄像头权限
+### Background
+- Preset background images can be selected in Setting - General
+- Custom image URL can be input as background in Setting - General
+- Real-time camera feed
+  - Can be enabled as background in Setting - General
+  - Requires camera permission
 
-### UI 折叠与隐藏
-- 侧边栏可以通过点击右侧中央按钮折叠/展开
-- 底部控制栏可以通过点击底部中央按钮折叠/展开
-- 字幕显示可在 Setting - General 中开启/关闭
-- WebSocket连接状态显示可以 Setting - General 中开启/关闭 (TODO)
+### UI Folding and Hiding
+- Sidebar can be collapsed/expanded by clicking the center button on the right
+- Bottom control bar can be collapsed/expanded by clicking the center button at the bottom
+- Subtitle display can be turned on/off in Setting - General
+- WebSocket connection status display can be turned on/off in Setting - General (TODO)

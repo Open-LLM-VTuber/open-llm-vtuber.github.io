@@ -2,69 +2,68 @@
 sidebar_position: 4
 ---
 
-# 窗口 & 桌宠模式
+# Window & Desktop Pet Mode
 
+:::info Shared Context
+Window mode and desktop pet mode share the complete context, including:
+- All settings and configurations
+- Conversation history
+- WebSocket connection status
+- AI status and memory
+- Live2D model status
 
-:::info 共享上下文
-窗口模式和桌宠模式共享完整的上下文，包括：
-- 所有设置和配置
-- 对话历史记录
-- WebSocket 连接状态
-- AI 状态和记忆
-- Live2D 模型状态
-
-这意味着在两种模式之间切换，不会丢失任何状态或中断当前的对话。
+This means that switching between the two modes will not lose any state or interrupt the current conversation.
 :::
 
-:::tip 模式切换
-通过系统托盘，或者桌宠模式下的右键模型菜单进行模式切换
+:::tip Mode Switching
+Switch modes through the system tray or the right-click model menu in desktop pet mode
 :::
 
-## 窗口模式
-窗口模式基于 Electron 实现，与 Web 模式共享相同的界面布局和功能，具体请参考 [Web 模式](web.md)。除了 Web 模式的功能外，窗口模式还提供以下作为应用的基础功能：
+## Window Mode
+Window mode is implemented based on Electron and shares the same interface layout and functionality as Web mode. Please refer to [Web Mode](web.md) for details. In addition to the features of Web mode, window mode also provides the following basic application functions:
 
-- 支持窗口拖拽、最大化、最小化
-- 系统托盘支持 (同样适用于桌宠模式)
-  - 右键托盘图标可快速切换模式
-  - 支持显示/隐藏窗口
-  - 快速退出应用
+- Support for window dragging, maximizing, and minimizing
+- System tray support (also applicable to desktop pet mode)
+  - Right-click the tray icon to quickly switch modes
+  - Support for showing/hiding the window
+  - Quick exit of the application
 
-## 桌宠模式
+## Desktop Pet Mode
 
 <img src={require('./img/electron/overview.jpg').default} style={{width: '70%'}} />
 
-### 功能
-以下功能与 [Web 模式](web.md) 完全一致：
-- WebSocket 连接和状态管理
-- AI 对话功能和状态控制
-- Live2D 模型加载和动作管理
-- 设置面板的所有配置项
-- 对话历史记录的存储和管理
+### Features
+The following features are identical to [Web Mode](web.md):
+- WebSocket connection and status management
+- AI conversation functionality and status control
+- Live2D model loading and action management
+- All configuration options in the settings panel
+- Storage and management of conversation history
 
-桌宠模式特有的功能：
-- 全局置顶显示
-- 背景透明
-- 鼠标可穿透非交互区域
-- 支持拖拽移动位置
-- 支持鼠标滚轮/双指缩放调节大小（可在设置中开启/关闭）
-- 支持鼠标交互
-  - 点击触发动作（可在设置中开启/关闭）
-  - 视线跟随（可在设置中开启/关闭）
-- 输入框 & 字幕可以独立拖拽位置（可以隐藏）
+Features unique to desktop pet mode:
+- Global top-level display
+- Transparent background
+- Mouse click-through for non-interactive areas
+- Support for dragging to move position
+- Support for mouse wheel/two-finger zoom to adjust size (can be enabled/disabled in settings)
+- Support for mouse interaction
+  - Click to trigger actions (can be enabled/disabled in settings)
+  - Gaze following (can be enabled/disabled in settings)
+- Input box & subtitles can be independently dragged (can be hidden)
 
-### 右键菜单
-- 开/关麦克风
-- 打断当前对话
-- 开启/关闭缩放
-- 显示/隐藏输入框和字幕
-- 切换模式
-- 切换角色
-- 隐藏/退出应用
+### Right-click Menu
+- Turn on/off microphone
+- Interrupt current conversation
+- Enable/disable zooming
+- Show/hide input box and subtitles
+- Switch modes
+- Switch characters
+- Hide/exit application
 
-### 输入框 & 字幕
-- 可以通过右键菜单或快捷键显示/隐藏
-- 支持独立拖拽位置
-- 显示当前 AI 状态和对话内容
-- 支持文字输入和语音输入
-- 开/关麦克风
-- 打断按钮
+### Input Box & Subtitles
+- Can be shown/hidden via right-click menu or shortcut keys
+- Support for independent position dragging
+- Display current AI status and conversation content
+- Support for text input and voice input
+- Turn on/off microphone
+- Interrupt button

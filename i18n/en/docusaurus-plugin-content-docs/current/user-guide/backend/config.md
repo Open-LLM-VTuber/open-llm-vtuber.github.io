@@ -2,9 +2,9 @@
 sidebar_position: 2
 ---
 
-# 配置文件
+# Configuration file
 
-下图是 `v1.0.0` 版本 配置文件的基本结构。
+This is the basic structure of the configuration file as of `v1.0.0`.
 
 
 ```mermaid
