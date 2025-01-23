@@ -31,11 +31,11 @@
     "message": "Backend API",
     "description": "The generated-index page description for category Backend API in sidebar docSidebar"
   },
-  "sidebar.docSidebar.category.frontend": {
-    "message": "Frontend",
+  "sidebar.docSidebar.category.前端 API": {
+    "message": "Frontend API",
     "description": "The label for category Frontend in sidebar docSidebar"
   },
-  "sidebar.docSidebar.category.frontend.link.generated-index.description": {
+  "sidebar.docSidebar.category.前端 API.link.generated-index.description": {
     "message": "Frontend API",
     "description": "The generated-index page description for category Frontend in sidebar docSidebar"
   },
