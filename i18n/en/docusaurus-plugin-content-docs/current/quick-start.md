@@ -183,20 +183,15 @@ For more uv installation methods, refer to: [Installing uv](https://docs.astral.
 ### 1. Get the Project Code
 
 :::info Development Version Note
-Currently in the v1.0.0 development phase, you need to switch to the `superb-refactoring` branch.
-
 Starting from `v1.0.0`, the frontend code has been split into a separate repository. We have established a complete build process and linked the frontend code to the main repository's `frontend` directory via git submodule.
 :::
 
 ```bash
-# Clone the repository
+# Clone the repository / Download the latest release
 git clone https://github.com/t41372/Open-LLM-VTuber
 
 # Enter the project directory
 cd Open-LLM-VTuber
-
-# Switch to the development branch
-git switch superb-refactoring
 
 # Since git submodule linked content is not automatically synced to the local directory, we need to manually fetch the frontend code.
 git submodule update --init --recursive
@@ -319,7 +314,7 @@ uv run run_server.py
 After successful execution, visit `http://localhost:12393` to open the web interface.
 
 :::tip Desktop Application
-If you prefer an Electron application (window mode + desktop mode), you can download the corresponding platform Electron client from [Open-LLM-VTuber-Web Releases](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web/releases), which can be used directly while the backend service is running.
+If you prefer an Electron application (window mode + desktop mode), you can download the corresponding platform Electron client from [Open-LLM-VTuber-Web Releases](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web/releases), which can be used directly while the backend service is running. You may encounter **security warnings** due to the lack of code signing - please check [Mode Introduction](./user-guide/frontend/mode.md) for details and solutions.
 
 For more information about the frontend, refer to the [Frontend Guide](./user-guide/frontend/)
 :::

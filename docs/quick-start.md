@@ -186,20 +186,15 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 ### 1. 获取项目代码
 
 :::info 开发版说明
-目前处于 v1.0.0 开发阶段，需要切换到 `superb-refactoring` 分支。
-
 自 `v1.0.0` 开始，前端代码已被拆分到独立仓库中。我们建立了完整的构建流程，并通过 git submodule 将前端代码链接到主仓库的 `frontend` 目录下。
 :::
 
 ```bash
-# 克隆仓库
+# 克隆仓库 / 下载最新的 Github Release
 git clone https://github.com/t41372/Open-LLM-VTuber
 
 # 进入项目目录
 cd Open-LLM-VTuber
-
-# 切换到开发分支
-git switch superb-refactoring
 
 # 由于 git submodule 链接的内容不会自动同步到本地目录，我们需要手动获取前端代码。
 git submodule update --init --recursive
@@ -322,7 +317,7 @@ uv run run_server.py
 运行成功后，访问 `http://localhost:12393` 打开 Web 界面。
 
 :::tip 桌面应用
-如果你更喜欢 Electron 应用 (窗口模式 + 桌充模式)，可以从 [Open-LLM-VTuber-Web Releases](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web/releases) 下载对应平台 Electron 客户端，可以在后端服务运行的前提下直接使用。
+如果你更喜欢 Electron 应用 (窗口模式 + 桌充模式)，可以从 [Open-LLM-VTuber-Web Releases](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web/releases) 下载对应平台 Electron 客户端，可以在后端服务运行的前提下直接使用。但你有可能会遇到因为没有签名验证而导致的**安全警告**，具体情况和解决方案请查看 [模式介绍](./user-guide/frontend/mode.md)
 
 有关前端的更多信息，请参考 [前端指南](./user-guide/frontend/)
 :::

@@ -14,6 +14,25 @@ Window Mode and Desktop Pet Mode are two modes based on the Electron application
 
 Window Mode and Pet Mode share context, which means you can switch between the two modes at will while maintaining current settings, status, and connections.
 
+:::warning About Security Warnings
+Since our desktop application has not been code-signed, you may encounter the following security warnings:
+
+- **Windows**: When running, you may see a "Windows protected your PC" warning. Simply click "More info" and then select "Run anyway" to proceed.
+- **macOS**: When first opening, you may see a warning that the app "is damaged and can't be opened. You should move it to the Trash". To resolve this:
+  1. Run the command `sudo spctl --master-disable` in terminal
+  2. Open System Settings - Security & Privacy, select "Allow apps downloaded from: Anywhere"
+  3. Run the command `xattr -rc /Applications/open-llm-vtuber-electron.app` in terminal
+  4. Try opening the app again
+
+You can search for these errors to learn more about them and their solutions.
+
+These warnings occur because the application has not been certified by the operating system and will not affect the normal use of the application. In the future, we may consider resolving this issue completely through code signing.
+:::
+
+:::info About Updates
+Currently, the application does not support automatic update checking. To get the latest version, you can follow the version release information on the Github Release page, or try using the latest unstable branch (not recommended except for developers).
+:::
+
 :::note Detailed Instructions
 
 For specific usage methods and features of each mode, please refer to
