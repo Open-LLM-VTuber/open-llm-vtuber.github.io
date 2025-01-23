@@ -9,3 +9,10 @@
   height: 200px;
   width: 200px;
 }
+
+.featureImage {
+  width: auto;
+  height: 200px; /* 或者您想要的其他高度 */
+  object-fit: contain; /* 保持图片比例 */
+  margin: 0 auto;
+}
