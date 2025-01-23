@@ -1,20 +1,64 @@
 # Live2D Guide
 
 :::info Overview
-To add a new Live2D model to your project, you need to complete the following three steps:
+To add a new Live2D model to your project, you need to complete three to five steps:
 
-1. Place the Live2D model files in the `live2d-models` folder
-2. Configure the model information in the `model_dict.json` file
-3. Specify the Live2D model to use in the character configuration file (`conf.yaml` or character setting files in the `characters` directory)
+1. Get a Live2D model (optional)
+2. Configure expressions and motions for your Live2D model (optional)
+3. Place the Live2D model files in the `live2d-models` folder
+4. Configure model information in the `model_dict.json` file
+5. Specify the Live2D model to use in the character configuration file (`conf.yaml` or character setting files in the `characters` directory)
 :::
 
-## 1. Place Model Files
+## 1. Get a Live2D Model
+
+:::warning About Model Version
+Currently, the project uses pixi-live2d-display-lipsyncpatch which only supports Cubism2/3/4 models and does not support the latest Cubism5.
+:::
+
+If you already have a suitable Live2D model, you can skip this step.
+Here are some common sources for obtaining Live2D models (feel free to add more sources):
+
+- [Booth](https://booth.pm/)
+- [Bilibili](https://www.bilibili.com/)
+- [Eikanya/Live2d-model](https://github.com/Eikanya/Live2d-model)
+
+## 2. Configure Live2D Model
+
+:::info
+The Live2D model configuration file is an important file containing multiple settings such as expressions and motions. Since the configuration methods are diverse and complex, this part of the tutorial is not yet formally started. You can choose to:
+
+1. Learn configuration methods by searching online resources
+2. Skip this part for now and come back when you have a deeper understanding of Live2D model configuration
+3. If you have relevant experience, you're very welcome to help us improve this content through PR or Issue
+:::
+
+Since most Live2D models are extracted from games or primarily used for streaming, their expressions and motions may not be entirely suitable for this project's use case. For the best user experience, it's recommended to first check the model's configuration file (`model.json` or `model3.json`) and make appropriate adjustments as needed to achieve better interaction.
+
+You can use the following tools to view and adjust models:
+- Vtuber Studio
+- Live2DViewerEx Studio 
+- Live2D Cubism Viewer
+
+You can:
+1. View and test the model's expression list
+2. Preview all available motion effects
+3. Add Idle motion groups
+4. Create custom motion groups
+5. Add new expressions
+6. Create new motions
+
+## 3. Place Model Files
 
 Put your Live2D model files in the `live2d-models` folder, as shown in the image with the `xiao` folder.
 
 <img src={require('./img/live2d_p1.jpg').default} style={{width: '70%'}} />
 
-## 2. Add Model Configuration
+## 4. Add Model Configuration
+
+:::caution Note
+In the model configuration, only `name` (model identifier), `url` (model path), and `kScale` (scaling ratio) are required fields. Other configuration items such as `emotionMap` (expression mapping) and `tapMotions` (touch actions) are optional - not filling in these configuration items will cause the model to lose expression changes and motion interaction functionality.
+:::
 
 Add the model configuration in the `model_dict.json` file in the project root directory. Here's a complete configuration example:
 
@@ -54,7 +98,7 @@ Add the model configuration in the `model_dict.json` file in the project root di
 }
 ```
 
-### 2.1 Basic Configuration
+### 4.1 Basic Configuration
 
 | Config Item   | Description                             | Example Value                                |
 | ------------- | --------------------------------------- | -------------------------------------------- |
@@ -66,7 +110,7 @@ Add the model configuration in the `model_dict.json` file in the project root di
 - Local paths should start with `/live2d-models/`, not `./live2d-models/`
 - Remote URLs should point to valid `.model.json` or `.model3.json` files, e.g., `https://cdn.jsdelivr.net/gh/guansss/pixi-live2d-display/test/assets/shizuku/shizuku.model.json`
 
-### 2.2 Display Configuration
+### 4.2 Display Configuration
 
 | Config Item     | Description                      | Recommended Value |
 | --------------- | -------------------------------- | ----------------- |
@@ -83,7 +127,7 @@ Add the model configuration in the `model_dict.json` file in the project root di
 
 Note that when the container size changes (e.g., resizing the window, collapsing/expanding sidebars or bottom bars, switching display modes, etc.), the Live2D model will reset to its initial position but maintain its current scale.
 
-### 2.3 Idle Motion Configuration
+### 4.3 Idle Motion Configuration
 
 Live2D model motion animations are generally divided into multiple motion groups. Each motion group contains a series of related motion animations. In the model.json file, these motion groups are usually defined under the `motions` or `Motions` field.
 
@@ -97,7 +141,7 @@ The specific motion group name needs to be based on the name in the model config
 If you understand the model's motion structure, you can also configure your own idle motion group. However, unless you know what you're doing, it's recommended to keep the default value of `idleMotionGroupName` (`idle` or `Idle`).
 :::
 
-### 2.4 Expression Configuration
+### 4.4 Expression Configuration
 
 `emotionMap` defines the expression mapping available to the AI. It supports two mapping methods:
 1. Using expression indices (numbers)
@@ -183,7 +227,7 @@ The expression will persist until:
 4. Choose appropriate emotion mappings based on the model's expression characteristics
 :::
 
-### 2.5 Interaction Motion Configuration
+### 4.5 Interaction Motion Configuration
 
 `tapMotions` defines the motion mapping for model interactions with the mouse. When a user clicks on the model, the system will randomly trigger a corresponding motion based on the clicked area and the configured weights.
 
@@ -247,7 +291,7 @@ The expression will persist until:
    }
    ```
 
-## 3. Modify Character Configuration
+## 5. Modify Character Configuration
 
 Specify the Live2D model to use in the character configuration file. You can:
 
