@@ -203,14 +203,26 @@ git submodule update --init --recursive
 ### 2. 安装项目依赖
 
 :::info
-内地用户可以配置 Python 与 pip 的镜像源，提高下载速度。
+> :warning: 如果你不在中国大陆境内，没有必要使用镜像源。
 
-请在项目目录下的 `pyproject.toml` 文件底部添加下面内容
-```toml
-[[tool.uv.index]]
-url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"
-default = true
-```
+内地用户可以配置 Python 与 pip 的镜像源，提高下载速度。此处我们配置阿里镜像。
+
+<details>
+  请在项目目录下的 `pyproject.toml` 文件底部添加下面内容。
+  ```toml
+  [[tool.uv.index]]
+  url = "https://mirrors.aliyun.com/pypi/simple"
+  default = true
+  ```
+  一些其他镜像源 (修改上面的 url 部分)
+  - 腾讯镜像: https://mirrors.cloud.tencent.com/pypi/simple/
+  - 中科大镜像: https://pypi.mirrors.ustc.edu.cn/simple
+  - 清华镜像(安装我们项目好像有点问题): https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple 
+  - 华为镜像: https://repo.huaweicloud.com/repository/pypi/simple
+  - 百度镜像: https://mirror.baidu.com/pypi/simple
+
+  有些镜像源有时候可能会不稳定，如果出现问题，可以换一个镜像源试试。
+</details>
 :::
 
 确认 uv 已正确安装:

@@ -200,15 +200,26 @@ git submodule update --init --recursive
 ### 2. Install Project Dependencies
 
 :::info
-Users in mainland China can configure Python and pip mirror sources to improve download speed.
+> :warning: If you are not located in mainland China, don't use mirror sources.
 
-Please add the following content to the bottom of the `pyproject.toml` file in the project directory:
-```toml
-[[tool.uv.index]]
-url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"
-default = true
-```
-:::
+Users in mainland China can configure mirrors for Python and pip to improve download speeds. Here, we'll set up the Alibaba mirror.
+
+<details>
+  Please add the following content to the bottom of the `pyproject.toml` file in your project directory.
+  ```toml
+  [[tool.uv.index]]
+  url = "https://mirrors.aliyun.com/pypi/simple"
+  default = true
+  ```
+  Some other mirror sources (modify the url part above):
+  - Tencent mirror: https://mirrors.cloud.tencent.com/pypi/simple/
+  - USTC mirror: https://pypi.mirrors.ustc.edu.cn/simple
+  - Tsinghua mirror (seems to have some issues with our project): https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple 
+  - Huawei mirror: https://repo.huaweicloud.com/repository/pypi/simple
+  - Baidu mirror: https://mirror.baidu.com/pypi/simple
+  
+  Some mirrors may be unstable at times. If you encounter issues, try switching to a different mirror.
+</details>
 
 Verify that uv is installed correctly:
 
