@@ -161,16 +161,26 @@ If you prefer to use conda or venv, you can also use these tools. The project is
 ```powershell
 # Method 1: PowerShell
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
+# Or wget -qO- https://astral.sh/uv/install.sh | sh if you don't have curl
 
 # Method 2: winget
 winget install --id=astral-sh.uv -e
+
+# Important: If you choose winget, restart the shell or source the shell config file.
 ```
 
   </TabItem>
   <TabItem value="unix" label="macOS/Linux">
 
 ```bash
+# Method 1:  curl
 curl -LsSf https://astral.sh/uv/install.sh | sh
+# Or wget -qO- https://astral.sh/uv/install.sh | sh if you don't have curl.
+
+# Method 2: homebrew (if installed)
+brew install uv
+
+# Important: If you choose curl or wget, restart the shell or source the shell config file.
 ```
 
   </TabItem>
@@ -218,7 +228,8 @@ Users in mainland China can configure mirrors for Python and pip to improve down
   - Huawei mirror: https://repo.huaweicloud.com/repository/pypi/simple
   - Baidu mirror: https://mirror.baidu.com/pypi/simple
   
-  Some mirrors may be unstable at times. If you encounter issues, try switching to a different mirror.
+  Some mirrors may be unstable at times. If you encounter issues, try switching to a different mirror. 
+  Don't enable proxy when using mirror sources.
 </details>
 :::
 

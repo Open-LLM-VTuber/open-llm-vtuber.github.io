@@ -24,6 +24,12 @@ import TabItem from '@theme/TabItem';
 Groq Whisper API、OpenAI API 等国外大模型/推理平台 API 一般无法使用香港地区的代理。
 :::
 
+:::tip 关于桌面应用
+如果你更喜欢 Electron 应用 (窗口模式 + 桌宠模式)，可以从 [Open-LLM-VTuber-Web Releases](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web/releases) 下载对应平台 Electron 客户端，可以在后端服务运行的前提下直接使用。但你有可能会遇到因为没有签名验证而导致的**安全警告**，具体情况和解决方案请查看 [模式介绍](./user-guide/frontend/mode.md)
+
+有关前端的更多信息，请参考 [前端指南](./user-guide/frontend/)
+:::
+
 ## 环境准备
 
 ### 安装 Git
@@ -165,21 +171,28 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 
 # 方法 2: winget
 winget install --id=astral-sh.uv -e
+
+# 重要：如果使用 winget，安装完成后需要重启命令行或重新加载配置文件
 ```
 
   </TabItem>
   <TabItem value="unix" label="macOS/Linux">
 
 ```bash
+# 方法 1: curl
 curl -LsSf https://astral.sh/uv/install.sh | sh
+# 或者运行 wget -qO- https://astral.sh/uv/install.sh | sh 如果你的电脑上不存在 curl
+
+# 方法 2: homebrew (如果已安装)
+brew install uv
+
+# 重要：如果使用 curl 或 wget ，安装完成后需要重启命令行或重新加载配置文件
 ```
 
   </TabItem>
 </Tabs>
 
-
 更多 uv 安装方法参考：[Installing uv](https://docs.astral.sh/uv/getting-started/installation/)
-
 
 ## 手动部署指南
 
@@ -222,6 +235,7 @@ git submodule update --init --recursive
   - 百度镜像: https://mirror.baidu.com/pypi/simple
 
   有些镜像源有时候可能会不稳定，如果出现问题，可以换一个镜像源试试。
+  使用镜像源的时候不要打开代理。
 </details>
 :::
 
@@ -327,12 +341,6 @@ uv run run_server.py
 ```
 
 运行成功后，访问 `http://localhost:12393` 打开 Web 界面。
-
-:::tip 桌面应用
-如果你更喜欢 Electron 应用 (窗口模式 + 桌充模式)，可以从 [Open-LLM-VTuber-Web Releases](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web/releases) 下载对应平台 Electron 客户端，可以在后端服务运行的前提下直接使用。但你有可能会遇到因为没有签名验证而导致的**安全警告**，具体情况和解决方案请查看 [模式介绍](./user-guide/frontend/mode.md)
-
-有关前端的更多信息，请参考 [前端指南](./user-guide/frontend/)
-:::
 
 ## 常见问题排查
 
