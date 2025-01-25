@@ -220,6 +220,7 @@ Users in mainland China can configure mirrors for Python and pip to improve down
   
   Some mirrors may be unstable at times. If you encounter issues, try switching to a different mirror.
 </details>
+:::
 
 Verify that uv is installed correctly:
 
