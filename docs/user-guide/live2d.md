@@ -72,6 +72,7 @@ Live2D 模型的配置文件是一个包含表情、动作等多个设置项的�
     "initialXshift": 0,
     "initialYshift": 0,
     "idleMotionGroupName": "idle",
+    "defaultEmotion" : 0,
     "emotionMap": {
         "neutral": 0,
         "anger": 2,
@@ -148,7 +149,17 @@ Live2D 模型的动作动画一般会被分成多个动作组 (Motion Groups)。
 
 ### 4.4 表情配置
 
-`emotionMap` 定义了 AI 可用的表情映射。支持两种映射方式:
+`emotionMap` 定义了 AI 可用的表情映射，而 `defaultEmotion` 则用于设置模型的默认表情。
+
+#### 默认表情配置
+
+`defaultEmotion` 是一个可选配置项，用于指定模型加载后或对话结束时显示的表情。它的值可以是表情索引（数字）或表情名称（字符串），需要与 `emotionMap` 使用相同的映射方式。
+
+某些模型可能会带有水印，这时可以通过创建一个去掉水印的表情，并通过设置这个表情为默认表情来去掉水印。
+
+#### 表情映射配置
+
+`emotionMap` 支持两种映射方式:
 1. 使用表情索引 (数字)
 2. 使用表情名称 (字符串)
 

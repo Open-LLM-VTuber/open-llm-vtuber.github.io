@@ -148,7 +148,17 @@ If you understand the model's motion structure, you can also configure your own 
 
 ### 4.4 Expression Configuration
 
-`emotionMap` defines the expression mapping available to the AI. It supports two mapping methods:
+`emotionMap` defines the expression mapping available to the AI, while `defaultEmotion` sets the model's default expression.
+
+#### Default Expression Configuration
+
+`defaultEmotion` is an optional configuration item that specifies which expression the model should display after loading or when a dialogue ends. Its value can be either an expression index (number) or expression name (string), and needs to use the same mapping method as `emotionMap`.
+
+Some models may come with watermarks. In this case, you can create an expression without the watermark and set it as the default expression to remove the watermark.
+
+#### Expression Mapping Configuration
+
+`emotionMap` supports two mapping methods:
 1. Using expression indices (numbers)
 2. Using expression names (strings)
 
