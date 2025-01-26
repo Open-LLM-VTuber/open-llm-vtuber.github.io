@@ -15,6 +15,10 @@ import TabItem from '@theme/TabItem';
 如果用 OpenAI Compatible 代替 Ollama，用 groq_whisper_asr 代替 sherpa-onnx-asr (SenseVoiceSmall)，那么只需配置 API Key 即可使用，无需下载模型文件，也可以跳过对本地 GPU 的配置。
 :::
 
+:::warning
+本项目只推荐使用 **Chrome 浏览器**。已知 Edge、Safari 等浏览器都存在不同的问题，比如模型表情无法使用。
+:::
+
 :::danger 关于代理
 如果你位于中国大陆，建议你开启代理后再部署和使用本项目，确保能顺利下载所有资源。
 

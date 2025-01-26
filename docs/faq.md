@@ -6,6 +6,10 @@ sidebar_position: 6
 
 ## 部署相关
 
+### uv 安装后无法找到
+- 如果你是用 `winget` 或者 `curl` 安装的 uv，需要重启命令行或者重新加载 shell 配置文件才能使环境变量生效。
+- 详细说明请参考[快速开始](./quick-start.md)
+
 ### 如何选择合适的 LLM?
 - 如果你希望快速部署且不想下载模型,建议使用 OpenAI Compatible API 或 Groq API
 - 如果你想使用本地部署,建议根据显存大小选择合适的模型
@@ -22,9 +26,9 @@ sidebar_position: 6
 - 确认模型名称是否与 `ollama list` 列出的完全一致
 - 详细说明请参考[快速开始](./quick-start.md)
 
-### uv 安装后无法找到
-- 如果你是用 `winget` 或者 `curl` 安装的 uv，需要重启命令行或者重新加载 shell 配置文件才能使环境变量生效。
-- 详细说明请参考[快速开始](./quick-start.md)
+### 遇到 `AttributeError: 'NoneType' object has no attribute 'emo_str'` 错误怎么办
+- `model_dict.json` 中的模型名与 `conf.yaml` 中的不对应
+- `model_dict.json` 格式错误 (`Error decoding JSON from model dictionary file at model_dict.json`)
 
 ## 客户端相关
 
@@ -49,7 +53,7 @@ sidebar_position: 6
 - macOS 用户需要调整系统设置并执行特定命令
 - 详细解决方案请参考[模式介绍](./user-guide/frontend/mode.md)
 
-### 远程访问 Web 界面时麦克风/摄像头/录屏无法使用怎么办?
+### 远程访问 Web 界面时麦克风/摄像头/录屏无法使用怎么办
 - Electron 应用暂时不支持录屏 (`Failed to start screen capture:
 NotSupportedError: Not supported`)。
 - 这是因为这些功能需要安全上下文(HTTPS 或 localhost)
@@ -61,9 +65,11 @@ NotSupportedError: Not supported`)。
 - 需要不断点击才能使说话功能正常运行
 - 详细说明请参考[模式介绍](./user-guide/frontend/mode.md)
 
-### Electron 应用 切换模式导致屏幕一片空白怎么办
+### Electron 应用切换模式导致屏幕一片空白怎么办
 - 属于小概率难以修复的 bug，实测几乎不会触发。
 - 等待几秒，或者重启应用即可解决。
+
+### 模型表情无法显示怎么办
 
 ## 其他问题
 

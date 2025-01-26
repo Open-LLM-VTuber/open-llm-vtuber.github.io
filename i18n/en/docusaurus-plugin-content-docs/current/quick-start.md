@@ -15,6 +15,10 @@ The configuration deployed in this guide is Ollama + sherpa-onnx-asr (SenseVoice
 If you replace Ollama with OpenAI Compatible and sherpa-onnx-asr (SenseVoiceSmall) with groq_whisper_asr, you only need to configure the API Key to use it. There is no need to download model files, and you can skip configuring the local GPU.
 :::
 
+:::warning
+This project only recommends using **Chrome**. Known issues exist with browsers like Edge and Safari, such as model expressions not working.
+:::
+
 :::danger About Proxies
 If you are located in mainland China, it is recommended to enable a proxy before deploying and using this project to ensure that all resources can be downloaded smoothly.
 
