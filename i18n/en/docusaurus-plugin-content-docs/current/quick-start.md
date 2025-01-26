@@ -321,7 +321,7 @@ For detailed explanations of the configuration file, refer to [User Guide/Config
 
 ### 4. Configure Other Modules
 
-The default configuration in this project's `conf.yaml` uses sherpa-onnx-asr (SenseVoiceSmall) and edgeTTS (requires a proxy), and translation is disabled by default, so you do not need to make modifications.
+The default configuration in this project's `conf.yaml` uses sherpa-onnx-asr (SenseVoiceSmall) and edgeTTS, and translation is disabled by default, so you do not need to make modifications.
 
 Alternatively, you can refer to the [ASR Configuration Guide](./user-guide/backend/asr.md), [TTS Configuration Guide](./user-guide/backend/tts.md), and [Translator Configuration Guide](./user-guide/backend/translate.md) for modifications.
 

@@ -110,6 +110,11 @@ Add the model configuration in the `model_dict.json` file in the project root di
 - Local paths should start with `/live2d-models/`, not `./live2d-models/`
 - Remote URLs should point to valid `.model.json` or `.model3.json` files, e.g., `https://cdn.jsdelivr.net/gh/guansss/pixi-live2d-display/test/assets/shizuku/shizuku.model.json`
 
+- When loading HTTPS resources while accessing the Web via HTTP protocol, you may encounter the error `Failed to load LiveD model: Error: Network error`. In this case, you need to allow the website to load insecure content in your browser settings:
+  - Chrome: Click the shield icon on the right side of the address bar -> Site Settings -> Insecure content -> Allow
+  - Firefox: Click the lock icon on the left side of the address bar -> Turn off Enhanced Tracking Protection
+  - Edge: Click the lock icon on the right side of the address bar -> Site permissions -> Insecure content -> Allow
+
 ### 4.2 Display Configuration
 
 | Config Item     | Description                      | Recommended Value |

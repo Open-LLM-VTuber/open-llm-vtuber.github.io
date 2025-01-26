@@ -110,6 +110,10 @@ Live2D 模型的配置文件是一个包含表情、动作等多个设置项的�
 - 支持本地路径和远程 URL
 - 本地路径以 `/live2d-models/` 开头，而非 `./live2d-models/` 开头。
 - 远程 URL 需要指向有效的 `.model.json` 或 `.model3.json` 文件，比如 `https://cdn.jsdelivr.net/gh/guansss/pixi-live2d-display/test/assets/shizuku/shizuku.model.json`
+- 如果使用 HTTP 协议访问 Web，加载 HTTPS 资源时可能会报错 `Failed to load LiveD model: Error: Network error`。此时需要在浏览器设置中允许网站加载不安全内容:
+  - Chrome: 点击地址栏右侧的盾牌图标 -> 网站设置 -> 不安全内容 -> 允许
+  - Firefox: 点击地址栏左侧的锁图标 -> 关闭连接保护
+  - Edge: 点击地址栏右侧的锁图标 -> 网站权限 -> 不安全内容 -> 允许
 
 ### 4.2 显示配置
 

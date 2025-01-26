@@ -62,5 +62,9 @@
   "sidebar.docSidebar.category.社区与贡献.link.generated-index.description": {
     "message": "Developer documentation for Open LLM Vtuber",
     "description": "The generated-index page description for category Community and Contribution in sidebar docSidebar"
+  },
+  "sidebar.docSidebar.category.常见问题": {
+    "message": "FAQ",
+    "description": "The label for category FAQ in sidebar docSidebar"
   }
 }
