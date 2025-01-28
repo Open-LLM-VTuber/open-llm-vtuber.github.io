@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.7.0">
 <title data-rh="true">语音合成 (TTS) | Open LLM Vtuber</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://open-llm-vtuber.github.io/img/Open_LLM_VTuber_Social.png"><meta data-rh="true" name="twitter:image" content="https://open-llm-vtuber.github.io/img/Open_LLM_VTuber_Social.png"><meta data-rh="true" property="og:url" content="https://open-llm-vtuber.github.io/docs/user-guide/backend/tts"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en_US"><meta data-rh="true" name="docusaurus_locale" content="zh-Hans"><meta data-rh="true" name="docsearch:language" content="zh-Hans"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="语音合成 (TTS) | Open LLM Vtuber"><meta data-rh="true" name="description" content="安装所需的依赖并在 conf.yaml 进行配置后后，通过修改 conf.yaml 中的 TTS_MODEL 选项来启用相应的语音合成引擎。"><meta data-rh="true" property="og:description" content="安装所需的依赖并在 conf.yaml 进行配置后后，通过修改 conf.yaml 中的 TTS_MODEL 选项来启用相应的语音合成引擎。"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://open-llm-vtuber.github.io/docs/user-guide/backend/tts"><link data-rh="true" rel="alternate" href="https://open-llm-vtuber.github.io/docs/user-guide/backend/tts" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://open-llm-vtuber.github.io/en/docs/user-guide/backend/tts" hreflang="en-US"><link data-rh="true" rel="alternate" href="https://open-llm-vtuber.github.io/docs/user-guide/backend/tts" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Open LLM Vtuber RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Open LLM Vtuber Atom Feed"><link rel="stylesheet" href="/assets/css/styles.544d7f8e.css">
-<script src="/assets/js/runtime~main.ca424a3d.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.840c42f0.js" defer="defer"></script>
 <script src="/assets/js/main.b022c5b4.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -77,9 +77,12 @@
 <li>如遇到 <code>mecab-python</code> 相关问题，可尝试使用此<a href="https://github.com/polm/MeloTTS" target="_blank" rel="noopener noreferrer">分支</a>（注：截至 2024/7/16 尚未合并至主分支）</li>
 </ul>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="coqui-tts本地部署">Coqui-TTS（本地部署）<a href="#coqui-tts本地部署" class="hash-link" aria-label="Coqui-TTS（本地部署）的直接链接" title="Coqui-TTS（本地部署）的直接链接">​</a></h2>
+<div class="theme-admonition theme-admonition-warning admonition_xJq3 alert alert--warning"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 16 16"><path fill-rule="evenodd" d="M8.893 1.5c-.183-.31-.52-.5-.887-.5s-.703.19-.886.5L.138 13.499a.98.98 0 0 0 0 1.001c.193.31.53.501.886.501h13.964c.367 0 .704-.19.877-.5a1.03 1.03 0 0 0 .01-1.002L8.893 1.5zm.133 11.497H6.987v-2.003h2.039v2.003zm0-3.004H6.987V5.987h2.039v4.006z"></path></svg></span>重要提示</div><div class="admonitionContent_BuS1"><ul>
+<li>MeloTTS 与 Coqui-TTS 存在依赖冲突，请勿同时安装</li>
+</ul></div></div>
 <p>Coqui-TTS 是一个开源语音合成工具包，支持多种模型和语言。推理速度取决于所选模型的大小和复杂度。</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="安装步骤-1">安装步骤<a href="#安装步骤-1" class="hash-link" aria-label="安装步骤的直接链接" title="安装步骤的直接链接">​</a></h3>
-<div class="language-sh codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-sh codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain"># 安装 Coqui-TTS 及其语言支持</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">uv pip install &quot;coqui-tts[languages]&quot;</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="复制代码到剪贴板" title="复制" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<div class="language-sh codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-sh codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain"># 安装 Coqui-TTS 及其语言支持</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">uv add transformers &quot;coqui-tts[languages]&quot;</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="复制代码到剪贴板" title="复制" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="模型配置">模型配置<a href="#模型配置" class="hash-link" aria-label="模型配置的直接链接" title="模型配置的直接链接">​</a></h3>
 <ol>
 <li>查看可用模型：</li>
@@ -117,7 +120,7 @@
 </ul>
 </li>
 </ul>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="gptsovits本地部署性能适中">GPTSoVITS（本地部署，性能适中）<a href="#gptsovits本地部署性能适中" class="hash-link" aria-label="GPTSoVITS（本地部署，性能适中）的直接链接" title="GPTSoVITS（本地部署，性能适中）的直接链接">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="gptsovits本地部署性能适中">GPTSoVITS（本地部署，性能适中）<a href="#gptsovits本地部署性 能适中" class="hash-link" aria-label="GPTSoVITS（本地部署，性能适中）的直接链接" title="GPTSoVITS（本地部署，性能适中）的直接链接">​</a></h2>
 <blockquote>
 <p>在 <a href="https://github.com/t41372/Open-LLM-VTuber/pull/40" target="_blank" rel="noopener noreferrer">PR #40</a> 中引入，于 v0.4.0 版本正式发布</p>
 </blockquote>
@@ -133,7 +136,7 @@
 <li>在 <code>conf.yaml</code> 中设置 <code>tts_model: bark_tts</code></li>
 <li>首次启动时会自动下载所需模型</li>
 </ol>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="cosyvoice-tts本地部署较慢">CosyVoice TTS（本地部署、较慢）<a href="#cosyvoice-tts本地部署较慢" class="hash-link" aria-label="CosyVoice TTS（本地部署、较慢）的直接链接" title="CosyVoice TTS（本地部署、较慢）的直接链接">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="cosyvoice-tts本地部署较慢">CosyVoice TTS（本地部署、较慢）<a href="#cosyvoice-tts本地部署较慢" class="hash-link" aria-label="CosyVoice TTS（本地部署、较慢）的直接链接" title="CosyVoice TTS（本地部署、较慢）的直接链  接">​</a></h2>
 <ol>
 <li>按照 <a href="https://github.com/FunAudioLLM/CosyVoice" target="_blank" rel="noopener noreferrer">CosyVoice 官方文档</a> 配置并启动 WebUI</li>
 <li>参考 WebUI 中的 API 文档，在 <code>conf.yaml</code> 的 <code>cosyvoiceTTS</code> 部分进行相应配置</li>
