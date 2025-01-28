@@ -78,13 +78,16 @@ python
 
 
 ## Coqui-TTS（本地部署）
+:::warning 重要提示
+- MeloTTS 与 Coqui-TTS 存在依赖冲突，请勿同时安装
+:::
 
 Coqui-TTS 是一个开源语音合成工具包，支持多种模型和语言。推理速度取决于所选模型的大小和复杂度。
 
 ### 安装步骤
 ```sh
 # 安装 Coqui-TTS 及其语言支持
-uv pip install "coqui-tts[languages]"
+uv add transformers "coqui-tts[languages]"
 ```
 
 ### 模型配置

@@ -39,7 +39,7 @@ This package will use the default TTS engine on your system:
 ## MeloTTS (Local Deployment)
 :::warning Important Note
 - It is strongly recommended to use MeloTTS through sherpa-onnx, rather than installing the more complex official version
-- MeloTTS has dependency conflicts with Coqui-TTS, please do not install them simultaneously
+- MeloTTS has dependency conflicts with Coqui-TTS. Please do not install them simultaneously
 - The official version of MeloTTS may encounter mps-related errors on macOS (solutions are welcome)
 :::
 
@@ -75,13 +75,16 @@ python
 - If encountering `mecab-python` related issues, try using this [branch](https://github.com/polm/MeloTTS) (Note: As of 2024/7/16, it has not been merged into the main branch)
 
 ## Coqui-TTS (Local Deployment)
+:::warning Important Note
+- Coqui-TTS has dependency conflicts with MeloTTS. Please do not install them simultaneously
+:::
 
 Coqui-TTS is an open-source speech synthesis toolkit that supports multiple models and languages. The inference speed depends on the size and complexity of the chosen model.
 
 ### Installation Steps
 ```sh
 # Install Coqui-TTS and its language support
-uv pip install "coqui-tts[languages]"
+uv add transformers "coqui-tts[languages]"
 ```
 
 ### Model Configuration
