@@ -12,6 +12,7 @@ sidebar_position: 4
 - WebSocket 连接状态
 - AI 状态和记忆
 - Live2D 模型状态
+- 摄像头和屏幕录制状态
 
 这意味着在两种模式之间切换，不会丢失任何状态或中断当前的对话。
 :::
@@ -34,14 +35,7 @@ sidebar_position: 4
 <img src={require('./img/electron/overview.jpg').default} style={{width: '70%'}} />
 
 ### 功能
-以下功能与 [Web 模式](web.md) 完全一致：
-- WebSocket 连接和状态管理
-- AI 对话功能和状态控制
-- Live2D 模型加载和动作管理
-- 设置面板的所有配置项
-- 对话历史记录的存储和管理
-
-桌宠模式特有的功能：
+在 [Web 模式](web.md) 所有功能的基础上，支持：
 - 全局置顶显示
 - 背景透明
 - 鼠标可穿透非交互区域

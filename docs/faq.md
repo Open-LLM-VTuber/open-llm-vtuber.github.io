@@ -53,9 +53,8 @@ sidebar_position: 6
 - macOS 用户需要调整系统设置并执行特定命令
 - 详细解决方案请参考[模式介绍](./user-guide/frontend/mode.md)
 
-### 远程访问 Web 界面时麦克风/摄像头/录屏无法使用怎么办
-- Electron 应用暂时不支持录屏 (`Failed to start screen capture:
-NotSupportedError: Not supported`)。
+### 远程访问 Web 界面时麦克风/摄像头/录屏无法使用怎么办 (`Failed to start screen capture:
+NotSupportedError: Not supported`)
 - 这是因为这些功能需要安全上下文(HTTPS 或 localhost)
 - 如需远程使用,必须为 Web 服务器配置 HTTPS
 - 详细说明请参考[模式介绍](./user-guide/frontend/mode.md)

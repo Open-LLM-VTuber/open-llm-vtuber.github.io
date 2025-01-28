@@ -49,8 +49,7 @@ Common causes and solutions:
 - macOS users need to adjust system settings and execute specific commands
 - For detailed solutions, please refer to [Mode Introduction](./user-guide/frontend/mode.md)
 
-### What to do when microphone/camera/screen capture doesn't work with remote Web interface access?
-- Electron app currently doesn't support screen capture (`Failed to start screen capture:
+### What to do when microphone/camera/screen capture doesn't work with remote Web interface access? (`Failed to start screen capture:
 NotSupportedError: Not supported`)
 - These features require a secure context (HTTPS or localhost)
 - For remote access, you must configure HTTPS for the web server

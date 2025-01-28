@@ -331,7 +331,7 @@
     "description": "Title of interaction feature"
   },
   "features.interact.description": {
-    "message": "Chat through voice or text, interrupt naturally, with AI proactively speaking, Live2D expressions, touch response and more.",
+    "message": "Chat through voice or text, support camera & screen vision, interrupt naturally, with AI proactively speaking, Live2D expressions, touch response and more.",
     "description": "Description of interaction feature"
   },
   "features.ui.title": {

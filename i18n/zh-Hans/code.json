@@ -20,7 +20,7 @@
     "description": "Title of interaction feature"
   },
   "features.interact.description": {
-    "message": "支持语音文字实时交流，自然打断对话，AI 主动发言，Live2D 实时表情，还能触摸互动，用法多样有趣。",
+    "message": "支持语音文字实时交流，支持摄像头 & 屏幕视觉，自然打断对话，AI 主动发言，Live2D 实时表情，还能触摸互动，用法多样有趣。",
     "description": "Description of interaction feature"
   },
   "features.ui.title": {

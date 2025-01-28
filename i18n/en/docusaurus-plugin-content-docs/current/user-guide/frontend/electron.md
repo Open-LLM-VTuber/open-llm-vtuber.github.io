@@ -33,14 +33,7 @@ Window mode is implemented based on Electron and shares the same interface layou
 <img src={require('./img/electron/overview.jpg').default} style={{width: '70%'}} />
 
 ### Features
-The following features are identical to [Web Mode](web.md):
-- WebSocket connection and status management
-- AI conversation functionality and status control
-- Live2D model loading and action management
-- All configuration options in the settings panel
-- Storage and management of conversation history
-
-Features unique to desktop pet mode:
+Based on all features in [Web Mode](web.md), it additionally supports:
 - Global top-level display
 - Transparent background
 - Mouse click-through for non-interactive areas
