@@ -1,3 +1,8 @@
+---
+sidebar_position: 4
+---
+
+
 # Live2D 指南
 
 :::info 概览

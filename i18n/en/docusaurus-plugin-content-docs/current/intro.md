@@ -49,6 +49,7 @@ This project underwent code refactoring after version `v1.0.0` and is currently 
   - 🫱 Touch feedback, interact with your AI companion through clicks or drags
   - 😊 Live2D expressions, set emotion mapping to control model expressions from the backend
   - 🐱 Pet mode, supporting transparent background, global top-most, and mouse click-through - drag your AI companion anywhere on the screen
+  - 💭 Display AI's inner thoughts, allowing you to see AI's expressions, thoughts and actions without them being spoken
   - 🗣️ AI proactive speaking feature
   - 💾 Chat log persistence, switch to previous conversations anytime
   - 🌍 TTS translation support (e.g., chat in Chinese while AI uses Japanese voice)
