@@ -130,14 +130,47 @@ uv run tts --list_models
 GPT-SoVITS is a powerful speech synthesis engine capable of high-quality voice cloning.
 
 :::note
-Some of the following content is compiled from the [Tencent Document](https://docs.qq.com/doc/DTHR6WkZ3aU9JcXpy) in the QQ group
+Note: The official tutorial for GPTSoVITS is currently not comprehensive.
+Some of the following content has been compiled from the [Tencent Document](https://docs.qq.com/doc/DTHR6WkZ3aU9JcXpy), which was created by the users from the qq group before the release of `v1.0.0` (the doc was blocked by tencent for some reason so it is no longer maintained). 
 
-The official tutorial for GPTSoVITS is currently incomplete, you can refer to the Tencent Document for deployment.
+If you encountered any problems or would like to improve the documentation, please use the edit button at the end of this page or just contact me.
 :::
 
 ### [GPTSoVITS-V2 Integration Package](https://www.yuque.com/baicaigongchang1145haoyuangong/ib3g1e/dkxgpiy9zb96hob4#KTvnO)
 
 ### [miHoYo One-Click Package](https://www.bilibili.com/video/BV1D7421R7Rn)
+
+#### If you are using the miHoYo one-click package:
+First launch GPT SoVITS, then launch this project (`uv run run_server.py`).
+
+You need to modify the following settings:
+
+1: Change the tts option in conf.yaml to gpt_sovits (surely no one would overlook this step)
+![](./img/gpt_sovits_1.png)
+- This screenshot was taken before the release of `v1.0.0`. Please enter `gpt_sovits` instead of `GPT_Sovits`.
+
+2: Modify the corresponding configuration parameters in gpt_sovits below:
+![](./img/gpt_sovits_2.png)
+from top to bottom, the red text in the image says:
+- The url of the GPT sovits server endpoint
+- please have the `/tts` at the end of the url
+- change the `ref_audio_path` to the path of the reference audio of the model you use.
+
+If it prompts that GPT-Sovits loaded successfully but ffmpeg reports a decoding failure, it's because you didn't add /tts:
+![](./img/gpt_sovits_3.png)
+
+#### If you are using the GPT-SovitsV2 integrated package:
+1: The modifications in conf.yaml are the same as the previous step, but place the corresponding models in the appropriate locations. Put the GPT model (with .ckpt extension) in the GPT_weights_v2 folder, the SoVITS model (with .pth extension) in the SoVITS_weights_v2 folder. If you don't change the location of the reference audio, it should be placed in the GPT-Sovits root directory, alongside api_v2.py;
+![](./img/gpt_sovits_4.png)
+![](./img/gpt_sovits_5.png)
+![](./img/gpt_sovits_6.png)
+
+2: Run GPT-SovitsV2, navigate to the GPT-Sovits root directory, and in the prompt run `python api_v2.py -a 0.0.0.0`. 
+
+If there's no response, use the Python that comes with the integrated package, and in the prompt run `runtime\python.exe api_v2.py`. When it prompts "TTS config", it indicates that it has loaded successfully. You can then leave it running in the background.
+
+![](./img/gpt_sovits_7.png)
+- the red text says: this is the url you need to put into conf.yaml
 
 ## Bark (Local Deployment, Relatively Slow)
 1. Install dependencies:

@@ -134,14 +134,38 @@ uv run tts --list_models
 GPT-SoVITS 是一个强大的语音合成引擎，可实现高质量的声音克隆。
 
 :::note
-以下部分内容整理自 QQ 群的 [腾讯文档](https://docs.qq.com/doc/DTHR6WkZ3aU9JcXpy)
-
-GPTSoVITS 的官方教程暂时不完善，可以参考腾讯文进行部署。
+GPTSoVITS的官方教程目前尚不完善。
+以下部分内容整理自 QQ 群的 [腾讯文档](https://docs.qq.com/doc/DTHR6WkZ3aU9JcXpy)，由v1.0.0版本发布前 QQ 群的用户们共同编辑完成（文档因不明原因被腾讯封锁，现已停止维护）。若您在阅读过程中遇到问题，或希望参与教程完善，可通过本页面最下方的编辑按钮提交修改建议，也可直接联系我进行反馈。
 :::
 
 ### [GPTSoVITS-V2 整合包](https://www.yuque.com/baicaigongchang1145haoyuangong/ib3g1e/dkxgpiy9zb96hob4#KTvnO)
 
 ### [米哈游一键包](https://www.bilibili.com/video/BV1D7421R7Rn)
+
+#### 如果你是用的米哈游一键包：
+先启动 GPT SoVITS，然后启动本项目 (`uv run run_server.py`)。
+
+需要修改以下设置：
+
+1: conf.yaml里的tts选项改成GPT_Sovits（应该没人会忽略这步吧）
+![](./img/gpt_sovits_1.png)
+- 这个截图是在 `v1.0.0` 版本之前截的图，请填入 `gpt_sovits`，不要填 `GPT_Sovits`
+
+2: 修改下方GPT_Sovits中对应配置的参数：
+![](./img/gpt_sovits_2.png)
+
+提示GPT-Sovits加载成功但是ffmpeg提示decoding失败就是没加/tts：
+![](./img/gpt_sovits_3.png)
+
+#### 如果你是用的GPT-SovitsV2整合包：
+1: conf.yaml里的修改与上一步相同，不过对应的模型放在相应位置，GPT模型（ckpt后缀）放入GPT_weights_v2文件夹，SoVITS模型（pth后缀）放入SoVITS_weights_v2文件夹，参考音频如果不改位置就是放在GPT-Sovits根目录下，跟api_v2.py放在一起；
+![](./img/gpt_sovits_4.png)
+![](./img/gpt_sovits_5.png)
+![](./img/gpt_sovits_6.png)
+
+2: 运行GPT-SovitsV2，切到GPT-Sovits根目录，在prompt里面运行python api_v2.py -a 0.0.0.0，如果没反应就用整合包自带的python，在prompt里面运行runtime\python.exe api_v2.py，提示TTS config就表示加载好了，放后台就行
+![](./img/gpt_sovits_7.png)
+
 
 ## Bark (本地部署、较慢)
 1. 安装依赖：
