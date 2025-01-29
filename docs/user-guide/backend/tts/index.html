@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.7.0">
 <title data-rh="true">语音合成 (TTS) | Open LLM Vtuber</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://open-llm-vtuber.github.io/img/Open_LLM_VTuber_Social.png"><meta data-rh="true" name="twitter:image" content="https://open-llm-vtuber.github.io/img/Open_LLM_VTuber_Social.png"><meta data-rh="true" property="og:url" content="https://open-llm-vtuber.github.io/docs/user-guide/backend/tts"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en_US"><meta data-rh="true" name="docusaurus_locale" content="zh-Hans"><meta data-rh="true" name="docsearch:language" content="zh-Hans"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="语音合成 (TTS) | Open LLM Vtuber"><meta data-rh="true" name="description" content="安装所需的依赖并在 conf.yaml 进行配置后后，通过修改 conf.yaml 中的 TTS_MODEL 选项来启用相应的语音合成引擎。"><meta data-rh="true" property="og:description" content="安装所需的依赖并在 conf.yaml 进行配置后后，通过修改 conf.yaml 中的 TTS_MODEL 选项来启用相应的语音合成引擎。"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://open-llm-vtuber.github.io/docs/user-guide/backend/tts"><link data-rh="true" rel="alternate" href="https://open-llm-vtuber.github.io/docs/user-guide/backend/tts" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://open-llm-vtuber.github.io/en/docs/user-guide/backend/tts" hreflang="en-US"><link data-rh="true" rel="alternate" href="https://open-llm-vtuber.github.io/docs/user-guide/backend/tts" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Open LLM Vtuber RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Open LLM Vtuber Atom Feed"><link rel="stylesheet" href="/assets/css/styles.544d7f8e.css">
-<script src="/assets/js/runtime~main.723718cc.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.50b20c14.js" defer="defer"></script>
 <script src="/assets/js/main.744d784c.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -125,9 +125,29 @@
 <p>在 <a href="https://github.com/t41372/Open-LLM-VTuber/pull/40" target="_blank" rel="noopener noreferrer">PR #40</a> 中引入，于 v0.4.0 版本正式发布</p>
 </blockquote>
 <p>GPT-SoVITS 是一个强大的语音合成引擎，可实现高质量的声音克隆。</p>
-<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>备注</div><div class="admonitionContent_BuS1"><p>以下部分内容整理自 QQ 群的 <a href="https://docs.qq.com/doc/DTHR6WkZ3aU9JcXpy" target="_blank" rel="noopener noreferrer">腾讯文档</a></p><p>GPTSoVITS 的官方教程暂时不完善，可以参考腾讯文进行部署。</p></div></div>
+<div class="theme-admonition theme-admonition-note admonition_xJq3 alert alert--secondary"><div class="admonitionHeading_Gvgb"><span class="admonitionIcon_Rf37"><svg viewBox="0 0 14 16"><path fill-rule="evenodd" d="M6.3 5.69a.942.942 0 0 1-.28-.7c0-.28.09-.52.28-.7.19-.18.42-.28.7-.28.28 0 .52.09.7.28.18.19.28.42.28.7 0 .28-.09.52-.28.7a1 1 0 0 1-.7.3c-.28 0-.52-.11-.7-.3zM8 7.99c-.02-.25-.11-.48-.31-.69-.2-.19-.42-.3-.69-.31H6c-.27.02-.48.13-.69.31-.2.2-.3.44-.31.69h1v3c.02.27.11.5.31.69.2.2.42.31.69.31h1c.27 0 .48-.11.69-.31.2-.19.3-.42.31-.69H8V7.98v.01zM7 2.3c-3.14 0-5.7 2.54-5.7 5.68 0 3.14 2.56 5.7 5.7 5.7s5.7-2.55 5.7-5.7c0-3.15-2.56-5.69-5.7-5.69v.01zM7 .98c3.86 0 7 3.14 7 7s-3.14 7-7 7-7-3.12-7-7 3.14-7 7-7z"></path></svg></span>备注</div><div class="admonitionContent_BuS1"><p>GPTSoVITS的官方教程目前尚不完善。
+以下部分内容整理自 QQ 群的 <a href="https://docs.qq.com/doc/DTHR6WkZ3aU9JcXpy" target="_blank" rel="noopener noreferrer">腾讯文档</a>，由v1.0.0版本发布前 QQ 群的用户们共同编辑完成（文档因不明原因被腾讯封锁，现已停止维护）。若您在阅读过程中遇到问题，或希望参与教程完善，可通过本页面最下方的编辑按钮提交修改建议，也可直接联系我进行反馈。</p></div></div>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="gptsovits-v2-整合包"><a href="https://www.yuque.com/baicaigongchang1145haoyuangong/ib3g1e/dkxgpiy9zb96hob4#KTvnO" target="_blank" rel="noopener noreferrer">GPTSoVITS-V2 整合包</a><a href="#gptsovits-v2-整合包" class="hash-link" aria-label="gptsovits-v2-整合包的直接链接" title="gptsovits-v2-整合包的直接链接">​</a></h3>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="米哈游一键包"><a href="https://www.bilibili.com/video/BV1D7421R7Rn" target="_blank" rel="noopener noreferrer">米哈游一键包</a><a href="#米哈游一键包" class="hash-link" aria-label="米哈游一键包的直接链接" title="米哈游一键包的直接链接">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="如果你是用的米哈游一键包">如果你是用的米哈游一键包：<a href="#如果你是用的米哈游一键包" class="hash-link" aria-label="如果你是用的米哈游一键包：的直接链接" title="如果你是用的米哈游一键包：的直接链接">​</a></h4>
+<p>先启动 GPT SoVITS，然后启动本项目 (<code>uv run run_server.py</code>)。</p>
+<p>需要修改以下设置：</p>
+<p>1: conf.yaml里的tts选项改成GPT_Sovits（应该没人会忽略这步吧）
+<img decoding="async" loading="lazy" src="/assets/images/gpt_sovits_1-0095dfb4d736cfafff39a06ec73909c9.png" width="1340" height="576" class="img_ev3q"></p>
+<ul>
+<li>这个截图是在 <code>v1.0.0</code> 版本之前截的图，请填入 <code>gpt_sovits</code>，不要填 <code>GPT_Sovits</code></li>
+</ul>
+<p>2: 修改下方GPT_Sovits中对应配置的参数：
+<img decoding="async" loading="lazy" src="/assets/images/gpt_sovits_2-7a06cacc1f7a47b2b512a48127c8a5bd.png" width="1288" height="480" class="img_ev3q"></p>
+<p>提示GPT-Sovits加载成功但是ffmpeg提示decoding失败就是没加/tts：
+<img decoding="async" loading="lazy" src="/assets/images/gpt_sovits_3-0d64562e65d7b8865370c7b8d7258ea4.png" width="1958" height="1584" class="img_ev3q"></p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="如果你是用的gpt-sovitsv2整合包">如果你是用的GPT-SovitsV2整合包：<a href="#如果你是用的gpt-sovitsv2整合包" class="hash-link" aria-label="如果你是用的GPT-SovitsV2整合包：的直接链接" title="如果你是用的GPT-SovitsV2整合包：的直接链接">​</a></h4>
+<p>1: conf.yaml里的修改与上一步相同，不过对应的模型放在相应位置，GPT模型（ckpt后缀）放入GPT_weights_v2文件夹，SoVITS模型（pth后缀）放入SoVITS_weights_v2文件夹，参考音频如果不改位置就是放在GPT-Sovits根目录下，跟api_v2.py放在一起；
+<img decoding="async" loading="lazy" src="/assets/images/gpt_sovits_4-f2af17262fca2652f816d2d92efb77f6.png" width="640" height="203" class="img_ev3q">
+<img decoding="async" loading="lazy" src="/assets/images/gpt_sovits_5-74fb34cdb8f377def13fccba89eeda23.png" width="653" height="246" class="img_ev3q">
+<img decoding="async" loading="lazy" src="/assets/images/gpt_sovits_6-d17c6ff286a5098a2021b6db7fc54c43.png" width="903" height="203" class="img_ev3q"></p>
+<p>2: 运行GPT-SovitsV2，切到GPT-Sovits根目录，在prompt里面运行python api_v2.py -a 0.0.0.0，如果没反应就用整合包自带的python，在prompt里面运行runtime\python.exe api_v2.py，提示TTS config就表示加载好了，放后台就行
+<img decoding="async" loading="lazy" src="/assets/images/gpt_sovits_7-9219682950050258824c0fed61631e79.png" width="979" height="603" class="img_ev3q"></p>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="bark-本地部署较慢">Bark (本地部署、较慢)<a href="#bark-本地部署较慢" class="hash-link" aria-label="Bark (本地部署、较慢)的直接链接" title="Bark (本地部署、较慢)的直接链接">​</a></h2>
 <ol>
 <li>安装依赖：<!-- -->
@@ -136,7 +156,7 @@
 <li>在 <code>conf.yaml</code> 中设置 <code>tts_model: bark_tts</code></li>
 <li>首次启动时会自动下载所需模型</li>
 </ol>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="cosyvoice-tts本地部署较慢">CosyVoice TTS（本地部署、较慢）<a href="#cosyvoice-tts本地部署较慢" class="hash-link" aria-label="CosyVoice TTS（本地部署、较慢）的直接链接" title="CosyVoice TTS（本地部署、较慢）的直接链  接">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="cosyvoice-tts本地部署较慢">CosyVoice TTS（本地部署、较慢）<a href="#cosyvoice-tts本地部署较慢" class="hash-link" aria-label="CosyVoice TTS（本地部署、较慢）的直接链接" title="CosyVoice TTS（本地部署、较慢）的直接链接">​</a></h2>
 <ol>
 <li>按照 <a href="https://github.com/FunAudioLLM/CosyVoice" target="_blank" rel="noopener noreferrer">CosyVoice 官方文档</a> 配置并启动 WebUI</li>
 <li>参考 WebUI 中的 API 文档，在 <code>conf.yaml</code> 的 <code>cosyvoiceTTS</code> 部分进行相应配置</li>
@@ -146,7 +166,7 @@
 <p>自 <code>v0.2.4</code> 版本起可用（<a href="https://github.com/t41372/Open-LLM-VTuber/pull/23" target="_blank" rel="noopener noreferrer">PR#23</a>）</p>
 </blockquote>
 <p>推荐使用 xtts-api-server，提供了清晰的 API 文档且部署相对简单。</p>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="edge-tts在线无需-api-密钥">Edge TTS（在线、无需 API 密钥）<a href="#edge-tts在线无需-api-密钥" class="hash-link" aria-label="Edge TTS（在线、无需 API 密钥）的直接链接" title="Edge TTS（在线、无需 API 密钥）的直接链接">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="edge-tts在线无需-api-密钥">Edge TTS（在线、无  需 API 密钥）<a href="#edge-tts在线无需-api-密钥" class="hash-link" aria-label="Edge TTS（在线、无需 API 密钥）的直接链接" title="Edge TTS（在线、无需 API 密钥）的直接链接">​</a></h2>
 <ul>
 <li>特点：<!-- -->
 <ul>
