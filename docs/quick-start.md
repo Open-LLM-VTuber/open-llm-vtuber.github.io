@@ -364,9 +364,11 @@ uv run run_server.py
 
 
 
-## 常见问题排查
+## 常见问题
 
-如果遇到 `Error calling the chat endpoint...` 错误，请检查：
+常见问题请参考 [常见问题](faq/)
+
+### 如果遇到 `Error calling the chat endpoint...` 错误，请检查：
 
 - http://localhost:11434/ 是否能正常访问，如果不能，可能是因为 `ollama run` 没有运行成功，或者运行成功后命令行被关闭了。
 

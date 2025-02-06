@@ -361,9 +361,12 @@ Please refer to the [Live2D Guide](user-guide/live2d)
 Please refer to [Participate in Discussions](community/contact)
 
 
-## Common Issue Troubleshooting
+## Common Issue Troubleshooting & Frequently Asked Questions
 
-If you encounter the `Error calling the chat endpoint...` error, please check:
+Please refer to the [FAQ](faq/)
+
+
+### If you encounter the `Error calling the chat endpoint...` error, please check:
 
 - Whether http://localhost:11434/ is accessible. If not, it may be because `ollama run` did not run successfully, or the command line was closed after successful execution.
 
