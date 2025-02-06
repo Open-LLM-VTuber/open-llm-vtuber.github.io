@@ -346,6 +346,21 @@ If you prefer an Electron application (window mode + desktop mode), you can down
 For more information about the frontend, refer to the [Frontend Guide](./user-guide/frontend/)
 :::
 
+
+## Further Reading
+
+### Desktop Pet Mode, Desktop Mode, and Web Mode
+![](user-guide/frontend/img/mode/pet.jpg)
+
+For an introduction and usage guide of the Desktop Pet Mode, please refer to [Frontend/Mode Introduction](user-guide/frontend/mode)
+
+### Modifying Live2D Models
+Please refer to the [Live2D Guide](user-guide/live2d)
+
+### Community, Discussion, and Communication
+Please refer to [Participate in Discussions](community/contact)
+
+
 ## Common Issue Troubleshooting
 
 If you encounter the `Error calling the chat endpoint...` error, please check:

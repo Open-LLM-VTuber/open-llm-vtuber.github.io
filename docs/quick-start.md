@@ -346,6 +346,24 @@ uv run run_server.py
 
 运行成功后，访问 `http://localhost:12393` 打开 Web 界面。
 
+
+## 深入阅读
+
+### 桌宠模式，桌面模式与 Web 模式
+![](user-guide/frontend/img/mode/pet.jpg)
+
+桌宠模式介绍与使用，参考 [前端/模式介绍](user-guide/frontend/mode)
+
+
+### 修改 Live2D 模型
+参考 [Live2D指南](user-guide/live2d)
+
+
+### 社区，讨论，交流
+参考 [参与讨论](community/contact)
+
+
+
 ## 常见问题排查
 
 如果遇到 `Error calling the chat endpoint...` 错误，请检查：
