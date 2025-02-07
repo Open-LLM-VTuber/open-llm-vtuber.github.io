@@ -176,9 +176,45 @@ GPTSoVITS的官方教程目前尚不完善。
 3. 首次启动时会自动下载所需模型
 ## CosyVoice TTS（本地部署、较慢）
 1. 按照 [CosyVoice 官方文档](https://github.com/FunAudioLLM/CosyVoice) 配置并启动 WebUI
-2. 参考 WebUI 中的 API 文档，在 `conf.yaml` 的 `cosyvoiceTTS` 部分进行相应配置
+2. 参考 WebUI 中的 API 文档，在 `conf.yaml` 的 `cosyvoice_tts` 部分进行相应配置
 
-#### X-TTS（本地部署、较慢）
+#### CosyVoice2 TTS（本地部署)
+
+1. 按照 [CosyVoice 官方文档](https://github.com/FunAudioLLM/CosyVoice) 配置环境
+2. 下载 CosyVoice2 模型 `CosyVoice2-0.5B`
+3. 修改 CosyVoice 的 `webui.py` 文件
+   - ```
+     audio_output = gr.Audio(label="合成音频", autoplay=True, streaming=True) 
+     改为 ->
+     audio_output = gr.Audio(label="合成音频", autoplay=True, streaming=False)
+     ```
+    - ```
+         logging.info('get instruct inference request')
+         set_all_random_seed(seed)
+         for i in cosyvoice.inference_instruct(tts_text, sft_dropdown, instruct_text, stream=stream, speed=speed):
+             yield (cosyvoice.sample_rate, i['tts_speech'].numpy().flatten())
+      改为 ->
+              logging.info('get instruct inference request')
+              prompt_speech_16k = postprocess(load_wav(prompt_wav, prompt_sr))
+              set_all_random_seed(seed)
+              for i in cosyvoice.inference_instruct2(tts_text, instruct_text, prompt_speech_16k, stream=stream, speed=speed):
+                  yield (cosyvoice.sample_rate, i['tts_speech'].numpy().flatten())
+      ```
+4. 启动 CosyVoice WebUI
+5. 使用命令`uv add gradio_client`在本项目下安装 gradio_client
+6. 在 `conf.yaml` 的 `cosyvoice2_tts` 部分进行配置
+
+目前官方只放出了CosyVoice2的基座模型——`CosyVoice2-0.5B`，该模型仅支持"3s极速复刻", "跨语种复刻", "自然语言控制"
+- 在"3s极速复刻"模式下，需要填写 prompt_wav_upload_url 和 prompt_wav_record_url 作为参考音频，填写 prompt_text 为参考音频对应的文本
+- 在"跨语种复刻"模式下，需要填写 prompt_wav_upload_url 和 prompt_wav_record_url 作为参考音频，在生成音频与参考音频语种不同时效果最好
+- 在"自然语言控制"模式下，需要填写 prompt_wav_upload_url 和 prompt_wav_record_url 作为参考音频，填写 instruct_text 为控制生成的指令，如“说粤语”，“用激昂的语气”
+
+:::warning 
+prompt_wav_upload_url 和 prompt_wav_record_url 请填写为相同路径
+stream（流式生成）推荐填 False，因为本项目已包含语音分段合成（才不是因为填 True 会有bug
+:::
+
+## X-TTS（本地部署、较慢）
 > 自 `v0.2.4` 版本起可用（[PR#23](https://github.com/t41372/Open-LLM-VTuber/pull/23)）
 
 推荐使用 xtts-api-server，提供了清晰的 API 文档且部署相对简单。
