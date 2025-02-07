@@ -178,7 +178,7 @@ GPTSoVITS的官方教程目前尚不完善。
 1. 按照 [CosyVoice 官方文档](https://github.com/FunAudioLLM/CosyVoice) 配置并启动 WebUI
 2. 参考 WebUI 中的 API 文档，在 `conf.yaml` 的 `cosyvoice_tts` 部分进行相应配置
 
-#### CosyVoice2 TTS（本地部署)
+#### CosyVoice2 TTS（本地部署）
 
 1. 按照 [CosyVoice 官方文档](https://github.com/FunAudioLLM/CosyVoice) 配置环境
 2. 下载 CosyVoice2 模型 `CosyVoice2-0.5B`
