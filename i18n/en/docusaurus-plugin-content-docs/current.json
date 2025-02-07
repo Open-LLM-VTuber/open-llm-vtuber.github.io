@@ -55,6 +55,14 @@
     "message": "Hooks",
     "description": "The generated-index page description for category Hooks in sidebar docSidebar"
   },
+  "sidebar.docSidebar.category.开发指南": {
+    "message": "Development Guide",
+    "description": "The label for category Development Guide in sidebar docSidebar"
+  },
+  "sidebar.docSidebar.category.后端开发指南": {
+    "message": "Backend Development Guide",
+    "description": "The label for category Backend Development Guide in sidebar docSidebar"
+  },
   "sidebar.docSidebar.category.社区与贡献": {
     "message": "Community and Contribution",
     "description": "The label for category Community and Contribution in sidebar docSidebar"

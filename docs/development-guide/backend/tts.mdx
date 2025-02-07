@@ -1,0 +1,156 @@
+---
+sidebar_position: 1
+---
+
+# TTS
+
+# 如何添加新的 TTS 支持?
+
+:::info
+tim: TTS 安装永远是添加 TTS 支持中最困难的一步。第二困难的是让别人也装上这个 TTS。
+:::
+
+
+添加 TTS 的步骤相对固定，并不要求对 Open-LLM-VTuber 项目代码的深度理解，因此相对适合新人上手熟悉项目 (Pull Request 也比较容易被合并)。
+
+
+## 0. 总览
+
+### 0.1 要求
+- 高于 `v1.0.0` 版本的 Open-LLM-VTuber。
+- 会写 Python (不过你跟着下面步骤走就知道你会不会 Python 了。你可以边走边学)
+- 大概理解 GitHub 开源工作流。具体来说，理解 fork 与 Pull Request 的概念。
+- 理解如何使用 uv 管理 Python 项目依赖。(不会 uv 的[这里学](https://docs.astral.sh/uv/getting-started/features/#projects))
+- 懂一点点 Pydantic (或是... AI 懂也行)
+
+
+### 0.2 步骤总览
+
+:::info
+本项目目录遵循 src 结构，所有后端代码都存放在 `src/open_llm_vtuber` 目录下。后面提到的 `tts` 和 `config_manager` 都在 `src/open_llm_vtuber` 目录中。
+
+前端代码的引用，配置文件，极少数代码和其他非代码文件则存放在项目根目录下。
+:::
+
+#### 开发
+1. 往 `tts` 目录中添加新的 TTS 实现
+2. 在 `tts_factory` 工厂类中，添加代码来初始化你实现的 tts 类。
+3. 在 `conf.yaml` 以及 `conf.CN.yaml` 文件中，添加 tts 配置项
+4. 在 `config_manager/tts.py` 文件中，将你的 tts 的相关配置添加到配置文件数据校验代码中。
+
+#### 测试
+1. 切换到你的 tts 实现并进行测试，确保在空输入，奇怪标点符号的状况下，能正常使用。
+2. 整理代码，提交 pull request
+
+#### 文档
+1. 请前往 [用户指南/后端用户指南/语音合成(TTS)](https://github.com/Open-LLM-VTuber/open-llm-vtuber.github.io/blob/main/docs/user-guide/backend/tts.md)，编辑 TTS 文档的源代码并添加你实现的 TTS 的安装指南。
+- 如果你在这一步遇到困难，你可以直接联系我，我可以帮你把文档添加进文档网站中 (但安装指南要自己写！)
+
+
+## 1. 开发:
+
+### 2.1 往 `tts` 目录中添加新的 TTS 实现
+
+前往 `src/open_llm_vtuber/tts` 目录。
+
+
+![tts](img/tts_package.png)
+
+目录下有几个重要的文件:
+
+`tts_interface.py`
+- 这个是 tts 类的接口类。所有 tts 都要继承这个接口。
+
+`tts_factory.py`
+- tts 的工厂类。后端将会用配置项调用这个工厂类来初始化 tts，获取 tts 的实例。
+
+剩下的文件都是项目支持的 tts 的实现。我推荐你参考 `edge_tts.py` 的实现，这也是项目预设的 tts。
+
+请参考 `tts_interface.py` 与其他 tts 实现，添加新的 tts。
+
+你可以选择实现 `async_generate_audio` 或 `generate_audio` 其中之一。项目后端以异步代码为主，`tts_interface.py` 中，如果你选择实现了同步的 `generate_audio` 函数，`async_generate_audio` 函数会将 `generate_audio` 函数包装成异步函数。
+
+`generate_audio` 函数并不会被外部调用，因此如果你使用的 tts 支持异步，你可以只实现 `async_generate_audio` 函数。
+
+#### 传入值
+你大概率会想要在这个 tts 类初始化的时候从配置文件获取一些参数，自定义一些像是声音，语言之类的自定义项。请把这些可配置项的参数写成构造函数的参数。
+
+
+### 2.2 在 `tts_factory` 工厂类中，添加代码来初始化你实现的 tts 类。
+
+前往 `tts_factory.py` 文件，在`get_tts_engine`函数中添加新 tts 的初始化逻辑。
+
+函数 `get_tts_engine` 将会被外部逻辑调用，并回传一个 tts 的实例。
+
+- `engine_type` 表示了用户在 `conf.yaml` 中，`tts_model` 选项写的东西，也就是 tts 的选择。
+- `kwargs` 是一个字典，内容是 `conf.yaml` 中，这个 `tts_model` 在 `tts_config` 下的配置。
+
+举个例子:
+
+```yaml
+  tts_config:
+    tts_model: "edge_tts"
+    # text to speech model options:
+    #   "azure_tts", "pyttsx3_tts", "edge_tts", "bark_tts",
+    #   "cosyvoice_tts", "melo_tts", "coqui_tts",
+    #   "fish_api_tts", "x_tts", "gpt_sovits_tts", "sherpa_onnx_tts"
+
+    azure_tts:
+      api_key: "azure-api-key"
+      region: "eastus"
+      voice: "en-US-AshleyNeural"
+      pitch: "26" # percentage of the pitch adjustment
+      rate: "1" # rate of speak
+
+    bark_tts:
+      voice: "v2/en_speaker_1"
+
+    edge_tts:
+      # Check out doc at https://github.com/rany2/edge-tts
+      # Use `edge-tts --list-voices` to list all available voices
+      voice: "en-US-AvaMultilingualNeural" # "en-US-AvaMultilingualNeural" #"zh-CN-XiaoxiaoNeural" # "ja-JP-NanamiNeural"
+```
+
+当 `tts_model` 设成 `edge_tts` 的时候:
+- `engine_type` 的传入数值将会是 `edge_tts`。
+- `kwargs` 将会是这样的字典
+```python
+{"voice": "en-US-AvaMultilingualNeural"}
+```
+
+
+### 2.3 在 `conf.yaml` 以及 `conf.CN.yaml` 文件中，添加 tts 配置项
+
+前往 `conf.yaml` 与 `conf.CN.yaml` (conf.yaml 文件的中文版预设)，往 `tts_config` 中添加新 tts 需要的配置项。
+
+
+### 2.4 在 `config_manager/tts.py` 文件中，将你的 tts 的相关配置添加到配置文件数据校验代码中。
+
+自 `v1.0.0` 版本开始，项目引入了基于 Pydantic 的配置文件数据校验，因此如果要添加 `conf.yaml` 中可供配置的选项，我们要修改对应的 Pydantic 模型。
+
+前往 `src/open_llm_vtuber/config_manager/tts.py` 文件。参考其他 tts 实现，在 tts.py 中添加配置的类，并在底部的 `TTSConfig` 中添加 tts。
+
+
+## 3. 测试与提交代码
+
+测试好你添加的 tts，确认项目可以正常运行，所有配置项都能正常使用。
+
+接着在命令行中用 `uv run ruff format` 命令，格式化代码。
+
+之后就可以提交 pull request 啦。
+
+:::danger
+请在 `conf.yaml` 与 `conf.CN.yaml` 文件中放入预设的选项。请不要随便改动配置文件中的其他选项。
+:::
+
+:::danger
+请不要把自己的 API key 推送到分支中。请在提交前检查自己要提交的代码。
+:::
+
+
+## 4. 补充文档
+
+请前往 [用户指南/后端用户指南/语音合成(TTS)](https://github.com/Open-LLM-VTuber/open-llm-vtuber.github.io/blob/main/docs/user-guide/backend/tts.md)，编辑 TTS 文档的源代码并添加你实现的 TTS 的安装指南。
+
+注意，我们的文档有中英文两种语言。如果可以，可以先完成一个语言之后用 AI 翻译成另一个语言。
+
