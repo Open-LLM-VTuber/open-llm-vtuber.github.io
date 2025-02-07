@@ -27,6 +27,28 @@ If you encounter an issue where local services (ollama, deeplx, gptsovits) canno
 Groq Whisper API, OpenAI API, and other foreign large model/inference platform APIs generally cannot use proxies from Hong Kong.
 :::
 
+## Device Requirements
+
+### Minimum Requirements
+Most of the heavy components (ASR, LLM, TTS, and translation) of this project can be chosen to use APIs instead of local computing, allowing you to choose which components you wish to run locally while using APIs for those that your local system cannot handle.
+
+Therefore, the minimum device requirements for this project are:
+
+- A computer
+- A Raspberry Pi as well if you insist
+
+### Recommended Device Requirements for Local Operation
+
+- Mac with M series chip
+- Nvidia GPU
+- Newer AMD GPU (great if it supports ROCm)
+- Other GPUs
+- Or a CPU powerful enough to substitute for a GPU
+
+This project supports various backends for speech recognition (ASR), large language models (LLM), and text-to-speech (TTS). Please choose wisely according to your hardware capabilities. If you find the operation too slow, please select smaller models or use APIs.
+
+For the components selected in this quick start guide, you will need a CPU with normal speed (for ASR), a GPU supported by Ollama (for LLM), and an internet connection (for TTS).
+
 ## Environment Preparation
 
 ### Install Git
@@ -39,7 +61,13 @@ Groq Whisper API, OpenAI API, and other foreign large model/inference platform A
 winget install Git.Git
 ```
 
-Or download the installation package from the [Git official website](https://git-scm.com/downloads/win) to install.
+:::warning
+**Regarding winget**
+
+If you are using an older version of Windows (**prior to Windows 11 (21H2)**), your computer may **not have the winget package manager built-in**. You can search for and download winget from the Microsoft Store.
+
+If you are using a version **before Windows 10 1809 (build 17763)**, your computer may **not support winget**. Please visit the [Git official website](https://git-scm.com/downloads/win) to download and install Git. For ffmpeg, please search online for ffmpeg installation guides.
+:::
 
   </TabItem>
   <TabItem value="macos" label="macOS">
@@ -102,6 +130,22 @@ sudo dnf install ffmpeg
 
   </TabItem>
 </Tabs>
+
+#### Verify ffmpeg installation
+
+Run the following command in the command line:
+```sh
+ffmpeg -version
+```
+
+If you see text similar to:
+
+```text
+ffmpeg version 7.1 Copyright (c) 2000-2024 the FFmpeg developers
+...(followed by a long string of text)
+```
+it indicates that you have successfully installed ffmpeg.
+
 
 ### NVIDIA GPU Support
 
@@ -196,20 +240,40 @@ For more uv installation methods, refer to: [Installing uv](https://docs.astral.
 
 ### 1. Get the Project Code
 
-:::info Development Version Note
-Starting from `v1.0.0`, the frontend code has been split into a separate repository. We have established a complete build process and linked the frontend code to the main repository's `frontend` directory via git submodule.
-:::
+There are two methods to acquire the project code.
 
-```bash
-# Clone the repository / Download the latest release
-git clone https://github.com/t41372/Open-LLM-VTuber
+<Tabs groupId="code-clone-method">
+  <TabItem value="release" label="Download Stable Release from GitHub">
+  Visit the latest [release page](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/releases) and download the ZIP file named similar to `Open-LLM-VTuber-v1.x.x.zip`.
 
-# Enter the project directory
-cd Open-LLM-VTuber
+  If you want Desktop Pet Mode or desktop client version, you can also download files starting with `open-llm-vtuber-electron` - Windows users download the exe file, while the macOS users download the dmg file. This desktop client can launch Pet Mode after you configured backend and successfully start the backend server.
 
-# Since git submodule linked content is not automatically synced to the local directory, we need to manually fetch the frontend code.
-git submodule update --init --recursive
-```
+  </TabItem>
+  <TabItem value="git" label="Git Command Pull">
+  :::warning
+  Ensure stable network connection when using Git. Mainland China users may need to use a proxy.
+  :::
+
+  :::info
+  Starting from `v1.0.0`, frontend code (user interface) has been moved to a separate repository. We've established build workflows and linked frontend code via git submodule to the `frontend` directory. Manual retrieval is therefore required after cloning.
+  :::
+
+  ```bash
+  # Clone repository / Download latest Github Release
+  git clone https://github.com/Open-LLM-VTuber/Open-LLM-VTuber
+
+  # Enter project directory
+  cd Open-LLM-VTuber
+
+  # Manually retrieve frontend code as submodules aren't auto-fetched
+  git submodule update --init --recursive
+  ```
+
+  For Desktop Pet Mode or desktop client, visit [Open-LLM-VTuber-Web Releases](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web/releases/latest) and download `open-llm-vtuber-electron` files - Windows users download the exe file, while the macOS users download the dmg file. This desktop client can launch Pet Mode after you configured backend and successfully start the backend server.
+  
+  </TabItem>
+</Tabs>
+
 
 ### 2. Install Project Dependencies
 
@@ -250,6 +314,10 @@ Create the environment and install dependencies:
 uv sync
 # This command will create a `.venv` virtual environment
 ```
+
+:::note
+For users in mainland China who encountered a problem at this step, please enable your proxy and try again.
+:::
 
 ### 3. Configure LLM
 

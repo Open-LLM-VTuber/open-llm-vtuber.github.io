@@ -34,6 +34,29 @@ Groq Whisper API、OpenAI API 等国外大模型/推理平台 API 一般无法�
 有关前端的更多信息，请参考 [前端指南](./user-guide/frontend/)
 :::
 
+## 设备要求
+
+### 最低要求
+本项目的各个组件 (ASR, LLM, TTS, 翻译) 都可以选用 API，你可以把想要在本地运行的组件放在本地，本地跑不动的用 API。
+
+因此，本项目的最低设备要求:
+
+- 电脑
+- 树莓派也行
+
+### 本地运行的推荐设备要求
+
+- M 系列芯片的 mac
+- Nvidia GPU
+- 比较新的 AMD GPU (支持 ROCm 的话会很棒)
+- 别的 GPU
+- 或是一个强大到，可以代替 GPU 的 CPU。
+
+本项目支持多种不同的语音识别(ASR)，大语言模型(LLM)，以及语音合成(TTS) 的后端。请根据你的硬件条件**量力而行**。如果发现运行速度太慢，请选择小一些的模型或者使用 API。
+
+对于本快速开始文档选择的组件，你需要一个速度正常的 CPU (ASR)，一个 Ollama 支持的 GPU (LLM)，以及网路链接 (TTS)。
+
+
 ## 环境准备
 
 ### 安装 Git
@@ -46,7 +69,13 @@ Groq Whisper API、OpenAI API 等国外大模型/推理平台 API 一般无法�
 winget install Git.Git
 ```
 
-或者从 [Git 官网](https://git-scm.com/downloads/win) 下载安装包进行安装。
+:::warning
+**关于 winget**
+
+如果你的 Windows 版本较旧 (**Windows 11 (21H2 之前)**)，你的电脑可能**没有内置 winget 包管理器**。你可以去微软应用商店中搜索并下载 winget。
+
+如果使用 **Windows 10 1809 (build 17763) 之前的版本**，你的电脑可能**不支持 winget**。请前往 [Git 官网](https://git-scm.com/downloads/win)下载 git 安装包进行安装。之后的 ffmpeg 也请自行上网搜索 ffmpeg 的安装指南。
+:::
 
   </TabItem>
   <TabItem value="macos" label="macOS">
@@ -109,6 +138,21 @@ sudo dnf install ffmpeg
 
   </TabItem>
 </Tabs>
+
+#### 检查 ffmpeg 已经成功安装
+
+在命令行中运行
+```sh
+ffmpeg -version
+```
+
+如果出现类似
+
+```text
+ffmpeg version 7.1 Copyright (c) 2000-2024 the FFmpeg developers
+...(后面一大串文字)
+```
+的文字，说明你安装成功了。
 
 ### NVIDIA GPU 支持
 
@@ -202,20 +246,44 @@ brew install uv
 
 ### 1. 获取项目代码
 
-:::info 开发版说明
-自 `v1.0.0` 开始，前端代码已被拆分到独立仓库中。我们建立了完整的构建流程，并通过 git submodule 将前端代码链接到主仓库的 `frontend` 目录下。
-:::
+我们需要下载项目代码。有两种方法获取项目代码。
 
-```bash
-# 克隆仓库 / 下载最新的 Github Release
-git clone https://github.com/t41372/Open-LLM-VTuber
+<Tabs groupId="code-clone-method">
+  <TabItem value="release" label="下载稳定的 release 包">
+  前往最新的 [release 页面](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/releases)，下载长得像 `Open-LLM-VTuber-v1.x.x.zip` 的 zip 文件。
 
-# 进入项目目录
-cd Open-LLM-VTuber
+  如果你想要使用桌宠模式或是桌面版本，你可以顺手再下载以 `open-llm-vtuber-electron` 开头的文件。windows 用户下载 exe，macOS 用户下载 dmg文件。这个是桌面版本的客户端。之后等后端配置完成并启动之后，这个electron 版前端可以启动桌宠模式。
 
-# 由于 git submodule 链接的内容不会自动同步到本地目录，我们需要手动获取前端代码。
-git submodule update --init --recursive
-```
+  </TabItem>
+  <TabItem value="git" label="git 命令拉取">
+  :::warning
+  使用 git 拉取时，请确保网络畅通。中国大陆用户可能需要开启代理。
+  :::
+
+  :::info
+  自 `v1.0.0` 开始，前端代码 (用户界面) 已被拆分到独立仓库中。我们建立了构建流程，并通过 git submodule 将前端代码链接到主仓库的 `frontend` 目录下，在克隆仓库之后需要手动拉取前端代码。
+  :::
+
+  ```bash
+  # 克隆仓库 / 下载最新的 Github Release
+  git clone https://github.com/Open-LLM-VTuber/Open-LLM-VTuber
+
+  # 进入项目目录
+  cd Open-LLM-VTuber
+
+  # 由于 git submodule 链接的内容不会自动同步到本地目录，我们需要手动获取前端代码。
+  git submodule update --init --recursive
+  ```
+
+  如果你想要使用桌宠模式或是桌面版本，你可以前往[Open-LLM-VTuber-Web 的 Release 页面](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web/releases/latest) 顺手再下载以 `open-llm-vtuber-electron` 开头的文件。windows 用户下载 exe，macOS 用户下载 dmg文件。这个是桌面版本的客户端。之后等后端配置完成并启动之后，这个electron 版前端可以启动桌宠模式。
+
+  </TabItem>
+
+</Tabs>
+
+
+
+
 
 ### 2. 安装项目依赖
 
@@ -256,6 +324,10 @@ uv --version
 uv sync
 # 这个命令将创建一个 `.venv` 虚拟环境，
 ```
+
+:::note
+内地用户如果在此处出错，可以尝试开启代理后重新运行此命令。
+:::
 
 ### 3. 配置 LLM
 
@@ -345,6 +417,12 @@ uv run run_server.py
 ```
 
 运行成功后，访问 `http://localhost:12393` 打开 Web 界面。
+
+:::tip 桌面应用程序
+如果你更倾向于使用 Electron 应用（窗口模式 + 桌宠模式），可以从 [Open-LLM-VTuber-Web Releases](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web/releases) 下载对应平台的 Electron 客户端。该客户端可在后端服务运行时直接使用，你可能会遇到**安全警告**（由于未进行代码签名）——具体说明和解决方案请查阅[模式介绍](./user-guide/frontend/mode.md)。
+
+有关前端的更多信息，请参考[前端指南](./user-guide/frontend/)
+:::
 
 
 ## 深入阅读
