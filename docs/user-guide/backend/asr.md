@@ -43,7 +43,7 @@ uv remove faster-whisper
 > 
 > 以链接到正确的 CUDA 环境。
 >
-> 如果您不希望使用官方安装器/手动设置PATH，可以考虑使用 [`pixi`](https://pixi.sh/) 管理一个局部的 conda 环境。
+> 如果您不希望使用 NVIDIA 官方安装器/手动设置PATH，可以考虑使用 [`pixi`](https://pixi.sh/) 管理一个局部的 conda 环境。
 > 这种方式不需要您通过 uv 安装依赖。
 >
 > ```nushell
