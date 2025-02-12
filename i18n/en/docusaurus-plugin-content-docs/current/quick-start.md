@@ -255,18 +255,15 @@ There are two methods to acquire the project code.
   :::
 
   :::info
-  Starting from `v1.0.0`, frontend code (user interface) has been moved to a separate repository. We've established build workflows and linked frontend code via git submodule to the `frontend` directory. Manual retrieval is therefore required after cloning.
+  Starting from `v1.0.0`, frontend code (user interface) has been moved to a separate repository. We've established build workflows and linked frontend code via git submodule to the `frontend` directory. Adding the `--recursive` flag is therefore required in git clone command.
   :::
 
   ```bash
   # Clone repository / Download latest Github Release
-  git clone https://github.com/Open-LLM-VTuber/Open-LLM-VTuber
+  git clone https://github.com/Open-LLM-VTuber/Open-LLM-VTuber --recursive
 
   # Enter project directory
   cd Open-LLM-VTuber
-
-  # Manually retrieve frontend code as submodules aren't auto-fetched
-  git submodule update --init --recursive
   ```
 
   For Desktop Pet Mode or desktop client, visit [Open-LLM-VTuber-Web Releases](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web/releases/latest) and download `open-llm-vtuber-electron` files - Windows users download the exe file, while the macOS users download the dmg file. This desktop client can launch Pet Mode after you configured backend and successfully start the backend server.
