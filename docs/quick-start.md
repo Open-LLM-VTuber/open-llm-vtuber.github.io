@@ -261,18 +261,15 @@ brew install uv
   :::
 
   :::info
-  自 `v1.0.0` 开始，前端代码 (用户界面) 已被拆分到独立仓库中。我们建立了构建流程，并通过 git submodule 将前端代码链接到主仓库的 `frontend` 目录下，在克隆仓库之后需要手动拉取前端代码。
+  自 `v1.0.0` 开始，前端代码 (用户界面) 已被拆分到独立仓库中。我们建立了构建流程，并通过 git submodule 将前端代码链接到主仓库的 `frontend` 目录下，因此在克隆仓库时要像下面这样添加 `--recursive`。
   :::
 
   ```bash
   # 克隆仓库 / 下载最新的 Github Release
-  git clone https://github.com/Open-LLM-VTuber/Open-LLM-VTuber
+  git clone https://github.com/Open-LLM-VTuber/Open-LLM-VTuber --recursive
 
   # 进入项目目录
   cd Open-LLM-VTuber
-
-  # 由于 git submodule 链接的内容不会自动同步到本地目录，我们需要手动获取前端代码。
-  git submodule update --init --recursive
   ```
 
   如果你想要使用桌宠模式或是桌面版本，你可以前往[Open-LLM-VTuber-Web 的 Release 页面](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web/releases/latest) 顺手再下载以 `open-llm-vtuber-electron` 开头的文件。windows 用户下载 exe，macOS 用户下载 dmg文件。这个是桌面版本的客户端。之后等后端配置完成并启动之后，这个electron 版前端可以启动桌宠模式。
