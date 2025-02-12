@@ -31,11 +31,31 @@ import TabItem from '@theme/TabItem';
 1. 首先卸载 CPU 版本的依赖：
 ```sh
 uv remove sherpa-onnx onnxruntime
+# 避免通过依赖引入 onnxruntime
+uv remove faster-whisper
 ```
+
+> 注意，示例中 sherpa-onnx 通过预构建 wheel 安装，这意味着您需要安装
+> 
+> CUDA Toolkit 11.x + CUDNN 8.x for CUDA 11.x （并将 `%SystemDrive%\Program Files\NVIDIA\CUDNN\v8.x\bin` 添加到您的 `PATH`）
+>
+> > 此处x为您的 cudnn 次版本号，如 `v8.9.7` 版本，此处写 `v8.9`。
+> 
+> 以链接到正确的 CUDA 环境。
+>
+> 如果您不希望使用 NVIDIA 官方安装器/手动设置PATH，可以考虑使用 [`pixi`](https://pixi.sh/) 管理一个局部的 conda 环境。
+> 这种方式不需要您通过 uv 安装依赖。
+>
+> ```nushell
+> pixi remove --pypi onnxruntime sherpa-onnx
+> pixi add --pypi onnxruntime-gpu==1.17.1 pip
+> pixi run python -m pip install sherpa-onnx==1.10.39+cuda -f https://k2-fsa.github.io/sherpa/onnx/cuda.html
+> ```
 
 2. 安装 CUDA 版本的 `sherpa-onnx` 和 `onnxruntime-gpu` 依赖：
 ```sh
-uv add onnxruntime-gpu sherpa-onnx==1.10.39+cuda -f https://k2-fsa.github.io/sherpa/onnx/cuda.html 
+# sherpa-onnx 提供的预构建 wheels 和 onnxruntime-gpu==1.17.1 兼容
+uv add onnxruntime-gpu==1.17.1 sherpa-onnx==1.10.39+cuda -f https://k2-fsa.github.io/sherpa/onnx/cuda.html 
 ```
 
 3. 修改配置文件：
