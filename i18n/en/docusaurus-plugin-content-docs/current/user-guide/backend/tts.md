@@ -180,9 +180,45 @@ If there's no response, use the Python that comes with the integrated package, a
 2. Set `tts_model: bark_tts` in `conf.yaml`
 3. Required models will be automatically downloaded on first launch
 
-## CosyVoice TTS (Local Deployment, Relatively Slow)
-1. Configure and start the WebUI according to the [CosyVoice official documentation](https://github.com/FunAudioLLM/CosyVoice)
-2. Refer to the API documentation in the WebUI and configure accordingly in the `cosyvoiceTTS` section of `conf.yaml`
+## CosyVoice TTS (Local Deployment, Slower)
+1. Configure and start WebUI according to [CosyVoice Official Documentation](https://github.com/FunAudioLLM/CosyVoice)
+2. Refer to the API documentation in WebUI to configure the `cosyvoice_tts` section in `conf.yaml`
+
+#### CosyVoice2 TTS (Local Deployment)
+
+1. Set up the environment according to [CosyVoice Official Documentation](https://github.com/FunAudioLLM/CosyVoice)
+2. Download CosyVoice2 model `CosyVoice2-0.5B`
+3. Modify CosyVoice's `webui.py` file
+   - ```
+     audio_output = gr.Audio(label="Synthesized Audio", autoplay=True, streaming=True) 
+     change to ->
+     audio_output = gr.Audio(label="Synthesized Audio", autoplay=True, streaming=False)
+     ```
+    - ```
+         logging.info('get instruct inference request')
+         set_all_random_seed(seed)
+         for i in cosyvoice.inference_instruct(tts_text, sft_dropdown, instruct_text, stream=stream, speed=speed):
+             yield (cosyvoice.sample_rate, i['tts_speech'].numpy().flatten())
+      change to ->
+              logging.info('get instruct inference request')
+              prompt_speech_16k = postprocess(load_wav(prompt_wav, prompt_sr))
+              set_all_random_seed(seed)
+              for i in cosyvoice.inference_instruct2(tts_text, instruct_text, prompt_speech_16k, stream=stream, speed=speed):
+                  yield (cosyvoice.sample_rate, i['tts_speech'].numpy().flatten())
+      ```
+4. Start CosyVoice WebUI
+5. Install gradio_client in this project using the command `uv add gradio_client`
+6. Configure the `cosyvoice2_tts` section in `conf.yaml`
+
+Currently, only the base model of CosyVoice2 - `CosyVoice2-0.5B` has been released, which only supports "3s Quick Voice Cloning", "Cross-lingual Voice Cloning", and "Natural Language Control"
+- In "3s Quick Voice Cloning" mode, you need to fill in prompt_wav_upload_url and prompt_wav_record_url as reference audio, and prompt_text as the corresponding text for the reference audio
+- In "Cross-lingual Voice Cloning" mode, you need to fill in prompt_wav_upload_url and prompt_wav_record_url as reference audio. Best results are achieved when the generated audio language differs from the reference audio language
+- In "Natural Language Control" mode, you need to fill in prompt_wav_upload_url and prompt_wav_record_url as reference audio, and instruct_text as the control instruction, such as "speak Cantonese", "use an enthusiastic tone"
+
+:::warning 
+Please fill in prompt_wav_upload_url and prompt_wav_record_url with the same path
+It's recommended to set stream (streaming generation) to False, as this project already includes voice segment synthesis (definitely not because setting it to True causes bugs)
+:::
 
 #### X-TTS (Local Deployment, Relatively Slow)
 > Available since version `v0.2.4` ([PR#23](https://github.com/t41372/Open-LLM-VTuber/pull/23))
