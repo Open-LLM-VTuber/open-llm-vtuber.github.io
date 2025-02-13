@@ -316,6 +316,17 @@ uv sync
 For users in mainland China who encountered a problem at this step, please enable your proxy and try again.
 :::
 
+Next, let's run the main program to generate the configuration file.
+
+```bash
+uv run run_server.py
+```
+Then press `Ctrl` + `C` to exit the program.
+
+:::info
+Starting from version `v1.1.0`, the `conf.yaml` file may not automatically appear in the project directory. Please run the main program `uv run run_server.py` once to generate the configuration file.
+:::
+
 ### 3. Configure LLM
 
 We will use [Ollama](https://github.com/ollama/ollama) as an example for configuration. For other options, please refer to the [LLM Configuration Guide](/docs/user-guide/backend/llm).
@@ -369,8 +380,8 @@ When selecting a model, consider your GPU memory capacity and computing power. I
 
 #### Modify Configuration File
 
-:::tip
-You can overwrite the contents of `conf.yaml` with the contents of `conf.CN.yaml` to get preset configurations more suitable for Chinese use.
+:::tip 
+If you don't have a `conf.yaml` file in your project directory, please run the main program `uv run run_server.py` once to generate the configuration file, then exit.
 :::
 
 Edit `conf.yaml`:
@@ -430,6 +441,8 @@ Please refer to [Participate in Discussions](community/contact)
 
 Please refer to the [FAQ](faq/)
 
+### If you don't have a `conf.yaml` file in your project directory
+Starting from version `v1.1.0`, the `conf.yaml` file may not automatically appear in your project directory. Please run the main program `uv run run_server.py` once to generate the configuration file.
 
 ### If you encounter the `Error calling the chat endpoint...` error, please check:
 

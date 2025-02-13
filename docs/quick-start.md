@@ -326,6 +326,17 @@ uv sync
 内地用户如果在此处出错，可以尝试开启代理后重新运行此命令。
 :::
 
+接着，我们运行一下主程序来生成预设的配置文件。
+
+```bash
+uv run run_server.py
+```
+然后按下 `Ctrl` + `C` 退出程序。
+
+:::info
+`v1.1.0` 版本开始，`conf.yaml` 文件可能不会自动出现在项目目录下。请运行一次项目主程序 `uv run run_server.py` 生成配置文件。
+:::
+
 ### 3. 配置 LLM
 
 我们以 [Ollama](https://github.com/ollama/ollama) 为例进行配置。其他选项请参考[LLM 配置指南](/docs/user-guide/backend/llm)。
@@ -380,7 +391,7 @@ ollama list
 #### 修改配置文件
 
 :::tip 
-可以用 `conf.CN.yaml` 的内容覆盖 `conf.yaml` 的内容，获得更适合中文使用的预设配置。
+如果你的项目目录下没有 `conf.yaml` 文件，请运行一次项目主程序 `uv run run_server.py`，生成配置文件，然后退出。
 :::
 
 编辑 `conf.yaml`：
@@ -442,6 +453,10 @@ uv run run_server.py
 ## 常见问题
 
 常见问题请参考 [常见问题](faq/)
+
+### 如果你的项目目录下没有 `conf.yaml` 文件
+`v1.1.0` 版本开始，`conf.yaml` 文件可能不会自动出现在项目目录下。请运行一次项目主程序 `uv run run_server.py` 生成配置文件。
+
 
 ### 如果遇到 `Error calling the chat endpoint...` 错误，请检查：
 
