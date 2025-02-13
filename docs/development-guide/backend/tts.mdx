@@ -35,7 +35,7 @@ tim: TTS 安装永远是添加 TTS 支持中最困难的一步。第二困难的
 #### 开发
 1. 往 `tts` 目录中添加新的 TTS 实现
 2. 在 `tts_factory` 工厂类中，添加代码来初始化你实现的 tts 类。
-3. 在 `conf.yaml` 以及 `conf.CN.yaml` 文件中，添加 tts 配置项
+3. 在 `conf.default.yaml` 以及 `conf.ZH.default.yaml` 文件中，添加 tts 配置项
 4. 在 `config_manager/tts.py` 文件中，将你的 tts 的相关配置添加到配置文件数据校验代码中。
 
 #### 测试
@@ -119,9 +119,13 @@ tim: TTS 安装永远是添加 TTS 支持中最困难的一步。第二困难的
 ```
 
 
-### 2.3 在 `conf.yaml` 以及 `conf.CN.yaml` 文件中，添加 tts 配置项
+### 2.3 在 `conf.default.yaml` 以及 `conf.ZH.default.yaml` 文件中，添加 tts 配置项
 
-前往 `conf.yaml` 与 `conf.CN.yaml` (conf.yaml 文件的中文版预设)，往 `tts_config` 中添加新 tts 需要的配置项。
+在 `v1.1.0` 版本之后，项目的配置文件(`conf.yaml`)会从预设配置文件 `conf.default.yaml` 和 `conf.ZH.default.yaml` 生成。如果要添加配置项，我们需要编辑 `conf.default.yaml` 文件，然后在 `conf.ZH.yaml` 文件中也加上。
+
+> `conf.ZH.default.yaml` 是给中文用户提供的配置文件，包含中文的注释和一些预设选项。如果用户的系统语言是中文，本项目的配置文件初始化与配置文件更新都会从 `conf.ZH.default.yaml` 文件而非 `conf.default.yaml` 文件获取。
+
+你可以在这两个预设配置文件中的 `tts_config` 中添加新的 tts 所需要的配置项。
 
 
 ### 2.4 在 `config_manager/tts.py` 文件中，将你的 tts 的相关配置添加到配置文件数据校验代码中。

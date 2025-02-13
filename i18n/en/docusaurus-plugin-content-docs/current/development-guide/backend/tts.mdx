@@ -33,7 +33,7 @@ Frontend code references, configuration files, a very small amount of code and o
 #### Development
 1. Add new TTS implementation to the `tts` directory
 2. Add code to initialize your implemented tts class in the `tts_factory` factory class.
-3. Add tts configuration items in `conf.yaml` and `conf.CN.yaml` files
+3. Add TTS configuration items in both `conf.default.yaml` and `conf.ZH.default.yaml` files
 4. Add the configuration related to your tts to the configuration file data validation code in the `config_manager/tts.py` file.
 
 #### Testing
@@ -113,9 +113,17 @@ When `tts_model` is set to `edge_tts`:
 {"voice": "en-US-AvaMultilingualNeural"}
 ```
 
-### 2.3 Add tts configuration items in `conf.yaml` and `conf.CN.yaml` files
+### 2.3 Add TTS Configuration Items in `conf.default.yaml` and `conf.ZH.default.yaml` Files
 
-Go to `conf.yaml` and `conf.CN.yaml` (Chinese version of conf.yaml by default), and add configuration items needed for the new tts to `tts_config`.
+After version `v1.1.0`, the project's configuration file (`conf.yaml`) is generated from the preset configuration files `conf.default.yaml` and `conf.ZH.default.yaml`. To add configuration items, we need to edit the `conf.default.yaml` file and also add them to the `conf.ZH.yaml` file.
+
+:::note
+If you don't speak Chinese, leave the `conf.ZH.default.yaml` to me.
+:::
+
+> `conf.ZH.default.yaml` is a configuration file provided for Chinese users, containing Chinese comments and some preset options. If the user's system language is Chinese, the project's configuration file initialization and updates will be sourced from `conf.ZH.default.yaml` instead of `conf.default.yaml`.
+
+You can add new TTS-required configuration items in the `tts_config` section of both preset configuration files.
 
 ### 2.4 Add the configuration related to your tts to the configuration file data validation code in the `config_manager/tts.py` file.
 
