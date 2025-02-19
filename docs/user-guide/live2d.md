@@ -27,6 +27,7 @@ sidebar_position: 4
 - [Booth](https://booth.pm/)
 - [Bilibili](https://www.bilibili.com/)
 - [Eikanya/Live2d-model](https://github.com/Eikanya/Live2d-model)
+- [模之屋](https://www.aplaybox.com/model/model)
 
 ## 2. 配置 Live2D 模型
 

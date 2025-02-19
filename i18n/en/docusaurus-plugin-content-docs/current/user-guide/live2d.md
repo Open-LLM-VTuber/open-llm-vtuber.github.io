@@ -22,6 +22,8 @@ Here are some common sources for obtaining Live2D models (feel free to add more 
 - [Booth](https://booth.pm/)
 - [Bilibili](https://www.bilibili.com/)
 - [Eikanya/Live2d-model](https://github.com/Eikanya/Live2d-model)
+- [模之屋](https://www.aplaybox.com/model/model)
+
 
 ## 2. Configure Live2D Model
 

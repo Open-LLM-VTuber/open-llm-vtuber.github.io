@@ -220,7 +220,7 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 # 方法 2: winget
 winget install --id=astral-sh.uv -e
 
-# 重要：如果使用 winget，安装完成后需要重启命令行或重新加载配置文件
+# 重要：对于 winget，安装完成后请重启命令行 / IDE
 ```
 
   </TabItem>
@@ -234,11 +234,19 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 # 方法 2: homebrew (如果已安装)
 brew install uv
 
-# 重要：如果使用 curl 或 wget ，安装完成后需要重启命令行或重新加载配置文件
+# 重要：安装完成后请运行以下命令重新加载配置文件，或者重启命令行 / IDE
+source ~/.bashrc  # 如果使用 bash
+# 或
+source ~/.zshrc   # 如果使用 zsh
 ```
 
   </TabItem>
 </Tabs>
+
+:::warning
+对于 winget, curl 或 weget，安装完 uv 后需要重启命令行 / IDE 或重新加载配置文件
+:::
+
 
 更多 uv 安装方法参考：[Installing uv](https://docs.astral.sh/uv/getting-started/installation/)
 
@@ -330,8 +338,7 @@ uv sync
 
 ```bash
 uv run run_server.py
-```
-然后按下 `Ctrl` + `C` 退出程序。
+```然后按下 `Ctrl` + `C` 退出程序。
 
 :::info
 `v1.1.0` 版本开始，`conf.yaml` 文件可能不会自动出现在项目目录下。请运行一次项目主程序 `uv run run_server.py` 生成配置文件。
