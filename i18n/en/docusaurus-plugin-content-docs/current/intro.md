@@ -46,6 +46,7 @@ This project underwent code refactoring after version `v1.0.0` and is currently 
 - 🎯 **Advanced interaction features**:
   - 👁️ Visual perception, supporting camera, screen recording and screenshots, allowing your AI companion to see you and your screen
   - 🎤 Voice interruption without headphones (AI won't hear its own voice)
+  - 👥 Group chat, supporting multiple AI characters participating in conversation interactions simultaneously
   - 🫱 Touch feedback, interact with your AI companion through clicks or drags
   - 😊 Live2D expressions, set emotion mapping to control model expressions from the backend
   - 🐱 Pet mode, supporting transparent background, global top-most, and mouse click-through - drag your AI companion anywhere on the screen

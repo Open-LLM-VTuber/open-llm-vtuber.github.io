@@ -321,6 +321,7 @@ Next, let's run the main program to generate the configuration file.
 ```bash
 uv run run_server.py
 ```
+
 Then press `Ctrl` + `C` to exit the program.
 
 :::info

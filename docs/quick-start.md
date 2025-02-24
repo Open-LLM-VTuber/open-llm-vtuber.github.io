@@ -338,7 +338,9 @@ uv sync
 
 ```bash
 uv run run_server.py
-```然后按下 `Ctrl` + `C` 退出程序。
+```
+
+然后按下 `Ctrl` + `C` 退出程序。
 
 :::info
 `v1.1.0` 版本开始，`conf.yaml` 文件可能不会自动出现在项目目录下。请运行一次项目主程序 `uv run run_server.py` 生成配置文件。
