@@ -256,6 +256,12 @@ source ~/.zshrc   # 如果使用 zsh
 
 我们需要下载项目代码。有两种方法获取项目代码。
 
+:::warning
+请把项目放在一个合适的位置，路径中不要包含中文。
+
+举个例子，`D：\新建文件夹\Open-LLM=VTuber` 这样的路径名可能会导致错误，请确保路径中都是英文。
+:::
+
 <Tabs groupId="code-clone-method">
   <TabItem value="release" label="下载稳定的 release 包">
   前往最新的 [release 页面](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/releases)，下载长得像 `Open-LLM-VTuber-v1.x.x.zip` 的 zip 文件。
