@@ -18,7 +18,7 @@ sidebar_position: 3
 |------|------|------------|
 | [Open-LLM-VTuber](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber) | 项目后端，主仓库 | [t41372](https://github.com/t41372), [ylxmf2005](https://github.com/ylxmf2005) |
 | [Open-LLM-VTuber-Web](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web) | 项目前端，包括网页界面和 Electron 应用 | [ylxmf2005](https://github.com/ylxmf2005) |
-| [Open-LLM-VTuber-Unity](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Unity) | Unity 桌宠应用，开发中 | [AnyaCoder](https://github.com/AnyaCoder), [Harry-Yu-Shuhang](https://github.com/Harry-Yu-Shuhang) |
+| [Open-LLM-VTuber-Unity](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Unity) | Unity 前端，开发中 | [AnyaCoder](https://github.com/AnyaCoder), [Harry-Yu-Shuhang](https://github.com/Harry-Yu-Shuhang) |
 | [open-llm-vtuber.github.io](https://github.com/Open-LLM-VTuber/open-llm-vtuber.github.io) | 本文档网站源码，基于 docusaurus | - |
 
 本项目采用前后端分离架构，后端 [Open-LLM-VTuber](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber) 提供 API 服务，因此只要适配后端 API（主要是 `/client-ws`），你也可以开发自己的前端应用。
@@ -126,4 +126,4 @@ sidebar_position: 3
 
 如果你在我们 QQ 群里，做出贡献后可以获得 `贡献者` 称号。记得告诉我你的 GitHub ID，这样我才能认出你来～
 
-实际上，我们项目的主要贡献者基本都在 QQ 群里面。欢迎加入，一起交流！
+目前，我们项目的主要贡献者基本都在 QQ 群里面。欢迎加入，一起交流！

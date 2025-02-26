@@ -18,7 +18,7 @@ Our project exists as an organization on GitHub, primarily to organize related r
 |------|------|------------|
 | [Open-LLM-VTuber](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber) | Project backend, main repository | [t41372](https://github.com/t41372), [ylxmf2005](https://github.com/ylxmf2005) |
 | [Open-LLM-VTuber-Web](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web) | Project frontend, including web interface and Electron application | [ylxmf2005](https://github.com/ylxmf2005) |
-| [Open-LLM-VTuber-Unity](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Unity) | Unity desktop pet application, in development | [AnyaCoder](https://github.com/AnyaCoder), [Harry-Yu-Shuhang](https://github.com/Harry-Yu-Shuhang) |
+| [Open-LLM-VTuber-Unity](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Unity) | Unity frontend, in development | [AnyaCoder](https://github.com/AnyaCoder), [Harry-Yu-Shuhang](https://github.com/Harry-Yu-Shuhang) |
 | [open-llm-vtuber.github.io](https://github.com/Open-LLM-VTuber/open-llm-vtuber.github.io) | Documentation site source code, based on docusaurus | - |
 
 This project uses a frontend-backend separation architecture. The backend [Open-LLM-VTuber](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber) provides API services, so as long as you adapt to the backend API (mainly `/client-ws`), you can also develop your own frontend application.
