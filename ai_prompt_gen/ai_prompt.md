@@ -2061,7 +2061,8 @@ sidebar_position: 1
 
 # 模式介绍
 
-Open LLM VTuber 提供了三种使用模式，以满足不同用户的需求：[Web 模式](web-window-mode)、[窗口模式](web-window-mode)和[桌宠模式](pet-mode)。
+Open LLM VTuber 提供了三种使用模式，以满足不同用户的需求：[Web 模式](web)、[窗口模式](electron)和[桌宠模式](electron)。
+
 
 三种模式都使用 localStorage 来存储用户的个性化设置。
 
