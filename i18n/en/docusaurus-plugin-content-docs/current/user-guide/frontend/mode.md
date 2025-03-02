@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Mode Introduction
 
-Open LLM VTuber offers three modes of use to meet the needs of different users: [Web Mode](web-window-mode), [Window Mode](web-window-mode), and [Desktop Pet Mode](pet-mode).
+Open LLM VTuber offers three modes of use to meet the needs of different users: [Web Mode](web), [Window Mode](web), and [Desktop Pet Mode](pet).
 
 All three modes use localStorage to store user personalization settings.
 
