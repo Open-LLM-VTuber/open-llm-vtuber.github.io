@@ -100,3 +100,45 @@ Mem0 is an experimental long-term memory solution. Although it's still under dev
 #### Limitations
 - Can only remember user preferences and ideas, unable to remember LLM's response content
 - Unstable triggering mechanism for memory storage
+
+## Letta Agent
+
+### Introduction
+
+Letta Agent is a stateful AI system that evolves and learns over time, maintaining consistency in memory and behavior, overcoming the limitations of traditional LLMs. The Letta platform integrates a visual development environment (ADE), production API, and complex server runtime, supporting the creation and deployment of stateful agents.
+
+Simply put, it allows large models to have long-term memory and autonomously manage their memory.
+
+- [Here is Letta's Github page](https://github.com/letta-ai/letta)
+- [Here is Letta's official documentation](https://docs.letta.com/)
+
+Letta can be used with Docker or set up from scratch, and it includes an ADE graphical interface available for download from the official site.
+
+You can also view the visual memory repository, which roughly includes:
+- `Core Memory`: Such as role settings, user identity information, etc.
+- `Archival Memory`: Other information
+
+You need to run the Letta Server.
+
+### Configuration File
+To use it, replace `conversation_agent_choice` with `letta_agent` in `agent_config`.
+
+Also, modify the following content:
+```yaml
+letta_agent:
+        host: 'localhost' # Host address
+        port: 8283 # Port number
+        id: xxx # ID number of the Agent running on Letta Server
+        faster_first_response: True
+        # Sentence segmentation method: 'regex' or 'pysbd'
+        segment_method: 'pysbd'
+```
+  
+:::info
+When you set to use letta_agent in the config, the configuration for llm in conf.yaml will become invalid. The large model used ultimately depends on the model running on the Letta Server.
+:::
+
+:::warning
+When Letta is enabled, sending multimodal information such as images is not supported temporarily.
+:::
+

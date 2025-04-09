@@ -109,3 +109,45 @@ Mem0 是一个实验性的长期记忆解决方案。虽然目前仍在开发中
 :::warning
 由于以上局限性，我们目前不推荐在生产环境中使用 Mem0 智能体。
 :::
+
+
+## Letta Agent
+
+### 简介
+
+Letta 代理是有状态的 AI 系统，能够随着时间推移不断演进和学习，保持记忆和行为的一致性，突破了传统 LLM 的限制。Letta 平台整合了可视化开发环境 (ADE)、生产 API 和复杂的服务器运行时，支持创建和部署有状态代理。
+
+简单理解就是可以让大模型拥有长期记忆，自主管理记忆。
+
+- [这里是Letta的Github地址](https://github.com/letta-ai/letta)
+- [这里是Letta的官方文档](https://docs.letta.com/)
+
+Letta可以使用Docker，也可以从零自己搭环境运行，而且自带ADE图形界面，可以通过官方进行下载。
+
+同时也可以查看可视化的记忆库，大概包括：
+- `Core Memory`：例如角色的设定，用户的身份信息等
+- `Archival Memory`: 其它的信息
+
+需要自己运行Letta Server
+
+### 配置文件
+如需使用，请在`agent_config`下的`conversation_agent_choice`替换为`letta_agent`
+
+同时修改以下内容
+```yaml
+letta_agent:
+        host: 'localhost' #主机地址
+        port: 8283 # 端口号
+        id: xxx #letta server运行的Agent的id编号
+        faster_first_response: True
+        # 句子分割方法：'regex' 或 'pysbd'
+        segment_method: 'pysbd'
+```
+
+:::info
+当在config中设置使用`letta_agent`之后，`conf.yaml`中对于`llm`的配置将会失效，最终使用的大模型取决于Letta Server上正在运行的大模型
+:::
+
+:::warning
+当启用Letta之后，暂时不支持发送图片这种多模态信息。
+:::
