@@ -200,7 +200,66 @@ nvcc --version
 Starting from version v1.0.0, we recommend using [uv](https://docs.astral.sh/uv/) as the dependency management tool.
 
 :::note
-If you prefer to use conda or venv, you can also use these tools. The project is fully compatible with the standard pip installation method.
+If you prefer to use conda, venv, or something similar, you can them as well. Starting from `v1.2.0`, the project is fully compatible with standard pip installation methods.
+
+Guidelines and Notes on using pip and conda
+<details>
+uv is the dependency management tool for this project, and I recommend using uv.
+
+conda, pip, and other dependency management tools can also be used, but we will not test these tools nor answer questions arising from their use (because before v1.0.0 we used conda, and we received a significant number of Python-related questions).
+
+If you absolutely must use them, please pay close attention to issues like the Python version and the Python executable used by the virtual environment. Before migrating to uv, many, many people encountered various problems.
+
+Ensure your Python version is >= 3.10 and < 3.13. I am not sure about the current version's compatibility with 3.13, but you can try it.
+
+#### Installing project dependencies using pip
+
+> (Added in project version `v1.2.0`)
+
+```sh
+pip install -r requirements.txt
+```
+- This `requirements.txt` is automatically generated from the `pyproject.toml` file and might pin dependencies quite strictly. If issues arise, you can refer to the dependency versions declared in `pyproject.toml` and loosen the constraints yourself. Alternatively, switch to using uv or another tool that supports declaring dependencies via `pyproject.toml`.
+
+Or
+```sh
+pip install -e .
+```
+- This command installs dependencies using the pyproject.toml file, but it also installs the project itself into the environment in editable mode. I suspect this might cause issues during project updates, but I'm not certain.
+
+
+Then run the project
+
+```sh
+python run_server.py
+```
+
+Afterward, any `uv add` or `uv remove` commands mentioned in the documentation can be directly replaced with `pip install`, `pip uninstall`, etc.
+
+#### conda
+1. In the current directory, create a conda environment
+```sh
+conda create -p "./.conda" python=3.10.6
+```
+
+2. Activate this conda environment
+```sh
+conda activate ./.conda
+```
+
+3. Use pip to install project dependencies
+```sh
+pip install -r requirements.txt
+```
+
+4. Run the project
+```sh
+python run_server.py
+```
+
+Afterward, any `uv add` or `uv remove` commands mentioned in the documentation can be directly replaced with `pip install`, `pip uninstall`, etc.
+
+</details>
 :::
 
 <Tabs groupId="operating-systems">

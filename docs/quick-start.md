@@ -207,7 +207,67 @@ nvcc --version
 从 v1.0.0 版本开始，我们推荐使用 [uv](https://docs.astral.sh/uv/) 作为依赖管理工具。
 
 :::note
-如果你更希望使用 conda 或 venv，也可以使用这些工具。项目完全兼容标准的 pip 安装方式。
+如果你更希望使用 conda 或 venv，也可以使用这些工具。项目自`v1.2.0` 起完全兼容标准的 pip 安装方式。
+
+关于 pip 与 conda 的指南与注意事项
+<details>
+uv 是这个项目的依赖管理工具，我推荐使用 uv。
+
+conda，pip，以及其他的依赖管理工具也可以用，但我们不会测试这些工具，也不会回答这些工具产生的问题 (因为我们 v1.0.0 版本之前用的是 conda，问 python 相关问题的人真的好多啊呱！)。
+
+如果你一定要用，非用不可，请在使用这些工具时重点关注 Python 版本，虚拟环境使用的 Python 执行档等问题，我们在迁移到 uv 之前有很多，很多人遇到了各种各样的问题。
+
+确保你的 Python 版本 >= 3.10, < 3.13。我不确定当前版本与 3.13 的兼容性，你可以试试。
+
+#### 使用 pip 安装项目依赖
+
+> (项目版本 `v1.2.0` 添加)
+
+```sh
+pip install -r requirements.txt
+```
+- 这个 `requirements.txt` 是根据 `pyproject.toml` 文件自动生成出来的，可能会把依赖绑的比较紧。如果出现问题，可以参考 `pyproject.toml` 中声明的依赖版本，自行松绑。亦或是改用 uv 或其他支持以 `pyproject.toml` 声明依赖的工具。
+
+或是
+```sh
+pip install -e .
+```
+- 这个命令会用 pyproject.toml 文件安装依赖，但会把项目本身也一起安装到环境中，我感觉项目更新时有可能会出问题，但我不确定。
+
+
+然后运行项目
+
+```sh
+python run_server.py
+```
+
+之后文档中出现的任何 `uv add`, `uv remove` 命令，可以直接代替换成 `pip install`, `pip uninstall` 等命令。
+
+#### conda
+1. 在当前目录下，创建 conda 环境
+```sh
+conda create -p "./.conda" python=3.10.6
+```
+
+2. 激活这个 conda 环境
+```sh
+conda activate ./.conda
+```
+
+3. 用 pip 安装项目依赖
+```sh
+pip install -r requirements.txt
+```
+
+4. 运行项目
+```sh
+python run_server.py
+```
+
+之后文档中出现的任何 `uv add`, `uv remove` 命令，可以直接代替换成 `pip install`, `pip uninstall` 等命令。
+
+</details>
+
 :::
 
 <Tabs groupId="operating-systems">
