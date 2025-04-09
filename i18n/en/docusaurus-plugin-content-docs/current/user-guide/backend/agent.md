@@ -105,20 +105,26 @@ Mem0 is an experimental long-term memory solution. Although it's still under dev
 
 ### Introduction
 
-Letta Agent is a stateful AI system that evolves and learns over time, maintaining consistency in memory and behavior, overcoming the limitations of traditional LLMs. The Letta platform integrates a visual development environment (ADE), production API, and complex server runtime, supporting the creation and deployment of stateful agents.
+[Letta](https://github.com/letta-ai/letta) is a stateful AI system that evolves and learns over time, maintaining consistency in memory and behavior, overcoming the limitations of traditional LLMs. The Letta platform integrates a visual development environment (ADE), production API, and complex server runtime, supporting the creation and deployment of stateful agents.
 
 Simply put, it allows large models to have long-term memory and autonomously manage their memory.
-
-- [Here is Letta's Github page](https://github.com/letta-ai/letta)
-- [Here is Letta's official documentation](https://docs.letta.com/)
-
-Letta can be used with Docker or set up from scratch, and it includes an ADE graphical interface available for download from the official site.
 
 You can also view the visual memory repository, which roughly includes:
 - `Core Memory`: Such as role settings, user identity information, etc.
 - `Archival Memory`: Other information
 
-You need to run the Letta Server.
+To use Letta for implementing long-term memory in this project, follow these steps:
+1. Install, configure, and run Letta
+2. Create and configure an Agent in Letta
+3. Fill in the Agent ID in our project configuration file
+
+For Windows and macOS users, you can currently try the beta version of [Letta Desktop](https://docs.letta.com/install). In addition to that, Letta can be deployed using Docker, or you can set up the environment from scratch.
+
+Since the specific operations for the above steps may change, please refer to Letta's official documentation for the first two steps.
+
+- [Here is Letta's Github page](https://github.com/letta-ai/letta)
+- [Here is Letta's official documentation](https://docs.letta.com/)
+
 
 ### Configuration File
 To use it, replace `conversation_agent_choice` with `letta_agent` in `agent_config`.
@@ -133,7 +139,7 @@ letta_agent:
         # Sentence segmentation method: 'regex' or 'pysbd'
         segment_method: 'pysbd'
 ```
-  
+
 :::info
 When you set to use letta_agent in the config, the configuration for llm in conf.yaml will become invalid. The large model used ultimately depends on the model running on the Letta Server.
 :::

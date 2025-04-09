@@ -510,6 +510,11 @@ uv run run_server.py
 
 ## 深入阅读
 
+### 长期记忆?
+`1.2.0` 版本加入了基于 Letta (也就是 MemGPT) 的长期记忆实现 ([PR #179](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/pull/179))，虽然回答延迟会增加，但能实现效果较好的长期记忆。
+
+详见 [Agent -> Letta Agent 页面](user-guide/backend/agent#letta-agent)
+
 ### 桌宠模式，桌面模式与 Web 模式
 ![](user-guide/frontend/img/mode/pet.jpg)
 

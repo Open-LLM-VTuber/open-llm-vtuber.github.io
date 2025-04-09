@@ -485,6 +485,11 @@ For more information about the frontend, refer to the [Frontend Guide](./user-gu
 
 ## Further Reading
 
+### Long-term memory?
+In version `1.2.0`, long-term memory implementation based on Letta (also known as MemGPT) was added thanks to the effort of ([PR #179](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/pull/179)). Your AI companion can get long term memory powered by Letta, though this will increase conversation latency.
+
+For more details, see the [Agent -> Letta Agent page](user-guide/backend/agent#letta-agent)
+
 ### Desktop Pet Mode, Desktop Mode, and Web Mode
 ![](user-guide/frontend/img/mode/pet.jpg)
 
