@@ -184,7 +184,7 @@ If there's no response, use the Python that comes with the integrated package, a
 1. Configure and start WebUI according to [CosyVoice Official Documentation](https://github.com/FunAudioLLM/CosyVoice)
 2. Refer to the API documentation in WebUI to configure the `cosyvoice_tts` section in `conf.yaml`
 
-#### CosyVoice2 TTS (Local Deployment)
+## CosyVoice2 TTS (Local Deployment)
 
 1. Set up the environment according to [CosyVoice Official Documentation](https://github.com/FunAudioLLM/CosyVoice)
 2. Download CosyVoice2 model `CosyVoice2-0.5B`
@@ -220,7 +220,7 @@ Please fill in prompt_wav_upload_url and prompt_wav_record_url with the same pat
 It's recommended to set stream (streaming generation) to False, as this project already includes voice segment synthesis (definitely not because setting it to True causes bugs)
 :::
 
-#### X-TTS (Local Deployment, Relatively Slow)
+## X-TTS (Local Deployment, Relatively Slow)
 > Available since version `v0.2.4` ([PR#23](https://github.com/t41372/Open-LLM-VTuber/pull/23))
 
 It is recommended to use xtts-api-server, which provides clear API documentation and is relatively easy to deploy.
@@ -231,7 +231,7 @@ It is recommended to use xtts-api-server, which provides clear API documentation
   - Requires maintaining network connection
 - Configuration: Set `tts_model: edge_tts` in `conf.yaml`
 
-#### Fish Audio TTS (Online, API Key Required)
+## Fish Audio TTS (Online, API Key Required)
 > Available since version `v0.3.0-beta`
 
 1. Install dependencies:
@@ -245,7 +245,7 @@ uv pip install fish-audio-sdk
      - `tts_model: fish_api_tts`
      - Fill in `api_key` and `reference_id` in the `fish_api_tts` section
 
-### Azure TTS (Online, API Key Required)
+## Azure TTS (Online, API Key Required)
 > The same TTS service as neuro-sama
 
 1. Obtain an API key for the text-to-speech service from Azure

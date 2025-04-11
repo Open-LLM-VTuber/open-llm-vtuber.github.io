@@ -178,7 +178,7 @@ GPTSoVITS的官方教程目前尚不完善。
 1. 按照 [CosyVoice 官方文档](https://github.com/FunAudioLLM/CosyVoice) 配置并启动 WebUI
 2. 参考 WebUI 中的 API 文档，在 `conf.yaml` 的 `cosyvoice_tts` 部分进行相应配置
 
-#### CosyVoice2 TTS（本地部署）
+## CosyVoice2 TTS（本地部署）
 
 1. 按照 [CosyVoice 官方文档](https://github.com/FunAudioLLM/CosyVoice) 配置环境
 2. 下载 CosyVoice2 模型 `CosyVoice2-0.5B`
@@ -225,7 +225,7 @@ stream（流式生成）推荐填 False，因为本项目已包含语音分段�
   - 需要保持网络连接
 - 配置：在 `conf.yaml` 中设置 `tts_model: edge_tts`
 
-#### Fish Audio TTS（在线、需要 API 密钥）
+## Fish Audio TTS（在线、需要 API 密钥）
 > 自 `v0.3.0-beta` 版本起可用
 
 1. 安装依赖：
@@ -239,7 +239,7 @@ uv pip install fish-audio-sdk
      - `tts_model: fish_api_tts`
      - 在 `fish_api_tts` 部分填写 `api_key` 和 `reference_id`
 
-### Azure TTS（在线、需要 API 密钥）
+## Azure TTS（在线、需要 API 密钥）
 > 与 neuro-sama 相同的 TTS 服务
 
 1. 从 Azure 获取文本转语音服务的 API 密钥
