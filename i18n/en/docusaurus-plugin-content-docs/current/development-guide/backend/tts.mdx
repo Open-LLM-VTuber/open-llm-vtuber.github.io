@@ -8,7 +8,7 @@ sidebar_position: 1
 # How to Add New TTS Support?
 
 :::info
-tim: TTS installation is always the most difficult step in adding TTS support. The second most difficult is getting others to install this TTS as well.
+"TTS installation is always the most difficult step in adding TTS support. The second most difficult is getting others to install this TTS as well."
 :::
 
 The steps to add TTS are relatively fixed and do not require a deep understanding of the Open-LLM-VTuber project code, so it is relatively suitable for newcomers to familiarize themselves with the project (Pull Requests are also easier to merge).
@@ -16,11 +16,11 @@ The steps to add TTS are relatively fixed and do not require a deep understandin
 ## 0. Overview
 
 ### 0.1 Requirements
-- Open-LLM-VTuber version higher than `v1.0.0`.
+- Latest version of Open-LLM-VTuber. Please switch to dev branch. (The target of your pull request should also be the dev branch)
 - Ability to write Python (though you'll know if you can as you follow the steps below. You can learn as you go)
 - Basic understanding of GitHub open source workflow. Specifically, understanding the concepts of fork and Pull Request.
 - Understanding of how to use uv to manage Python project dependencies. (If you don't know uv, [learn here](https://docs.astral.sh/uv/getting-started/features/#projects))
-- A little knowledge of Pydantic (or... AI knowledge is fine too)
+- A little knowledge of Pydantic (or... if the AI knows it...)
 
 ### 0.2 Step Overview
 
@@ -127,7 +127,7 @@ You can add new TTS-required configuration items in the `tts_config` section of 
 
 ### 2.4 Add the configuration related to your tts to the configuration file data validation code in the `config_manager/tts.py` file.
 
-Since version `v1.0.0`, the project has introduced Pydantic-based configuration file data validation, so if we want to add configurable options in `conf.yaml`, we need to modify the corresponding Pydantic model.
+Since version `v1.0.0`, the project has introduced Pydantic-based configuration file data validation, so if we want to add configurable options, we need to modify the corresponding Pydantic model.
 
 Go to the `src/open_llm_vtuber/config_manager/tts.py` file. Refer to other tts implementations, add configuration classes in tts.py, and add tts to `TTSConfig` at the bottom.
 
@@ -140,11 +140,11 @@ Then use the `uv run ruff format` command in the command line to format the code
 After that, you can submit a pull request.
 
 :::danger
-Please put default options in the `conf.yaml` and `conf.CN.yaml` files. Please do not randomly change other options in the configuration files.
+Please put default options in the `conf.default.yaml` and `conf.ZH.yaml` files. Please do not change options that are irrelevant to the thing you tried to do in your pull request in the configuration files.
 :::
 
 :::danger
-Please do not push your own API key to the branch. Please check the code you are about to submit before submitting.
+Please do not push your own API key to the branch. Please check the code you are about to submit before submitting. Don't push weird stuff.
 :::
 
 ## 4. Supplementary Documentation
