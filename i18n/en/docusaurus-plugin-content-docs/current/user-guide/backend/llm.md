@@ -9,6 +9,12 @@ import TabItem from '@theme/TabItem';
 
 This project supports multiple large language model backends and models.
 
+:::note
+Almost all large language model (LLM) APIs and inference engines support the OpenAI format. So, if you find that an LLM API you want to use isn't explicitly supported in our project, you can usually just fill in the relevant information (base URL, API key, model name) into the `openai_compatible_llm` section, and it should work right away.
+
+In fact, apart from llama.cpp and Claude, all other LLM APIs or backends supported by this project are essentially just variations of `openai_compatible_llm` (we added some model loading logic for Ollama), using the exact same code. The only difference is that we've pre-filled the base URL and some other settings for you.
+:::
+
 ### How to configure and switch between different large language model backends
 
 > The project's default agent is `basic_memory_agent`, so to switch the language model for the default agent, make selections under the `llm_provider` option of `basic_memory_agent`.

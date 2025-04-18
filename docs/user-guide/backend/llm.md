@@ -9,6 +9,12 @@ import TabItem from '@theme/TabItem';
 
 本项目支持多种大语言模型后端与模型。
 
+:::note
+几乎所有的大语言模型 API 和推理引擎都支持 OpenAI 格式，所以如果你发现你想用的那个 LLM API 在我们项目中没有明确的被支持，直接把相关信息 (base url, api key, 模型名称) 填到 `openai_compatible_llm` 里面，基本都能直接用。
+
+实际上，除了 llama.cpp 和 claude 以外，其他所有本项目支持的 LLM api 或 llm 后端都是 `openai_compatible_llm` 的换皮 (Ollama 我们加了个模型加载的逻辑)，代码完全相同。区别只是 base url 和一些设定被提前填好了。
+:::
+
 ### 如何配置和切换不同的大语言模型后端
 
 > 项目预设的智能体 (Agent) 是 `basic_memory_agent`，所以要切换预设 Agent 的语言模型，在 `basic_memory_agent` 的 `llm_provider` 选项下进行选择。
