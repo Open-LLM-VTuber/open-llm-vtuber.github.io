@@ -7,7 +7,7 @@ sidebar_position: 1
 # 如何添加新的 TTS 支持?
 
 :::info
-tim: TTS 安装永远是添加 TTS 支持中最困难的一步。第二困难的是让别人也装上这个 TTS。
+"TTS 安装永远是添加 TTS 支持中最困难的一步。第二困难的是让别人也装上这个 TTS。"
 :::
 
 
@@ -17,7 +17,7 @@ tim: TTS 安装永远是添加 TTS 支持中最困难的一步。第二困难的
 ## 0. 总览
 
 ### 0.1 要求
-- 高于 `v1.0.0` 版本的 Open-LLM-VTuber。
+- 最新版本的 Open-LLM-VTuber，并请切换到 dev 分支进行开发 (Pull Request 也请开到 dev 分支)。
 - 会写 Python (不过你跟着下面步骤走就知道你会不会 Python 了。你可以边走边学)
 - 大概理解 GitHub 开源工作流。具体来说，理解 fork 与 Pull Request 的概念。
 - 理解如何使用 uv 管理 Python 项目依赖。(不会 uv 的[这里学](https://docs.astral.sh/uv/getting-started/features/#projects))
@@ -130,7 +130,7 @@ tim: TTS 安装永远是添加 TTS 支持中最困难的一步。第二困难的
 
 ### 2.4 在 `config_manager/tts.py` 文件中，将你的 tts 的相关配置添加到配置文件数据校验代码中。
 
-自 `v1.0.0` 版本开始，项目引入了基于 Pydantic 的配置文件数据校验，因此如果要添加 `conf.yaml` 中可供配置的选项，我们要修改对应的 Pydantic 模型。
+自 `v1.0.0` 版本开始，项目引入了基于 Pydantic 的配置文件数据校验，因此如果往配置文件中添加新的设置项，我们要修改对应的 Pydantic 模型。
 
 前往 `src/open_llm_vtuber/config_manager/tts.py` 文件。参考其他 tts 实现，在 tts.py 中添加配置的类，并在底部的 `TTSConfig` 中添加 tts。
 
@@ -144,11 +144,11 @@ tim: TTS 安装永远是添加 TTS 支持中最困难的一步。第二困难的
 之后就可以提交 pull request 啦。
 
 :::danger
-请在 `conf.yaml` 与 `conf.CN.yaml` 文件中放入预设的选项。请不要随便改动配置文件中的其他选项。
+请在 `conf.default.yaml` 与 `conf.ZH.default.yaml` 文件中放入预设的选项。请不要随便改动配置文件中与你pull request 无关的的选项。
 :::
 
 :::danger
-请不要把自己的 API key 推送到分支中。请在提交前检查自己要提交的代码。
+请不要把自己的 API key 推送到分支中。请在提交前检查自己要提交的代码，不要把乱七八糟的东西推上来。
 :::
 
 
