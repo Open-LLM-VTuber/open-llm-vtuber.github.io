@@ -1,15 +1,15 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 ---
 
-# Live Streaming Development Guide
+# Live Streaming Development
 
-:::info Architecture Overview: `/proxy-ws` is the Core
-The live streaming integration in this project adopts a **separate process** architecture, relying on a core **WebSocket proxy endpoint (`/proxy-ws`)**.
+:::info Architecture Overview
+The live streaming integration in this project adopts a **separate process** architecture, relying on a **WebSocket proxy endpoint (`/proxy-ws`)**.
 
 - **Live Platform Client (Independent Process)**: Connects to specific live streaming platforms (like Bilibili), monitors events (such as danmaku/comments).
 - **Open-LLM-VTuber Main Process**: Runs AI, TTS, and other core services.
-- **Frontend UI (User Interface)**: Displays the Live2D model, receives user input, plays audio, etc.
+- **Frontend UI (User Interface)**: Displays the Live2D model, receives user (the room admin) input, plays audio, etc.
 
 **Key Connection Topology:**
 

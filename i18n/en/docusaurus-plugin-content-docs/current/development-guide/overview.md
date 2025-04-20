@@ -1,7 +1,7 @@
 ---
-sidebar_position: 3
+sidebar_position: 2
 ---
-# Development Guide
+# Development Guide Overview
 
 Guides that are done:
 
