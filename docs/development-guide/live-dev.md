@@ -11,8 +11,6 @@ sidebar_position: 3
 - **Open-LLM-VTuber 主进程**: 运行 AI、TTS 等核心服务。
 - **前端 UI (用户界面)**: 展示 Live2D 模型、接收用户 (直播间管理员) 输入、播放音频等。
 
-**关键连接拓扑:**
-
 ```mermaid
 graph LR
     A[Live Platform Client] --"text-input"--> P{/proxy-ws};
@@ -25,7 +23,6 @@ graph LR
     P --"optional"--> A;
 ```
 
-**图例说明:**
 - Live Platform Client: 直播平台客户端（如Bilibili）向代理发送弹幕消息（格式化为text-input）
 - Frontend UI: 前端界面也向同一个代理发送用户输入和控制消息
 - /proxy-ws: 核心代理端点，接收所有消息并进行转发和广播
@@ -33,7 +30,7 @@ graph LR
 - AI Agent: 生成回复
 - 最终AI回复通过代理广播给所有连接的客户端（包括前端和直播客户端）
 
-**核心要求:** 为了使直播弹幕能够被 AI 处理，并且 AI 的回复能够正确显示在前端，**所有客户端（包括前端 UI 和 直播平台客户端）都必须连接到同一个 `/proxy-ws` 端点**。
+为了使直播弹幕能够被 AI 处理，并且 AI 的回复能够正确显示在前端，**所有客户端（包括前端 UI 和 直播平台客户端）都必须连接到同一个 `/proxy-ws` 端点**。
 
 **`/proxy-ws` 的作用 (`ProxyHandler`):**
 - **统一入口:** 为所有类型的客户端提供单一的连接点。
@@ -51,15 +48,12 @@ graph LR
 1.  **观众** -> **Bilibili 服务器**: 发送弹幕。
 2.  **Bilibili 服务器** -> **`run_bilibili_live.py` (独立进程)**: `blivedm` 库接收弹幕事件。
 3.  **`run_bilibili_live.py`** -> **`/proxy-ws` (主进程)**: `BiliBiliLivePlatform` 将弹幕格式化为 `{"type": "text-input", "text": "弹幕内容"}` 并通过 WebSocket 发送给 `/proxy-ws`。
-4.  **`/proxy-ws` (`ProxyHandler`)** -> **`WebSocketHandler`**: `ProxyHandler` 接收到消息，因其类型为 `text-input`，将其放入消息队列 (`ProxyMessageQueue`)。
-5.  **`ProxyMessageQueue`** -> **`ProxyHandler.forward_to_server`**: 当轮到此消息处理时，队列将其取出并通过 `forward_to_server` 发送给 `WebSocketHandler`。
-6.  **`WebSocketHandler`**: 接收到 `text-input` 消息，触发对话处理逻辑 (`_handle_conversation_trigger`)。
-7.  **`WebSocketHandler`** -> **AI Agent**: 将弹幕文本 (`"弹幕内容"`) 作为用户输入，调用 AI 模型。
-8.  **AI Agent** -> **`WebSocketHandler`**: AI 返回回复文本流。
-9.  **`WebSocketHandler`** -> **TTS/表情/动作处理**: 处理 AI 回复。
-10. **`WebSocketHandler`** -> **`/proxy-ws` (`ProxyHandler`)**: 将处理后的结果（文本、音频、指令等）发送回 `ProxyHandler` 进行广播。
-11. **`/proxy-ws` (`ProxyHandler`)** -> **所有连接的客户端 (包括前端 UI)**: `ProxyHandler` 调用 `broadcast_to_clients` 将 AI 的回复广播给所有连接到 `/proxy-ws` 的客户端。
-12. **前端 UI**: 接收到广播的消息，播放音频、显示文本、执行表情/动作。
+4.  **`/proxy-ws` (`ProxyHandler`)** -> **`ProxyMessageQueue`**: `ProxyHandler` 接收到消息，因其类型为 `text-input`，将其放入消息队列 (`ProxyMessageQueue`)。
+5.  **`ProxyMessageQueue`** -> **`ProxyHandler.forward_to_server`** -> **`WebSocketHandler`**: 当轮到此消息处理时，队列将其取出并通过 `forward_to_server` 发送给 `WebSocketHandler`。
+6.  **`WebSocketHandler`** -> **ConversationHandler**: 接收到 `text-input` 消息，触发对话处理逻辑 (`_handle_conversation_trigger`)。
+7.  **ConversationHandler** -> ... -> **`WebSocketHandler`**: AI 返回回复文本流。
+8. **`WebSocketHandler`** -> **`/proxy-ws` (`ProxyHandler`)**: 将处理后的结果（文本、音频、指令等）发送回 `ProxyHandler` 进行广播。
+9. **`/proxy-ws` (`ProxyHandler`)** -> **所有连接的客户端 (包括前端 UI)**: `ProxyHandler` 调用 `broadcast_to_clients` 将 AI 的回复广播给所有连接到 `/proxy-ws` 的客户端。
 
 ## 2. 关键接口与实现
 

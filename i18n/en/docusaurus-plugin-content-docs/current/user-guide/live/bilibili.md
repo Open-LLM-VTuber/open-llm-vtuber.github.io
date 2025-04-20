@@ -8,7 +8,7 @@ sidebar_position: 3
 :::info Feature Description
 We provide an experimental live platform integration that can send comments from live rooms to the Agent in real-time for interaction. Currently, only Bilibili live streaming is supported, with basic comment reading and forwarding functionality. The AI reads and responds to received comments one by one (currently, unresponded comments are added to a queue, and when messages come too quickly, the AI may experience significant response delays due to queue congestion).
 
-If you want to support more live platforms (such as YouTube, Twitch, etc.), please refer to the [Development Guide](../../development-guide/backend/live-dev) to develop and contribute. Additionally, the default supported Bilibili live functionality does not yet implement features like gift acknowledgment or reading multiple comments together. Developers can refer to the [Development Guide](../../development-guide/backend/live-dev) to implement more features and contribute.
+If you want to support more live platforms (such as YouTube, Twitch, etc.), please refer to the [Development Guide](../../development-guide/live-dev) to develop and contribute. Additionally, the default supported Bilibili live functionality does not yet implement features like gift acknowledgment or reading multiple comments together. Developers can refer to the [Development Guide](../../development-guide/live-dev) to implement more features and contribute.
 :::
 
 ## 0. Module Preparation

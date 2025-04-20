@@ -8,7 +8,7 @@ sidebar_position: 3
 :::info 功能说明
 我们提供了实验性的直播平台对接功能，可以将直播间的弹幕实时发送给 Agent 进行互动。目前仅支持 Bilibili 直播，实现了基础的弹幕读取和转发功能。AI 会依次阅读并回复收到的弹幕（目前，没有被回复的弹幕会被添加到队列中，当消息速度过快时，AI 会因为队列拥塞而产生较大的回复延迟）。
 
-如果你想要支持更多的直播平台（如YouTube、Twitch等），欢迎参考[开发指南](../../development-guide/backend/live-dev)进行开发并提交贡献。另外，默认支持的 Bilibili 直播功能暂未实现礼物答谢、多条弹幕一起阅读等功能，开发者可以参考[开发指南](../../development-guide/backend/live-dev)来实现更多功能并提交贡献。
+如果你想要支持更多的直播平台（如YouTube、Twitch等），欢迎参考[开发指南](../../development-guide/live-dev)进行开发并提交贡献。另外，默认支持的 Bilibili 直播功能暂未实现礼物答谢、多条弹幕一起阅读等功能，开发者可以参考[开发指南](../../development-guide/live-dev)来实现更多功能并提交贡献。
 :::
 
 ## 0. 模块准备

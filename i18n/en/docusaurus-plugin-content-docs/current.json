@@ -15,6 +15,10 @@
     "message": "Frontend User Guide",
     "description": "The label for category Frontend User Guide in sidebar docSidebar"
   },
+  "sidebar.docSidebar.category.直播指南 (Beta)": {
+    "message": "Live Streaming Guide (Beta)",
+    "description": "The label for category Live Streaming Guide (Beta) in sidebar docSidebar"
+  },
   "sidebar.docSidebar.category.API 参考": {
     "message": "API Reference",
     "description": "The label for category API Reference in sidebar docSidebar"
@@ -59,9 +63,9 @@
     "message": "Development Guide",
     "description": "The label for category Development Guide in sidebar docSidebar"
   },
-  "sidebar.docSidebar.category.后端开发指南": {
-    "message": "Backend Development Guide",
-    "description": "The label for category Backend Development Guide in sidebar docSidebar"
+  "sidebar.docSidebar.category.后端开发": {
+    "message": "Backend Development",
+    "description": "The label for category Backend Development in sidebar docSidebar"
   },
   "sidebar.docSidebar.category.社区与贡献": {
     "message": "Community and Contribution",

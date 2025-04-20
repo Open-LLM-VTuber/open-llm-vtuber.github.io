@@ -11,8 +11,6 @@ The live streaming integration in this project adopts a **separate process** arc
 - **Open-LLM-VTuber Main Process**: Runs AI, TTS, and other core services.
 - **Frontend UI (User Interface)**: Displays the Live2D model, receives user (the room admin) input, plays audio, etc.
 
-**Key Connection Topology:**
-
 ```mermaid
 graph LR
     A[Live Platform Client] --"text-input"--> P{/proxy-ws};
@@ -25,7 +23,6 @@ graph LR
     P --"optional"--> A;
 ```
 
-**Legend:**
 - Live Platform Client: Live platform client (e.g., Bilibili) sends comments to the proxy (formatted as text-input)
 - Frontend UI: Front-end interface also sends user input and control messages to the same proxy
 - /proxy-ws: Core proxy endpoint, receives all messages and handles forwarding and broadcasting
@@ -33,7 +30,7 @@ graph LR
 - AI Agent: Generates responses
 - AI responses are ultimately broadcast via the proxy to all connected clients (including the frontend and live platform client)
 
-**Core Requirement:** For live comments to be processed by the AI, and for AI responses to be correctly displayed in the frontend, **all clients (including the frontend UI and live platform client) must connect to the same `/proxy-ws` endpoint**.
+For live comments to be processed by the AI, and for AI responses to be correctly displayed in the frontend, **all clients (including the frontend UI and live platform client) must connect to the same `/proxy-ws` endpoint**.
 
 **The Role of `/proxy-ws` (`ProxyHandler`):**
 - **Unified Entry Point:** Provides a single connection point for all types of clients.
@@ -51,15 +48,12 @@ Using Bilibili live streaming as an example, here's the complete flow from **com
 1.  **Viewer** -> **Bilibili Server**: Sends a comment.
 2.  **Bilibili Server** -> **`run_bilibili_live.py` (Independent Process)**: The `blivedm` library receives the comment event.
 3.  **`run_bilibili_live.py`** -> **`/proxy-ws` (Main Process)**: `BiliBiliLivePlatform` formats the comment as `{"type": "text-input", "text": "comment content"}` and sends it to `/proxy-ws` via WebSocket.
-4.  **`/proxy-ws` (`ProxyHandler`)** -> **`WebSocketHandler`**: `ProxyHandler` receives the message and, because its type is `text-input`, places it in the message queue (`ProxyMessageQueue`).
-5.  **`ProxyMessageQueue`** -> **`ProxyHandler.forward_to_server`**: When it's this message's turn to be processed, the queue retrieves it and sends it to `WebSocketHandler` via `forward_to_server`.
-6.  **`WebSocketHandler`**: Receives the `text-input` message, triggering conversation processing logic (`_handle_conversation_trigger`).
-7.  **`WebSocketHandler`** -> **AI Agent**: Passes the comment text (`"comment content"`) as user input to the AI model.
-8.  **AI Agent** -> **`WebSocketHandler`**: AI returns a response text stream.
-9.  **`WebSocketHandler`** -> **TTS/Expression/Action Processing**: Processes the AI response.
-10. **`WebSocketHandler`** -> **`/proxy-ws` (`ProxyHandler`)**: Sends the processed results (text, audio, instructions, etc.) back to `ProxyHandler` for broadcasting.
-11. **`/proxy-ws` (`ProxyHandler`)** -> **All Connected Clients (including Frontend UI)**: `ProxyHandler` calls `broadcast_to_clients` to broadcast the AI's response to all clients connected to `/proxy-ws`.
-12. **Frontend UI**: Receives the broadcast message, plays audio, displays text, executes expressions/actions.
+4.  **`/proxy-ws` (`ProxyHandler`)** -> **`ProxyMessageQueue`**: `ProxyHandler` receives the message and, because its type is `text-input`, places it in the message queue (`ProxyMessageQueue`).
+5.  **`ProxyMessageQueue`** -> **`ProxyHandler.forward_to_server`** -> **`WebSocketHandler`**: When it's this message's turn to be processed, the queue retrieves it and sends it to `WebSocketHandler` via `forward_to_server`.
+6.  **`WebSocketHandler`** -> **ConversationHandler**: Receives the `text-input` message, triggering conversation processing logic (`_handle_conversation_trigger`).
+7.  **ConversationHandler** -> ... -> **`WebSocketHandler`**: AI returns response text stream.
+8.  **`WebSocketHandler`** -> **`/proxy-ws` (`ProxyHandler`)**: Sends the processed results (text, audio, instructions, etc.) back to `ProxyHandler` for broadcasting.
+9.  **`/proxy-ws` (`ProxyHandler`)** -> **All Connected Clients (including Frontend UI)**: `ProxyHandler` calls `broadcast_to_clients` to broadcast the AI's response to all clients connected to `/proxy-ws`.
 
 ## 2. Key Interfaces and Implementations
 
