@@ -5,7 +5,7 @@
 <meta name="generator" content="Docusaurus v3.7.0">
 <title data-rh="true">直播开发 | Open LLM Vtuber</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://open-llm-vtuber.github.io/img/Open_LLM_VTuber_Social.png"><meta data-rh="true" name="twitter:image" content="https://open-llm-vtuber.github.io/img/Open_LLM_VTuber_Social.png"><meta data-rh="true" property="og:url" content="https://open-llm-vtuber.github.io/docs/development-guide/live-dev"><meta data-rh="true" property="og:locale" content="zh_CN"><meta data-rh="true" property="og:locale:alternate" content="en_US"><meta data-rh="true" name="docusaurus_locale" content="zh-Hans"><meta data-rh="true" name="docsearch:language" content="zh-Hans"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="直播开发 | Open LLM Vtuber"><meta data-rh="true" name="description" content="本项目的直播集成功能采用分离进程架构，并依赖 WebSocket 代理端点 (/proxy-ws)。"><meta data-rh="true" property="og:description" content="本项目的直播集成功能采用分离进程架构，并依赖 WebSocket 代理端点 (/proxy-ws)。"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://open-llm-vtuber.github.io/docs/development-guide/live-dev"><link data-rh="true" rel="alternate" href="https://open-llm-vtuber.github.io/docs/development-guide/live-dev" hreflang="zh-CN"><link data-rh="true" rel="alternate" href="https://open-llm-vtuber.github.io/en/docs/development-guide/live-dev" hreflang="en-US"><link data-rh="true" rel="alternate" href="https://open-llm-vtuber.github.io/docs/development-guide/live-dev" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Open LLM Vtuber RSS Feed">
 <link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Open LLM Vtuber Atom Feed"><link rel="stylesheet" href="/assets/css/styles.544d7f8e.css">
-<script src="/assets/js/runtime~main.76cc127b.js" defer="defer"></script>
+<script src="/assets/js/runtime~main.d5d1eef0.js" defer="defer"></script>
 <script src="/assets/js/main.0e1a972c.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -34,21 +34,18 @@
 <li><strong>观众</strong> -&gt; <strong>Bilibili 服务器</strong>: 发送弹幕。</li>
 <li><strong>Bilibili 服务器</strong> -&gt; <strong><code>run_bilibili_live.py</code> (独立进程)</strong>: <code>blivedm</code> 库接收弹幕事件。</li>
 <li><strong><code>run_bilibili_live.py</code></strong> -&gt; <strong><code>/proxy-ws</code> (主进程)</strong>: <code>BiliBiliLivePlatform</code> 将弹幕格式化为 <code>{&quot;type&quot;: &quot;text-input&quot;, &quot;text&quot;: &quot;弹幕内容&quot;}</code> 并通过 WebSocket 发送给 <code>/proxy-ws</code>。</li>
-<li><strong><code>/proxy-ws</code> (<code>ProxyHandler</code>)</strong> -&gt; <strong><code>WebSocketHandler</code></strong>: <code>ProxyHandler</code> 接收到消息，因其类型为 <code>text-input</code>，将其放入消息队列 (<code>ProxyMessageQueue</code>)。</li>
-<li><strong><code>ProxyMessageQueue</code></strong> -&gt; <strong><code>ProxyHandler.forward_to_server</code></strong>: 当轮到此消息处理时，队列将其取出并通过 <code>forward_to_server</code> 发送给 <code>WebSocketHandler</code>。</li>
-<li><strong><code>WebSocketHandler</code></strong>: 接收到 <code>text-input</code> 消息，触发对话处理逻辑 (<code>_handle_conversation_trigger</code>)。</li>
-<li><strong><code>WebSocketHandler</code></strong> -&gt; <strong>AI Agent</strong>: 将弹幕文本 (<code>&quot;弹幕内容&quot;</code>) 作为用户输入 ，调用 AI 模型。</li>
-<li><strong>AI Agent</strong> -&gt; <strong><code>WebSocketHandler</code></strong>: AI 返回回复文本流。</li>
-<li><strong><code>WebSocketHandler</code></strong> -&gt; <strong>TTS/表情/动作处理</strong>: 处理 AI 回复。</li>
+<li><strong><code>/proxy-ws</code> (<code>ProxyHandler</code>)</strong> -&gt; <strong><code>ProxyMessageQueue</code></strong>: <code>ProxyHandler</code> 接收到消息，因其类型为 <code>text-input</code>，将其放入消息队列 (<code>ProxyMessageQueue</code>)。</li>
+<li><strong><code>ProxyMessageQueue</code></strong> -&gt; <strong><code>ProxyHandler.forward_to_server</code></strong> -&gt; <strong><code>WebSocketHandler</code></strong>: 当轮到此消息处理时，队列将其取出并通过 <code>forward_to_server</code> 发送给 <code>WebSocketHandler</code>。</li>
+<li><strong><code>WebSocketHandler</code></strong> -&gt; <strong>ConversationHandler</strong>: 接收到 <code>text-input</code> 消息，触发对话处理逻辑 (<code>_handle_conversation_trigger</code>)。</li>
+<li><strong>ConversationHandler</strong> -&gt; ... -&gt; <strong><code>WebSocketHandler</code></strong>: AI 返回回复文本流。</li>
 <li><strong><code>WebSocketHandler</code></strong> -&gt; <strong><code>/proxy-ws</code> (<code>ProxyHandler</code>)</strong>: 将处理后的结果（文本、音频、指令等）发送回 <code>ProxyHandler</code> 进行广播。</li>
 <li><strong><code>/proxy-ws</code> (<code>ProxyHandler</code>)</strong> -&gt; <strong>所有连接的客户端 (包括前端 UI)</strong>: <code>ProxyHandler</code> 调用 <code>broadcast_to_clients</code> 将 AI 的回复广播给所有连接到 <code>/proxy-ws</code> 的客户端。</li>
-<li><strong>前端 UI</strong>: 接收到广播的消息，播放音频、显示文本、执行表情/动作。</li>
 </ol>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="2-关键接口与实现">2. 关键接口与实现<a href="#2-关键接口与实现" class="hash-link" aria-label="2. 关键接口与实现的直接链接" title="2. 关键接口与实现的直接链接">​</a></h2>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="21-liveplatforminterface-接口定义">2.1 <code>LivePlatformInterface</code> (接口定义)<a href="#21-liveplatforminterface-接口定义" class="hash-link" aria-label="21-liveplatforminterface-接口定义的直接链接" title="21-liveplatforminterface-接口定义的直接链接">​</a></h3>
 <p>(位于 <code>src/open_llm_vtuber/live/live_interface.py</code>)</p>
 <p>所有直播平台客户端实现必须遵守的抽象基类。核心要求是实现 <code>connect</code> 方法以连接到<strong>代理端点 <code>/proxy-ws</code></strong>，并在 <code>run</code> 方法中实现监听平台事件并将事件<strong>格式化为 <code>{&quot;type&quot;: &quot;text-input&quot;, ...}</code></strong> 后通过 <code>_send_to_proxy</code> 发送给代理。</p>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="22-websocket-代理-proxy-ws-与-proxyhandler">2.2 WebSocket 代理 (<code>/proxy-ws</code> 与 <code>ProxyHandler</code>)<a href="#22-websocket-代理-proxy-ws-与-proxyhandler" class="hash-link" aria-label="22-websocket-代理-proxy-ws-与-proxyhandler的直接链接" title="22-websocket-代理-proxy-ws-与-proxyhandler的直接链接">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="22-websocket-代理-proxy-ws-与-proxyhandler">2.2 WebSocket 代理 (<code>/proxy-ws</code> 与 <code>ProxyHandler</code>)<a href="#22-websocket-代理-proxy-ws-与-proxyhandler" class="hash-link" aria-label="22-websocket-代理-proxy-ws-与-proxyhandler的直接链接" title="22-websocket-代 理-proxy-ws-与-proxyhandler的直接链接">​</a></h3>
 <p>(端点定义于 <code>src/open_llm_vtuber/routes.py</code>, 实现于 <code>src/open_llm_vtuber/proxy_handler.py</code>)</p>
 <p><strong>核心组件</strong>，负责：</p>
 <ul>
