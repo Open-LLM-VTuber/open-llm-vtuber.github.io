@@ -491,6 +491,7 @@ For more information about the frontend, refer to the [Frontend Guide](./user-gu
 
 ## Next Step:
 - [Common Issue](faq.md)
+- [Long-Term Memory (Letta)](user-guide/backend/agent#letta-agent)
 - [Desktop Pet Mode](user-guide/frontend/mode)
 - [Modifying AI's persona (prompt)](user-guide/backend/character_settings.md)
 - [AI Group Chat (lacking docs as of now)]
@@ -501,7 +502,10 @@ For more information about the frontend, refer to the [Frontend Guide](./user-gu
 - [Join discussion & community](community/contact.md)
 - [Contributing to our project](community/contribute.md)
 
+### Long-term memory?
+In version `1.2.0`, long-term memory implementation based on Letta (also known as MemGPT) was added thanks to the effort of ([PR #179](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/pull/179)). Your AI companion can get long term memory powered by Letta, though this will increase conversation latency.
 
+For more details, see the [Agent -> Letta Agent page](user-guide/backend/agent#letta-agent)
 
 
 ### If you don't have a `conf.yaml` file in your project directory

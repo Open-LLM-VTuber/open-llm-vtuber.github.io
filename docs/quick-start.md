@@ -517,6 +517,7 @@ uv run run_server.py
 
 ## 下一步
 - [常见问题](faq.md)
+- [长期记忆 (Letta)](user-guide/backend/agent#letta-agent)
 - [桌宠模式](user-guide/frontend/mode)
 - [修改 AI 角色的设定(提示词)](user-guide/backend/character_settings.md)
 - [AI 群聊 (目前文档欠缺)]
@@ -527,7 +528,10 @@ uv run run_server.py
 - [参与讨论，加入社区](community/contact.md)
 - [参与开发](community/contribute.md)
 
+### 长期记忆?
+`1.2.0` 版本加入了基于 Letta (也就是 MemGPT) 的长期记忆实现 ([PR #179](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/pull/179))，虽然回答延迟会增加，但能实现效果较好的长期记忆。
 
+详见 [Agent -> Letta Agent 页面](user-guide/backend/agent#letta-agent)
 
 
 ### 如果你的项目目录下没有 `conf.yaml` 文件
