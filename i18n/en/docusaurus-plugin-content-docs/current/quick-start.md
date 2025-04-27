@@ -7,6 +7,12 @@ import TabItem from '@theme/TabItem';
 
 # Quick Start
 
+> [Frequently Asked Questions Document](https://docs.qq.com/pdf/DTFZGQXdTUXhIYWRq)
+>
+> [User Survey (English)](https://forms.gle/w6Y6PiHTZr1nzbtWA)
+>
+> [User Survey (Chinese)](https://wj.qq.com/s2/16150415/f50a/)
+
 This guide will help you quickly deploy and run the Open-LLM-VTuber project.
 
 The configuration deployed in this guide is Ollama + sherpa-onnx-asr (SenseVoiceSmall) + edge_tts. For in-depth customization, please refer to the relevant sections in the [User Guide](/docs/user-guide).

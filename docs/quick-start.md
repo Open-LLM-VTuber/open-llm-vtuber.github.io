@@ -7,6 +7,13 @@ import TabItem from '@theme/TabItem';
 
 # 快速开始
 
+> [常见问题文档](https://docs.qq.com/pdf/DTFZGQXdTUXhIYWRq)
+>
+> [用户调查问卷(英文)](https://forms.gle/w6Y6PiHTZr1nzbtWA)
+>
+> [用户调查问卷(中文)](https://wj.qq.com/s2/16150415/f50a/)
+
+
 本指南将帮助你快速部署并运行 Open-LLM-VTuber 项目。
 
 本指南部署的配置为 Ollama + sherpa-onnx-asr (SenseVoiceSmall) + edge_tts。如需深入定制，请参考[用户指南](/docs/user-guide)的相关章节。
