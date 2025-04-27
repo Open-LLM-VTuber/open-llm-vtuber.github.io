@@ -455,26 +455,20 @@ uv run run_server.py
 :::
 
 
-## 深入阅读
-
-### 桌宠模式，桌面模式与 Web 模式
-![](user-guide/frontend/img/mode/pet.jpg)
-
-桌宠模式介绍与使用，参考 [前端/模式介绍](user-guide/frontend/mode)
-
-
-### 修改 Live2D 模型
-参考 [Live2D指南](user-guide/live2d)
-
-
-### 社区，讨论，交流
-参考 [参与讨论](community/contact)
+## 下一步
+- [常见问题](faq.md)
+- [桌宠模式](user-guide/frontend/mode)
+- [修改 AI 角色的设定(提示词)](user-guide/backend/character_settings.md)
+- [AI 群聊 (目前文档欠缺)]
+- [修改 Live2D 模型](user-guide/live2d)
+- [修改 LLM 大语言模型](user-guide/backend/llm.md)
+- [修改 TTS 模型 (AI 的声音模型)](user-guide/backend/tts.md)
+- [修改 ASR 模型 (语音识别模型)](user-guide/backend/asr.md)
+- [参与讨论，加入社区](community/contact.md)
+- [参与开发](community/contribute.md)
 
 
 
-## 常见问题
-
-常见问题请参考 [常见问题](faq/)
 
 ### 如果你的项目目录下没有 `conf.yaml` 文件
 `v1.1.0` 版本开始，`conf.yaml` 文件可能不会自动出现在项目目录下。请运行一次项目主程序 `uv run run_server.py` 生成配置文件。
@@ -487,3 +481,5 @@ uv run run_server.py
 - 报错中提示`Model not found, try pulling it...`，请使用 `ollama list` 查看已安装的模型名称，确保配置文件中的模型名称与列表中的完全一致。
 
 - 如果你的代理软件没有绕过本地地址，会导致 Ollama 无法连接。尝试临时关闭代理，或参考前文设置代理绕过本地地址。
+
+关于这个问题，我们在 [常见问题 -> #遇到-error-calling-the-chat-endpoint-错误怎么办](faq.md#遇到-error-calling-the-chat-endpoint-错误怎么办) 中有详细解释。
