@@ -21,6 +21,7 @@
     "@docusaurus/theme-search-algolia": "^3.7.0",
     "@mendable/search": "^0.0.206",
     "clsx": "^2.0.0",
+    "posthog-docusaurus": "^2.0.4",
     "prism-react-renderer": "^2.3.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",

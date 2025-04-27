@@ -1,5 +1,5 @@
-import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
+import { themes as prismThemes } from 'prism-react-renderer';
+import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 // This rus in Node.js - Don't use client-side code here (browser APIs, JSX...)
@@ -69,6 +69,17 @@ const config: Config = {
   markdown: {
     mermaid: true,
   },
+
+  plugins: [
+    [
+      "posthog-docusaurus",
+      {
+        apiKey: "phc_DLpdYyLOud1ZW0yXoLTCsaKQRPYCBpkp8kfBOnC7cix",
+        appUrl: "https://us.i.posthog.com", // optional, defaults to "https://us.i.posthog.com"
+        enableInDevelopment: false, // optional
+      },
+    ],
+  ],
 
   presets: [
     [
