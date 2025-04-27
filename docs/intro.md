@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # 项目简介
 
-> [常见问题文档](https://docs.qq.com/pdf/DTFZGQXdTUXhIYWRq)
+> [常见问题文档](faq)
 >
 > [用户调查问卷(英文)](https://forms.gle/w6Y6PiHTZr1nzbtWA)
 >
