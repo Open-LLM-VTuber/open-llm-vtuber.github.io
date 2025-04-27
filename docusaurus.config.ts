@@ -28,6 +28,17 @@ const config: Config = {
   onBrokenLinks: "ignore",
   onBrokenMarkdownLinks: "ignore",
 
+  // Add the Algolia site verification meta tag
+  headTags: [
+    {
+      tagName: 'meta',
+      attributes: {
+        name: 'algolia-site-verification',
+        content: 'A4A67663DD2003A1'
+      },
+    },
+  ],
+
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
