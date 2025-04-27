@@ -87,7 +87,7 @@ Since EVI continues to charge when the WebSocket is idle, it is recommended not 
 
 [Empathic Voice Interface FAQ](https://dev.hume.ai/docs/empathic-voice-interface-evi/faq)
 
-## Mem0 Agent (Experimental)
+## ~~Mem0 Agent (Experimental)~~ Temporarily removed
 
 ### Introduction
 

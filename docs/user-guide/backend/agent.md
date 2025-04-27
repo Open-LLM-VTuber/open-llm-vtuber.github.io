@@ -90,7 +90,7 @@ EVI 的 LLM 选择和 Prompt 需要在 `config_id` 对应的配置中进行设�
 
 
 
-## Mem0 Agent（实验性）
+## ~~Mem0 Agent（实验性）~~ 目前暂时移除
 
 ### 简介
 
