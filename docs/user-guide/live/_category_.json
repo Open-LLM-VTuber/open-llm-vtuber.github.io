@@ -1,0 +1,8 @@
+{
+  "label": "直播指南 (Beta)",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "slug": "/user-guide/live"
+  }
+}

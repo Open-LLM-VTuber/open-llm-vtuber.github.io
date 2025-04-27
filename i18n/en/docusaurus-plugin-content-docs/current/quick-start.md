@@ -7,6 +7,12 @@ import TabItem from '@theme/TabItem';
 
 # Quick Start
 
+> [Frequently Asked Questions Document](faq)
+>
+> [User Survey (English)](https://forms.gle/w6Y6PiHTZr1nzbtWA)
+>
+> [User Survey (Chinese)](https://wj.qq.com/s2/16150415/f50a/)
+
 This guide will help you quickly deploy and run the Open-LLM-VTuber project.
 
 The configuration deployed in this guide is Ollama + sherpa-onnx-asr (SenseVoiceSmall) + edge_tts. For in-depth customization, please refer to the relevant sections in the [User Guide](/docs/user-guide).
@@ -483,28 +489,20 @@ For more information about the frontend, refer to the [Frontend Guide](./user-gu
 :::
 
 
-## Further Reading
-
-### Long-term memory?
-In version `1.2.0`, long-term memory implementation based on Letta (also known as MemGPT) was added thanks to the effort of ([PR #179](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/pull/179)). Your AI companion can get long term memory powered by Letta, though this will increase conversation latency.
-
-For more details, see the [Agent -> Letta Agent page](user-guide/backend/agent#letta-agent)
-
-### Desktop Pet Mode, Desktop Mode, and Web Mode
-![](user-guide/frontend/img/mode/pet.jpg)
-
-For an introduction and usage guide of the Desktop Pet Mode, please refer to [Frontend/Mode Introduction](user-guide/frontend/mode)
-
-### Modifying Live2D Models
-Please refer to the [Live2D Guide](user-guide/live2d)
-
-### Community, Discussion, and Communication
-Please refer to [Participate in Discussions](community/contact)
+## Next Step:
+- [Common Issue](faq.md)
+- [Desktop Pet Mode](user-guide/frontend/mode)
+- [Modifying AI's persona (prompt)](user-guide/backend/character_settings.md)
+- [AI Group Chat (lacking docs as of now)]
+- [Modify Live2D Model](user-guide/live2d)
+- [Change LLM](user-guide/backend/llm.md)
+- [Change TTS model (AI's voice)](user-guide/backend/tts.md)
+- [Change ASR model (speech recognition model)](user-guide/backend/asr.md)
+- [Join discussion & community](community/contact.md)
+- [Contributing to our project](community/contribute.md)
 
 
-## Common Issue Troubleshooting & Frequently Asked Questions
 
-Please refer to the [FAQ](faq/)
 
 ### If you don't have a `conf.yaml` file in your project directory
 Starting from version `v1.1.0`, the `conf.yaml` file may not automatically appear in your project directory. Please run the main program `uv run run_server.py` once to generate the configuration file.
@@ -516,3 +514,5 @@ Starting from version `v1.1.0`, the `conf.yaml` file may not automatically appea
 - If the error message indicates `Model not found, try pulling it...`, use `ollama list` to check the installed model names and ensure the model name in the configuration file matches the list exactly.
 
 - If your proxy software does not bypass local addresses, Ollama will not be able to connect. Try temporarily disabling the proxy or refer to the previous section to set up proxy bypass for local addresses.
+
+Regarding this issue, we have a detailed explanation in [FAQ -> What to do if I encounter the "Error calling the chat endpoint..." error?](faq#what-to-do-if-i-encounter-the-error-calling-the-chat-endpoint-error)

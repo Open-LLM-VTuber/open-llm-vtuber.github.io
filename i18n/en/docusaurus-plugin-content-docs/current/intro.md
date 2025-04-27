@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Project Overview
 
-> [Frequently Asked Questions Document](https://docs.qq.com/pdf/DTFZGQXdTUXhIYWRq)
+> [Frequently Asked Questions Document](faq)
 >
 > [User Survey (English)](https://forms.gle/w6Y6PiHTZr1nzbtWA)
 >
