@@ -8,9 +8,13 @@ const config: Config = {
   title: "Open LLM Vtuber",
   tagline: "与你的专属 Live2D AI 虚拟伴侣进行实时语音互动",
   customFields: {
-    mendableAnonKey: "e9107444-aa01-467d-8ad2-f19b9dff4f83",
     thirdline: "支持所有主流大语言模型，跨平台运行",
-    showcaseImages: ["img/i1.jpg", "img/i2.jpg", "img/i3.jpg", "img/i4.jpg"],
+    showcaseImages: [
+      'img/i1.jpg',
+      'img/i2.jpg',
+      'img/i3.jpg',
+      'img/i4.jpg',
+    ],
   },
   favicon: "img/favicon.ico",
 
