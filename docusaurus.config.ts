@@ -56,9 +56,23 @@ const config: Config = {
     mermaid: true,
   },
 
-  // Add the Dify client module
-  clientModules: [
-    './src/clientModules/difyIntegration.js',
+  scripts: [
+    {
+      innerHTML: `
+        window.difyChatbotConfig = {
+          token: 'wairWlveaRXYYqb5',
+          systemVariables: {
+            // user_id: 'YOU CAN DEFINE USER ID HERE',
+            // conversation_id: 'YOU CAN DEFINE CONVERSATION ID HERE, IT MUST BE A VALID UUID',
+          },
+        }
+      `,
+    },
+    {
+      src: 'https://udify.app/embed.min.js',
+      id: 'wairWlveaRXYYqb5',
+      defer: true,
+    },
   ],
 
   plugins: [
@@ -78,6 +92,8 @@ const config: Config = {
       {
         docs: {
           sidebarPath: "./sidebars.ts",
+          // Please change this to your repo.
+          // Remove this to remove the "edit this page" links.
           editUrl:
             "https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Docs/tree/main/",
         },
@@ -87,6 +103,8 @@ const config: Config = {
             type: ["rss", "atom"],
             xslt: true,
           },
+          // Please change this to your repo.
+          // Remove this to remove the "edit this page" links.
           editUrl:
             "https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Docs/tree/main/",
           // Useful options to enforce blogging best practices
@@ -102,6 +120,7 @@ const config: Config = {
   ],
 
   themeConfig: {
+    // Replace with your project's social card
     image: "img/Open_LLM_VTuber_Social.png",
     navbar: {
       title: "Open LLM Vtuber",
