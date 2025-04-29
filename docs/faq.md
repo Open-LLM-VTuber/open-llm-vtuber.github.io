@@ -182,9 +182,3 @@ Error calling the chat endpoint
 - 需要不断点击才能使说话功能正常运行
 - 详细说明请参考[模式介绍](./user-guide/frontend/mode.md)
 
-### Electron 应用切换模式导致屏幕一片空白怎么办
-- 属于小概率难以修复的 bug，实测几乎不会触发。
-- 等待几秒，或者重启应用即可解决。
-
-### 模型表情无法显示怎么办
-

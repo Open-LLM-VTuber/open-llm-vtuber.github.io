@@ -1,0 +1,6 @@
+{
+  "backend": "http://localhost:2493/upload",
+  "token": "",
+  "include": ["docs/**/*.md", "docs/**/*.mdx"],
+  "exclude": [".git/**", "node_modules/**"]
+}

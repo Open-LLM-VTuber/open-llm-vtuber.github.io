@@ -111,6 +111,11 @@ const config: Config = {
       },
       items: [
         {
+          type: "custom-documate",
+          position: "right",
+          endpoint: "http://localhost:2493/ask",
+        },
+        {
           type: "localeDropdown",
           position: "right",
         },

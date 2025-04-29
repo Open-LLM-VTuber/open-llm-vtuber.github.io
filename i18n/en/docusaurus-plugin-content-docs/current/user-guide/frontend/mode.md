@@ -8,11 +8,11 @@ Open LLM VTuber offers three modes of use to meet the needs of different users: 
 
 All three modes use localStorage to store user personalization settings.
 
-Web Mode requires deployment or access to a deployed web link for use.
+Web Mode requires deployment or accessing a publicly hosted web link to use.
 
-Window Mode and Desktop Pet Mode are two modes based on the Electron application, supporting Windows and Mac systems, but not currently supporting mobile devices. You can directly download the installation package for your platform from Github Release (recommended), or download the source code for testing or packaging.
+Window Mode and Desktop Pet Mode are two modes based on the Electron application, supporting Windows and Mac systems, but not mobile devices currently. You can download the installer package for your platform directly from the [Download Page](/docs/download) (recommended), or download the source code for testing or packaging.
 
-Window Mode and Pet Mode share context, which means you can switch between the two modes at will while maintaining current settings, status, and connections.
+Window Mode and Pet Mode share context, meaning you can switch between the two modes freely while maintaining your current settings, state, and connection.
 
 :::warning About Security Warnings
 Since our desktop application has not been code-signed, you may encounter the following security warnings:
@@ -21,7 +21,7 @@ Since our desktop application has not been code-signed, you may encounter the fo
 - **macOS**: When first opening, you may see a warning that the app "is damaged and can't be opened. You should move it to the Trash". To resolve this:
   1. Run the command `sudo spctl --master-disable` in terminal
   2. Open System Settings - Security & Privacy, select "Allow apps downloaded from: Anywhere"
-  3. Run the command `xattr -rc /Applications/open-llm-vtuber-electron.app` in terminal
+  3. Run the command `xattr -rc /Applications/Open LLM Vtuber.app` in terminal
   4. Try opening the app again
 
 You can search for these errors to learn more about them and their solutions.

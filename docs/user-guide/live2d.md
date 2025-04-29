@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
 ---
 
 
@@ -18,7 +18,7 @@ sidebar_position: 4
 ## 1. 获取 Live2D 模型
 
 :::warning 关于模型版本
-目前项目使用的 pixi-live2d-display-lipsyncpatch 仅支持 Cubism2/3/4 版本的模型，暂不支持最新的 Cubism5。如
+目前项目使用的 pixi-live2d-display-lipsyncpatch 仅支持 Cubism 3 到 Cubism 5 版本的模型，不支持 Cubism 2 版本。
 :::
 
 如果你已经拥有了合适的 Live2D 模型，可以直接跳过这一步。
@@ -39,7 +39,7 @@ Live2D 模型的配置文件是一个包含表情、动作等多个设置项的�
 3. 如果你有相关经验，非常欢迎通过 PR 或 Issue 来帮助我们完善这部分内容
 :::
 
-由于大多数 Live2D 模型是从游戏中提取或主要用于直播，它们的表情和动作可能并不完全适合本项目的使用场景。为了获得最佳的使用体验，建议你先查看模型的配置文件（`model.json` 或 `model3.json`），并根据需要进行适当的调整，获得更好的交互体验。
+由于大多数 Live2D 模型是从游戏中提取或主要用于直播，它们的表情和动作可能并不完全适合本项目的使用场景。为了获得最佳的使用体验，建议你先查看模型的配置文件（`model3.json`），并根据需要进行适当的调整，获得更好的交互体验。
 
 你可以使用以下工具来查看和调整模型：
 - Vtuber Studio
@@ -73,7 +73,7 @@ Live2D 模型的配置文件是一个包含表情、动作等多个设置项的�
 {
     "name": "shizuku-local",
     "description": "Orange-Haired Girl, locally available. no internet required.",
-    "url": "/live2d-models/shizuku/shizuku.model.json",
+    "url": "/live2d-models/shizuku/shizuku.model3.json",
     "kScale": 0.5,
     "initialXshift": 0,
     "initialYshift": 0,
@@ -112,11 +112,11 @@ Live2D 模型的配置文件是一个包含表情、动作等多个设置项的�
 | ------------- | ------------------------------ | --------------------------------------------- |
 | `name`        | 模型的唯一标识符，建议使用英文 | `"shizuku-local"`                             |
 | `description` | 模型描述（可选）               | `"Orange-Haired Girl"`                        |
-| `url`         | 模型文件路径                   | `"/live2d-models/shizuku/shizuku.model.json"` |
+| `url`         | 模型文件路径                   | `"/live2d-models/shizuku/shizuku.model3.json"` |
 
 - 支持本地路径和远程 URL
 - 本地路径以 `/live2d-models/` 开头，而非 `./live2d-models/` 开头。
-- 远程 URL 需要指向有效的 `.model.json` 或 `.model3.json` 文件，比如 `https://cdn.jsdelivr.net/gh/guansss/pixi-live2d-display/test/assets/shizuku/shizuku.model.json`
+- 远程 URL 需要指向有效的 `.model3.json` 文件，比如 `https://cdn.jsdelivr.net/gh/guansss/pixi-live2d-display/test/assets/shizuku/shizuku.model3.json` (注意：请替换为实际有效的 model3.json 链接)
 - 如果使用 HTTP 协议访问 Web，加载 HTTPS 资源时可能会报错 `Failed to load LiveD model: Error: Network error`。此时需要在浏览器设置中允许网站加载不安全内容:
   - Chrome: 点击地址栏右侧的盾牌图标 -> 网站设置 -> 不安全内容 -> 允许
   - Firefox: 点击地址栏左侧的锁图标 -> 关闭连接保护
@@ -141,11 +141,11 @@ Live2D 模型的配置文件是一个包含表情、动作等多个设置项的�
 
 ### 4.3 待机动作配置
 
-Live2D 模型的动作动画一般会被分成多个动作组 (Motion Groups)。每个动作组包含一系列相关的动作动画。在 model.json 文件中，这些动作组通常定义在 `motions` 或 `Motions` 字段下。
+Live2D 模型的动作动画一般会被分成多个动作组 (Motion Groups)。每个动作组包含一系列相关的动作动画。在 model3.json 文件中，这些动作组通常定义在 `motions` 或 `Motions` 字段下。
 
 待机动作(Idle Motion)是模型在无交互时随机播放的基础动画。它们通常被放在名为 `idle` 或 `Idle` 的动作组中，系统会从该组中随机选择一个动作进行播放。 
 
-具体动作组名称需要根据模型配置文件 `model.json` 或 `model3.json` 中的名称，如图所示。
+具体动作组名称需要根据模型配置文件 `model3.json` 中的名称，如图所示。
 
 <img src={require('./img/live2d_p3.jpg').default} style={{width: '100%'}} />
 
@@ -173,15 +173,7 @@ Live2D 模型的动作动画一般会被分成多个动作组 (Motion Groups)。
 
 1. 首先查看模型文件中的表情定义:
 ```json
-// model.json
-"expressions": [
-    {"name": "f01", "file": "expressions/f01.exp.json"}, // 索引 0
-    {"name": "f02", "file": "expressions/f02.exp.json"}, // 索引 1
-    {"name": "f03", "file": "expressions/f03.exp.json"}, // 索引 2
-    {"name": "f04", "file": "expressions/f04.exp.json"}  // 索引 3
-]
-
-// 或者你会在 model3.json 文件中遇到
+// model3.json
 "Expressions" : [
     {"Name": "f01", "File": "f01.exp3.json"}, // 索引 0
     {"Name": "f02", "File": "f02.exp3.json"}, // 索引 1
@@ -223,7 +215,7 @@ Live2D 模型的动作动画一般会被分成多个动作组 (Motion Groups)。
 #### 配置说明
 
 :::caution 注意事项
-1. 如果使用索引映射，索引值是按照模型文件中 `expressions` 数组的顺序，从 0 开始计数
+1. 如果使用索引映射，索引值是按照模型文件中 `Expressions` 数组的顺序，从 0 开始计数
 2. 如果使用表情名称映射，需要确保名称与模型文件中定义的表情名称完全一致
 3. 多个情绪可以映射到同一个表情索引或名称
 :::
@@ -275,14 +267,7 @@ AI 会使用 `[emotion]` 格式在对话中触发表情变化，例如：
 #### 配置说明
 
 1. 点击区域名称
-   - Live2D 2.0 模型：通常使用 `body`、`head` 等区域名称
-   ```json
-   "hit_areas": [
-       {"name": "head", "id": "D_REF.HEAD"},
-       {"name": "body", "id": "D_REF.BODY"}
-   ]
-   ```
-   - Live2D 3.0/4.0 模型：通常使用 `HitAreaBody`、`HitAreaHead` 等区域名称
+   - Live2D 3.0 / 4.0 / 5.0 模型：通常使用 `HitAreaBody`、`HitAreaHead` 等区域名称
    ```json
    "HitAreas": [
        {"Id": "HitAreaHead", "Name": ""},

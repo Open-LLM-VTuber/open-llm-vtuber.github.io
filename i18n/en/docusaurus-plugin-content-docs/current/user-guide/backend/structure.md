@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Backend Architecture Overview
 
-## Core Component Interaction Flow
+## Core Component Interaction Flow (v1.0.0)
 
 ```mermaid
 sequenceDiagram
@@ -50,7 +50,7 @@ sequenceDiagram
     Note over Frontend,Backend: The entire process supports:<br>1. Interrupting conversations<br>2. Switching character configurations<br>3. History management
 ```
 
-## Code Structure
+## Code Structure (v1.0.0)
 
 ```
 ├── background/                # Background image resource directory

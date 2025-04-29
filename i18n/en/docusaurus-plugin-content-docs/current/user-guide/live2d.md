@@ -1,3 +1,7 @@
+---
+sidebar_position: 5
+---
+
 # Live2D Guide
 
 :::info Overview
@@ -13,7 +17,7 @@ To add a new Live2D model to your project, you need to complete three to five st
 ## 1. Get a Live2D Model
 
 :::warning About Model Version
-Currently, the project uses pixi-live2d-display-lipsyncpatch which only supports Cubism2/3/4 models and does not support the latest Cubism5.
+Currently, the project uses pixi-live2d-display-lipsyncpatch which supports Cubism 3 to Cubism 5 models, but does not support Cubism 2.
 :::
 
 If you already have a suitable Live2D model, you can skip this step.
@@ -35,7 +39,7 @@ The Live2D model configuration file is an important file containing multiple set
 3. If you have relevant experience, you're very welcome to help us improve this content through PR or Issue
 :::
 
-Since most Live2D models are extracted from games or primarily used for streaming, their expressions and motions may not be entirely suitable for this project's use case. For the best user experience, it's recommended to first check the model's configuration file (`model.json` or `model3.json`) and make appropriate adjustments as needed to achieve better interaction.
+Since most Live2D models are extracted from games or primarily used for streaming, their expressions and motions may not be entirely suitable for this project's use case. For the best user experience, it's recommended to first check the model's configuration file (`model3.json`) and make appropriate adjustments as needed to achieve better interaction.
 
 You can use the following tools to view and adjust models:
 - Vtuber Studio
@@ -68,11 +72,12 @@ Add the model configuration in the `model_dict.json` file in the project root di
 {
     "name": "shizuku-local",
     "description": "Orange-Haired Girl, locally available. no internet required.",
-    "url": "/live2d-models/shizuku/shizuku.model.json",
+    "url": "/live2d-models/shizuku/shizuku.model3.json",
     "kScale": 0.5,
     "initialXshift": 0,
     "initialYshift": 0,
     "idleMotionGroupName": "idle",
+    "defaultEmotion" : 0,
     "emotionMap": {
         "neutral": 0,
         "anger": 2,
@@ -106,11 +111,11 @@ Add the model configuration in the `model_dict.json` file in the project root di
 | ------------- | --------------------------------------- | -------------------------------------------- |
 | `name`        | Unique identifier for the model, preferably in English | `"shizuku-local"`                     |
 | `description` | Model description (optional)            | `"Orange-Haired Girl"`                       |
-| `url`         | Model file path                         | `"/live2d-models/shizuku/shizuku.model.json"` |
+| `url`         | Model file path                         | `"/live2d-models/shizuku/shizuku.model3.json"` |
 
 - Supports both local paths and remote URLs
 - Local paths should start with `/live2d-models/`, not `./live2d-models/`
-- Remote URLs should point to valid `.model.json` or `.model3.json` files, e.g., `https://cdn.jsdelivr.net/gh/guansss/pixi-live2d-display/test/assets/shizuku/shizuku.model.json`
+- Remote URLs should point to valid `.model3.json` files, e.g., `https://cdn.jsdelivr.net/gh/guansss/pixi-live2d-display/test/assets/shizuku/shizuku.model3.json` (Note: please replace with an actual valid model3.json link)
 
 - When loading HTTPS resources while accessing the Web via HTTP protocol, you may encounter the error `Failed to load LiveD model: Error: Network error`. In this case, you need to allow the website to load insecure content in your browser settings:
   - Chrome: Click the shield icon on the right side of the address bar -> Site Settings -> Insecure content -> Allow
@@ -136,11 +141,11 @@ Note that when the container size changes (e.g., resizing the window, collapsing
 
 ### 4.3 Idle Motion Configuration
 
-Live2D model motion animations are generally divided into multiple motion groups. Each motion group contains a series of related motion animations. In the model.json file, these motion groups are usually defined under the `motions` or `Motions` field.
+Live2D model motion animations are generally divided into multiple motion groups. Each motion group contains a series of related motion animations. In the model3.json file, these motion groups are usually defined under the `motions` or `Motions` field.
 
 Idle motions are the basic animations that the model plays randomly when there's no interaction. They are usually placed in a motion group named `idle` or `Idle`, and the system will randomly select a motion from this group to play.
 
-The specific motion group name needs to be based on the name in the model configuration file `model.json` or `model3.json`, as shown in the image.
+The specific motion group name needs to be based on the name in the model configuration file `model3.json`, as shown in the image.
 
 <img src={require('./img/live2d_p3.jpg').default} style={{width: '100%'}} />
 
@@ -168,15 +173,7 @@ Some models may come with watermarks. In this case, you can create an expression
 
 1. First, check the expression definitions in the model file:
 ```json
-// model.json
-"expressions": [
-    {"name": "f01", "file": "expressions/f01.exp.json"}, // index 0
-    {"name": "f02", "file": "expressions/f02.exp.json"}, // index 1
-    {"name": "f03", "file": "expressions/f03.exp.json"}, // index 2
-    {"name": "f04", "file": "expressions/f04.exp.json"}  // index 3
-]
-
-// Or you might encounter in model3.json file
+// model3.json
 "Expressions" : [
     {"Name": "f01", "File": "f01.exp3.json"}, // index 0
     {"Name": "f02", "File": "f02.exp3.json"}, // index 1
@@ -218,7 +215,7 @@ Method 2: Using expression names
 #### Configuration Notes
 
 :::caution Important Notes
-1. If using index mapping, index values start from 0 and follow the order of the `expressions` array in the model file
+1. If using index mapping, index values start from 0 and follow the order of the `Expressions` array in the model file
 2. If using expression name mapping, ensure the names match exactly with those defined in the model file
 3. Multiple emotions can be mapped to the same expression index or name
 :::
@@ -270,14 +267,7 @@ The expression will persist until:
 #### Configuration Notes
 
 1. Click area names
-   - Live2D 2.0 models: Usually use area names like `body`, `head`, etc.
-   ```json
-   "hit_areas": [
-       {"name": "head", "id": "D_REF.HEAD"},
-       {"name": "body", "id": "D_REF.BODY"}
-   ]
-   ```
-   - Live2D 3.0/4.0 models: Usually use area names like `HitAreaBody`, `HitAreaHead`, etc.
+   - Live2D 3.0 / 4.0 / 5.0 models: Usually use area names like `HitAreaBody`, `HitAreaHead`, etc.
    ```json
    "HitAreas": [
        {"Id": "HitAreaHead", "Name": ""},

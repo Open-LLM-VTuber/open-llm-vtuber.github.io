@@ -1,0 +1,57 @@
+:root {
+  --dm-color-brand: #25c2a0;
+  --dm-color-bg-alt: #f9fafb;
+  --dm-color-hint: rgba(60, 60, 67, .78);
+
+  --dm-button-font-size: 14px;
+  --dm-button-height: 40px;
+
+  --dm-c-white: #fff;
+  --dm-text-color: #111827;
+  --dm-modal-bg-color: var(--dm-c-white);
+  --dm-mask-bg-color: rgba(0, 0, 0, 0.7);
+  --dm-divider-color: #e5e7eb;
+  --dm-highlight-color: var(--dm-color-brand);
+  
+  /* Docusaurus变量 */
+  --ifm-font-size-base: 1rem;
+  --ifm-font-weight-semibold: 500;
+  --ifm-navbar-item-padding-vertical: 0.25rem;
+  --ifm-navbar-item-padding-horizontal: 0.75rem;
+  --ifm-navbar-link-color: var(--ifm-font-color-base);
+  --ifm-navbar-link-hover-color: var(--ifm-color-primary);
+  --ifm-font-color-base: var(--dm-text-color);
+  --ifm-color-primary: var(--dm-color-brand);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --dm-color-brand: #33925d;
+    --dm-color-bg-alt: #1f2937;
+    --dm-color-hint: rgba(235, 235, 245, .6);
+
+    --dm-text-color: #f3f4f6;
+    --dm-modal-bg-color: #111827;
+    --dm-mask-bg-color: rgba(0, 0, 0, 0.8);
+    --dm-divider-color: #374151;
+    --dm-highlight-color: var(--dm-color-brand);
+    
+    /* Docusaurus变量 */
+    --ifm-font-color-base: var(--dm-text-color);
+  }
+}
+
+.dark {
+  --dm-color-brand: #33925d;
+  --dm-color-bg-alt: #1f2937;
+  --dm-color-hint: rgba(235, 235, 245, .6);
+
+  --dm-text-color: #f3f4f6;
+  --dm-modal-bg-color: #111827;
+  --dm-mask-bg-color: rgba(0, 0, 0, 0.8);
+  --dm-divider-color: #374151;
+  --dm-highlight-color: var(--dm-color-brand);
+  
+  /* Docusaurus变量 */
+  --ifm-font-color-base: var(--dm-text-color);
+}

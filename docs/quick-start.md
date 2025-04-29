@@ -23,7 +23,7 @@ import TabItem from '@theme/TabItem';
 :::
 
 :::warning
-本项目只推荐使用 **Chrome 浏览器**。已知 Edge、Safari 等浏览器都存在不同的问题，比如模型表情无法使用。
+本项目只推荐使用 **Chrome 浏览器**。已知 Edge、Safari 等浏览器都存在不同的问题。
 :::
 
 :::danger 关于代理
@@ -336,7 +336,7 @@ source ~/.zshrc   # 如果使用 zsh
   如果你想要使用桌宠模式或是桌面版本，你可以顺手再下载以 `open-llm-vtuber-electron` 开头的文件。windows 用户下载 exe，macOS 用户下载 dmg文件。这个是桌面版本的客户端。之后等后端配置完成并启动之后，这个electron 版前端可以启动桌宠模式。
 
   </TabItem>
-  <TabItem value="git" label="git 命令拉取">
+  <TabItem value="git" label="Git 命令拉取">
   :::warning
   使用 git 拉取时，请确保网络畅通。中国大陆用户可能需要开启代理。
   :::
@@ -416,7 +416,9 @@ uv run run_server.py
 然后按下 `Ctrl` + `C` 退出程序。
 
 :::info
-`v1.1.0` 版本开始，`conf.yaml` 文件可能不会自动出现在项目目录下。请运行一次项目主程序 `uv run run_server.py` 生成配置文件。
+`v1.1.0` 版本开始，`conf.yaml` 文件可能不会自动出现在项目目录下。请复制 `config_templates` 目录下的 `conf.default.yaml`  或 `conf.ZH.default.yaml` 文件到项目根目录并重命名为 `conf.yaml`。
+
+或者，你也可以通过运行主程序 `uv run run_server.py` 并使用 `Ctrl` + `C` 退出程序来生成配置文件（不推荐使用这个方法）。请注意，退出操作需要及时执行，否则程序会开始下载模型文件（此刻退出可能会导致下次无法启动，解决方案为删除 `models/` 下的全部文件）。
 :::
 
 ### 3. 配置 LLM
@@ -506,12 +508,12 @@ uv run run_server.py
 # 第一次运行可能会下载一些模型，导致等待时间较久。
 ```
 
-运行成功后，访问 `http://localhost:12393` 打开 Web 界面。
+运行成功后，浏览器访问 `http://localhost:12393` 即可打开 Web 界面。
 
 :::tip 桌面应用程序
 如果你更倾向于使用 Electron 应用（窗口模式 + 桌宠模式），可以从 [Open-LLM-VTuber-Web Releases](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web/releases) 下载对应平台的 Electron 客户端。该客户端可在后端服务运行时直接使用，你可能会遇到**安全警告**（由于未进行代码签名）——具体说明和解决方案请查阅[模式介绍](./user-guide/frontend/mode.md)。
 
-有关前端的更多信息，请参考[前端指南](./user-guide/frontend/)
+关于前端的更多信息，请查阅 [前端使用指南](./user-guide/frontend/)
 :::
 
 
@@ -520,7 +522,7 @@ uv run run_server.py
 - [长期记忆 (Letta)](user-guide/backend/agent#letta-agent)
 - [桌宠模式](user-guide/frontend/mode)
 - [修改 AI 角色的设定(提示词)](user-guide/backend/character_settings.md)
-- [AI 群聊 (目前文档欠缺)]
+- [AI 群聊 (目前文档欠缺)](user-guide/backend/group_chat.md)
 - [修改 Live2D 模型](user-guide/live2d)
 - [修改 LLM 大语言模型](user-guide/backend/llm.md)
 - [修改 TTS 模型 (AI 的声音模型)](user-guide/backend/tts.md)

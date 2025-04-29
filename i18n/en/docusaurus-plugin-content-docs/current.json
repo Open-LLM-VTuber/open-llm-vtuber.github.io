@@ -19,6 +19,10 @@
     "message": "Live Streaming Guide (Beta)",
     "description": "The label for category Live Streaming Guide (Beta) in sidebar docSidebar"
   },
+  "sidebar.docSidebar.category.MCP 指南": {
+    "message": "MCP Guide",
+    "description": "The label for category MCP Guide in sidebar docSidebar"
+  },
   "sidebar.docSidebar.category.API 参考": {
     "message": "API Reference",
     "description": "The label for category API Reference in sidebar docSidebar"

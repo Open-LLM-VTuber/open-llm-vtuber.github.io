@@ -37,9 +37,22 @@ function HomepageHeader() {
         </p>
         <div className={styles.buttons}>
           <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro">
-            Get Started
+            className={styles.customButton}
+            to="/docs/download">
+            {translate({
+              id: 'homepage.downloadButton',
+              message: 'Download App',
+            })}
+          </Link>
+          <Link
+            className={styles.customButton}
+            to="https://workshop.llmvtuber.com"
+            target="_blank"
+            rel="noopener noreferrer">
+            {translate({
+              id: 'homepage.workshopButton',
+              message: 'Workshop',
+            })}
           </Link>
         </div>
       </div>

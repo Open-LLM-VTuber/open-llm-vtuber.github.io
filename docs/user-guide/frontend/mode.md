@@ -10,7 +10,7 @@ Open LLM VTuber 提供了三种使用模式，以满足不同用户的需求：[
 
 Web 模式需要通过部署或访问他人部署的网页链接来使用。
 
-窗口模式和桌宠模式是基于 Electron 应用的两个模式，支持 Windows 和 Mac 系统，但暂时不支持移动设备。你可以直接从 [Github Release](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web/releases) 下载对应平台的安装包（推荐），或者下载源码进行测试或打包。
+窗口模式和桌宠模式是基于 Electron 应用的两个模式，支持 Windows 和 Mac 系统，但暂时不支持移动设备。你可以直接从 [下载页面](/docs/download) 下载对应平台的安装包（推荐），或者下载源码进行测试或打包。
 
 Window 模式和 Pet 模式共享上下文，这意味着你可以在两种模式之间任意切换的同时，保持当前的设置、状态、和连接不变。
 
@@ -21,7 +21,7 @@ Window 模式和 Pet 模式共享上下文，这意味着你可以在两种模�
 - **macOS**: 首次打开时可能提示应用"已损坏，无法打开。您应该将它移到废纸篓"。解决方法：
   1. 在命令行执行命令 `sudo spctl --master-disable`
   2. 打开系统设置 - 安全与隐私，在软件来源处选择任意来源。
-  3. 在命令行执行命令 `xattr -rc /Applications/open-llm-vtuber-electron.app`
+  3. 在命令行执行命令 `xattr -rc /Applications/Open LLM Vtuber.app`
   4. 再次打开应用即可
 
 你可以通过搜索这些报错，了解更多关于他们的信息和解决方法。

@@ -1,0 +1,25 @@
+:root {
+  --ifm-color-primary: var(--ifm-original-color-primary, #2e8555) !important;
+  --ifm-color-primary-dark: var(--ifm-original-color-primary-dark, #29784c) !important;
+  --ifm-color-primary-darker: var(--ifm-original-color-primary-darker, #277148) !important;
+  --ifm-color-primary-darkest: var(--ifm-original-color-primary-darkest, #205d3b) !important;
+  --ifm-color-primary-light: var(--ifm-original-color-primary-light, #33925d) !important;
+  --ifm-color-primary-lighter: var(--ifm-original-color-primary-lighter, #359962) !important;
+  --ifm-color-primary-lightest: var(--ifm-original-color-primary-lightest, #3cad6e) !important;
+  
+  --dm-color-brand: #25c2a0;
+}
+
+[data-theme='dark'] {
+  --ifm-color-primary: var(--ifm-original-dark-color-primary, #2e8555) !important;
+  --ifm-color-primary-dark: var(--ifm-original-dark-color-primary-dark, #21af90) !important;
+  --ifm-color-primary-darker: var(--ifm-original-dark-color-primary-darker, #1fa588) !important;
+  --ifm-color-primary-darkest: var(--ifm-original-dark-color-primary-darkest, #1a8870) !important;
+  --ifm-color-primary-light: var(--ifm-original-dark-color-primary-light, #29d5b0) !important;
+  --ifm-color-primary-lighter: var(--ifm-original-dark-color-primary-lighter, #32d8b4) !important;
+  --ifm-color-primary-lightest: var(--ifm-original-dark-color-primary-lightest, #4fddbf) !important;
+}
+
+.documate-button {
+  --ifm-navbar-link-hover-color: var(--dm-color-brand);
+} 

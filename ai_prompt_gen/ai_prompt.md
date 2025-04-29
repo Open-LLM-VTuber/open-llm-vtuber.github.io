@@ -695,6 +695,36 @@ This is a collection of all documentation files for AI reference.
 
 
 ================================================================================
+## File: ../docs/download.md
+
+---
+sidebar_position: 6
+---
+
+# 下载
+
+在这里，你可以下载 Open LLM VTuber 的不同版本。
+
+## 桌面客户端 (Electron)
+
+桌面客户端提供了最佳的本地使用体验，包括窗口模式和桌宠模式。
+
+- **[下载 Windows 版本 (.exe)](https://open-llm-vtuber-frontend.s3.ap-northeast-1.amazonaws.com/open-llm-vtuber-1.2.0-setup.exe)**
+  - :warning: 首次运行时可能会遇到安全警告，请参考 [安全警告说明](./user-guide/frontend/mode.md#关于安全警告) 进行操作。
+
+- **[下载 macOS 版本 (.dmg)](https://open-llm-vtuber-frontend.s3.ap-northeast-1.amazonaws.com/open-llm-vtuber-1.2.0.dmg)**
+  - :warning: 首次打开时可能会遇到安全警告，请参考 [安全警告说明](./user-guide/frontend/mode.md#关于安全警告) 进行操作。
+
+## Web 版本 (自托管)
+
+如果你希望自行部署或在服务器上运行 Web 版本，可以下载此打包文件。
+
+- **[下载 Web Pack (.zip)](https://open-llm-vtuber-frontend.s3.ap-northeast-1.amazonaws.com/open-llm-vtuber-web-1.2.0.zip)**
+  - 此版本适用于希望自行托管 Web 界面的用户。你需要先运行后端服务，然后将此包解压并部署到 Web 服务器。
+  - 关于 Web 模式的更多信息，请参考 [Web 模式使用指南](./user-guide/frontend/web.md)。
+
+
+================================================================================
 ## File: ../docs/faq.md
 
 ---
@@ -1010,7 +1040,7 @@ Groq Whisper API、OpenAI API 等国外大模型/推理平台 API 一般无法�
 :::
 
 :::tip 关于桌面应用
-如果你更喜欢 Electron 应用 (窗口模式 + 桌宠模式)，可以从 [Open-LLM-VTuber-Web Releases](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web/releases) 下载对应平台 Electron 客户端，可以在后端服务运行的前提下直接使用。但你有可能会遇到因为没有签名验证而导致的**安全警告**，具体情况和解决方案请查看 [模式介绍](./user-guide/frontend/mode.md)
+如果你更喜欢 Electron 应用 (窗口模式 + 桌宠模式)，可以从 [下载页面](/docs/download) 下载对应平台 Electron 客户端，可以在后端服务运行的前提下直接使用。但你有可能会遇到因为没有签名验证而导致的**安全警告**，具体情况和解决方案请查看 [模式介绍](./user-guide/frontend/mode.md)
 
 有关前端的更多信息，请参考 [前端指南](./user-guide/frontend/)
 :::
@@ -1244,13 +1274,12 @@ source ~/.zshrc   # 如果使用 zsh
 :::
 
 <Tabs groupId="code-clone-method">
-  <TabItem value="release" label="下载稳定的 release 包">
-  前往最新的 [release 页面](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/releases)，下载长得像 `Open-LLM-VTuber-v1.x.x.zip` 的 zip 文件。
+  <TabItem value="release" label="从 GitHub 下载稳定版本">
+  访问最新的 [release 页面](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/releases) ，下载类似于 `Open-LLM-VTuber-v1.x.x.zip` 的 zip 文件。
 
-  如果你想要使用桌宠模式或是桌面版本，你可以顺手再下载以 `open-llm-vtuber-electron` 开头的文件。windows 用户下载 exe，macOS 用户下载 dmg文件。这个是桌面版本的客户端。之后等后端配置完成并启动之后，这个electron 版前端可以启动桌宠模式。
-
+  如果你想使用桌宠模式或桌面客户端版本，你可以从 [下载页面](/docs/download) 下载应用程序。在你配置并成功启动后端服务后，这个桌面客户端可以启动桌宠模式。
   </TabItem>
-  <TabItem value="git" label="git 命令拉取">
+  <TabItem value="git" label="Git 命令拉取">
   :::warning
   使用 git 拉取时，请确保网络畅通。中国大陆用户可能需要开启代理。
   :::
@@ -1267,7 +1296,7 @@ source ~/.zshrc   # 如果使用 zsh
   cd Open-LLM-VTuber
   ```
 
-  如果你想要使用桌宠模式或是桌面版本，你可以前往[Open-LLM-VTuber-Web 的 Release 页面](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web/releases/latest) 顺手再下载以 `open-llm-vtuber-electron` 开头的文件。windows 用户下载 exe，macOS 用户下载 dmg文件。这个是桌面版本的客户端。之后等后端配置完成并启动之后，这个electron 版前端可以启动桌宠模式。
+  对于桌宠模式或桌面客户端，请访问 [下载页面](/docs/download) 下载适用于你操作系统的应用程序（Windows 或 macOS）。在你配置并成功启动后端服务后，这个桌面客户端可以启动桌宠模式。
 
   </TabItem>
 
@@ -1420,12 +1449,12 @@ uv run run_server.py
 # 第一次运行可能会下载一些模型，导致等待时间较久。
 ```
 
-运行成功后，访问 `http://localhost:12393` 打开 Web 界面。
+运行成功后，浏览器访问 `http://localhost:12393` 即可打开 Web 界面。
 
-:::tip 桌面应用程序
-如果你更倾向于使用 Electron 应用（窗口模式 + 桌宠模式），可以从 [Open-LLM-VTuber-Web Releases](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web/releases) 下载对应平台的 Electron 客户端。该客户端可在后端服务运行时直接使用，你可能会遇到**安全警告**（由于未进行代码签名）——具体说明和解决方案请查阅[模式介绍](./user-guide/frontend/mode.md)。
+:::tip 桌面应用
+如果你更喜欢 Electron 应用（窗口模式+桌宠模式），可以从 [下载页面](/docs/download) 下载客户端应用。在后端服务运行的情况下，可以直接使用。你可能会遇到**安全警告**，这是因为缺少代码签名 - 请查阅 [模式介绍](./user-guide/frontend/mode.md) 了解详情及解决方法。
 
-有关前端的更多信息，请参考[前端指南](./user-guide/frontend/)
+关于前端的更多信息，请查阅 [前端使用指南](./user-guide/frontend/)
 :::
 
 
@@ -1481,7 +1510,7 @@ sidebar_position: 4
 ## 1. 获取 Live2D 模型
 
 :::warning 关于模型版本
-目前项目使用的 pixi-live2d-display-lipsyncpatch 仅支持 Cubism2/3/4 版本的模型，暂不支持最新的 Cubism5。如
+目前项目使用的 pixi-live2d-display-lipsyncpatch 仅支持 Cubism 3 到 Cubism 5 版本的模型，不支持 Cubism 2 版本。
 :::
 
 如果你已经拥有了合适的 Live2D 模型，可以直接跳过这一步。
@@ -1502,7 +1531,7 @@ Live2D 模型的配置文件是一个包含表情、动作等多个设置项的�
 3. 如果你有相关经验，非常欢迎通过 PR 或 Issue 来帮助我们完善这部分内容
 :::
 
-由于大多数 Live2D 模型是从游戏中提取或主要用于直播，它们的表情和动作可能并不完全适合本项目的使用场景。为了获得最佳的使用体验，建议你先查看模型的配置文件（`model.json` 或 `model3.json`），并根据需要进行适当的调整，获得更好的交互体验。
+由于大多数 Live2D 模型是从游戏中提取或主要用于直播，它们的表情和动作可能并不完全适合本项目的使用场景。为了获得最佳的使用体验，建议你先查看模型的配置文件（`model3.json`），并根据需要进行适当的调整，获得更好的交互体验。
 
 你可以使用以下工具来查看和调整模型：
 - Vtuber Studio
@@ -1536,7 +1565,7 @@ Live2D 模型的配置文件是一个包含表情、动作等多个设置项的�
 {
     "name": "shizuku-local",
     "description": "Orange-Haired Girl, locally available. no internet required.",
-    "url": "/live2d-models/shizuku/shizuku.model.json",
+    "url": "/live2d-models/shizuku/shizuku.model3.json",
     "kScale": 0.5,
     "initialXshift": 0,
     "initialYshift": 0,
@@ -1575,11 +1604,11 @@ Live2D 模型的配置文件是一个包含表情、动作等多个设置项的�
 | ------------- | ------------------------------ | --------------------------------------------- |
 | `name`        | 模型的唯一标识符，建议使用英文 | `"shizuku-local"`                             |
 | `description` | 模型描述（可选）               | `"Orange-Haired Girl"`                        |
-| `url`         | 模型文件路径                   | `"/live2d-models/shizuku/shizuku.model.json"` |
+| `url`         | 模型文件路径                   | `"/live2d-models/shizuku/shizuku.model3.json"` |
 
 - 支持本地路径和远程 URL
 - 本地路径以 `/live2d-models/` 开头，而非 `./live2d-models/` 开头。
-- 远程 URL 需要指向有效的 `.model.json` 或 `.model3.json` 文件，比如 `https://cdn.jsdelivr.net/gh/guansss/pixi-live2d-display/test/assets/shizuku/shizuku.model.json`
+- 远程 URL 需要指向有效的 `.model3.json` 文件，比如 `https://cdn.jsdelivr.net/gh/guansss/pixi-live2d-display/test/assets/shizuku/shizuku.model3.json` (注意：请替换为实际有效的 model3.json 链接)
 - 如果使用 HTTP 协议访问 Web，加载 HTTPS 资源时可能会报错 `Failed to load LiveD model: Error: Network error`。此时需要在浏览器设置中允许网站加载不安全内容:
   - Chrome: 点击地址栏右侧的盾牌图标 -> 网站设置 -> 不安全内容 -> 允许
   - Firefox: 点击地址栏左侧的锁图标 -> 关闭连接保护
@@ -1604,11 +1633,11 @@ Live2D 模型的配置文件是一个包含表情、动作等多个设置项的�
 
 ### 4.3 待机动作配置
 
-Live2D 模型的动作动画一般会被分成多个动作组 (Motion Groups)。每个动作组包含一系列相关的动作动画。在 model.json 文件中，这些动作组通常定义在 `motions` 或 `Motions` 字段下。
+Live2D 模型的动作动画一般会被分成多个动作组 (Motion Groups)。每个动作组包含一系列相关的动作动画。在 model3.json 文件中，这些动作组通常定义在 `motions` 或 `Motions` 字段下。
 
 待机动作(Idle Motion)是模型在无交互时随机播放的基础动画。它们通常被放在名为 `idle` 或 `Idle` 的动作组中，系统会从该组中随机选择一个动作进行播放。 
 
-具体动作组名称需要根据模型配置文件 `model.json` 或 `model3.json` 中的名称，如图所示。
+具体动作组名称需要根据模型配置文件 `model3.json` 中的名称，如图所示。
 
 <img src={require('./img/live2d_p3.jpg').default} style={{width: '100%'}} />
 
@@ -1636,15 +1665,7 @@ Live2D 模型的动作动画一般会被分成多个动作组 (Motion Groups)。
 
 1. 首先查看模型文件中的表情定义:
 ```json
-// model.json
-"expressions": [
-    {"name": "f01", "file": "expressions/f01.exp.json"}, // 索引 0
-    {"name": "f02", "file": "expressions/f02.exp.json"}, // 索引 1
-    {"name": "f03", "file": "expressions/f03.exp.json"}, // 索引 2
-    {"name": "f04", "file": "expressions/f04.exp.json"}  // 索引 3
-]
-
-// 或者你会在 model3.json 文件中遇到
+// model3.json
 "Expressions" : [
     {"Name": "f01", "File": "f01.exp3.json"}, // 索引 0
     {"Name": "f02", "File": "f02.exp3.json"}, // 索引 1
@@ -1686,7 +1707,7 @@ Live2D 模型的动作动画一般会被分成多个动作组 (Motion Groups)。
 #### 配置说明
 
 :::caution 注意事项
-1. 如果使用索引映射，索引值是按照模型文件中 `expressions` 数组的顺序，从 0 开始计数
+1. 如果使用索引映射，索引值是按照模型文件中 `Expressions` 数组的顺序，从 0 开始计数
 2. 如果使用表情名称映射，需要确保名称与模型文件中定义的表情名称完全一致
 3. 多个情绪可以映射到同一个表情索引或名称
 :::
@@ -1738,14 +1759,7 @@ AI 会使用 `[emotion]` 格式在对话中触发表情变化，例如：
 #### 配置说明
 
 1. 点击区域名称
-   - Live2D 2.0 模型：通常使用 `body`、`head` 等区域名称
-   ```json
-   "hit_areas": [
-       {"name": "head", "id": "D_REF.HEAD"},
-       {"name": "body", "id": "D_REF.BODY"}
-   ]
-   ```
-   - Live2D 3.0/4.0 模型：通常使用 `HitAreaBody`、`HitAreaHead` 等区域名称
+   - Live2D 3.0 / 4.0 / 5.0 模型：通常使用 `HitAreaBody`、`HitAreaHead` 等区域名称
    ```json
    "HitAreas": [
        {"Id": "HitAreaHead", "Name": ""},
@@ -1810,7 +1824,7 @@ sidebar_position: 5
 
 本项目自带一个更新脚本，在项目目录下，叫做 `upgrade.py`。运行 `uv run upgrade.py` 就可以更新项目了。
 
-目前，更新脚本仅支持更新后端以及 Web 版本。如果你使用 Electron 版本的桌宠，请在使用更新脚本之后，前往 [Open-LLM-VTuber-Web 仓库的 Release 页面](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web/releases) 下载最新版本的桌面版客户端。
+目前，更新脚本仅支持更新后端以及 Web 版本。如果你使用 Electron 版本的桌宠，请在使用更新脚本之后，前往 [下载页面](/docs/download) 下载最新版本的桌面版客户端。
 
 
 ### Git
@@ -1920,133 +1934,6 @@ sidebar_position: 4
 
 
 ================================================================================
-## File: ../docs/user-guide/frontend/install.md
-
----
-sidebar_position: 2
----
-
-# 安装部署
-
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-
-:::info
-Web 模式、Window 模式和 Pet 模式共享同一个代码仓库和项目结构，开发者/用户只需要维护/配置一套代码即可支持所有模式的部署与使用。
-:::
-
-:::tip
-对于 Electron 应用，你可以从 Github Release 下载对应平台的安装包。
-:::
-
-如果你想从源码构建应用，请按照以下步骤操作：
-
-### 前置要求
-
-- Node.js 18.0 或更高版本 (可通过运行 `node -v` 检查版本)。建议使用 nvm 管理多个 Node.js 版本
-
-### 克隆仓库并安装依赖
-
-```bash
-git clone [placeholder]
-cd [placeholder]
-npm install
-```
-
-### 项目结构
-
-```
-open-llm-vtuber-web/
-├── resources/              
-├── src/
-│   ├── main/               
-│   │   ├── index.ts        
-│   │   ├── menu-manager.ts 
-│   │   └── window-manager.ts 
-│   ├── preload/            
-│   │   ├── index.d.ts      
-│   │   └── index.ts        
-│   └── renderer/           
-│       ├── public/        
-│       └── src/
-│           ├── assets/     
-│           ├── components/ 
-│           │   ├── canvas/ 
-│           │   ├── electron/ 
-│           │   ├── footer/ 
-│           │   └── sidebar/ 
-│           │       └── setting/
-│           ├── context/    
-│           ├── hooks/      
-│           │   ├── canvas/ 
-│           │   ├── electron/ 
-│           │   ├── footer/ 
-│           │   └── sidebar/ 
-│           │       └── setting/
-│           ├── services/   
-│           ├── types/     
-│           ├── App.tsx    
-│           └── main.tsx   
-├── electron.vite.config.ts 
-└── package.json           
-```
-
-### 开发模式 (可选，通常用于开发者测试)
-
-<Tabs>
-  <TabItem value="electron" label="Electron" default>
-    ```bash
-    npm run dev
-    ```
-  </TabItem>
-  <TabItem value="web" label="Web">
-    ```bash
-    npm run dev:web
-    ```
-  </TabItem>
-</Tabs>
-
-:::info 
-`npm run dev` 会同时启动 Electron 和 Web 模式 (默认在 5137 端口上)
-:::
-
-### 根据目标平台/模式选择相应的构建命令
-
-<Tabs>
-  <TabItem value="windows" label="Windows" default>
-    ```bash
-    npm run build:win
-    ```
-  </TabItem>
-  <TabItem value="macos" label="MacOS">
-    ```bash
-    npm run build:mac
-    ```
-  </TabItem>
-  <TabItem value="linux" label="Linux">
-    ```bash
-    npm run build:linux
-    ```
-  </TabItem>
-  <TabItem value="web" label="Web">
-    ```bash
-    npm run build:web
-    ```
-  </TabItem>
-</Tabs>
-
-:::info 
-Electron 构建输出的文件将位于 `dist` 目录下。
-
-Web 构建输出的文件将位于 `src/renderer/dist` 目录下。
-:::
-
-
-
-
-
-
-================================================================================
 ## File: ../docs/user-guide/frontend/mode.md
 
 ---
@@ -2061,7 +1948,7 @@ Open LLM VTuber 提供了三种使用模式，以满足不同用户的需求：[
 
 Web 模式需要通过部署或访问他人部署的网页链接来使用。
 
-窗口模式和桌宠模式是基于 Electron 应用的两个模式，支持 Windows 和 Mac 系统，但暂时不支持移动设备。你可以直接从 [Github Release](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web/releases) 下载对应平台的安装包（推荐），或者下载源码进行测试或打包。
+窗口模式和桌宠模式是基于 Electron 应用的两个模式，支持 Windows 和 Mac 系统，但暂时不支持移动设备。你可以直接从 [下载页面](/docs/download) 下载对应平台的安装包（推荐），或者下载源码进行测试或打包。
 
 Window 模式和 Pet 模式共享上下文，这意味着你可以在两种模式之间任意切换的同时，保持当前的设置、状态、和连接不变。
 
@@ -2072,7 +1959,7 @@ Window 模式和 Pet 模式共享上下文，这意味着你可以在两种模�
 - **macOS**: 首次打开时可能提示应用"已损坏，无法打开。您应该将它移到废纸篓"。解决方法：
   1. 在命令行执行命令 `sudo spctl --master-disable`
   2. 打开系统设置 - 安全与隐私，在软件来源处选择任意来源。
-  3. 在命令行执行命令 `xattr -rc /Applications/open-llm-vtuber-electron.app`
+  3. 在命令行执行命令 `xattr -rc /Applications/Open LLM Vtuber.app`
   4. 再次打开应用即可
 
 你可以通过搜索这些报错，了解更多关于他们的信息和解决方法。

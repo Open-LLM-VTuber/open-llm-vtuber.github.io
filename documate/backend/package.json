@@ -1,0 +1,15 @@
+{
+  "name": "doc-ai",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ai": "^2.2.31",
+    "express": "^4.18.2",
+    "gpt-3-encoder": "^1.1.4",
+    "openai": "^4.24.1",
+    "pg": "^8.11.3"
+  }
+}
