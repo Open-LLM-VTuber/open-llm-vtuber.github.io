@@ -212,7 +212,7 @@ const config: Config = {
       appId: "PB6QVXEO9H",
       apiKey: "7029ae39403dd6e8515c305572489bb5",
       indexName: "llmvtuber",
-      contextualSearch: false,
+      contextualSearch: true,
       insights: true,
       searchPagePath: "search",
     },
