@@ -56,6 +56,25 @@ const config: Config = {
     mermaid: true,
   },
 
+  scripts: [
+    {
+      innerHTML: `
+        window.difyChatbotConfig = {
+          token: 'wairWlveaRXYYqb5',
+          systemVariables: {
+            // user_id: 'YOU CAN DEFINE USER ID HERE',
+            // conversation_id: 'YOU CAN DEFINE CONVERSATION ID HERE, IT MUST BE A VALID UUID',
+          },
+        }
+      `,
+    },
+    {
+      src: 'https://udify.app/embed.min.js',
+      id: 'wairWlveaRXYYqb5',
+      defer: true,
+    },
+  ],
+
   plugins: [
     [
       "posthog-docusaurus",
