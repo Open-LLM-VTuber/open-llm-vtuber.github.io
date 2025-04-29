@@ -2,13 +2,10 @@ import { themes as prismThemes } from 'prism-react-renderer';
 import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
-// This rus in Node.js - Don't use client-side code here (browser APIs, JSX...)
-
 const config: Config = {
   title: "Open LLM Vtuber",
   tagline: "与你的专属 Live2D AI 虚拟伴侣进行实时语音互动",
   customFields: {
-    mendableAnonKey: "e9107444-aa01-467d-8ad2-f19b9dff4f83",
     thirdline: "支持所有主流大语言模型，跨平台运行",
     showcaseImages: ["img/i1.jpg", "img/i2.jpg", "img/i3.jpg", "img/i4.jpg"],
   },
@@ -27,17 +24,6 @@ const config: Config = {
 
   onBrokenLinks: "ignore",
   onBrokenMarkdownLinks: "ignore",
-
-  // Add the Algolia site verification meta tag
-  headTags: [
-    {
-      tagName: 'meta',
-      attributes: {
-        name: 'algolia-site-verification',
-        content: 'A4A67663DD2003A1'
-      },
-    },
-  ],
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -203,13 +189,14 @@ const config: Config = {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
     },
-    // algolia: {
-    //   appId: 'YOUR_APP_ID',
-    //   apiKey: 'YOUR_SEARCH_API_KEY',
-    //   indexName: 'open-llm-vtuber',
-    //   contextualSearch: true,
-    //   searchPagePath: 'search',
-    // },
+    algolia: {
+      appId: "PB6QVXEO9H",
+      apiKey: "7029ae39403dd6e8515c305572489bb5",
+      indexName: "llmvtuber",
+      contextualSearch: true,
+      insights: true,
+      searchPagePath: "search",
+    },
   } satisfies Preset.ThemeConfig,
 };
 
