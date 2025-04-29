@@ -421,268 +421,262 @@ character_config:
 ================================================================================
 <!-- PROJECT_DIRECTORY_STRUCTURE -->
 
-## File: 
-        .
+## File: Open-LLM-VTuber
+├── .gitattributes
+├── .github
+│   ├── FUNDING.yml
+│   ├── ISSUE_TEMPLATE
+│   │   ├── bug---question---get-help---bug---提问---求助.md
+│   │   └── feature-request---功能建议.md
+│   └── workflows
+│       ├── codeql.yml
+│       ├── create_release.yml
+│       ├── fossa_scan.yml
+│       └── ruff.yml
+├── .gitignore
+├── .gitmodules
+├── .pre-commit-config.yaml
+├── .python-version
+├── conf.yaml
 ├── LICENSE
 ├── LICENSE-Live2D.md
 ├── README.CN.md
 ├── README.md
 ├── assets
-│   ├── banner.cn.jpg
-│   ├── banner.jpg
-│   ├── i1.jpg
-│   ├── i1_app_mode.jpg
-│   ├── i2.jpg
-│   ├── i2_pet_vscode.jpg
-│   ├── i3.jpg
-│   ├── i3_browser_world_fun.jpg
-│   ├── i4.jpg
-│   └── i4_pet_desktop.jpg
+│   ├── banner.cn.jpg
+│   ├── banner.jpg
+│   ├── i1.jpg
+│   ├── i1_app_mode.jpg
+│   ├── i2.jpg
+│   ├── i2_pet_vscode.jpg
+│   ├── i3.jpg
+│   ├── i3_browser_world_fun.jpg
+│   ├── i4.jpg
+│   └── i4_pet_desktop.jpg
 ├── avatars
-│   ├── mao.png
-│   └── shizuku.png
+│   ├── mao.png
+│   └── shizuku.png
 ├── backgrounds
-│   ├── cartoon-night-landscape-moon.jpeg
-│   ├── ceiling-window-room-night.jpeg
-│   ├── cityscape.jpeg
-│   ├── computer-room-illustration.jpeg
-│   ├── congress.jpg
-│   ├── field-night-painting-moon.jpeg
-│   ├── lernado-diff-classroom-center.jpeg
-│   ├── moon-over-mountain.jpeg
-│   ├── mountain-range-illustration.jpeg
-│   ├── night-landscape-grass-moon.jpeg
-│   ├── night-scene-cartoon-moon.jpeg
-│   ├── painting-valley-night-sky. 2.jpeg
-│   ├── room-interior-illustration.jpeg
-│   └── sdxl-classroom-door-view.jpeg
-├── cache
+│   ├── cartoon-night-landscape-moon.jpeg
+│   ├── ceiling-window-room-night.jpeg
+│   ├── cityscape.jpeg
+│   ├── computer-room-illustration.jpeg
+│   ├── congress.jpg
+│   ├── field-night-painting-moon.jpeg
+│   ├── lernado-diff-classroom-center.jpeg
+│   ├── moon-over-mountain.jpeg
+│   ├── mountain-range-illustration.jpeg
+│   ├── night-landscape-grass-moon.jpeg
+│   ├── night-scene-cartoon-moon.jpeg
+│   ├── painting-valley-night-sky. 2.jpeg
+│   ├── room-interior-illustration.jpeg
+│   └── sdxl-classroom-door-view.jpeg
 ├── characters
-│   ├── en_mashiro.yaml
-│   ├── en_nuke_debate.yaml
-│   ├── en_unhelpful_ai.yaml
-│   ├── zh_米粒.yaml
-│   └── zh_翻译腔.yaml
-├── chat_history
-├── conf.yaml
+│   ├── en_mashiro.yaml
+│   ├── en_nuke_debate.yaml
+│   ├── en_unhelpful_ai.yaml
+│   ├── zh_米粒.yaml
+│   └── zh_翻译腔.yaml
 ├── config_templates
-│   ├── README.md
-│   ├── conf.ZH.default.yaml
-│   └── conf.default.yaml
+│   ├── README.md
+│   ├── conf.ZH.default.yaml
+│   └── conf.default.yaml
 ├── doc
-│   └── sample_conf
-│       ├── sherpaASRTTS_sense_voice_melo.yaml
-│       ├── sherpaASRTTS_sense_voice_piper_en.yaml
-│       ├── sherpaASRTTS_sense_voice_vits_zh.yaml
-│       ├── sherpaASR_paraformer.yaml
-│       └── sherpaASR_sense_voice.yaml
+│   └── sample_conf
+│       ├── sherpaASRTTS_sense_voice_melo.yaml
+│       ├── sherpaASRTTS_sense_voice_piper_en.yaml
+│       ├── sherpaASRTTS_sense_voice_vits_zh.yaml
+│       ├── sherpaASR_paraformer.yaml
+│       └── sherpaASR_sense_voice.yaml
 ├── dockerfile
-├── frontend
-│   ├── assets
-│   │   ├── main-6gNOTEMZ.css
-│   │   └── main-DsLaT6SU.js
-│   ├── favicon.ico
-│   ├── index.html
-│   └── libs
-│       ├── live2d.min.js
-│       └── live2dcubismcore.min.js
 ├── live2d-models
-│   ├── mao_pro
-│   │   ├── expressions
-│   │   │   ├── exp_01.exp3.json
-│   │   │   ├── exp_02.exp3.json
-│   │   │   ├── exp_03.exp3.json
-│   │   │   ├── exp_04.exp3.json
-│   │   │   ├── exp_05.exp3.json
-│   │   │   ├── exp_06.exp3.json
-│   │   │   ├── exp_07.exp3.json
-│   │   │   └── exp_08.exp3.json
-│   │   ├── mao_pro.4096
-│   │   │   └── texture_00.png
-│   │   ├── mao_pro.cdi3.json
-│   │   ├── mao_pro.moc3
-│   │   ├── mao_pro.model3.json
-│   │   ├── mao_pro.physics3.json
-│   │   ├── mao_pro.pose3.json
-│   │   └── motions
-│   │       ├── mtn_01.motion3.json
-│   │       ├── mtn_02.motion3.json
-│   │       ├── mtn_03.motion3.json
-│   │       ├── mtn_04.motion3.json
-│   │       ├── special_01.motion3.json
-│   │       ├── special_02.motion3.json
-│   │       └── special_03.motion3.json
-│   └── shizuku
-│       ├── expressions
-│       │   ├── f01.exp.json
-│       │   ├── f02.exp.json
-│       │   ├── f03.exp.json
-│       │   └── f04.exp.json
-│       ├── motions
-│       │   ├── flickHead_00.mtn
-│       │   ├── flickHead_01.mtn
-│       │   ├── flickHead_02.mtn
-│       │   ├── idle_00.mtn
-│       │   ├── idle_01.mtn
-│       │   ├── idle_02.mtn
-│       │   ├── pinchIn_00.mtn
-│       │   ├── pinchIn_01.mtn
-│       │   ├── pinchIn_02.mtn
-│       │   ├── pinchOut_00.mtn
-│       │   ├── pinchOut_01.mtn
-│       │   ├── pinchOut_02.mtn
-│       │   ├── shake_00.mtn
-│       │   ├── shake_01.mtn
-│       │   ├── shake_02.mtn
-│       │   ├── tapBody_00.mtn
-│       │   ├── tapBody_01.mtn
-│       │   └── tapBody_02.mtn
-│       ├── shizuku.1024
-│       │   ├── texture_00.png
-│       │   ├── texture_01.png
-│       │   ├── texture_02.png
-│       │   ├── texture_03.png
-│       │   ├── texture_04.png
-│       │   └── texture_05.png
-│       ├── shizuku.moc
-│       ├── shizuku.model.json
-│       ├── shizuku.physics.json
-│       ├── shizuku.pose.json
-│       └── sounds
-│           ├── flickHead_00.mp3
-│           ├── flickHead_01.mp3
-│           ├── flickHead_02.mp3
-│           ├── pinchIn_00.mp3
-│           ├── pinchIn_01.mp3
-│           ├── pinchIn_02.mp3
-│           ├── pinchOut_00.mp3
-│           ├── pinchOut_01.mp3
-│           ├── pinchOut_02.mp3
-│           ├── shake_00.mp3
-│           ├── shake_01.mp3
-│           ├── shake_02.mp3
-│           ├── tapBody_00.mp3
-│           ├── tapBody_01.mp3
-│           └── tapBody_02.mp3
-├── logs
-│   └── debug_2025-02-19.log
+│   ├── mao_pro
+│   │   ├── expressions
+│   │   │   ├── exp_01.exp3.json
+│   │   │   ├── exp_02.exp3.json
+│   │   │   ├── exp_03.exp3.json
+│   │   │   ├── exp_04.exp3.json
+│   │   │   ├── exp_05.exp3.json
+│   │   │   ├── exp_06.exp3.json
+│   │   │   ├── exp_07.exp3.json
+│   │   │   └── exp_08.exp3.json
+│   │   ├── mao_pro.4096
+│   │   │   └── texture_00.png
+│   │   ├── mao_pro.cdi3.json
+│   │   ├── mao_pro.moc3
+│   │   ├── mao_pro.model3.json
+│   │   ├── mao_pro.physics3.json
+│   │   ├── mao_pro.pose3.json
+│   │   └── motions
+│   │       ├── mtn_01.motion3.json
+│   │       ├── mtn_02.motion3.json
+│   │       ├── mtn_03.motion3.json
+│   │       ├── mtn_04.motion3.json
+│   │       ├── special_01.motion3.json
+│   │       ├── special_02.motion3.json
+│   │       └── special_03.motion3.json
+│   └── shizuku
+│       ├── expressions
+│       │   ├── f01.exp.json
+│       │   ├── f02.exp.json
+│       │   ├── f03.exp.json
+│       │   └── f04.exp.json
+│       ├── motions
+│       │   ├── flickHead_00.mtn
+│       │   ├── flickHead_01.mtn
+│       │   ├── flickHead_02.mtn
+│       │   ├── idle_00.mtn
+│       │   ├── idle_01.mtn
+│       │   ├── idle_02.mtn
+│       │   ├── pinchIn_00.mtn
+│       │   ├── pinchIn_01.mtn
+│       │   ├── pinchIn_02.mtn
+│       │   ├── pinchOut_00.mtn
+│       │   ├── pinchOut_01.mtn
+│       │   ├── pinchOut_02.mtn
+│       │   ├── shake_00.mtn
+│       │   ├── shake_01.mtn
+│       │   ├── shake_02.mtn
+│       │   ├── tapBody_00.mtn
+│       │   ├── tapBody_01.mtn
+│       │   └── tapBody_02.mtn
+│       ├── shizuku.1024
+│       │   ├── texture_00.png
+│       │   ├── texture_01.png
+│       │   ├── texture_02.png
+│       │   ├── texture_03.png
+│       │   ├── texture_04.png
+│       │   └── texture_05.png
+│       ├── shizuku.moc
+│       ├── shizuku.model.json
+│       ├── shizuku.physics.json
+│       ├── shizuku.pose.json
+│       └── sounds
+│           ├── flickHead_00.mp3
+│           ├── flickHead_01.mp3
+│           ├── flickHead_02.mp3
+│           ├── pinchIn_00.mp3
+│           ├── pinchIn_01.mp3
+│           ├── pinchIn_02.mp3
+│           ├── pinchOut_00.mp3
+│           ├── pinchOut_01.mp3
+│           ├── pinchOut_02.mp3
+│           ├── shake_00.mp3
+│           ├── shake_01.mp3
+│           ├── shake_02.mp3
+│           ├── tapBody_00.mp3
+│           ├── tapBody_01.mp3
+│           └── tapBody_02.mp3
 ├── merge_configs.py
 ├── model_dict.json
-├── models
-│   └── sherpa-onnx-sense-voice-zh-en-ja-ko-yue-2024-07-17
-│       ├── LICENSE
-│       ├── README.md
-│       ├── export-onnx.py
-│       ├── model.int8.onnx
-│       └── tokens.txt
 ├── pixi.lock
 ├── prompts
-│   ├── __init__.py
-│   ├── prompt_loader.py
-│   └── utils
-│       ├── group_conversation_prompt.txt
-│       ├── live2d_expression_prompt.txt
-│       └── think_tag_prompt.txt
+│   ├── __init__.py
+│   ├── prompt_loader.py
+│   └── utils
+│       ├── concise_style_prompt.txt
+│       ├── group_conversation_prompt.txt
+│       ├── live2d_expression_prompt.txt
+│       └── think_tag_prompt.txt
 ├── pyproject.toml
 ├── run_server.py
 ├── src
-│   └── open_llm_vtuber
-│       ├── __init__.py
-│       ├── agent
-│       │   ├── __init__.py
-│       │   ├── agent_factory.py
-│       │   ├── agents
-│       │   │   ├── __init__.py
-│       │   │   ├── agent_interface.py
-│       │   │   ├── basic_memory_agent.py
-│       │   │   ├── hume_ai.py
-│       │   │   └── mem0_llm.py
-│       │   ├── input_types.py
-│       │   ├── output_types.py
-│       │   ├── stateless_llm
-│       │   │   ├── __init__.py
-│       │   │   ├── claude_llm.py
-│       │   │   ├── llama_cpp_llm.py
-│       │   │   ├── ollama_llm.py
-│       │   │   ├── openai_compatible_llm.py
-│       │   │   └── stateless_llm_interface.py
-│       │   ├── stateless_llm_factory.py
-│       │   └── transformers.py
-│       ├── asr
-│       │   ├── __init__.py
-│       │   ├── asr_factory.py
-│       │   ├── asr_interface.py
-│       │   ├── azure_asr.py
-│       │   ├── faster_whisper_asr.py
-│       │   ├── fun_asr.py
-│       │   ├── groq_whisper_asr.py
-│       │   ├── openai_whisper_asr.py
-│       │   ├── sherpa_onnx_asr.py
-│       │   ├── utils.py
-│       │   └── whisper_cpp_asr.py
-│       ├── chat_group.py
-│       ├── chat_history_manager.py
-│       ├── config_manager
-│       │   ├── __init__.py
-│       │   ├── agent.py
-│       │   ├── asr.py
-│       │   ├── character.py
-│       │   ├── i18n.py
-│       │   ├── main.py
-│       │   ├── stateless_llm.py
-│       │   ├── system.py
-│       │   ├── tts.py
-│       │   ├── tts_preprocessor.py
-│       │   ├── utils.py
-│       │   └── vad.py
-│       ├── conversations
-│       │   ├── __init__.py
-│       │   ├── conversation_handler.py
-│       │   ├── conversation_utils.py
-│       │   ├── group_conversation.py
-│       │   ├── single_conversation.py
-│       │   ├── tts_manager.py
-│       │   └── types.py
-│       ├── live2d_model.py
-│       ├── message_handler.py
-│       ├── routes.py
-│       ├── server.py
-│       ├── service_context.py
-│       ├── translate
-│       │   ├── __init__.py
-│       │   ├── deeplx.py
-│       │   ├── tencent.py
-│       │   ├── translate_factory.py
-│       │   └── translate_interface.py
-│       ├── tts
-│       │   ├── __init__.py
-│       │   ├── azure_tts.py
-│       │   ├── bark_tts.py
-│       │   ├── coqui_tts.py
-│       │   ├── cosyvoice2_tts.py
-│       │   ├── cosyvoice_tts.py
-│       │   ├── edge_tts.py
-│       │   ├── fish_api_tts.py
-│       │   ├── gpt_sovits_tts.py
-│       │   ├── melo_tts.py
-│       │   ├── pyttsx3_tts.py
-│       │   ├── sherpa_onnx_tts.py
-│       │   ├── tts_factory.py
-│       │   ├── tts_interface.py
-│       │   └── x_tts.py
-│       ├── utils
-│       │   ├── __init__.py
-│       │   ├── install_utils.py
-│       │   ├── sentence_divider.py
-│       │   ├── stream_audio.py
-│       │   └── tts_preprocessor.py
-│       ├── vad
-│       │   ├── __init__.py
-│       │   ├── silero.py
-│       │   ├── vad_factory.py
-│       │   └── vad_interface.py
-│       └── websocket_handler.py
-├── tree.txt
+│   └── open_llm_vtuber
+│       ├── __init__.py
+│       ├── agent
+│       │   ├── __init__.py
+│       │   ├── agent_factory.py
+│       │   ├── agents
+│       │   │   ├── __init__.py
+│       │   │   ├── agent_interface.py
+│       │   │   ├── basic_memory_agent.py
+│       │   │   ├── hume_ai.py
+│       │   │   └── mem0_llm.py
+│       │   ├── input_types.py
+│       │   ├── output_types.py
+│       │   ├── stateless_llm
+│       │   │   ├── __init__.py
+│       │   │   ├── claude_llm.py
+│       │   │   ├── llama_cpp_llm.py
+│       │   │   ├── ollama_llm.py
+│       │   │   ├── openai_compatible_llm.py
+│       │   │   └── stateless_llm_interface.py
+│       │   ├── stateless_llm_factory.py
+│       │   └── transformers.py
+│       ├── asr
+│       │   ├── __init__.py
+│       │   ├── asr_factory.py
+│       │   ├── asr_interface.py
+│       │   ├── azure_asr.py
+│       │   ├── faster_whisper_asr.py
+│       │   ├── fun_asr.py
+│       │   ├── groq_whisper_asr.py
+│       │   ├── openai_whisper_asr.py
+│       │   ├── sherpa_onnx_asr.py
+│       │   ├── utils.py
+│       │   └── whisper_cpp_asr.py
+│       ├── chat_group.py
+│       ├── chat_history_manager.py
+│       ├── config_manager
+│       │   ├── __init__.py
+│       │   ├── agent.py
+│       │   ├── asr.py
+│       │   ├── character.py
+│       │   ├── i18n.py
+│       │   ├── main.py
+│       │   ├── stateless_llm.py
+│       │   ├── system.py
+│       │   ├── tts.py
+│       │   ├── tts_preprocessor.py
+│       │   ├── utils.py
+│       │   └── vad.py
+│       ├── conversations
+│       │   ├── __init__.py
+│       │   ├── conversation_handler.py
+│       │   ├── conversation_utils.py
+│       │   ├── group_conversation.py
+│       │   ├── single_conversation.py
+│       │   ├── tts_manager.py
+│       │   └── types.py
+│       ├── live2d_model.py
+│       ├── message_handler.py
+│       ├── routes.py
+│       ├── server.py
+│       ├── service_context.py
+│       ├── translate
+│       │   ├── __init__.py
+│       │   ├── deeplx.py
+│       │   ├── tencent.py
+│       │   ├── translate_factory.py
+│       │   └── translate_interface.py
+│       ├── tts
+│       │   ├── __init__.py
+│       │   ├── azure_tts.py
+│       │   ├── bark_tts.py
+│       │   ├── coqui_tts.py
+│       │   ├── cosyvoice2_tts.py
+│       │   ├── cosyvoice_tts.py
+│       │   ├── edge_tts.py
+│       │   ├── fish_api_tts.py
+│       │   ├── gpt_sovits_tts.py
+│       │   ├── melo_tts.py
+│       │   ├── pyttsx3_tts.py
+│       │   ├── sherpa_onnx_tts.py
+│       │   ├── tts_factory.py
+│       │   ├── tts_interface.py
+│       │   └── x_tts.py
+│       ├── utils
+│       │   ├── __init__.py
+│       │   ├── install_utils.py
+│       │   ├── sentence_divider.py
+│       │   ├── stream_audio.py
+│       │   └── tts_preprocessor.py
+│       ├── vad
+│       │   ├── __init__.py
+│       │   ├── silero.py
+│       │   ├── vad_factory.py
+│       │   └── vad_interface.py
+│       └── websocket_handler.py
 ├── upgrade.py
 ├── uv.lock
 └── web_tool
@@ -691,9 +685,6 @@ character_config:
     ├── main.js
     └── recorder.js
 
-53 directories, 294 files
-
-        
 
 ---
 
