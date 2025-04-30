@@ -9,12 +9,12 @@ export default (function () {
     onRouteUpdate({location}) {
       // Check if the config is already set (e.g., by a previous navigation)
       // Also check if the script is added, maybe the config exists but script failed last time
-      if (!window.difyChatbotConfig && !document.getElementById('wairWlveaRXYYqb5')) {
+      if (!window.difyChatbotConfig && !document.getElementById('wi0Eh7bTEZYvWY9z')) {
           console.log('Setting Dify config and adding script via client module');
           
           // Define configuration
           window.difyChatbotConfig = {
-            token: 'wairWlveaRXYYqb5',
+            token: 'wi0Eh7bTEZYvWY9z',
             systemVariables: {
               // user_id: 'YOU CAN DEFINE USER ID HERE',
               // conversation_id: 'YOU CAN DEFINE CONVERSATION ID HERE, IT MUST BE A VALID UUID',
@@ -28,13 +28,13 @@ export default (function () {
           // Create and append the script tag
           const script = document.createElement('script');
           script.src = 'https://udify.app/embed.min.js';
-          script.id = 'wairWlveaRXYYqb5';
+          script.id = 'wi0Eh7bTEZYvWY9z';
           if (nonceValue) {
             script.setAttribute('nonce', nonceValue);
             console.log('Applied nonce to Dify script:', nonceValue);
           }
           document.head.appendChild(script); // Append to head
-      } else if (window.difyChatbotConfig && !document.getElementById('wairWlveaRXYYqb5')) {
+      } else if (window.difyChatbotConfig && !document.getElementById('wi0Eh7bTEZYvWY9z')) {
          // Config exists, but script is missing (maybe removed or failed to load)
          console.log('Dify config exists, re-adding script via client module');
          
@@ -44,7 +44,7 @@ export default (function () {
 
          const script = document.createElement('script');
          script.src = 'https://udify.app/embed.min.js';
-         script.id = 'wairWlveaRXYYqb5';
+         script.id = 'wi0Eh7bTEZYvWY9z';
          if (nonceValue) {
            script.setAttribute('nonce', nonceValue);
            console.log('Applied nonce to Dify script (re-add):', nonceValue);
