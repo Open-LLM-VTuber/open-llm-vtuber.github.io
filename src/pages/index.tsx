@@ -38,10 +38,10 @@ function HomepageHeader() {
         <div className={styles.buttons}>
           <Link
             className={styles.customButton}
-            to="/docs/download">
+            to="/docs/quick-start">
             {translate({
-              id: 'homepage.downloadButton',
-              message: 'Download App',
+              id: 'homepage.getStartedButton',
+              message: 'Get Started',
             })}
           </Link>
           <Link

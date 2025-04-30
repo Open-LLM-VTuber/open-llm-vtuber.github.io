@@ -51,6 +51,10 @@
     "message": "示例图片",
     "description": "Title of the showcase gallery section"
   },
+  "homepage.getStartedButton": {
+    "message": "开始使用",
+    "description": "Text for the get started button on homepage"
+  },
   "homepage.downloadButton": {
     "message": "下载应用",
     "description": "Text for the download app button on homepage"

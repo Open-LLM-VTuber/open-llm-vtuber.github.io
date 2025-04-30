@@ -358,6 +358,10 @@
     "message": "Keep your AI companion visible with desktop pet mode - transparent overlay, drag anywhere, and seamless mode switching.",
     "description": "Description of companion feature"
   },
+  "homepage.getStartedButton": {
+    "message": "Get Started",
+    "description": "Text for the get started button on homepage"
+  },
   "homepage.tagline": {
     "message": "Your AI waifu with real-time voice interaction and Live2D body",
     "description": "The homepage tagline"
