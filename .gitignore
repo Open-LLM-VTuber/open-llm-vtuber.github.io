@@ -23,6 +23,3 @@ yarn-error.log*
 
 # Ignore all dist directories
 dist/
-
-# But keep this specific dist directory
-!src/theme/NavbarItem/documate/react/dist/

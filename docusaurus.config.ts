@@ -110,11 +110,6 @@ const config: Config = {
         src: "img/open_llm_vtuber.png",
       },
       items: [
-        // {
-        //   type: "custom-documate",
-        //   position: "right",
-        //   endpoint: "http://localhost:2493/ask",
-        // },
         {
           type: "localeDropdown",
           position: "right",
