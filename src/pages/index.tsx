@@ -6,7 +6,6 @@ import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
 import { translate } from '@docusaurus/Translate';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import ShowcaseGallery from '@site/src/components/ShowcaseGallery';
 
 import styles from './index.module.css';
 
@@ -44,16 +43,6 @@ function HomepageHeader() {
               message: 'Get Started',
             })}
           </Link>
-          <Link
-            className={styles.customButton}
-            to="https://workshop.llmvtuber.com"
-            target="_blank"
-            rel="noopener noreferrer">
-            {translate({
-              id: 'homepage.workshopButton',
-              message: 'Workshop',
-            })}
-          </Link>
         </div>
       </div>
     </header>
@@ -69,7 +58,6 @@ export default function Home(): JSX.Element {
       <HomepageHeader />
       <main>
         <HomepageFeatures />
-        <ShowcaseGallery />
       </main>
     </Layout>
   );
