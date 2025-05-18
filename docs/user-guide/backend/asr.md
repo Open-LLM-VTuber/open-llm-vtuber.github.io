@@ -26,7 +26,14 @@ import TabItem from '@theme/TabItem';
 :::
 
 ### CUDA 推理
+
 `sherpa-onnx` 支持 CPU 和 CUDA 推理。虽然预设的 `SenseVoiceSmall` 模型在 CPU 上已经表现不错，但如果您有 NVIDIA GPU，可以通过以下步骤启用 CUDA 推理来获得更好的性能：
+
+[官方文档](https://k2-fsa.github.io/sherpa/onnx/python/install.html#method-2-from-pre-compiled-wheels-cpu-cuda)
+
+:::warning
+注意: sherpa onnx 似乎只支持 CUDA 11.8，但我没有证据。请参考[官方文档](https://k2-fsa.github.io/sherpa/onnx/python/install.html#method-2-from-pre-compiled-wheels-cpu-cuda)，安装 CUDA 11.8 以及获取更多信息。
+:::
 
 1. 首先卸载 CPU 版本的依赖：
 ```sh

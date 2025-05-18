@@ -27,17 +27,23 @@ Starting from version `v1.0.0`, this project uses `sherpa-onnx` to run the `Sens
 ### CUDA Inference
 `sherpa-onnx` supports both CPU and CUDA inference. Although the default `SenseVoiceSmall` model performs well on CPU, if you have an NVIDIA GPU, you can enable CUDA inference for better performance by following these steps:
 
+[Official doc on CUDA](https://k2-fsa.github.io/sherpa/onnx/python/install.html#method-2-from-pre-compiled-wheels-cpu-cuda)
+
+:::warning
+Warning: We suspect that sherpa onnx only support CUDA 11.8, but I'm not sure. Please refer to the [official documentation](https://k2-fsa.github.io/sherpa/onnx/python/install.html#method-2-from-pre-compiled-wheels-cpu-cuda) for CUDA 11.8 installation and more details.
+:::
+
 1. First, uninstall the CPU version dependencies:
 ```sh
 uv remove sherpa-onnx onnxruntime
 ```
 
-2. Install the CUDA version of `sherpa-onnx` and `onnxruntime-gpu` dependencies:
+1. Install the CUDA version of `sherpa-onnx` and `onnxruntime-gpu` dependencies:
 ```sh
 uv add onnxruntime-gpu sherpa-onnx==1.10.39+cuda -f https://k2-fsa.github.io/sherpa/onnx/cuda.html 
 ```
 
-3. Modify the configuration file:
+1. Modify the configuration file:
 In `conf.yaml`, find the `sherpa_onnx_asr` section and set `provider` to `cuda`
 
 ### Using Other sherpa-onnx Models
