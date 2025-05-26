@@ -4,7 +4,7 @@
         <title>Open LLM Vtuber Blog</title>
         <link>https://open-llm-vtuber.github.io/blog</link>
         <description>Open LLM Vtuber Blog</description>
-        <lastBuildDate>Sun, 18 May 2025 10:28:14 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 26 May 2025 05:54:36 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>zh-Hans</language>
@@ -12,7 +12,7 @@
             <title><![CDATA[v1.0.0 正式发布]]></title>
             <link>https://open-llm-vtuber.github.io/blog/v1.0.0-release</link>
             <guid>https://open-llm-vtuber.github.io/blog/v1.0.0-release</guid>
-            <pubDate>Sun, 18 May 2025 10:28:14 GMT</pubDate>
+            <pubDate>Mon, 26 May 2025 05:54:36 GMT</pubDate>
         </item>
     </channel>
 </rss>
