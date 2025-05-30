@@ -151,6 +151,9 @@ Error calling the chat endpoint
 ## 网页/客户端相关
 
 ### Web 显示 `{"detail": "Not Found"}` 怎么办
+
+![](img/faq/detail-not-found.jpg)
+
 - 前端代码没有被拉取到本地。出现这个报错说明你没有获取到完整的项目代码。请在项目目录下运行 `git submodule update --init --recursive` 来拉取项目代码。
 - 详细请参考 [快速开始/1. 获取项目代码](quick-start#1-获取项目代码) 中提到的两种获取项目代码的方式。
 

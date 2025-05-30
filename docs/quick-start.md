@@ -257,7 +257,7 @@ source ~/.zshrc   # 如果使用 zsh
 
 更多 uv 安装方法参考：[Installing uv](https://docs.astral.sh/uv/getting-started/installation/)
 
-## 手动部署指南
+## 部署指南
 
 ### 1. 获取项目代码
 
@@ -271,7 +271,11 @@ source ~/.zshrc   # 如果使用 zsh
 
 <Tabs groupId="code-clone-method">
   <TabItem value="release" label="下载稳定的 release 包">
-  前往最新的 [release 页面](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/releases)，下载长得像 `Open-LLM-VTuber-v1.x.x.zip` 的 zip 文件。
+  从项目的 [**Release 页面**](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/releases)，下载长得像 `Open-LLM-VTuber-v1.x.x.zip` 的 zip 文件。
+
+  :::warning
+  注意，是 Release 页面，**不是**项目主页上面那个 Code 按钮的 "Download ZIP" 选项。请不要用 "Download ZIP" 按钮下载项目代码。
+  :::
 
   如果你想要使用桌宠模式或是桌面版本，你可以顺手再下载以 `open-llm-vtuber-electron` 开头的文件。windows 用户下载 exe，macOS 用户下载 dmg文件。这个是桌面版本的客户端。之后等后端配置完成并启动之后，这个electron 版前端可以启动桌宠模式。
 
@@ -281,8 +285,10 @@ source ~/.zshrc   # 如果使用 zsh
   使用 git 拉取时，请确保网络畅通。中国大陆用户可能需要开启代理。
   :::
 
-  :::info
-  自 `v1.0.0` 开始，前端代码 (用户界面) 已被拆分到独立仓库中。我们建立了构建流程，并通过 git submodule 将前端代码链接到主仓库的 `frontend` 目录下，因此在克隆仓库时要像下面这样添加 `--recursive`。
+  :::warning
+  git clone 命令后面必须加上 `--recursive` flag。
+  
+  这是因为自 `v1.0.0` 开始，前端代码 (用户界面) 已被拆分到独立仓库中。我们建立了构建流程，通过 git submodule 将前端代码链接到主仓库的 `frontend` 目录下，因此在克隆仓库时要添加 `--recursive` 的 flag，否则会缺失前端代码，造成 [浏览器显示 Detail Not Found 的错误](faq.md#web-显示-detailnotfound-怎么办)。
   :::
 
   ```bash
@@ -295,6 +301,17 @@ source ~/.zshrc   # 如果使用 zsh
 
   如果你想要使用桌宠模式或是桌面版本，你可以前往[Open-LLM-VTuber-Web 的 Release 页面](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web/releases/latest) 顺手再下载以 `open-llm-vtuber-electron` 开头的文件。windows 用户下载 exe，macOS 用户下载 dmg文件。这个是桌面版本的客户端。之后等后端配置完成并启动之后，这个electron 版前端可以启动桌宠模式。
 
+  </TabItem>
+
+  <TabItem value="git-zip" label="不要从 Code 按钮下载 zip">
+  ![don't do this](./img/git-code-zip.jpg)
+
+  请 **不要** 从 GitHub 主页上，那个绿色的 "Code" 按钮那边，下载 Zip 文件，或是直接用那边提供的克隆命令，获取项目代码。
+
+  为什么不能从 Code 按钮下载 Zip 文件?
+  - 从 Code 按钮中获取的 Zip 文件 **不包含 Git 信息**。这是 Github 自己生成的，我没法控制。
+  - 本项目前端由 submodule 链接，如果你从这个按钮下载 Zip 文件，你会拿不到前端代码，导致 [浏览器显示 Detail Not Found 的错误](faq.md#web-显示-detailnotfound-怎么办)
+  - 本项目更新机制依赖 Git，因此缺失 Git 信息**会导致你无法使用更新功能**。
   </TabItem>
 
 </Tabs>

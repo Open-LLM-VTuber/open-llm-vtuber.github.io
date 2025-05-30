@@ -138,6 +138,9 @@ If you absolutely must run two Open-LLM-VTuber backends simultaneously, or if an
 ## Web/Client Related
 
 ### What to do if Web displays `{"detail": "Not Found"}`?
+
+![](img/faq/detail-not-found.jpg)
+
 - The frontend code hasn't been pulled to local. This error appears when you haven't obtained the complete project code. Please run `git submodule update --init --recursive` in the project directory to pull the project code.
 - For details, please refer to the two ways of obtaining project code mentioned in [Quick Start/1. Get Project Code](quick-start#1-get-project-code).
 
