@@ -267,7 +267,7 @@ siliconflow_tts:
   api_url: "https://api.siliconflow.cn/v1/audio/speech"  # 服务端点，固定值
   api_key: "sk-youkey"  # 官网获取的API密钥
   default_model: "FunAudioLLM/CosyVoice2-0.5B"  # 音频模型名称（支持列表见官网）
-  default_voice: "speech:Dreamflowers:5bdstvc39i:xkqldnpasqmoqbakubom"  # 音色ID，需在官网上传自定义音色后获取
+  default_voice: "speech:Dreamflowers:aaaaaaabvbbbasdas"  # 音色ID，需在官网上传自定义音色后获取
   sample_rate: 32000  # 输出采样率，声音异常时可尝试调整（如16000、44100）
   response_format: "mp3"  # 音频格式（mp3/wav等）
   stream: true  # 是否启用流式传输
