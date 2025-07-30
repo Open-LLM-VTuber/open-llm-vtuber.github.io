@@ -252,7 +252,7 @@ uv pip install fish-audio-sdk
 
 # SiliconFlow TTS（在线、需 API 密钥）  
 硅基流动提供的在线文本转语音服务，支持自定义音频模型和音色配置。  
-
+:::
 
 ## 配置步骤  
 1. **上传音频**：  
