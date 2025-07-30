@@ -249,10 +249,10 @@ uv pip install fish-audio-sdk
 :::
 :::tip
 `conf.yaml` 中默认使用的是 neuro-sama 同款语音
+:::
 
 # SiliconFlow TTS（在线、需 API 密钥）  
 硅基流动提供的在线文本转语音服务，支持自定义音频模型和音色配置。  
-:::
 
 ## 配置步骤  
 1. **上传音频**：  
