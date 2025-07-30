@@ -256,7 +256,7 @@ uv pip install fish-audio-sdk
 
 ## 配置步骤  
 1. **上传音频**：  
-   硅基流动目前有FunAudioLLM/CosyVoice2-0.5B，需要上官网上传参考音频，网址如下
+   硅基流动目前有FunAudioLLM/CosyVoice2-0.5B，需要上官网上传参考音频，网址如下：
    https://docs.siliconflow.cn/cn/api-reference/audio/upload-voice。  
 
 3. **填写 `conf.yaml` 配置**：  
