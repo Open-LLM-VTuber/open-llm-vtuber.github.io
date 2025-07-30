@@ -265,7 +265,7 @@ uv pip install fish-audio-sdk
 ```yaml
 siliconflow_tts:
   api_url: "https://api.siliconflow.cn/v1/audio/speech"  # 服务端点，固定值
-  api_key: "sk-youkey"  # 官网获取的API密钥
+  api_key: "sk-yourkey"  # 官网获取的API密钥
   default_model: "FunAudioLLM/CosyVoice2-0.5B"  # 音频模型名称（支持列表见官网）
   default_voice: "speech:Dreamflowers:aaaaaaabvbbbasdas"  # 音色ID，需在官网上传自定义音色后获取
   sample_rate: 32000  # 输出采样率，声音异常时可尝试调整（如16000、44100）
