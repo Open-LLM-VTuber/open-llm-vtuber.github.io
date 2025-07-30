@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 # Updating the Project
@@ -12,7 +12,7 @@ If your project version is below `v1.0.0`, you must redeploy the project followi
 
 This project comes with an update script called `upgrade.py` in the project directory. Running `uv run upgrade.py` will update the project.
 
-Currently, the update script only supports updating the backend and Web version. If you're using the Electron version of the desktop pet, after using the update script, please visit the [Open-LLM-VTuber-Web Repository's Release Page](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web/releases) to download the latest version of the desktop client.
+Currently, the update script only supports updating the backend and Web version. If you are using the Electron version of the desktop pet, please go to the [Download Page](/docs/download) to download the latest version of the desktop client after using the update script.
 
 ### Git
 

@@ -22,7 +22,7 @@ If you replace Ollama with OpenAI Compatible and sherpa-onnx-asr (SenseVoiceSmal
 :::
 
 :::warning
-This project only recommends using **Chrome**. Known issues exist with browsers like Edge and Safari, such as model expressions not working.
+This project only recommends using **Chrome**. Known issues exist with browsers like Edge and Safari.
 :::
 
 :::danger About Proxies
@@ -206,7 +206,66 @@ nvcc --version
 Starting from version v1.0.0, we recommend using [uv](https://docs.astral.sh/uv/) as the dependency management tool.
 
 :::note
-If you prefer to use conda or venv, you can also use these tools. The project is fully compatible with the standard pip installation method.
+If you prefer to use conda, venv, or something similar, you can them as well. Starting from `v1.2.0`, the project is fully compatible with standard pip installation methods.
+
+Guidelines and Notes on using pip and conda
+<details>
+uv is the dependency management tool for this project, and I recommend using uv.
+
+conda, pip, and other dependency management tools can also be used, but we will not test these tools nor answer questions arising from their use (because before v1.0.0 we used conda, and we received a significant number of Python-related questions).
+
+If you absolutely must use them, please pay close attention to issues like the Python version and the Python executable used by the virtual environment. Before migrating to uv, many, many people encountered various problems.
+
+Ensure your Python version is >= 3.10 and < 3.13. I am not sure about the current version's compatibility with 3.13, but you can try it.
+
+#### Installing project dependencies using pip
+
+> (Added in project version `v1.2.0`)
+
+```sh
+pip install -r requirements.txt
+```
+- This `requirements.txt` is automatically generated from the `pyproject.toml` file and might pin dependencies quite strictly. If issues arise, you can refer to the dependency versions declared in `pyproject.toml` and loosen the constraints yourself. Alternatively, switch to using uv or another tool that supports declaring dependencies via `pyproject.toml`.
+
+Or
+```sh
+pip install -e .
+```
+- This command installs dependencies using the pyproject.toml file, but it also installs the project itself into the environment in editable mode. I suspect this might cause issues during project updates, but I'm not certain.
+
+
+Then run the project
+
+```sh
+python run_server.py
+```
+
+Afterward, any `uv add` or `uv remove` commands mentioned in the documentation can be directly replaced with `pip install`, `pip uninstall`, etc.
+
+#### conda
+1. In the current directory, create a conda environment
+```sh
+conda create -p "./.conda" python=3.10.6
+```
+
+2. Activate this conda environment
+```sh
+conda activate ./.conda
+```
+
+3. Use pip to install project dependencies
+```sh
+pip install -r requirements.txt
+```
+
+4. Run the project
+```sh
+python run_server.py
+```
+
+Afterward, any `uv add` or `uv remove` commands mentioned in the documentation can be directly replaced with `pip install`, `pip uninstall`, etc.
+
+</details>
 :::
 
 <Tabs groupId="operating-systems">
@@ -215,12 +274,11 @@ If you prefer to use conda or venv, you can also use these tools. The project is
 ```powershell
 # Method 1: PowerShell
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
-# Or wget -qO- https://astral.sh/uv/install.sh | sh if you don't have curl
 
 # Method 2: winget
 winget install --id=astral-sh.uv -e
 
-# Important: If you choose winget, restart the shell or source the shell config file.
+# Important: For winget, please restart the command line / IDE after installation
 ```
 
   </TabItem>
@@ -229,16 +287,23 @@ winget install --id=astral-sh.uv -e
 ```bash
 # Method 1:  curl
 curl -LsSf https://astral.sh/uv/install.sh | sh
-# Or wget -qO- https://astral.sh/uv/install.sh | sh if you don't have curl.
+# Or run wget -qO- https://astral.sh/uv/install.sh | sh if curl is not available on your computer
 
 # Method 2: homebrew (if installed)
 brew install uv
 
-# Important: If you choose curl or wget, restart the shell or source the shell config file.
+# Important: After installation, please run the following command to reload the configuration file, or restart the command line / IDE
+source ~/.bashrc  # If using bash
+# Or
+source ~/.zshrc   # If using zsh
 ```
 
   </TabItem>
 </Tabs>
+
+:::warning
+For winget, curl or weget, you need to restart the command line / IDE or reload the configuration file after installing uv
+:::
 
 For more uv installation methods, refer to: [Installing uv](https://docs.astral.sh/uv/getting-started/installation/)
 
@@ -246,7 +311,13 @@ For more uv installation methods, refer to: [Installing uv](https://docs.astral.
 
 ### 1. Get the Project Code
 
-There are two methods to acquire the project code.
+We need to download the project code. There are two methods to acquire the project code.
+
+:::warning
+Please place the project in a suitable location, ensuring the path does not contain Chinese characters.
+
+For example, a path like `D:\新建文件夹\Open-LLM=VTuber` might cause errors. Please ensure the path consists only of English characters.
+:::
 
 <Tabs groupId="code-clone-method">
   <TabItem value="release" label="Download Stable Release from GitHub">
@@ -349,7 +420,9 @@ uv run run_server.py
 Then press `Ctrl` + `C` to exit the program.
 
 :::info
-Starting from version `v1.1.0`, the `conf.yaml` file may not automatically appear in the project directory. Please run the main program `uv run run_server.py` once to generate the configuration file.
+Starting from version `v1.1.0`, the `conf.yaml` file may not automatically appear in the project directory. Please copy the `conf.default.yaml` or `conf.ZH.default.yaml` file from the `config_templates` directory to the project root directory and rename it to `conf.yaml`.
+
+Alternatively, you can generate the configuration file by running the main program `uv run run_server.py` and exiting with `Ctrl` + `C` (this method is not recommended). Please note that the exit operation needs to be performed promptly, otherwise the program will start downloading model files (exiting at this point may prevent startup next time, the solution is to delete all files under `models/`).
 :::
 
 ### 3. Configure LLM
@@ -363,7 +436,7 @@ If you do not want to use Ollama / encounter difficult issues with Ollama config
 - Claude
 - Gemini
 - Mistral
-- Zhipu
+- Zhipu AI
 - DeepSeek
 - LM Studio (similar to Ollama, easier to use)
 - vLLM (better performance, more complex configuration)
@@ -449,22 +522,26 @@ For more information about the frontend, refer to the [Frontend Guide](./user-gu
 
 
 ## Next Step:
-- [Common Issue](faq.md)
+- [Common Issues](faq.md)
+- [Long-Term Memory (Letta)](user-guide/backend/agent#letta-agent)
 - [Desktop Pet Mode](user-guide/frontend/mode)
-- [Modifying AI's persona (prompt)](user-guide/backend/character_settings.md)
-- [AI Group Chat (lacking docs as of now)]
+- [Modifying AI Character Settings (Prompt)](user-guide/backend/character_settings.md)
+- [AI Group Chat (currently lacking documentation)](user-guide/backend/group_chat.md)
 - [Modify Live2D Model](user-guide/live2d)
-- [Change LLM](user-guide/backend/llm.md)
-- [Change TTS model (AI's voice)](user-guide/backend/tts.md)
-- [Change ASR model (speech recognition model)](user-guide/backend/asr.md)
-- [Join discussion & community](community/contact.md)
-- [Contributing to our project](community/contribute.md)
+- [Modify LLM (Large Language Model)](user-guide/backend/llm.md)
+- [Modify TTS Model (AI's Voice Model)](user-guide/backend/tts.md)
+- [Modify ASR Model (Speech Recognition Model)](user-guide/backend/asr.md)
+- [Join Discussions, Join the Community](community/contact.md)
+- [Contribute to Development](community/contribute.md)
 
+### Long-term memory?
+In version `1.2.0`, long-term memory implementation based on Letta (also known as MemGPT) was added thanks to the effort of ([PR #179](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/pull/179)). Your AI companion can get long term memory powered by Letta, though this will increase conversation latency.
 
+For more details, see the [Agent -> Letta Agent page](user-guide/backend/agent#letta-agent)
 
 
 ### If you don't have a `conf.yaml` file in your project directory
-Starting from version `v1.1.0`, the `conf.yaml` file may not automatically appear in your project directory. Please run the main program `uv run run_server.py` once to generate the configuration file.
+Starting from version `v1.1.0`, the `conf.yaml` file might not automatically appear in the project directory. Please run the main program `uv run run_server.py` once to generate the configuration file.
 
 ### If you encounter the `Error calling the chat endpoint...` error, please check:
 
@@ -474,4 +551,4 @@ Starting from version `v1.1.0`, the `conf.yaml` file may not automatically appea
 
 - If your proxy software does not bypass local addresses, Ollama will not be able to connect. Try temporarily disabling the proxy or refer to the previous section to set up proxy bypass for local addresses.
 
-Regarding this issue, we have a detailed explanation in [FAQ -> What to do if I encounter the "Error calling the chat endpoint..." error?](faq#what-to-do-if-i-encounter-the-error-calling-the-chat-endpoint-error)
+Regarding this issue, we have a detailed explanation in [FAQ -> #What-to-do-if-I-encounter-the-error-calling-the-chat-endpoint-error](faq#what-to-do-if-i-encounter-the-error-calling-the-chat-endpoint-error)

@@ -6,7 +6,6 @@ import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
 import { translate } from '@docusaurus/Translate';
 import useBaseUrl from '@docusaurus/useBaseUrl';
-import ShowcaseGallery from '@site/src/components/ShowcaseGallery';
 
 import styles from './index.module.css';
 
@@ -37,9 +36,12 @@ function HomepageHeader() {
         </p>
         <div className={styles.buttons}>
           <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro">
-            Get Started
+            className={styles.customButton}
+            to="/docs/quick-start">
+            {translate({
+              id: 'homepage.getStartedButton',
+              message: 'Get Started',
+            })}
           </Link>
         </div>
       </div>
@@ -56,7 +58,6 @@ export default function Home(): JSX.Element {
       <HomepageHeader />
       <main>
         <HomepageFeatures />
-        <ShowcaseGallery />
       </main>
     </Layout>
   );

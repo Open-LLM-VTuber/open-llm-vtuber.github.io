@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 # 更新项目
@@ -12,7 +12,7 @@ sidebar_position: 5
 
 本项目自带一个更新脚本，在项目目录下，叫做 `upgrade.py`。运行 `uv run upgrade.py` 就可以更新项目了。
 
-目前，更新脚本仅支持更新后端以及 Web 版本。如果你使用 Electron 版本的桌宠，请在使用更新脚本之后，前往 [Open-LLM-VTuber-Web 仓库的 Release 页面](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web/releases) 下载最新版本的桌面版客户端。
+目前，更新脚本仅支持更新后端以及 Web 版本。如果你使用 Electron 版本的桌宠，请在使用更新脚本之后，前往 [下载页面](/docs/download) 下载最新版本的桌面版客户端。
 
 
 ### Git

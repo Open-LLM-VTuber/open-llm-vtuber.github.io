@@ -171,9 +171,3 @@ If you absolutely must run two Open-LLM-VTuber backends simultaneously, or if an
 - This is a known issue caused by iOS security restrictions
 - You need to keep tapping to make the speech function work normally
 - For detailed instructions, please refer to [Mode Introduction](./user-guide/frontend/mode.md)
-
-### What to do if switching modes in the Electron application causes the screen to go blank?
-- This is a low-probability bug that's difficult to fix, and in practice it's rarely triggered.
-- Wait a few seconds, or restart the application to resolve it.
-
-### What to do if model expressions can't be displayed?

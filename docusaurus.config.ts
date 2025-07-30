@@ -56,6 +56,11 @@ const config: Config = {
     mermaid: true,
   },
 
+  // Add the Dify client module
+  clientModules: [
+    './src/clientModules/difyIntegration.js',
+  ],
+
   plugins: [
     [
       "posthog-docusaurus",
@@ -73,8 +78,6 @@ const config: Config = {
       {
         docs: {
           sidebarPath: "./sidebars.ts",
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl:
             "https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Docs/tree/main/",
         },
@@ -84,8 +87,6 @@ const config: Config = {
             type: ["rss", "atom"],
             xslt: true,
           },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl:
             "https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Docs/tree/main/",
           // Useful options to enforce blogging best practices
@@ -101,7 +102,6 @@ const config: Config = {
   ],
 
   themeConfig: {
-    // Replace with your project's social card
     image: "img/Open_LLM_VTuber_Social.png",
     navbar: {
       title: "Open LLM Vtuber",

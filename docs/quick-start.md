@@ -23,7 +23,7 @@ import TabItem from '@theme/TabItem';
 :::
 
 :::warning
-本项目只推荐使用 **Chrome 浏览器**。已知 Edge、Safari 等浏览器都存在不同的问题，比如模型表情无法使用。
+本项目只推荐使用 **Chrome 浏览器**。已知 Edge、Safari 等浏览器都存在不同的问题。
 :::
 
 :::danger 关于代理
@@ -214,7 +214,67 @@ nvcc --version
 从 v1.0.0 版本开始，我们推荐使用 [uv](https://docs.astral.sh/uv/) 作为依赖管理工具。
 
 :::note
-如果你更希望使用 conda 或 venv，也可以使用这些工具。项目完全兼容标准的 pip 安装方式。
+如果你更希望使用 conda 或 venv，也可以使用这些工具。项目自`v1.2.0` 起完全兼容标准的 pip 安装方式。
+
+关于 pip 与 conda 的指南与注意事项
+<details>
+uv 是这个项目的依赖管理工具，我推荐使用 uv。
+
+conda，pip，以及其他的依赖管理工具也可以用，但我们不会测试这些工具，也不会回答这些工具产生的问题 (因为我们 v1.0.0 版本之前用的是 conda，问 python 相关问题的人真的好多啊呱！)。
+
+如果你一定要用，非用不可，请在使用这些工具时重点关注 Python 版本，虚拟环境使用的 Python 执行档等问题，我们在迁移到 uv 之前有很多，很多人遇到了各种各样的问题。
+
+确保你的 Python 版本 >= 3.10, < 3.13。我不确定当前版本与 3.13 的兼容性，你可以试试。
+
+#### 使用 pip 安装项目依赖
+
+> (项目版本 `v1.2.0` 添加)
+
+```sh
+pip install -r requirements.txt
+```
+- 这个 `requirements.txt` 是根据 `pyproject.toml` 文件自动生成出来的，可能会把依赖绑的比较紧。如果出现问题，可以参考 `pyproject.toml` 中声明的依赖版本，自行松绑。亦或是改用 uv 或其他支持以 `pyproject.toml` 声明依赖的工具。
+
+或是
+```sh
+pip install -e .
+```
+- 这个命令会用 pyproject.toml 文件安装依赖，但会把项目本身也一起安装到环境中，我感觉项目更新时有可能会出问题，但我不确定。
+
+
+然后运行项目
+
+```sh
+python run_server.py
+```
+
+之后文档中出现的任何 `uv add`, `uv remove` 命令，可以直接代替换成 `pip install`, `pip uninstall` 等命令。
+
+#### conda
+1. 在当前目录下，创建 conda 环境
+```sh
+conda create -p "./.conda" python=3.10.6
+```
+
+2. 激活这个 conda 环境
+```sh
+conda activate ./.conda
+```
+
+3. 用 pip 安装项目依赖
+```sh
+pip install -r requirements.txt
+```
+
+4. 运行项目
+```sh
+python run_server.py
+```
+
+之后文档中出现的任何 `uv add`, `uv remove` 命令，可以直接代替换成 `pip install`, `pip uninstall` 等命令。
+
+</details>
+
 :::
 
 <Tabs groupId="operating-systems">
@@ -280,7 +340,7 @@ source ~/.zshrc   # 如果使用 zsh
   如果你想要使用桌宠模式或是桌面版本，你可以顺手再下载以 `open-llm-vtuber-electron` 开头的文件。windows 用户下载 exe，macOS 用户下载 dmg文件。这个是桌面版本的客户端。之后等后端配置完成并启动之后，这个electron 版前端可以启动桌宠模式。
 
   </TabItem>
-  <TabItem value="git" label="git 命令拉取">
+  <TabItem value="git" label="Git 命令拉取">
   :::warning
   使用 git 拉取时，请确保网络畅通。中国大陆用户可能需要开启代理。
   :::
@@ -373,7 +433,9 @@ uv run run_server.py
 然后按下 `Ctrl` + `C` 退出程序。
 
 :::info
-`v1.1.0` 版本开始，`conf.yaml` 文件可能不会自动出现在项目目录下。请运行一次项目主程序 `uv run run_server.py` 生成配置文件。
+`v1.1.0` 版本开始，`conf.yaml` 文件可能不会自动出现在项目目录下。请复制 `config_templates` 目录下的 `conf.default.yaml`  或 `conf.ZH.default.yaml` 文件到项目根目录并重命名为 `conf.yaml`。
+
+或者，你也可以通过运行主程序 `uv run run_server.py` 并使用 `Ctrl` + `C` 退出程序来生成配置文件（不推荐使用这个方法）。请注意，退出操作需要及时执行，否则程序会开始下载模型文件（此刻退出可能会导致下次无法启动，解决方案为删除 `models/` 下的全部文件）。
 :::
 
 ### 3. 配置 LLM
@@ -463,20 +525,21 @@ uv run run_server.py
 # 第一次运行可能会下载一些模型，导致等待时间较久。
 ```
 
-运行成功后，访问 `http://localhost:12393` 打开 Web 界面。
+运行成功后，浏览器访问 `http://localhost:12393` 即可打开 Web 界面。
 
 :::tip 桌面应用程序
 如果你更倾向于使用 Electron 应用（窗口模式 + 桌宠模式），可以从 [Open-LLM-VTuber-Web Releases](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web/releases) 下载对应平台的 Electron 客户端。该客户端可在后端服务运行时直接使用，你可能会遇到**安全警告**（由于未进行代码签名）——具体说明和解决方案请查阅[模式介绍](./user-guide/frontend/mode.md)。
 
-有关前端的更多信息，请参考[前端指南](./user-guide/frontend/)
+关于前端的更多信息，请查阅 [前端使用指南](./user-guide/frontend/)
 :::
 
 
 ## 下一步
 - [常见问题](faq.md)
+- [长期记忆 (Letta)](user-guide/backend/agent#letta-agent)
 - [桌宠模式](user-guide/frontend/mode)
 - [修改 AI 角色的设定(提示词)](user-guide/backend/character_settings.md)
-- [AI 群聊 (目前文档欠缺)]
+- [AI 群聊 (目前文档欠缺)](user-guide/backend/group_chat.md)
 - [修改 Live2D 模型](user-guide/live2d)
 - [修改 LLM 大语言模型](user-guide/backend/llm.md)
 - [修改 TTS 模型 (AI 的声音模型)](user-guide/backend/tts.md)
@@ -484,7 +547,10 @@ uv run run_server.py
 - [参与讨论，加入社区](community/contact.md)
 - [参与开发](community/contribute.md)
 
+### 长期记忆?
+`1.2.0` 版本加入了基于 Letta (也就是 MemGPT) 的长期记忆实现 ([PR #179](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/pull/179))，虽然回答延迟会增加，但能实现效果较好的长期记忆。
 
+详见 [Agent -> Letta Agent 页面](user-guide/backend/agent#letta-agent)
 
 
 ### 如果你的项目目录下没有 `conf.yaml` 文件

@@ -2,7 +2,7 @@
 sidebar_position: 7
 ---
 
-# 翻译
+# 翻译 (Translate)
 
 ### 翻译功能
 

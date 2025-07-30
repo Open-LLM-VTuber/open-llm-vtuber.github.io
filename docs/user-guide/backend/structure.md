@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # 后端架构概览
 
-## 核心组件交互流程
+## 核心组件交互流程 (v1.0.0)
 
 ```mermaid
 sequenceDiagram
@@ -50,7 +50,7 @@ sequenceDiagram
     Note over Frontend,Backend: 整个过程支持:<br>1. 中断对话<br>2. 切换角色配置<br>3. 历史记录管理
 ```
 
-## 代码结构
+## 代码结构 (v1.0.0)
 
 ```
 ├── background/                # 背景图片资源目录

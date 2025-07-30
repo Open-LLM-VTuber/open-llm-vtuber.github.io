@@ -1,69 +1,68 @@
-# Remote Deployment, Non-Local Deployment, Mobile
+# Remote Deployment & Cross-Device Access Guide
 
-If you are:
+This guide applies to the following scenarios:
+- Deploying Open-LLM-VTuber on a remote server and accessing it from a local device.
+- Deploying Open-LLM-VTuber within a local area network (LAN) and allowing access from other devices (e.g., mobile phones).
+- Exposing the Open-LLM-VTuber service to the public internet (**Strongly discouraged**, see security warning below).
 
-  - Trying to run Open-LLM-VTuber on a remote server and access it on your device.
-  - Trying to run Open-LLM-VTuber within a local area network (LAN) to allow access from other devices (like your phone).
-  - Trying to make your Open-LLM-VTuber publicly available to the world.
+When performing remote deployment or enabling cross-device access, please note the following configuration points:
 
-Here are some important points to consider:
+### Change Backend `host` Setting to `0.0.0.0`
+By default, the backend service binds to `localhost`, allowing access only from the local machine. To permit access from other devices via IP address, you must change the `host` parameter to `0.0.0.0`.
 
-### Please change the `host` in the backend settings to `0.0.0.0`
+### Enforce HTTPS and WSS Protocols
+Open-LLM-VTuber's frontend is a web application. Due to [browser security policies](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia), microphone access is restricted in insecure environments (HTTP). This will cause a "VAD error" in the frontend, preventing the speech recognition functionality from working correctly.
 
-The default binding `localhost` restricts your Open-LLM-VTuber to be accessible only from the machine it's running on. To allow access from other devices, you must change it to `0.0.0.0`. This allows other devices to access it using the IP address of the machine hosting the application.
+![VAD error caused by restricted microphone access in an insecure environment](img/vad_error.jpg)
 
-### Please use https and wss
+To ensure proper functionality, you must configure an HTTPS certificate for your service and access the frontend and WebSocket service using `https://` and `wss://` protocols, respectively.
 
-The Open-LLM-VTuber frontend is a web application. Due to [browser security restrictions](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia), the microphone cannot be accessed over insecure connections (`http` and `ws`), which will cause the frontend to display a `vad error`.
+### Configure Frontend Connection Parameters
+When accessing the frontend page, click the settings button in the top-left corner and ensure the `WebSocket URL` and `Base URL` parameters are correctly configured:
+- Change the protocol (the beginning of the URL) to `https://` and `wss://`.
+- Change the IP address to the actual IP address or domain name of the backend service.
+After correct configuration, the page background should load properly, and the connection status indicator should turn green.
 
-### When accessing the frontend, please set the correct `WebSocket URL` and `Base URL` in the frontend settings
+![](./img/url_settings.jpg)
 
-After opening the frontend page, there is a settings button in the top left corner. Please correctly configure the `WebSocket URL` and `Base URL` parameters. Change the protocol (the part at the beginning) to `https` and `wss`, then change the IP address to the backend's IP address. After this, you should see the background load correctly, and the connection status indicator on the page should turn green.
+### Regarding Mobile Access
+For accessing from mobile devices, we recommend using the [Open-LLM-VTuber-Unity](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Unity) project, which is specifically designed for mobile phones.
+- Please note: This project currently does not support iOS because an Apple Developer account is required for application signing.
 
-### Accessing via mobile phone?
+Reasons why direct access via mobile browser is not recommended:
+- **iOS Limitation**: iOS requires explicit user interaction for each audio playback instance. This means the user must tap the screen every time the AI generates speech for it to play.
+- **Android Compatibility**: The diversity of browser engines on Android may lead to compatibility issues. Using the latest version of Google Chrome mobile is recommended for the best experience.
 
-For mobile devices, we recommend using the [Open-LLM-VTuber-Unity](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Unity) project. It's specifically designed for mobile use, so check it out.
+### Security Warning: Do Not Expose Open-LLM-VTuber Service Directly to the Public Internet
+This project is not designed for public deployment and has potential security risks. It is strongly advised **not** to expose the service directly to the public internet.
 
-  - Currently, iOS is not supported because we don't have an Apple Developer account and cannot sign the application.
+Opening service ports (including ports for dependencies like Ollama) can lead to unauthorized access and resource abuse. Public lists exist that collect information about servers with open Ollama ports, allowing others to freeload off these resources. The security measures in this project are limited; please take this risk seriously.
 
-Why don't we recommend accessing directly via a mobile browser?
+For scenarios requiring remote access, consider using tools like Cloudflare Tunnel or Tailscale to establish secure access channels instead of directly opening ports.
 
-  - Due to iOS system limitations, every time the AI speaks, explicit user interaction is required. This means you have to tap the screen every single time the AI says something, otherwise, it won't be able to speak.
-  - Android browsers have a wide variety of underlying engines, which might lead to compatibility issues with some browsers. We recommend using the mobile version of Google Chrome for access.
+If you are unfamiliar with network security configurations, there's no need to panic. As long as you run the service on your local computer and access it solely via `localhost`, you are generally safe from external attacks. The above warning primarily applies to users deploying on servers, NAS devices, or similar setups.
 
-### Please do not make your Open-LLM-VTuber page publicly accessible
+## Is an HTTPS Certificate Required for LAN Deployment?
+Yes, even for deployment within a private LAN, browser security restrictions typically require an HTTPS certificate for microphone access to function correctly. Methods for obtaining a certificate include:
+1.  **Self-Signed Certificate**: Create and use a certificate signed by yourself. Browsers will likely show security warnings.
+2.  **Domain-Based Certificate (DNS-01 Challenge)**: If you own a domain name, you can use the DNS validation method to obtain a trusted SSL certificate. This process does not require a public IP address or open ports.
 
-Our project is not designed for public deployment and has significant security vulnerabilities. Please do not expose it to the public internet.
+Configuring these methods can be complex and is beyond the scope of this guide.
 
-If possible, please do not open the ports. Remember the lesson learned from exposing Ollama ports publicly. If you're unaware, numerous websites scan for servers with open Ollama ports, providing lists that allow others to freeload off your Ollama service, even letting them choose by region. You wouldn't want to end up on such a list, would you?
+## Methods to Bypass HTTPS Restrictions (Untested)
 
-Our project's development resources are far less than Ollama's, meaning security is virtually non-existent. Please do not expose your Open-LLM-VTuber port. There are many tools available that allow you to happily access your server without exposing the service to the entire world, such as Cloudflare Tunnel, Tailscale, etc.
-
-If you're completely new to networking and the above sounds alarming, don't worry. This primarily concerns those who use NAS, self-host services, or manage servers. If you're just running Open-LLM-VTuber on your own computer accessed via `localhost`, nobody can reach it.
-
-## So, running on a LAN also requires a certificate? Can a private LAN have a certificate?
-
-There are at least two ways, possibly more, but these are the ones I'm familiar with:
-
-1.  **Self-signed certificates:** You can generate your own certificate.
-2.  **DNS-01 Challenge:** If you own a domain name, you can request a certificate using the DNS-01 challenge method. This doesn't require a public IP address or opening any ports.
-
-Both methods are relatively complex and won't be detailed here.
-
-## Some ways to bypass https (untested):
+The following methods might bypass browser HTTPS restrictions but have not been thoroughly tested. Use them with caution:
 
 ### SSH Local Port Forwarding
+If you can connect to the device deploying Open-LLM-VTuber via SSH, you can use the local port forwarding feature. This maps the remote server's port to a local port on your machine, making the browser perceive the service as running locally, potentially relaxing security restrictions.
 
-If you can SSH into the device where Open-LLM-VTuber is deployed, you can use SSH local port forwarding. This maps a port on the server to a local port on your machine, making the browser think Open-LLM-VTuber is running locally, thereby bypassing the security restrictions.
-
+Execute the following command (replace `username` and `remote_server_address` with actual values):
 ```sh
 ssh -L 12393:localhost:12393 username@remote_server_address
 ```
+This command forwards the remote server's port `12393` (Open-LLM-VTuber's default port) to port `12393` on your local machine.
 
-This command means: forward port 12393 on the remote server (the default port for Open-LLM-VTuber) to port 12393 on your local machine.
+Once forwarding is established, you can access the service via `http://localhost:12393` without needing HTTPS.
 
-After setting up the forwarding, you can access the Open-LLM-VTuber service directly using `http://localhost:12393`, eliminating the need for https.
-
-### Add the server IP address to the browser's allowlist (Details needed)
-
-I've heard that it might be possible to add the IP address and port to a browser's allowlist (whitelist), causing the browser to relax the restriction against opening the microphone in an insecure environment specifically for the Open-LLM-VTuber service. However, I don't know the specific details. Documentation contributions on this are welcome.
+### Add Server IP Address to Browser Trust List (Details Needed)
+Some users have reported that adding the server's IP address and port to the browser's trusted sites list or relaxing security restrictions for specific origins might allow microphone access over HTTP. The exact steps vary depending on the browser. Community contributions to document this process are welcome.

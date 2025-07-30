@@ -12,7 +12,7 @@
     "description": "Title of run everywhere feature"
   },
   "features.run.description": {
-    "message": "完美支持 Windows、MacOS 和 Linux 系统，支持多个并发会话，电脑手机随时随地都能访问。",
+    "message": "完美支持 Windows、MacOS 和 Linux 系统，支持多个并发会话，支持对接直播平台，电脑手机随时随地都能访问。",
     "description": "Description of run everywhere feature"
   },
   "features.interact.title": {
@@ -20,7 +20,7 @@
     "description": "Title of interaction feature"
   },
   "features.interact.description": {
-    "message": "支持语音文字实时交流，支持摄像头 & 屏幕视觉，自然打断对话，AI 主动发言，看到 AI 内心 OS，Live2D 表、触摸互动、群组聊天，用法多样有趣。",
+    "message": "支持语音文字实时交流，兼容 MCP 协议，支持摄像头 & 屏幕视觉 & AI 使用自己的浏览器，自然打断对话，AI 主动发言，看到 AI 内心 OS，Live2D 表情、触摸互动、群组聊天，用法多样有趣。",
     "description": "Description of interaction feature"
   },
   "features.ui.title": {
@@ -36,7 +36,7 @@
     "description": "Title of memory feature"
   },
   "features.memory.description": {
-    "message": "轻松回顾过往对话，内置 Mem0、EVI 等多种记忆模块，还能通过简单接口快速接入自定义记忆系统。",
+    "message": "轻松回顾过往对话，内置 Letta、EVI 等多种记忆模块，还能通过简单接口快速接入自定义记忆系统。",
     "description": "Description of memory feature"
   },
   "features.companion.title": {
@@ -50,5 +50,17 @@
   "showcase.title": {
     "message": "示例图片",
     "description": "Title of the showcase gallery section"
+  },
+  "homepage.getStartedButton": {
+    "message": "开始使用",
+    "description": "Text for the get started button on homepage"
+  },
+  "homepage.downloadButton": {
+    "message": "下载应用",
+    "description": "Text for the download app button on homepage"
+  },
+  "homepage.workshopButton": {
+    "message": "创意工坊",
+    "description": "Text for the workshop button on homepage"
   }
 }
