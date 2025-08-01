@@ -281,3 +281,26 @@ siliconflow_tts:
   stream: true  # Enable streaming mode
   speed: 1  # Speaking speed (range: 0.5–2.0; 1 = default)
   gain: 0  # Volume gain (range: -10–10; 0 = default)
+```
+
+## MiniMax TTS (Online, API Key Required)
+MiniMax provides an online TTS service where models like `speech-02-turbo` offer powerful TTS capabilities with customizable voice options.
+
+### Configuration Steps
+1. **Obtain `group_id` and `api_key`**
+    You can register on the Minimax official website to get your `group_id` and `api_key`, [Official Documentation](https://platform.minimaxi.com/document/Fast)
+
+2. **Fill in the `conf.yaml` configuration**
+    In the `minimax_tts` section of the configuration file, enter parameters in the following format (example):
+```yaml
+minimax_tts:
+      group_id: '' # Your minimax group_id
+      api_key: '' # Your minimax api_key
+      # Supported models: 'speech-02-hd', 'speech-02-turbo' (recommended: 'speech-02-turbo')
+      model: 'speech-02-turbo' # minimax model name
+      voice_id: 'female-shaonv' # minimax voice id, default is 'female-shaonv'
+      # Custom pronunciation dictionary, default empty.
+      # Example: '{"tone": ["测试/(ce4)(shi4)", "危险/dangerous"]}'
+      pronunciation_dict: ''
+```
+The `voice_id` parameter can be configured to different voice tones. You can check the [voice ID query section in the official documentation](https://platform.minimaxi.com/document/get_voice) for a complete list of supported voices. The `pronunciation_dict` supports custom pronunciation rules - for example, you can define rules to pronounce "牛肉" as "neuro" using the format shown in the example.
