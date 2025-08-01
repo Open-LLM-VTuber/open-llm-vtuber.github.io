@@ -256,3 +256,28 @@ Since version `v0.2.5`, `api_key.py` has been deprecated. Please make sure to se
 :::tip
 The default voice used in `conf.yaml` is the same as neuro-sama
 :::
+
+## SiliconFlow TTS (Online, API Key Required)  
+An online text-to-speech service provided by SiliconFlow, supporting custom audio models and voice configuration.  
+
+
+### Configuration Steps  
+1. **Upload Reference Audio**：  
+   SiliconFlow currently offers models like `FunAudioLLM/CosyVoice2-0.5B`. To use them, upload reference audio via their official platform:  
+   [https://docs.siliconflow.cn/cn/api-reference/audio/upload-voice](https://docs.siliconflow.cn/cn/api-reference/audio/upload-voice)  
+
+
+2. **Fill in `conf.yaml`**：  
+   In the `siliconflow_tts` section of the configuration file, configure parameters as follows (example):  
+
+```yaml
+siliconflow_tts:
+  api_url: "https://api.siliconflow.cn/v1/audio/speech"  # Service endpoint (fixed value)
+  api_key: "sk-yourkey"  # API key obtained from SiliconFlow's official website
+  default_model: "FunAudioLLM/CosyVoice2-0.5B"  # Audio model name (check official docs for supported models)
+  default_voice: "speech:Dreamflowers:aaaaaaabvbbbasdas"  # Voice ID (generated after uploading custom voice on the official site)
+  sample_rate: 32000  # Output sample rate; adjust if audio is distorted (e.g., 16000, 44100)
+  response_format: "mp3"  # Audio format (e.g., mp3, wav)
+  stream: true  # Enable streaming mode
+  speed: 1  # Speaking speed (range: 0.5–2.0; 1 = default)
+  gain: 0  # Volume gain (range: -10–10; 0 = default)

@@ -64,7 +64,7 @@ sidebar_position: 1
 - 🧠 **广泛的模型支持**：
   - 🤖 **大语言模型 (LLM)**：Ollama、OpenAI（及兼容 API）、Gemini、Claude、Mistral、DeepSeek、智谱、GGUF、LM Studio、vLLM 等。
   - 🎙️ **语音识别 (ASR)**：sherpa-onnx、FunASR、Faster-Whisper、Whisper.cpp、Whisper、Groq Whisper、Azure ASR 等。
-  - 🔊 **语音合成 (TTS)**：sherpa-onnx、pyttsx3、MeloTTS、Coqui-TTS、GPTSoVITS、Bark、CosyVoice、Edge TTS、Fish Audio、Azure TTS、OpenAI TTS (及兼容 API)、SparkTTS 等。
+  - 🔊 **语音合成 (TTS)**：sherpa-onnx、pyttsx3、MeloTTS、Coqui-TTS、GPTSoVITS、Bark、CosyVoice、Edge TTS、Fish Audio、Azure TTS、OpenAI TTS (及兼容 API)、SparkTTS、SiliconFlowTTS等。
 
 - 🔧 **高度可定制**：
   - ⚙️ **简单的模块配置**：通过简单的配置文件修改，即可切换各种功能模块，无需深入代码。

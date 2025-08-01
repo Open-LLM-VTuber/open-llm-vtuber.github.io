@@ -61,7 +61,7 @@ This project is currently in active development, with many exciting features com
 - 🧠 **Extensive model support**:
   - 🤖 **Large Language Models (LLM)**: Ollama, OpenAI (and any OpenAI-compatible API), Gemini, Claude, Mistral, DeepSeek, Zhipu AI, GGUF, LM Studio, vLLM, etc.
   - 🎙️ **Automatic Speech Recognition (ASR)**: sherpa-onnx, FunASR, Faster-Whisper, Whisper.cpp, Whisper, Groq Whisper, Azure ASR, etc.
-  - 🔊 **Text-to-Speech (TTS)**: sherpa-onnx, pyttsx3, MeloTTS, Coqui-TTS, GPTSoVITS, Bark, CosyVoice, Edge TTS, Fish Audio, Azure TTS, OpenAI TTS (and compatible APIs), SparkTTS, etc.
+  - 🔊 **Text-to-Speech (TTS)**: sherpa-onnx, pyttsx3, MeloTTS, Coqui-TTS, GPTSoVITS, Bark, CosyVoice, Edge TTS, Fish Audio, Azure TTS, OpenAI TTS (and compatible APIs), SparkTTS,SiliconFlowTTS,etc.
 
 - 🔧 **Highly customizable**:
   - ⚙️ **Simple module configuration**: Switch various functional modules through simple configuration file modifications, without delving into the code.
