@@ -70,3 +70,12 @@ If you're not familiar with creating pull requests but want to contribute, you c
 
 We appreciate all contributions to making the Open-LLM-VTuber documentation better!
 
+
+
+## Managing Giscus Comments When Renaming or Moving Pages
+
+We use Giscus to enable the comment section on the website. All comments and reactions are stored in this repository's GitHub Discussions under the "Page Comments" category.
+
+Giscus relies on the page path to associate comments with the correct page. If you change a page's path or filename, the comments may no longer appear because Giscus won't find them.
+
+To prevent this, you must also update the title of the corresponding GitHub Discussion to match the new page path or filename.
