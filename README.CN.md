@@ -2,6 +2,8 @@
 
 [![English Documentation](https://img.shields.io/badge/Documentation-English-blue.svg)](README.md)
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Open-LLM-VTuber/open-llm-vtuber.github.io)
+
 本仓库包含 [Open-LLM-VTuber](https://github.com/Open-LLM-VTuber) 项目的文档网站源代码。
 
 **网站地址**：

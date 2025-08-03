@@ -2,6 +2,8 @@
 
 [![中文文档](https://img.shields.io/badge/文档-中文版-blue.svg)](README.CN.md)
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Open-LLM-VTuber/open-llm-vtuber.github.io)
+
 This repository contains the source code of the documentation site for the [Open-LLM-VTuber](https://github.com/Open-LLM-VTuber) project. 
 
 **Live at**: 
