@@ -273,3 +273,26 @@ siliconflow_tts:
   stream: true  # 是否启用流式传输
   speed: 1  # 语速（0.5~2.0，1为默认）
   gain: 0  # 音量增益
+```
+
+## MiniMax TTS（在线、需要API密钥）
+MiniMax提供的在线的TTS服务，`speech-02-turbo`等模型具有强大的TTS性能，并且可以自由定制音色。
+
+### 配置步骤
+1. **获取`group_id`和`api_key`**
+  您可以通过Minimax官网注册来获取`group_id`和`api_key`，[官方教程文档](https://platform.minimaxi.com/document/Fast)
+
+2. **填写`conf.yaml`配置**
+  在配置文件的 `minimax_tts` 段落中，按以下格式填写参数（示例）：
+```yaml
+    minimax_tts:
+      group_id: '' # 你在 Minimax官网获取到 的 group_id
+      api_key: '' # 你在 Minimax官网获取到 的 api_key
+      # 支持的模型: 'speech-02-hd', 'speech-02-turbo'（推荐使用 'speech-02-turbo'）
+      model: 'speech-02-turbo' # minimax 模型名称
+      voice_id: 'female-shaonv' # minimax 语音 id，默认 'female-shaonv'
+      # 自定义发音字典，默认为空。
+      # 示例: '{"tone": ["测试/(ce4)(shi4)", "危险/dangerous"]}'
+      pronunciation_dict: ''
+```
+其中`voice_id`是可以配置的声音音色，具体的支持声音列表可以查看[官方文档中查询可用声音ID的部分](https://platform.minimaxi.com/document/get_voice)。`pronunciation_dict`是可以支持的自定义发声规则，比如您可以把`牛肉`发音为`neuro`，可以用类似示例的方法来定义这个发声规则。
