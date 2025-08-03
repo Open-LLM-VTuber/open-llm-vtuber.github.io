@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="rss.xsl"?>
-<rss version="2.0">
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
     <channel>
         <title>Open LLM Vtuber Blog</title>
         <link>https://open-llm-vtuber.github.io/en/blog</link>
         <description>Open LLM Vtuber Blog</description>
-        <lastBuildDate>Sun, 03 Aug 2025 10:25:33 GMT</lastBuildDate>
+        <lastBuildDate>Sun, 03 Aug 2025 14:37:25 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
@@ -12,7 +12,414 @@
             <title><![CDATA[v1.0.0 正式发布]]></title>
             <link>https://open-llm-vtuber.github.io/en/blog/v1.0.0-release</link>
             <guid>https://open-llm-vtuber.github.io/en/blog/v1.0.0-release</guid>
-            <pubDate>Sun, 03 Aug 2025 10:25:33 GMT</pubDate>
+            <pubDate>Sun, 03 Aug 2025 14:37:25 GMT</pubDate>
+        </item>
+        <item>
+            <title><![CDATA[1.2.0 Release]]></title>
+            <link>https://open-llm-vtuber.github.io/en/blog/v1.2.0-release</link>
+            <guid>https://open-llm-vtuber.github.io/en/blog/v1.2.0-release</guid>
+            <pubDate>Sun, 03 Aug 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Version 1.2.0 Release]]></description>
+            <content:encoded><![CDATA[<p>This is a substantial update, packed with major features including Letta-based long-term memory, MCP support, Live2D Cubism 5 support, Chinese support for the frontend, an improved update system, a Bilibili Danmaku client, and numerous bug fixes.</p>
+<p>First, we'd like to apologize for the extended release cycle. We will do our best to avoid such long intervals between updates in the future.</p>
+<p>Additionally, please note a licensing change for the project's frontend (the <code>Open-LLM-VTuber-Web</code> repository, which powers the built-in web and Electron clients). Effective with this release (v1.2.0), the frontend will transition from unspecified license (all rights reserved) to the <code>Open-LLM-VTuber License 1.0</code>.</p>
+<p>The backend will remain under the MIT License for v1.2.0 but is expected to be unified under the <code>Open-LLM-VTuber License 1.0</code> around v1.3 or v1.4. We are still discussing the specifics and will provide a clear announcement in the GitHub Release when the change occurs. Please be aware that Live2D models have their own licenses, which you should check separately.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="️-notice-potential-breaking-changes">⚠️ Notice: Potential Breaking Changes<a href="https://open-llm-vtuber.github.io/en/blog/v1.2.0-release#%EF%B8%8F-notice-potential-breaking-changes" class="hash-link" aria-label="Direct link to ⚠️ Notice: Potential Breaking Changes" title="Direct link to ⚠️ Notice: Potential Breaking Changes">​</a></h3>
+<p>In this version, we have refactored the Live2D implementation to add support for Live2D 5.0 models and fix display issues with many existing models. As part of this change, <strong>support for Live2D 2.1 models has been removed</strong>. While this should increase compatibility with modern models, if you encounter any issues with your Live2D model not displaying after updating, please let us know and consider rolling back to the previous version.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-highlights">✨ Highlights<a href="https://open-llm-vtuber.github.io/en/blog/v1.2.0-release#-highlights" class="hash-link" aria-label="Direct link to ✨ Highlights" title="Direct link to ✨ Highlights">​</a></h2>
+<ul>
+<li><strong>(MCP)</strong> The AI can now call tools that support the Model-Context Protocol (MCP). Built-in support is included for <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/time" target="_blank" rel="noopener noreferrer">time</a> and <a href="https://github.com/nickclyde/duckduckgo-mcp-server" target="_blank" rel="noopener noreferrer">ddg-search</a>. The frontend now displays the status of tool calls. (See the Appendix for a demo).</li>
+<li><strong>(MCP)</strong> Added support for BrowserBase's Browser Use MCP with a <a href="https://docs.browserbase.com/features/session-live-view" target="_blank" rel="noopener noreferrer">Live View</a> in the frontend.</li>
+<li><strong>(Live2D)</strong> The frontend Live2D SDK has been migrated from <code>pixi-live2d-display-lipsync</code> to the official Live2D Web SDK. This adds support for Cubism 5 but removes support for Cubism 2. Models now have improved feedback on click interactions.</li>
+<li>The default Live2D model has been changed to <code>mao_pro</code>, as the expressions for the <code>shizuku</code> model were removed by the official creators in the Live2D 5 version.</li>
+<li><strong>(Frontend)</strong> Added Chinese language support.</li>
+<li>Implemented an interface for live streaming platforms and added a client for receiving Bilibili Danmaku (live comments).</li>
+<li><strong>(Memory)</strong> Implemented Letta-based long-term memory.</li>
+<li><strong>(LLM)</strong> Added support for LM Studio.</li>
+<li><strong>(TTS)</strong> Added support for OpenAI-Compatible TTS, SparkTTS, and SiliconFlow TTS.</li>
+<li>Added a <code>requirements.txt</code> file for users who are not familiar with <code>pip</code> commands or prefer not to use <code>uv</code>.</li>
+<li>Numerous bug fixes.</li>
+<li>Updated the documentation, which now includes an "Ask AI" feature.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="detailed-changes-since-v110">Detailed Changes Since v1.1.0:<a href="https://open-llm-vtuber.github.io/en/blog/v1.2.0-release#detailed-changes-since-v110" class="hash-link" aria-label="Direct link to Detailed Changes Since v1.1.0:" title="Direct link to Detailed Changes Since v1.1.0:">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="backend">Backend:<a href="https://open-llm-vtuber.github.io/en/blog/v1.2.0-release#backend" class="hash-link" aria-label="Direct link to Backend:" title="Direct link to Backend:">​</a></h3>
+<ul>
+<li>Changed some preset options in the configuration file: <code>llm_provider</code> -&gt; <code>ollama_llm</code>.</li>
+<li>Set <code>project_id</code> and <code>organization_id</code> in <code>conf.yaml</code> to <code>null</code> by default to prevent API errors.</li>
+<li>Azure ASR: Added a list for detected languages and fixed several bugs.</li>
+<li>Fixed bugs related to configuration file updates (2bc0c1b5f75ea79f563935b03a2267e6584d9bc @ylxmf2005).</li>
+<li>To allow Windows users to confidently use backslashes for file paths, all double quotes in the configuration file have been changed to single quotes (758d0b304bfa9d2c561987e9d3edac74857309c7).</li>
+<li>Fixed Claude's vision capabilities. It seems this was never working correctly—did no one notice until now?</li>
+<li>Information about Live2D models can now be fetched from the <code>GET /live2d-models/info</code> route.</li>
+<li>When using the update script, the frontend (linked via git submodule) will now be updated as well.</li>
+<li>Fixed <a href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/issues/150" target="_blank" rel="noopener noreferrer">#150</a>: The <code>temperature</code> parameter was not passed during the initialization of OpenAI-Compatible LLMs.</li>
+<li>Fixed <a href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/issues/141" target="_blank" rel="noopener noreferrer">#141</a>: A dependency issue on Intel Macs.</li>
+<li>Implemented a live streaming platform interface and a Bilibili Danmaku client based on <a href="https://github.com/xfgryujk/blivedm/tree/dev" target="_blank" rel="noopener noreferrer">blivedm</a> (fea16ace015851656e6c044961758c69247ce69e), <a href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/pull/142" target="_blank" rel="noopener noreferrer">#142</a> @Fluchw, @ylxmf2005.</li>
+<li>Merged <a href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/pull/161" target="_blank" rel="noopener noreferrer">#161</a>, adding the <code>StatelessLLMWithTemplate</code> class. Thanks, @aaronchantrill!</li>
+<li>Added OpenAI-Compatible TTS <a href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/pull/178" target="_blank" rel="noopener noreferrer">#178</a>. Thanks, @fastfading!</li>
+<li>Implemented Letta-based long-term memory <a href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/pull/179" target="_blank" rel="noopener noreferrer">#179</a>. Thanks, @rayburstray! See the <a href="https://open-llm-vtuber.github.io/docs/user-guide/backend/agent#letta-agent" target="_blank" rel="noopener noreferrer">Letta Agent docs</a>.</li>
+<li>Added LM Studio LLM support (b971867b231dac5f3e9e14a28e6c4124fa592a72).</li>
+<li>Added <code>requirements.txt</code> and documentation for installing with <code>pip</code> and <code>conda</code> in the Quick Start guide (044e5ba9aaab9de8fae440f54e6667c63ab89b85).</li>
+<li>Added Spark TTS <a href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/pull/182" target="_blank" rel="noopener noreferrer">#182</a> (@Because66666), SiliconFlow TTS <a href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/pull/208" target="_blank" rel="noopener noreferrer">#208</a> (@endtower), and MiniMax TTS <a href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/pull/214" target="_blank" rel="noopener noreferrer">#214</a> (@Y0oMu).</li>
+<li>Fixed an issue where FunASR could not run offline (Issue <a href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/issues/7" target="_blank" rel="noopener noreferrer">#7</a>, fixed in <a href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/pull/214" target="_blank" rel="noopener noreferrer">#214</a> by @Y0oMu).</li>
+<li>Added prompt configuration for whisper, fast-whisper, and whisper.cpp <a href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/pull/214" target="_blank" rel="noopener noreferrer">#214</a> @Y0oMu.</li>
+<li>Fixed [#159]: Resolved an error caused by empty chunks returned from third-party OpenAI-compatible APIs <a href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/pull/184" target="_blank" rel="noopener noreferrer">#184</a> @872226263.</li>
+<li>✨ Feature Enhancement: Implemented MCP Plus <a href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/pull/185" target="_blank" rel="noopener noreferrer">#185</a> @Stewitch @ylxmf2005.</li>
+<li>Fixed bugs related to AI group chat (4da3c82e6388604dc0817927a7f07796ef524785 @ylxmf2005).</li>
+<li>Fixed a bug that could cause garbled text in <code>conf.yaml</code> when merging configurations (67e1622891e264cc71b6da71533a3be188a09692).</li>
+<li>Added a DuckDuckGo-based web search MCP tool (3904419fb9f0b67e5f22027e183741cc0f1719dc @ylxmf2005).</li>
+<li>Fixed a bug where auto language detection could not be selected for faster-whisper (#188).</li>
+<li>Added a configurable prompt in <code>conf.yaml</code> for the AI's proactive speech (Issue <a href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/issues/190" target="_blank" rel="noopener noreferrer">#190</a> @ylxmf2005).</li>
+<li>Added a status bar for MCP function calls (51adb61895f1e5040e238fa1c97acdeefe9e2690 @ylxmf2005).</li>
+<li>Added an optional prompt for speaking style (0a76ac69b04d288c102ec52423d927a4ab9a246d @ylxmf2005).</li>
+<li>Implemented browser control capabilities via Stagehand: The AI can now operate a web browser (1dc2055d74d342202d4a54ea96109d3cfaa7bee7 @ylxmf2005).</li>
+<li>Implemented a backend check to automatically pull the <code>frontend</code> submodule, preventing issues where the frontend code is missing.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="frontend-ylxmf2005">Frontend (@ylxmf2005):<a href="https://open-llm-vtuber.github.io/en/blog/v1.2.0-release#frontend-ylxmf2005" class="hash-link" aria-label="Direct link to Frontend (@ylxmf2005):" title="Direct link to Frontend (@ylxmf2005):">​</a></h3>
+<ul>
+<li>Adopted a mode-management system and added a button in the Window mode UI to switch modes directly.</li>
+<li>Added support for playing "Talk" motion groups when the model is speaking (to create a swaying effect). A guide on how to use this will be available in v1.3.</li>
+<li>Migrated the Live2D SDK from <code>pixi-live2d-display-lipsync</code> to the official Live2D Web SDK (supports Cubism 5, drops Cubism 2). Note: This was developed using a beta version of the SDK from another project and does not yet support motionsync.</li>
+<li>Added i18n support for Chinese.</li>
+<li>Refactored VAD dependency static files from being loaded via CDN to being referenced from the local build output (<a href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web/pull/5" target="_blank" rel="noopener noreferrer">#5</a> @East333, <a href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web/pull/7" target="_blank" rel="noopener noreferrer">#7</a> @charliedcc).</li>
+<li>Fixed a "404 Not Found" bug for an invalid CSS link (<a href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web/pull/2" target="_blank" rel="noopener noreferrer">#2</a> @East333).</li>
+<li>Added a "Click-through" toggle switch for Desktop Pet mode.</li>
+<li>Removed the "follow mouse" feature. The "Pointer Interactive" setting now only controls whether clicks trigger actions, which must be configured in <code>model_dict</code>.</li>
+<li>Fixed a bug where the fallback avatar failed to display in the history area.</li>
+<li>Fixed a bug with abnormal mouse click-through behavior in Desktop Pet mode.</li>
+<li>Added a status display for when the AI is using tools.</li>
+<li>Added a Browser Live View Panel based on BrowserBase.</li>
+<li>Fixed a conflict between expression display and blinking (Issue <a href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/issues/105" target="_blank" rel="noopener noreferrer">#105</a>).</li>
+<li>Updated VAD to the latest version and used the new <code>onSpeechRealStart</code> event to prevent misfires that could interrupt the AI's response (<a href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web/commit/445dc8661b83357416ca848fddcaa07afc1433e1" target="_blank" rel="noopener noreferrer">Commit 445dc86</a>).</li>
+<li>Added settings to limit the size and dimensions of images sent to the backend (Issue <a href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/issues/209" target="_blank" rel="noopener noreferrer">#209</a>).</li>
+</ul>
+<blockquote>
+<p>⚠️<!-- --> there are way too many pull requests and contributions. If I happen to miss anyone, please let me know.</p>
+</blockquote>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="whats-next-a-look-at-v13-v14">What's Next: A Look at v1.3-v1.4<a href="https://open-llm-vtuber.github.io/en/blog/v1.2.0-release#whats-next-a-look-at-v13-v14" class="hash-link" aria-label="Direct link to What's Next: A Look at v1.3-v1.4" title="Direct link to What's Next: A Look at v1.3-v1.4">​</a></h2>
+<ul>
+<li><strong>Streaming TTS:</strong> We plan to add streaming support for major TTS models, which will significantly reduce response latency.</li>
+<li><strong>Hume AI Changes:</strong> The Hume AI Agent will be removed and replaced with an option for Hume AI API TTS (the official TTS API was released recently). Hume AI's emotion control and naturalness are the best I've seen (though it's also the priciest at $200/1M characters vs. Fish Audio at $15/1M).</li>
+<li><strong>Natural Motion:</strong> We will provide examples and tutorials for achieving natural, neuro-sama-like idle swaying motions.</li>
+<li><strong><code>motionMap</code> Feature:</strong> Similar to <code>emotionMap</code>, this will allow the model to perform actions while speaking.</li>
+<li><strong>One-Click Character Import.</strong></li>
+<li><strong>MCP Bridge Support:</strong> We'll add a demo for a decoupled MCP setup, where the MCP Server &amp; Client run on the user's machine. The main server will provide a ready-to-use bridge to push MCP commands via WebSocket and receive results.</li>
+<li><strong>Character Status Panel:</strong> A new UI area to display and manage the character's state (e.g., mood, affinity, current thoughts, what they are doing). This highly customizable state will influence the character's behavior. The "thinking" tag will likely be moved here (planned for v1.4).</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="upcoming-license-change-notice-v13-v14">Upcoming License Change Notice (v1.3-v1.4)<a href="https://open-llm-vtuber.github.io/en/blog/v1.2.0-release#upcoming-license-change-notice-v13-v14" class="hash-link" aria-label="Direct link to Upcoming License Change Notice (v1.3-v1.4)" title="Direct link to Upcoming License Change Notice (v1.3-v1.4)">​</a></h2>
+<p>As the project grows, we plan to adjust our licensing model to better support its long-term sustainability.</p>
+<p>Starting from a future version (the exact version will be clearly announced, likely around v1.3.0), the Open-LLM-VTuber project will adopt a modified Apache 2.0 license with the following terms:</p>
+<ul>
+<li><strong>Unified License:</strong> The entire project (both frontend and backend) will be under a single, modified Apache 2.0 license.</li>
+<li><strong>Clear Usage Scope:</strong> The new license will clarify permitted uses and commercial activities that require a separate license.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="how-does-this-affect-you">How does this affect you?<a href="https://open-llm-vtuber.github.io/en/blog/v1.2.0-release#how-does-this-affect-you" class="hash-link" aria-label="Direct link to How does this affect you?" title="Direct link to How does this affect you?">​</a></h3>
+<p>For most users, including streamers, educators, and researchers, there is no impact.</p>
+<p>The software is licensed under Apache 2.0 with the following additional terms:</p>
+<p>✅ <strong>Uses that DO NOT require a separate license:</strong></p>
+<ul>
+<li>All non-commercial purposes (e.g., personal projects, education, academic research, non-profit activities).</li>
+<li>Using the software for VTuber streaming and video creation (e.g., on YouTube, Twitch, Bilibili).</li>
+</ul>
+<p>❌ <strong>Uses that DO require a commercial license:</strong></p>
+<ul>
+<li>Providing paid access, subscriptions, or hosting services (including offering the software as a SaaS, paid download, or online service).</li>
+<li>Redistributing, reselling, rebranding, or repackaging the software for commercial purposes.</li>
+<li>Integrating the software into a commercial product that is sold or licensed for a fee (including both software and hardware).</li>
+</ul>
+<p>For full details, please refer to the <code>LICENSE</code> file in the frontend repository and the specific release notes when the backend license is updated.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="why-are-we-planning-this-change">Why are we planning this change?<a href="https://open-llm-vtuber.github.io/en/blog/v1.2.0-release#why-are-we-planning-this-change" class="hash-link" aria-label="Direct link to Why are we planning this change?" title="Direct link to Why are we planning this change?">​</a></h3>
+<p>The primary reasons for this adjustment are:</p>
+<ol>
+<li>Our frontend previously lacked a specific license, which led to instances of our software being repackaged, rebranded, and deployed commercially without attribution.</li>
+<li>We may develop a SaaS offering in the future. We want to protect the software we've invested significant effort in from being directly copied into a competing product.</li>
+</ol>
+<p><strong>Please note: Even if we launch a SaaS, we have no plans to close-source the core Open-LLM-VTuber project, nor do we intend to change its ability to run completely offline and locally. We deeply value the trust we have built within the open-source community.</strong> Even if we were to close-source it one day, you would still be able to use older, open-licensed versions.</p>
+<p><strong>An open-source license is an agreement that binds both users and developers.</strong> I can guarantee we will not delete the repository, barring unforeseen circumstances (and even then, GitHub's fork mechanism makes deletion largely symbolic).</p>
+<p>The core purpose of exploring a SaaS model is to make the project sustainable and to better realize our vision for AI companionship. There may come a day when we, the core developers, no longer have the time and energy to maintain Open-LLM-VTuber. Or perhaps a better, more advanced solution will emerge from the community, and our project will be consigned to the annals of history. But I hope that day is far off.</p>
+<p>Regarding project sustainability, I've considered two paths. One is the SaaS model mentioned above. The other is to better enable contributors to participate in our development, improving our efficiency and developer retention. I will be making progress on this front after the v1.2 release.</p>
+<p>The decision to change the license stems from observing multiple incidents of open-source misuse and license violations across the community. After seeing these events, we've come to feel that the MIT license may not align with our ideal expectations. A license should reflect the core developers' intent for how their code is used, serving as a protection and a set of boundaries for both developers and users. Due to my own oversight in the beginning, I chose a license without fully considering the project's potential scale <code>(I just picked MIT without much thought, never imagining the project would get this big)</code>. To ensure our contributors can continue to code without worry and that our users understand the intended boundaries of use, we have decided to amend our license.</p>
+<p>In fact, our React-based frontend (since v1.0.0) has never had a specified license. According to <a href="https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository#choosing-the-right-license" target="_blank" rel="noopener noreferrer">GitHub's documentation</a>, if a repository has no license, we retain full copyright (which is effectively closed-source). We want to clarify our licensing terms moving forward.</p>
+<p>During this process, we considered various options and looked at the approaches taken by other open-source projects like Dify and LobeHub, striving to avoid negative impacts on our regular users and open-source contributors.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="which-files-should-i-get">Which files should I get?<a href="https://open-llm-vtuber.github.io/en/blog/v1.2.0-release#which-files-should-i-get" class="hash-link" aria-label="Direct link to Which files should I get?" title="Direct link to Which files should I get?">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="for-existing-open-llm-vtuber-users-v100-or-newer">For Existing Open-LLM-VTuber Users (v1.0.0 or newer)<a href="https://open-llm-vtuber.github.io/en/blog/v1.2.0-release#for-existing-open-llm-vtuber-users-v100-or-newer" class="hash-link" aria-label="Direct link to For Existing Open-LLM-VTuber Users (v1.0.0 or newer)" title="Direct link to For Existing Open-LLM-VTuber Users (v1.0.0 or newer)">​</a></h3>
+<ol>
+<li>Run <code>uv run upgrade.py</code> to update to the latest version.</li>
+<li>Download the new Electron app from the assets below.</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="for-new-users-or-versions-below-v100">For New Users or Versions Below v1.0.0<a href="https://open-llm-vtuber.github.io/en/blog/v1.2.0-release#for-new-users-or-versions-below-v100" class="hash-link" aria-label="Direct link to For New Users or Versions Below v1.0.0" title="Direct link to For New Users or Versions Below v1.0.0">​</a></h3>
+<p>Please refer to the <a href="https://docs.llmvtuber.com/docs/quick-start" target="_blank" rel="noopener noreferrer">new deployment documentation</a> for installation instructions.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="download-files">Download Files<a href="https://open-llm-vtuber.github.io/en/blog/v1.2.0-release#download-files" class="hash-link" aria-label="Direct link to Download Files" title="Direct link to Download Files">​</a></h3>
+<p>If you are here because you read the documentation, download the zip file and the Electron app below.
+Download both of these files:</p>
+<ol>
+<li>The Electron app for your OS.</li>
+<li>The language-specific ZIP file:<!-- -->
+<ul>
+<li>English: <code>Open-LLM-VTuber-v1.2.0-en.zip</code></li>
+<li>Chinese: <code>Open-LLM-VTuber-v1.2.0-zh.zip</code></li>
+</ul>
+</li>
+</ol>
+<p>Note: The ZIP files are identical except for the language of the configuration file. Both packages include the SenseVoiceSmall model file to ensure accessibility for users in Mainland China.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="appendix">Appendix<a href="https://open-llm-vtuber.github.io/en/blog/v1.2.0-release#appendix" class="hash-link" aria-label="Direct link to Appendix" title="Direct link to Appendix">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="mcp-examples-tested-in-open-llm-vtuber">MCP examples tested in Open LLM Vtuber<a href="https://open-llm-vtuber.github.io/en/blog/v1.2.0-release#mcp-examples-tested-in-open-llm-vtuber" class="hash-link" aria-label="Direct link to MCP examples tested in Open LLM Vtuber" title="Direct link to MCP examples tested in Open LLM Vtuber">​</a></h3>
+<p><a href="https://github.com/browserbase/mcp-server-browserbase/tree/main/stagehand" target="_blank" rel="noopener noreferrer">mcp-server-browserbase</a>
+<img decoding="async" loading="lazy" src="https://hackmd.io/_uploads/HyvAAkGgxg.png" alt="image" class="img_ev3q"></p>
+<p><a href="https://github.com/Mtehabsim/ScreenPilot" target="_blank" rel="noopener noreferrer">ScreenPilot</a>
+<img decoding="async" loading="lazy" src="https://hackmd.io/_uploads/S14Ufgzxll.png" alt="1DfLpUV2Hvu8n7E" class="img_ev3q"></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="faster-download-links-for-chinese-users-给内地用户准备的相对快速的下载链接">Faster download links for Chinese users 给内地用户准备的(相对)快速的下载链接<a href="https://open-llm-vtuber.github.io/en/blog/v1.2.0-release#faster-download-links-for-chinese-users-%E7%BB%99%E5%86%85%E5%9C%B0%E7%94%A8%E6%88%B7%E5%87%86%E5%A4%87%E7%9A%84%E7%9B%B8%E5%AF%B9%E5%BF%AB%E9%80%9F%E7%9A%84%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5" class="hash-link" aria-label="Direct link to Faster download links for Chinese users 给内地用户准备的(相对)快速的下载链接" title="Direct link to Faster download links for Chinese users 给��内地用户准备的(相对)快速的下载链接">​</a></h2>
+<p>Open-LLM-VTuber-v1.2.0-zh.zip (包含 sherpa onnx asr 的 sense-voice 模型，就不用再从github上拉取了)</p>
+<ul>
+<li><a href="https://pub-17317087be374bc68161ac63de2022a5.r2.dev/v1.2.0/Open-LLM-VTuber-v1.2.0-en.zip" target="_blank" rel="noopener noreferrer">Open-LLM-VTuber-v1.2.0-en.zip</a></li>
+<li><a href="https://pub-17317087be374bc68161ac63de2022a5.r2.dev/v1.2.0/Open-LLM-VTuber-v1.2.0-zh.zip" target="_blank" rel="noopener noreferrer">Open-LLM-VTuber-v1.2.0-zh.zip</a></li>
+</ul>
+<p>open-llm-vtuber-1.2.0-setup.exe (桌面版前端，Windows) (注意，这只包含前端)</p>
+<ul>
+<li><a href="https://pub-17317087be374bc68161ac63de2022a5.r2.dev/v1.2.0/open-llm-vtuber-1.2.0-setup.exe" target="_blank" rel="noopener noreferrer">open-llm-vtuber-1.2.0-setup.exe</a></li>
+</ul>
+<p>open-llm-vtuber-1.2.0.dmg (桌面版前端，macOS) (注意，这只包含前端)</p>
+<ul>
+<li><a href="https://pub-17317087be374bc68161ac63de2022a5.r2.dev/v1.2.0/open-llm-vtuber-1.2.0.dmg" target="_blank" rel="noopener noreferrer">open-llm-vtuber-1.2.0.dmg</a></li>
+</ul>]]></content:encoded>
+            <category>Release</category>
+        </item>
+        <item>
+            <title><![CDATA[1.1.0 Release]]></title>
+            <link>https://open-llm-vtuber.github.io/en/blog/v1.1.0-release</link>
+            <guid>https://open-llm-vtuber.github.io/en/blog/v1.1.0-release</guid>
+            <pubDate>Thu, 20 Feb 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Version 1.1.0 Release]]></description>
+            <content:encoded><![CDATA[<h2 class="anchor anchorWithStickyNavbar_LWe7" id="whats-changed">What's Changed<a href="https://open-llm-vtuber.github.io/en/blog/v1.1.0-release#whats-changed" class="hash-link" aria-label="Direct link to What's Changed" title="Direct link to What's Changed">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="major-features">Major Features<a href="https://open-llm-vtuber.github.io/en/blog/v1.1.0-release#major-features" class="hash-link" aria-label="Direct link to Major Features" title="Direct link to Major Features">​</a></h3>
+<ul>
+<li>Implemented group chat functionality (@ylxmf2005)</li>
+<li>Added Silero-VAD voice activity detection (@AnyaCoder)</li>
+<li>Added CosyVoice2 text-to-speech support (@Warma10032)</li>
+<li>Added frontend ASR/TTS tools accessible at <code>http://localhost:web-tool</code>
+<ul>
+<li>Users can now directly use the project's speech recognition and text-to-speech engines</li>
+</ul>
+</li>
+<li>Introduced one-click CUDA-ready setup using pixi (@mokurin000)</li>
+<li>Improved configuration management and update mechanism:<!-- -->
+<ul>
+<li><code>conf.yaml</code> is no longer tracked in git</li>
+<li>New config template system for generating and updating <code>conf.yaml</code> during upgrades</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="bug-fixes--improvements">Bug Fixes &amp; Improvements<a href="https://open-llm-vtuber.github.io/en/blog/v1.1.0-release#bug-fixes--improvements" class="hash-link" aria-label="Direct link to Bug Fixes &amp; Improvements" title="Direct link to Bug Fixes &amp; Improvements">​</a></h3>
+<ul>
+<li>Fixed sentence divider issues</li>
+<li>Fixed system prompt override bug for certain LLMs</li>
+<li>Removed deprecated <code>prompts/persona</code> directory (unused since v1.0.0)</li>
+<li>Major codebase refactoring of conversation and handler components (@ylxmf2005)</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="new-contributors">New Contributors<a href="https://open-llm-vtuber.github.io/en/blog/v1.1.0-release#new-contributors" class="hash-link" aria-label="Direct link to New Contributors" title="Direct link to New Contributors">​</a></h3>
+<ul>
+<li>@mokurin000</li>
+<li>@AnyaCoder</li>
+<li>@Warma10032</li>
+</ul>
+<p><strong>Full Changelog</strong>: <a href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/compare/v1.0.0...v1.1.0" target="_blank" rel="noopener noreferrer">https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/compare/v1.0.0...v1.1.0</a></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="which-files-should-i-get-我应该下载哪些文件">Which files should I get? 我应该下载哪些文件？<a href="https://open-llm-vtuber.github.io/en/blog/v1.1.0-release#which-files-should-i-get-%E6%88%91%E5%BA%94%E8%AF%A5%E4%B8%8B%E8%BD%BD%E5%93%AA%E4%BA%9B%E6%96%87%E4%BB%B6" class="hash-link" aria-label="Direct link to Which files should I get? 我应该下载哪些文件？" title="Direct link to Which files should I get? 我应该下载哪些文件？">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="for-existing-open-llm-vtuber-users-v100-or-newer-现有-open-llm-vtuber-用户v100-或更新版本">For Existing Open-LLM-VTuber Users (v1.0.0 or newer) 现有 Open-LLM-VTuber 用户（v1.0.0 或更新版本）<a href="https://open-llm-vtuber.github.io/en/blog/v1.1.0-release#for-existing-open-llm-vtuber-users-v100-or-newer-%E7%8E%B0%E6%9C%89-open-llm-vtuber-%E7%94%A8%E6%88%B7v100-%E6%88%96%E6%9B%B4%E6%96%B0%E7%89%88%E6%9C%AC" class="hash-link" aria-label="Direct link to For Existing Open-LLM-VTuber Users (v1.0.0 or newer) 现有 Open-LLM-VTuber 用户（v1.0.0 或更新版本）" title="Direct link to For Existing Open-LLM-VTuber Users (v1.0.0 or newer) 现有 Open-LLM-VTuber 用户（v1.0.0 或更新版本）">​</a></h3>
+<ol>
+<li>Run <code>uv run upgrade.py</code> to update to the latest version 运行 <code>uv run upgrade.py</code> 来更新到最新版本</li>
+<li>Download the new electron app from the releases section 从发布区(下面)下载新的 electron 应用程序</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="for-new-users-or-versions-below-v100-新用户或-v100-以下版本用户">For New Users or Versions Below v1.0.0 新用户或 v1.0.0 以下版本用户<a href="https://open-llm-vtuber.github.io/en/blog/v1.1.0-release#for-new-users-or-versions-below-v100-%E6%96%B0%E7%94%A8%E6%88%B7%E6%88%96-v100-%E4%BB%A5%E4%B8%8B%E7%89%88%E6%9C%AC%E7%94%A8%E6%88%B7" class="hash-link" aria-label="Direct link to For New Users or Versions Below v1.0.0 新用户或 v1.0.0 以下版本用户" title="Direct link to For New Users or Versions Below v1.0.0 新用户或 v1.0.0 以下版本用户">​</a></h3>
+<p>Please refer to the <a href="https://docs.llmvtuber.com/docs/quick-start" target="_blank" rel="noopener noreferrer">new deployment documentation</a> for installation instructions.
+请参考<a href="https://docs.llmvtuber.com/docs/quick-start" target="_blank" rel="noopener noreferrer">新部署文档</a>获取安装说明。</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="download-files-下载文件">Download Files 下载文件<a href="https://open-llm-vtuber.github.io/en/blog/v1.1.0-release#download-files-%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6" class="hash-link" aria-label="Direct link to Download Files 下载文件" title="Direct link to Download Files 下载文件">​</a></h3>
+<p>If you are here because you read the documentation, download the zip file and the electron app below.
+Download both of these files:</p>
+<ol>
+<li>The electron app</li>
+<li>The language-specific ZIP file:<!-- -->
+<ul>
+<li>English: <code>Open-LLM-VTuber-v1.1.0-en.zip</code></li>
+<li>Chinese: <code>Open-LLM-VTuber-v1.1.0-zh.zip</code></li>
+</ul>
+</li>
+</ol>
+<p>Note: The ZIP files are identical except for the language of the configuration file. Both packages include the SenseVoiceSmall model file to ensure accessibility for Chinese users.</p>
+<p>如果您是按照文档指引来到这里的，请下载以下的 zip 文件和 electron 应用程序。
+请下载这两个文件：</p>
+<ol>
+<li>electron 应用程序</li>
+<li>对应语言的 ZIP 文件：<!-- -->
+<ul>
+<li>英文版：<code>Open-LLM-VTuber-v1.1.0-en.zip</code></li>
+<li>中文版：<code>Open-LLM-VTuber-v1.1.0-zh.zip</code></li>
+</ul>
+</li>
+</ol>
+<p>注意：这些 ZIP 文件除了配置文件的语言不同外完全相同。两个包都包含 SenseVoiceSmall 模型文件以确保内地用户可以愉快使用。</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="faster-download-links-for-chinese-users-给内地用户准备的相对快速的下载链接">Faster download links for Chinese users 给内地用户准备的(相对)快速的下载链接<a href="https://open-llm-vtuber.github.io/en/blog/v1.1.0-release#faster-download-links-for-chinese-users-%E7%BB%99%E5%86%85%E5%9C%B0%E7%94%A8%E6%88%B7%E5%87%86%E5%A4%87%E7%9A%84%E7%9B%B8%E5%AF%B9%E5%BF%AB%E9%80%9F%E7%9A%84%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5" class="hash-link" aria-label="Direct link to Faster download links for Chinese users 给内地用户准备的(相对)快速的下载链接" title="Direct link to Faster download links for Chinese users 给内地用户准备的(相对)快速的下载链接">​</a></h2>
+<p>Open-LLM-VTuber-v1.1.0-zh.zip (包含 sherpa onnx asr 的 sense-voice 模型，就不用再从github上拉取了)</p>
+<ul>
+<li><a href="https://pub-17317087be374bc68161ac63de2022a5.r2.dev/v1.1.0/Open-LLM-VTuber-v1.1.0-en.zip" target="_blank" rel="noopener noreferrer">Open-LLM-VTuber-v1.1.0-en.zip</a></li>
+<li><a href="https://pub-17317087be374bc68161ac63de2022a5.r2.dev/v1.1.0/Open-LLM-VTuber-v1.1.0-zh.zip" target="_blank" rel="noopener noreferrer">Open-LLM-VTuber-v1.1.0-zh.zip</a></li>
+</ul>
+<p>open-llm-vtuber-electron-1.1.0-frontend.exe (桌面版前端，Windows)</p>
+<ul>
+<li><a href="https://pub-17317087be374bc68161ac63de2022a5.r2.dev/v1.1.0/open-llm-vtuber-electron-1.1.0-setup.exe" target="_blank" rel="noopener noreferrer">https://pub-17317087be374bc68161ac63de2022a5.r2.dev/v1.1.0/open-llm-vtuber-electron-1.1.0-setup.exe</a></li>
+</ul>
+<p>open-llm-vtuber-electron-1.1.0-frontend.dmg (桌面版前端，macOS)</p>
+<ul>
+<li><a href="https://pub-17317087be374bc68161ac63de2022a5.r2.dev/v1.1.0/open-llm-vtuber-electron-1.1.0.dmg" target="_blank" rel="noopener noreferrer">https://pub-17317087be374bc68161ac63de2022a5.r2.dev/v1.1.0/open-llm-vtuber-electron-1.1.0.dmg</a></li>
+</ul>]]></content:encoded>
+            <category>Release</category>
+        </item>
+        <item>
+            <title><![CDATA[1.0.1 Release]]></title>
+            <link>https://open-llm-vtuber.github.io/en/blog/v1.0.1-release</link>
+            <guid>https://open-llm-vtuber.github.io/en/blog/v1.0.1-release</guid>
+            <pubDate>Tue, 04 Feb 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Version 1.0.1 Release]]></description>
+            <content:encoded><![CDATA[<p>This release marks a significant milestone for Open-LLM-VTuber, featuring a complete rewrite of the backend and frontend with over 240+ new commits, along with numerous enhancements and new features. If you were using a version before this, version <code>v1.0.0</code> is basically a new app.</p>
+<p>⚠️ Direct upgrades from older versions are impossible due to architectural changes. Please refer to our <strong><a href="https://open-llm-vtuber.github.io/docs/intro" target="_blank" rel="noopener noreferrer">new documentation site</a></strong> for installation.</p>
+<p>(v1.0.0 had a bug after the release, so let's just ignore that and have the v1.0.1)</p>
+<table><thead><tr><th style="text-align:center"><img decoding="async" loading="lazy" src="https://github.com/user-attachments/assets/06eff9dc-e141-4401-90ac-823b08662aae" alt="i4_pet_desktop" class="img_ev3q"></th><th style="text-align:center"><img decoding="async" loading="lazy" src="https://github.com/user-attachments/assets/e0175aa3-62c8-4cde-9c6f-5d010727c04f" alt="i1" class="img_ev3q"></th></tr></thead><tbody><tr><td style="text-align:center"><img decoding="async" loading="lazy" src="https://github.com/user-attachments/assets/082d8f29-9b48-4dbb-87f6-0f12d89a92f2" alt="i3" class="img_ev3q"></td><td style="text-align:center"><img decoding="async" loading="lazy" src="https://github.com/user-attachments/assets/f6b50eda-8187-4d37-b39b-a34e33683328" alt="i2" class="img_ev3q"></td></tr><tr><td style="text-align:center"><img decoding="async" loading="lazy" src="https://github.com/user-attachments/assets/fa4a5884-0ec7-4377-8a3b-204aafaf8ede" alt="i4" class="img_ev3q"></td><td style="text-align:center"><img decoding="async" loading="lazy" src="https://github.com/user-attachments/assets/8e0819d2-75dd-4ebf-97ab-399bf2d01795" alt="i3_browser_world_fun" class="img_ev3q"></td></tr></tbody></table>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-highlights">✨ Highlights<a href="https://open-llm-vtuber.github.io/en/blog/v1.0.1-release#-highlights" class="hash-link" aria-label="Direct link to ✨ Highlights" title="Direct link to ✨ Highlights">​</a></h2>
+<ul>
+<li><strong>Vision Capability:</strong> Video chat with the AI.</li>
+<li><strong>Desktop Pet Mode:</strong> A new Desktop Pet Mode lets you have your VTuber companion directly on your desktop.</li>
+<li><strong>Brand New Frontend:</strong>  A completely redesigned frontend built with React, ChakuraUI, and Vite offers a modern user experience. Available as web and desktop apps, located in the <a href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber-Web" target="_blank" rel="noopener noreferrer">Open-LLM-VTuber-Web</a> repository.</li>
+<li><strong>Chat History Management:</strong>  Implemented a system to store and retrieve conversation history, enabling persistent interactions with your AI.</li>
+<li><strong>New LLM support:</strong>  Many new (stateless) LLM providers are now supported (and refactored), including Ollama, OpenAI, Gemini, Claude, Mistral, DeepSeek, Zhipu, and llama.cpp.</li>
+<li><strong>DeepSeek R1 Reasoning model support</strong>: The reasoning chain will be displayed but not spoken. See your waifu's inner thoughts!</li>
+<li><strong>Major Backend Rewrite:</strong> The core of Open-LLM-VTuber has been rebuilt from the ground up, focusing on asynchronous operations, improved memory management, and a more modular architecture.</li>
+<li><strong>Refactored Configuration:</strong> The <code>conf.yaml</code> file was restructured, and <code>config_alts</code> has been renamed to <code>characters</code>.</li>
+<li><strong>TTS Preprocessor</strong>: Text inside <code>asterisks</code>, <code>brackets</code>, <code>parentheses</code>, and <code>angle brackets</code> will no longer be spoken by the TTS.</li>
+<li><strong>Dependency management:</strong> Switched to <code>uv</code> for dependency management, removed unused dependencies such as <code>rich</code>, <code>playsound3</code>, and <code>sounddevice</code>.</li>
+<li><strong>Documentation Site:</strong> A comprehensive documentation site is now live at <a href="https://open-llm-vtuber.github.io/" target="_blank" rel="noopener noreferrer">https://open-llm-vtuber.github.io/</a>.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-detailed-changes">📋 Detailed Changes<a href="https://open-llm-vtuber.github.io/en/blog/v1.0.1-release#-detailed-changes" class="hash-link" aria-label="Direct link to 📋 Detailed Changes" title="Direct link to 📋 Detailed Changes">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="-backend">🧮 Backend<a href="https://open-llm-vtuber.github.io/en/blog/v1.0.1-release#-backend" class="hash-link" aria-label="Direct link to 🧮 Backend" title="Direct link to 🧮 Backend">​</a></h3>
+<ul>
+<li><strong>Architecture:</strong>
+<ul>
+<li>The project structure has been reorganized to use the <code>src/</code> directory.</li>
+<li>The backend is now fully asynchronous, improving responsiveness.</li>
+<li>CLI mode (<code>main.py</code>) has been removed.</li>
+<li>The "exit word" has been removed.</li>
+<li>Models are initialized and managed using <code>ServiceContext</code>, offering better memory management, particularly when switching characters.</li>
+<li>Refactored LLMs into <code>agent</code> and <code>stateless_llm</code>, supporting a wider range of LLMs with a new agent interface: <code>basic_memory_agent</code> and <code>hume_ai_agent</code>.</li>
+</ul>
+</li>
+<li><strong>LLM (Language Model) Enhancements:</strong>
+<ul>
+<li>New (and old but refactored) providers: Ollama, OpenAI (and any OpenAI Compatible API), Gemini, Claude, Mistral, DeepSeek, Zhipu, llama.cpp.</li>
+<li><code>temperature</code> parameter added.</li>
+<li>No more tokens will be generated after interruption, improving the responsiveness of voice interruption.</li>
+<li>Ollama models are preloaded at startup, kept in memory for the server's duration, and unloaded at exit.</li>
+<li>Added a <code>hf_mirror</code> flag to specify whether to use the Hugging Face mirror source.</li>
+</ul>
+</li>
+<li><strong>TTS (Text-to-Speech) Enhancements:</strong>
+<ul>
+<li>TTS now generates multiple audio segments concurrently and sends them sequentially, reducing latency.</li>
+<li>New interruption logic for smoother transitions.</li>
+<li>Added filters (<code>asterisks</code>, <code>brackets</code>, <code>parentheses</code>) to prevent unwanted text from being spoken.</li>
+<li>Implemented <code>faster_first_response</code> feature to prioritize the synthesis and playback of the first sentence fragment, minimizing latency.</li>
+</ul>
+</li>
+<li><strong>ASR (Automatic Speech Recognition) Enhancements:</strong>
+<ul>
+<li>Made Sherpa-onnx ASR with the <strong>SenseVoiceSmall int8</strong> model the default for both English and Chinese presets, with automatic model download.</li>
+<li>Added a <code>provider</code> option for sherpa-onnx-asr.</li>
+</ul>
+</li>
+<li><strong>Other Improvements:</strong>
+<ul>
+<li>Chat log persistence is used to maintain conversation history.</li>
+<li>All <code>print</code> statements are replaced with <code>loguru</code> for structured logging.</li>
+<li>Added a Chinese configuration preset: <code>conf.CN.yaml</code>.</li>
+<li>Basic AI proactive speaking (experimental).</li>
+<li>Added some checks in the CI/CD process</li>
+<li>Added input/output type system to agents</li>
+<li>Added <strong>Tencent Translate</strong> in <a href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/pull/107" target="_blank" rel="noopener noreferrer">https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/pull/107</a></li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="️-frontend">🖥️ Frontend<a href="https://open-llm-vtuber.github.io/en/blog/v1.0.1-release#%EF%B8%8F-frontend" class="hash-link" aria-label="Direct link to 🖥️ Frontend" title="Direct link to 🖥️ Frontend">​</a></h3>
+<ul>
+<li><strong>New frontend built with Electron, React, ChakuraUI, and Vite.</strong></li>
+<li><strong>Multi-Mode in Single Codebase:</strong>
+<ul>
+<li>Web Mode: Browser interface</li>
+<li>Window Mode: Desktop window</li>
+<li>Pet Mode: Transparent desktop companion</li>
+<li>Seamless context sharing between Window and Pet modes, allowing for the preservation of settings, history, connections, and model states.</li>
+</ul>
+</li>
+<li><strong>Enhanced UI Features</strong>
+<ul>
+<li>Responsive layout with collapsible sidebar and footer</li>
+<li>Customizable Live2D model interactions: Mouse tracking for eye movement, Click-triggered animations, Drag &amp; resize capabilities.</li>
+<li>Persistent local storage for user preference settings, including background, VAD configuration, Live2D size and interactions, and agent behavior.</li>
+<li>Supports viewing, loading, and deleting conversation history with streaming subtitles.</li>
+<li>(Electron pet-mode) A transparent, always-on-top desktop companion with click-through, non-interactive areas featuring draggable and hideable Live2D and UI, right-click menu controls.</li>
+<li>Camera and screen capturing panel</li>
+<li>Switch characters easily</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="-documentation">📖 Documentation<a href="https://open-llm-vtuber.github.io/en/blog/v1.0.1-release#-documentation" class="hash-link" aria-label="Direct link to 📖 Documentation" title="Direct link to 📖 Documentation">​</a></h3>
+<ul>
+<li>Rewritten README file.</li>
+<li>New comprehensive documentation with a dedicated website.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="-cleanup">🧹 Cleanup<a href="https://open-llm-vtuber.github.io/en/blog/v1.0.1-release#-cleanup" class="hash-link" aria-label="Direct link to 🧹 Cleanup" title="Direct link to 🧹 Cleanup">​</a></h3>
+<ul>
+<li>Removed unused and legacy code, including <code>TaskQueue.py</code>, <code>scripts/install_piper_tts.py</code>, <code>model_manager_old.py</code>, <code>service_context_old.py</code>, <code>main.py</code>, <code>asr_with_vad</code>, <code>vad</code>, <code>start_cli</code>, <code>fake_llm</code>, <code>MemGPT</code>, the <code>pywhispercpp</code> submodule, and CoreML script.</li>
+<li>Removed unused dependencies: <code>rich</code>, <code>playsound3</code>, <code>sounddevice</code>, among others.</li>
+<li>Removed configuration options that are no longer relevant: <code>VOICE_INPUT_ON</code>, <code>MIC_IN_BROWSER</code>, <code>LIVE2D</code>, <code>EXTRA_SYSTEM_PROMPT_RAG</code>, <code>AI_NAME</code>, <code>USER_NAME</code>, <code>SAVE_CHAT_HISTORY</code>, <code>CHAT_HISTORY_DIR</code>, <code>RAG_ON</code>, <code>LLMASSIST_RAG_ON</code>, <code>SAY_SENTENCE_SEPARATELY</code>, <code>MEMORY_SNAPSHOT</code>, <code>PRELOAD_MODELS</code>, <code>tts_on</code>.</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="️️️-critical-upgrade-notice">⚠️⚠️⚠️ Critical Upgrade Notice<a href="https://open-llm-vtuber.github.io/en/blog/v1.0.1-release#%EF%B8%8F%EF%B8%8F%EF%B8%8F-critical-upgrade-notice" class="hash-link" aria-label="Direct link to ⚠️⚠️⚠️ Critical Upgrade Notice" title="Direct link to ⚠️⚠️⚠️ Critical Upgrade Notice">​</a></h2>
+<ol>
+<li>
+<p>No Direct Upgrades - Previous installations are incompatible</p>
+</li>
+<li>
+<p>Fresh Install Required - Follow new documentation</p>
+</li>
+<li>
+<p>Config Changes - Back up existing configurations before migration</p>
+</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="why-the-hassle-">Why the Hassle? 💡<a href="https://open-llm-vtuber.github.io/en/blog/v1.0.1-release#why-the-hassle-" class="hash-link" aria-label="Direct link to Why the Hassle? 💡" title="Direct link to Why the Hassle? 💡">​</a></h3>
+<ol>
+<li>UV dependency manager replaces legacy systems</li>
+<li>Complete configuration schema overhaul</li>
+</ol>
+<p>Please check out the <a href="https://open-llm-vtuber.github.io/docs/quick-start/" target="_blank" rel="noopener noreferrer">new documentation</a> to install Open-LLM-VTuber again. Fortunately, thanks to <code>uv,</code> there should be fewer headaches during installation.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="-contributors">🎉 Contributors<a href="https://open-llm-vtuber.github.io/en/blog/v1.0.1-release#-contributors" class="hash-link" aria-label="Direct link to 🎉 Contributors" title="Direct link to 🎉 Contributors">​</a></h2>
+<ul>
+<li>@t41372, which is me</li>
+<li>@ylxmf2005, the creator of the new frontend, implemented LLM vision capability, chat history management, TTS concurrency, hume AI agent, better sentence division, a better live2d configuration, countless bug fixes, and more. He also wrote the majority of the documentation and provided countless insights. The version <code>v1.0.0</code> was a close collaboration with him and wouldn't have existed without his tremendous contribution.</li>
+<li>@Stewitch, who added the hf_mirror option and is currently working on a launcher for this project to streamline the installation and configuration process. It's still a work in progress but will be completed very soon. <a href="https://github.com/Stewitch/LiZhen" target="_blank" rel="noopener noreferrer">https://github.com/Stewitch/LiZhen</a></li>
+<li>@Fluchw, who added Tecent translator and helped us fix the translator bug.</li>
+</ul>
+<p>And all the other contributors who worked on this project in previous versions.</p>
+<p><strong>Full Changelog</strong>: <a href="https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/compare/v0.5.2...v1.0.0" target="_blank" rel="noopener noreferrer">https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/compare/v0.5.2...v1.0.0</a></p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="faster-download-links-for-chinese-users-给内地用户准备的相对快速的下载链接">Faster download links for Chinese users 给内地用户准备的(相对)快速的下载链接<a href="https://open-llm-vtuber.github.io/en/blog/v1.0.1-release#faster-download-links-for-chinese-users-%E7%BB%99%E5%86%85%E5%9C%B0%E7%94%A8%E6%88%B7%E5%87%86%E5%A4%87%E7%9A%84%E7%9B%B8%E5%AF%B9%E5%BF%AB%E9%80%9F%E7%9A%84%E4%B8%8B%E8%BD%BD%E9%93%BE%E6%8E%A5" class="hash-link" aria-label="Direct link to Faster download links for Chinese users 给内地用户准备的(相对)快速的下载链接" title="Direct link to Faster download links for Chinese users 给内地用户准备的(相对)快速的下载链接">​</a></h2>
+<p>Open-LLM-VTuber-v1.0.3.zip (包含 sherpa onnx asr 的 sense-voice 模型，就不用再从github上拉取了)</p>
+<ul>
+<li><a href="https://pub-17317087be374bc68161ac63de2022a5.r2.dev/v1.0.3/Open-LLM-VTuber-v1.0.3.zip" target="_blank" rel="noopener noreferrer">https://pub-17317087be374bc68161ac63de2022a5.r2.dev/v1.0.3/Open-LLM-VTuber-v1.0.3.zip</a></li>
+</ul>
+<p>open-llm-vtuber-electron-1.0.0-frontend.exe (桌面版前端，Windows)</p>
+<ul>
+<li><a href="https://pub-17317087be374bc68161ac63de2022a5.r2.dev/v1.0.3/open-llm-vtuber-electron-1.0.0-setup.exe" target="_blank" rel="noopener noreferrer">https://pub-17317087be374bc68161ac63de2022a5.r2.dev/v1.0.3/open-llm-vtuber-electron-1.0.0-setup.exe</a></li>
+</ul>
+<p>open-llm-vtuber-electron-1.0.0-frontend.dmg (桌面版前端，macOS)</p>
+<ul>
+<li><a href="https://pub-17317087be374bc68161ac63de2022a5.r2.dev/v1.0.3/open-llm-vtuber-electron-1.0.0.dmg" target="_blank" rel="noopener noreferrer">https://pub-17317087be374bc68161ac63de2022a5.r2.dev/v1.0.3/open-llm-vtuber-electron-1.0.0.dmg</a></li>
+</ul>]]></content:encoded>
+            <category>Release</category>
         </item>
     </channel>
 </rss>
