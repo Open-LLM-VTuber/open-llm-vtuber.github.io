@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmy_website=self.webpackChunkmy_website||[]).push([[7472],{5513:e=>{e.exports=JSON.parse('{"title":"Recent posts","items":[{"title":"v1.0.0 \u6b63\u5f0f\u53d1\u5e03","permalink":"/en/blog/v1.0.0-release","unlisted":false,"date":"2025-08-03T03:06:15.000Z"}]}')}}]);
