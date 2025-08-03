@@ -1,3 +1,8 @@
+release:
+  label: Release
+  permalink: /release
+  description: Version Release Note
+
 facebook:
   label: Facebook
   permalink: /facebook
