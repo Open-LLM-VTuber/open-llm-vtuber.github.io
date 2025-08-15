@@ -12,7 +12,7 @@
 <link rel="search" type="application/opensearchdescription+xml" title="Open LLM Vtuber" href="/en/opensearch.xml">
 <link rel="preconnect" href="https://us.i.posthog.com">
 <script>!function(t,e){var o,s,r,a;e.__SV||(window.posthog=e,e._i=[],e.init=function(p,i,n){function c(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(r=t.createElement("script")).type="text/javascript",r.async=!0,r.src=i.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(a=t.getElementsByTagName("script")[0]).parentNode.insertBefore(r,a);var g=e;for(void 0!==n?g=e[n]=[]:n="posthog",g.people=g.people||[],g.toString=function(t){var e="posthog";return"posthog"!==n&&(e+="."+n),t||(e+=" (stub)"),e},g.people.toString=function(){return g.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys onSessionId".split(" "),s=0;s<o.length;s++)c(g,o[s]);e._i.push([p,i,n])},e.__SV=1)}(document,window.posthog||[]),posthog.init("phc_DLpdYyLOud1ZW0yXoLTCsaKQRPYCBpkp8kfBOnC7cix",{api_host:"https://us.i.posthog.com",id:"default"})</script><link rel="stylesheet" href="/en/assets/css/styles.39ec3de6.css">
-<script src="/en/assets/js/runtime~main.debfd334.js" defer="defer"></script>
+<script src="/en/assets/js/runtime~main.68c03726.js" defer="defer"></script>
 <script src="/en/assets/js/main.c840178e.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
@@ -28,7 +28,7 @@
 <ol>
 <li>Run the command <code>sudo spctl --master-disable</code> in terminal</li>
 <li>Open System Settings - Security &amp; Privacy, select &quot;Allow apps downloaded from: Anywhere&quot;</li>
-<li>Run the command <code>xattr -rc /Applications/Open LLM Vtuber.app</code> in terminal</li>
+<li>Run the command <code>xattr -d com.apple.quarantine &quot;/Applications/open-llm-vtuber-electron.app&quot;</code> in terminal</li>
 <li>Try opening the app again</li>
 </ol>
 </li>
