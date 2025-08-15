@@ -21,7 +21,7 @@ Since our desktop application has not been code-signed, you may encounter the fo
 - **macOS**: When first opening, you may see a warning that the app "is damaged and can't be opened. You should move it to the Trash". To resolve this:
   1. Run the command `sudo spctl --master-disable` in terminal
   2. Open System Settings - Security & Privacy, select "Allow apps downloaded from: Anywhere"
-  3. Run the command `xattr -rc /Applications/Open LLM Vtuber.app` in terminal
+  3. Run the command `xattr -d com.apple.quarantine "/Applications/open-llm-vtuber-electron.app"` in terminal
   4. Try opening the app again
 
 You can search for these errors to learn more about them and their solutions.

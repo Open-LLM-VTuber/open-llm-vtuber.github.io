@@ -1962,7 +1962,7 @@ Window 模式和 Pet 模式共享上下文，这意味着你可以在两种模�
 - **macOS**: 首次打开时可能提示应用"已损坏，无法打开。您应该将它移到废纸篓"。解决方法：
   1. 在命令行执行命令 `sudo spctl --master-disable`
   2. 打开系统设置 - 安全与隐私，在软件来源处选择任意来源。
-  3. 在命令行执行命令 `xattr -rc /Applications/Open LLM Vtuber.app`
+  3. 在命令行执行命令 `xattr -d com.apple.quarantine "/Applications/open-llm-vtuber-electron.app"`
   4. 再次打开应用即可
 
 你可以通过搜索这些报错，了解更多关于他们的信息和解决方法。
