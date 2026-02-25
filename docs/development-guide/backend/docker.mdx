@@ -1,0 +1,54 @@
+---
+sidebar_position: 2
+---
+
+# Docker 本地构建指南
+
+> 如果你想要的是使用我们提供的 docker 镜像部署 Open-LLM-VTuber 项目，可以看看 [Docker 部署](../../user-guide/backend/docker.md)
+
+## 说明
+- 项目的多架构镜像构建与推送已由 GitHub Actions 自动完成。
+- 本文档仅用于开发者本地构建调试镜像，不使用 `docker buildx`。
+
+## 本地环境要求
+- 已安装 `git`
+- 已安装 Docker（建议 Docker Engine 24+ 或 Docker Desktop 最新稳定版）
+- 可选：已安装 Docker Compose 插件（仅在你需要 `docker compose` 时）
+- 建议预留至少 `10GB` 可用磁盘空间（首次构建会下载较多依赖）
+
+可用以下命令自检：
+```
+git --version
+docker --version
+docker compose version
+```
+
+## 获取代码
+```
+git clone https://github.com/Open-LLM-VTuber/Open-LLM-VTuber.git
+cd Open-LLM-VTuber
+```
+
+## 本地构建镜像（单架构）
+在项目根目录执行：
+```
+docker build -t openllmvtuber/open-llm-vtuber:local -f dockerfile .
+```
+
+如需自定义镜像名或标签，替换 `openllmvtuber/open-llm-vtuber:local` 即可。
+
+## 可选：本地运行验证
+运行前请确认 `conf/conf.yaml` 已存在：
+```
+docker run --rm -it \
+  -p 12393:12393 \
+  -v "$(pwd)/conf:/app/conf" \
+  -v "$(pwd)/models:/app/models" \
+  openllmvtuber/open-llm-vtuber:local
+```
+
+## 清理本地 Docker 数据
+```
+docker system prune -a --volumes
+```
+

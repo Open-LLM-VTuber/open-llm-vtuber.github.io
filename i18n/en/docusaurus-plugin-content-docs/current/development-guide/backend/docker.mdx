@@ -1,0 +1,54 @@
+---
+sidebar_position: 2
+---
+
+# Docker Local Build Guide
+
+> If you want to deploy Open-LLM-VTuber using our pre-built Docker images, see [Docker Deployment](../../user-guide/backend/docker.md)
+
+## Notes
+- Multi-architecture image builds and pushes are automatically handled by GitHub Actions.
+- This document is only for developers who want to build debug images locally, without using `docker buildx`.
+
+## Local Environment Requirements
+- `git` installed
+- Docker installed (Docker Engine 24+ or the latest stable Docker Desktop recommended)
+- Optional: Docker Compose plugin installed (only if you need `docker compose`)
+- At least `10GB` of free disk space recommended (first build downloads many dependencies)
+
+You can verify your environment with these commands:
+```
+git --version
+docker --version
+docker compose version
+```
+
+## Get the Code
+```
+git clone https://github.com/Open-LLM-VTuber/Open-LLM-VTuber.git
+cd Open-LLM-VTuber
+```
+
+## Build Image Locally (Single Architecture)
+Run in the project root directory:
+```
+docker build -t openllmvtuber/open-llm-vtuber:local -f dockerfile .
+```
+
+To customize the image name or tag, replace `openllmvtuber/open-llm-vtuber:local` as needed.
+
+## Optional: Local Run Verification
+Before running, ensure `conf/conf.yaml` exists:
+```
+docker run --rm -it \
+  -p 12393:12393 \
+  -v "$(pwd)/conf:/app/conf" \
+  -v "$(pwd)/models:/app/models" \
+  openllmvtuber/open-llm-vtuber:local
+```
+
+## Clean Up Local Docker Data
+```
+docker system prune -a --volumes
+```
+

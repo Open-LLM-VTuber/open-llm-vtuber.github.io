@@ -1,56 +1,258 @@
 ---
-sidebar_position: 8
+sidebar_position: 3
 ---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 # Docker 部署
 
-:::danger
-由于重构幅度较大，Docker 镜像暂时还没有更新到 `v1.0.0` 版本，但是很快会更新。
+> 关于本地构建 docker 镜像，参考 [Docker 本地构建指南](../../development-guide/backend/docker.mdx)
+
+## 关于我们的docker团队
+我们在 docker hub 成立了[openllmvtuber团队](https://hub.docker.com/orgs/openllmvtuber/members)，目前docker镜像由[@Harry_Y](https://github.com/Harry-Yu-Shuhang)维护。
+
+## 下载配置文件
+
+### git下载（适合有git基础的用户）
+先[按照Quick Start安装 git](../../quick-start.md#安装-git)
+, 然后下载docker用户配置文件:
+
+```bash
+git clone https://github.com/Open-LLM-VTuber/OLV-Docker-Config
+```
+
+### zip下载（适合没有代码基础的用户）
+:::warning 
+这样下载的话,配置文件`conf.yaml`只能[手动更新](#手动更新)。
+:::
+首先，[点击这里前往用户配置代码仓库](https://github.com/Open-LLM-VTuber/OLV-Docker-Config)
+
+然后，在网页右上角，点击 `Code` -> `Download ZIP` 下载 docker 用户配置, 如下图。
+
+![](/docker_img/download_docker_conf_repo.png)
+
+## 修改配置文件
+如果自己有想修改的配置，就修改配置文件`conf.yaml`。
+
+:::info 默认的 `conf.yaml` 是英文的，如果想替换成中文，请到 `config_templates` 文件夹下复制 `conf.ZH.default.yaml`, 然后回到上一级, 替换掉原来的 `conf.yaml`
 :::
 
-:::warning
-⚠️ 请注意：此功能目前处于实验阶段，但在大多数情况下可以正常工作。
+如果你是小白，建议直接用默认的配置文件，可以一键启动。
+
+如果你想改一些配置，比如人设、模型、asr、tts等，请修改`conf.yaml`的对应字段。
+
+关于配置文件里各个字段的作用，可以参考配置文件里的注释。
+
+## 安装 Docker
+
+:::tip 关于安装方式
+目前支持两种方式。
+- 如果您是小白，推荐您[使用 Docker DeskTop](#使用-docker-desktop-安装-docker) 。
+- 如果您对 Docker 比较熟悉，也可以[使用终端命令](#使用终端命令安装-docker)。
 :::
 
-您可以选择自行构建 Docker 镜像，或者直接从 Docker Hub 拉取已构建的镜像：[![](https://img.shields.io/badge/t41372%2FOpen--LLM--VTuber-%25230db7ed.svg?logo=docker&logoColor=blue&labelColor=white&color=blue)](https://hub.docker.com/r/openllmvtuber/open-llm-vtuber)
+:::caution 关于GPU支持
+目前**仅支持CPU和Nvidia GPU**, 且GPU需要配置好Nvidia驱动, 如果还没配置好, 请[**点击这里前往Quick Start查看配置攻略**](../../quick-start.md#nvidia-gpu-支持)。
 
-## 使用须知
+如果您不打算使用GPU，而是**调用api**（这也是**绝大多数用户体验最好的方式**），或者使用CPU，可以忽略此步。
+:::
 
-- Docker 镜像体积较大（约 13GB），且某些可选模型在使用时需要额外下载，会占用更多存储空间
-- 仅支持 NVIDIA GPU 的设备
-- 需要安装并配置 [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) 以支持 GPU 直通
-- 目前存在的问题：容器停止后部分模型需要重新下载（该问题将在后续版本修复）
-- 不建议在 ARM 架构的设备上构建镜像，因为依赖项 gRPC 可能会出现构建失败的情况（[相关 issue](https://github.com/grpc/grpc/issues/34998)）
-- 如需在远程服务器上运行，必须配置 HTTPS。这是因为前端网页的麦克风/摄像头/屏幕录制功能只能在安全上下文（localhost 或 HTTPS 环境）中使用
+:::note 关于我们`Docker`团队
+我们在 docker hub 成立了[openllmvtuber团队](https://hub.docker.com/orgs/openllmvtuber/members)，目前Docker镜像由[@Harry_Y](https://github.com/Harry-Yu-Shuhang)维护。
+:::
 
-## 预装模型说明
+## 使用 Docker Desktop 安装 Docker
 
-默认镜像已预装大部分语音识别（ASR）和文本转语音（TTS）模型。但考虑到体积因素（约 8GB，会使总体积增加到 25GB）和性能表现，默认构建不包含以下模型：
-- Bark TTS
-- 原版 OpenAI Whisper（注意：这里指的是 Whisper，而非 WhisperCPP）
+:::warning 由于 `Docker Desktop` 退出重启经常卡死，建议尽量避免重启，如果重启很久以后没有反应，可以在任务管理器 (`Windows`) 或者 活动监视器 (`macOS`) 里杀掉 `Docker Desktop` 的后台进程，然后再次启动。
+:::
 
-如需在镜像中包含这些模型，请在构建时添加参数：
-```bash
---build-arg INSTALL_ORIGINAL_WHISPER=true --build-arg INSTALL_BARK=true
+### 下载 Docker Desktop
+
+访问 [Docker Desktop 下载页面](https://www.docker.com/products/docker-desktop)。
+
+点击 "Download Docker Desktop"
+
+![alt text](/docker_img/download_docker_desktop.png)
+
+根据电脑类型选择对应版本
+
+:::tip 如何选择适用于自己电脑的版本
+- **Mac Apple Silicon** → 新款 Mac (M1/M2/M3 芯片)  
+- **Mac Intel Chip** → 老款 Mac (Intel 处理器)  
+- **Windows AMD64** → 大部分 Windows 电脑 (Intel/AMD 64 位)  
+- **Windows ARM64** → 少见，仅 ARM 架构 Windows (如 Surface Pro X)  
+:::
+
+如果您还不确定，可以按如下方法查看系统设置：
+
+<Tabs groupId="operating-systems">
+  <TabItem value="windows" label="Windows">
+
+1. 右键 **此电脑 → 属性**
+2. 在 **系统类型** 一栏查看：  
+   - “基于 x64 的处理器” → 选择 **Windows AMD64**  
+   - “基于 ARM 的处理器” → 选择 **Windows ARM64**
+
+  </TabItem>
+  <TabItem value="macos" label="macOS">
+
+1. 点击屏幕左上角苹果图标 → **关于本机**  
+2. 在“芯片”一栏查看：  
+   - 显示 **Apple M1/M2/M3** → 选择 **Mac Apple Silicon**  
+   - 显示 **Intel** → 选择 **Mac Intel Chip**
+
+  </TabItem>
+</Tabs>
+
+### 启动 Docker Desktop
+
+双击下载好的安装包，按照提示完成安装。
+
+安装完成后，点击 Docker Desktop 图标启动 Docker。
+
+首次启动时，Docker Desktop 会要求您登录 Docker Hub 账号。如果您没有账号，需要先注册一个。
+
+### 获取 Docker 镜像
+
+点击顶部菜单的 **Search** 图标（或使用快捷键 `Ctrl + K`(Windows)或者`Cmd + K`(MacOS)）。
+
+![alt text](/docker_img/click_search.png)
+
+在搜索框中输入以下内容，搜索到以后点击右侧的**Pull**按钮。
+
+```
+openllmvtuber/open-llm-vtuber:latest
 ```
 
-## 部署步骤
+![alt text](/docker_img/openllmvtuber_image.png)
 
-1. 在构建镜像前，请先检查并调整 `conf.yaml` 配置文件（当前配置会被构建进镜像）
+### 配置 LLM
+:::info 关于调用LLM的方式
+如果您使用本地模型，比如默认配置的 `Ollama`， 这一步必须做。
 
-2. 构建 Docker 镜像：
+如果你选择api调用，可以跳过这一步。
+:::
+
+:::info 如果您是没有代码基础的小白
+建议按照以下步骤，直接使用默认的 `Ollama` 模型调用方式，省去配置麻烦。
+
+<details>
+  1. 从 [Ollama 官网](https://ollama.com/) 下载并安装 Ollama 客户端。
+
+  2. 终端输入以下指令，验证Ollama是否安装成功:
+  ```bash
+  ollama --version
+  ```
+
+  3. 下载并运行模型（以默认配置文件的 `qwen2.5:latest` 为例）：
+  ```bash
+  ollama run qwen2.5:latest
+  ```
+
+  4. 查看已安装的模型。
+  ```bash
+  ollama list
+  ```
+</details>
+:::
+
+
+更多注意事项，可以参考 [Quick Start 里的配置 LLM 部分](../../quick-start.md#3-配置-llm)。
+
+
+### 运行 Docker 容器
+
+点击**Images**, 找到**openllmvtuber/open-llm-vtuber**, 点击右侧的运行按钮。
+![alt text](/docker_img/run_image.png)
+
+点开"Optional settings", 按照下图配置，
+![alt text](/docker_img/container_config_cn.png)
+
+
+### 在浏览器打开web界面
+等到出现这几行字，如下图，就说明启动成功了。第一次拉取会比较慢，因为要安装一些必要工具，请耐心等待。
+![](/docker_img/docker_run_success.png)
+
+点击左上角的 `12393:12393`，如下图，或者在浏览器输入 `http://localhost:12393`
+![](/docker_img/click_12393.png)
+
+**恭喜你，成功了**，和你的虚拟伴侣对话吧！
+
+## 使用终端命令安装 Docker
+1. 安装 Docker Desktop。
+<Tabs groupId="operating-systems">
+  <TabItem value="windows" label="Windows">
+
 ```bash
-docker build -t open-llm-vtuber .
+winget install -e --id Docker.DockerDesktop
 ```
-   > 提示：构建过程可能需要较长时间
 
-3. 准备 `conf.yaml` 配置文件
-   您可以从项目仓库获取，或直接通过此[链接](https://raw.githubusercontent.com/Open-LLM-VTuber/Open-LLM-VTuber/main/conf.yaml)下载
+  </TabItem>
+  <TabItem value="macos" label="macOS">
 
-4. 运行容器：
 ```bash
-docker run -it --net=host --rm -v $(pwd)/conf.yaml:/app/conf.yaml -p 12393:12393 open-llm-vtuber
+brew install --cask docker
 ```
-   注意：请将 `$(pwd)/conf.yaml` 替换为您的配置文件实际路径
 
-5. 访问 `localhost:12393` 进行测试
+  </TabItem>
+</Tabs>
+
+2. 拉取最新镜像。
+
+```bash
+docker pull openllmvtuber/open-llm-vtuber:latest
+```
+
+3. 打包容器。可以更改 `docker-compose.yml`，默认的也可以直接一键启动。
+```bash
+cd OLV-Docker-Config
+```
+
+```bash 
+docker-compose up -d
+```
+
+4. 查看容器的日志。
+```bash 
+docker logs -f open-llm-vtuber-latest
+```
+
+5. 在浏览器打开web界面。
+
+等到日志里出现 `Uvicorn running on http://0.0.0.0:12393` 以后，在浏览器输入 `http://localhost:12393` 打开web界面。
+
+至此，你就成功部署了 Open LLM VTuber！
+
+## 更新
+### 更新配置文件
+有 git 更新和手动更新两种方式。
+#### git 更新
+在 `OLV-Docker-Config` 目录下运行以下命令：
+```bash
+git stash
+git pull
+git stash pop
+```
+如有冲突请手动处理。
+
+#### 手动更新
+手动对比新版 `conf.yaml` 与旧版 `conf.yaml`的不同，将需要更新的部分复制到旧的 `conf.yaml` 中。 
+
+ChatGPT推荐这个网站 [DiffCheck.ai — YAML Diff Checker](https://diffcheck.ai/yaml)，你也可以自己找合适的网站。
+
+### 拉取最新镜像
+如果用 `Docker Desktop`, 点击 `Image` 旁边的 `Pull` 即可。
+
+如果用终端，运行以下命令：
+```bash
+docker pull openllmvtuber/open-llm-vtuber:latest
+```
+
+### 重启容器
+如果用 `Docker Desktop`, 点击 `Containers` 的 `Restart` 即可。
+
+如果用终端，运行以下命令：
+```bash
+docker-compose up -d
+```

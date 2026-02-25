@@ -63,6 +63,23 @@ Groq Whisper API、OpenAI API 等国外大模型/推理平台 API 一般无法�
 
 对于本快速开始文档选择的组件，你需要一个速度正常的 CPU (ASR)，一个 Ollama 支持的 GPU (LLM)，以及网路链接 (TTS)。
 
+## Docker 快速启动
+
+:::info 说明
+Docker是**最适合小白**的部署方式，它可以一键部署所有组件，无需手动配置。
+:::
+
+如果你对 Docker 感兴趣，请移步[Docker 部署指南](./user-guide/backend/docker.md)。
+
+如果不感兴趣，您也可以跳转到常规配置方法，从下一步，也就是[环境准备](#环境准备)步骤开始。
+
+:::note 目前的docker镜像对平台支持情况如下表
+| 平台     | CPU 支持 | NVIDIA GPU 支持 | AMD/Intel GPU 支持 |
+|----------|----------|-----------------|--------------------|
+| Linux    | ✅       | ✅              | ❌                 |
+| Windows  | ✅       | ✅[(需安装Nvidia驱动）](#nvidia-gpu-支持) | ❌ |
+| macOS    | ✅       | ❌              | ❌                 |
+:::
 
 ## 环境准备
 
@@ -375,9 +392,6 @@ source ~/.zshrc   # 如果使用 zsh
   </TabItem>
 
 </Tabs>
-
-
-
 
 
 ### 2. 安装项目依赖

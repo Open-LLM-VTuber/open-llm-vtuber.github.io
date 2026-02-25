@@ -55,6 +55,24 @@ This project supports various backends for speech recognition (ASR), large langu
 
 For the components selected in this quick start guide, you will need a CPU with normal speed (for ASR), a GPU supported by Ollama (for LLM), and an internet connection (for TTS).
 
+## Docker Quick Start
+
+:::info Note
+Docker is the easiest deployment method for beginners. It can deploy all components with one click and requires no manual configuration.
+:::
+
+If you're interested in Docker, please refer to the [Docker Deployment Guide](./user-guide/backend/docker.md).
+
+If you're not interested, you can skip ahead to the general setup and start from the next step: [Environment Preparation](#environment-preparation).
+
+:::note Current Docker image platform support is as follows
+| Platform | CPU Support | NVIDIA GPU Support | AMD/Intel GPU Support |
+|----------|-------------|--------------------|-----------------------|
+| Linux    | ✅          | ✅                 | ❌                    |
+| Windows  | ✅          | ✅ [(requires Nvidia driver installation)](#nvidia-gpu-support) | ❌ |
+| macOS    | ✅          | ❌                 | ❌                    |
+:::
+
 ## Environment Preparation
 
 ### Install Git
