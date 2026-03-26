@@ -17,7 +17,7 @@ sidebar_position: 1
 ## 0. 总览
 
 ### 0.1 要求
-- 最新版本的 Open-LLM-VTuber，并请切换到 dev 分支进行开发 (Pull Request 也请开到 dev 分支)。
+- 最新版本的 Open-LLM-VTuber，并请切换到 `main` 分支进行开发 (Pull Request 也请开到 `main` 分支)。
 - 会写 Python (不过你跟着下面步骤走就知道你会不会 Python 了。你可以边走边学)
 - 大概理解 GitHub 开源工作流。具体来说，理解 fork 与 Pull Request 的概念。
 - 理解如何使用 uv 管理 Python 项目依赖。(不会 uv 的[这里学](https://docs.astral.sh/uv/getting-started/features/#projects))
@@ -45,6 +45,12 @@ sidebar_position: 1
 #### 文档
 1. 请前往 [用户指南/后端用户指南/语音合成(TTS)](https://github.com/Open-LLM-VTuber/open-llm-vtuber.github.io/blob/main/docs/user-guide/backend/tts.md)，编辑 TTS 文档的源代码并添加你实现的 TTS 的安装指南。
 - 如果你在这一步遇到困难，你可以直接联系我，我可以帮你把文档添加进文档网站中 (但安装指南要自己写！)
+
+:::tip
+如果你的 TTS 服务已经提供 OpenAI 兼容的 `/v1/audio/speech` 接口，优先复用现有的请求流程，再把服务特有参数留在单独的适配器里。
+
+以 `qwen_tts` 为例，适合的做法是复用 `openai_tts` 的基础调用方式，只在 `qwen_tts` 中补充 Qwen 特有的可选字段，例如 `language`。不要把 Qwen 专用逻辑直接塞进通用的 `openai_tts` 实现中。
+:::
 
 
 ## 1. 开发:

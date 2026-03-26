@@ -281,6 +281,44 @@ stream（流式生成）推荐填 False，因为本项目已包含语音分段�
   - 需要保持网络连接
 - 配置：在 `conf.yaml` 中设置 `tts_model: edge_tts`
 
+## Qwen3 TTS（本地、OpenAI 兼容接口）
+适合已经在本地部署了 Qwen3 TTS FastAPI 服务的用户。这个服务需要提供 OpenAI 兼容的 `POST /v1/audio/speech` 接口，Open-LLM-VTuber 会把它当作一个本地 TTS 后端来调用。
+
+1. 先准备本地 Qwen3 TTS 服务
+   - 推荐使用干净的 Python 3.12 环境。
+   - 按你的 Qwen3 TTS 服务说明准备基础模型、voice design 模型和用户自己生成的提示音色资产。
+   - 参考音频、生成出来的 `.wav` / `.pkl` 提示资产不应该提交到 Git 仓库。
+
+2. 启动本地 FastAPI 服务
+   - 确认服务已经监听在本地地址，例如 `http://127.0.0.1:8000/v1`
+   - 确认可以正常响应 `POST /v1/audio/speech`
+
+3. 在 `conf.yaml` 中配置：
+```yaml
+tts_model: qwen_tts
+
+qwen_tts:
+  model: "qwen3-tts-en-single"
+  voice: "default"
+  api_key: "not-needed"
+  base_url: "http://127.0.0.1:8000/v1"
+  file_extension: "wav"
+  language: "English"
+```
+
+4. 配置说明
+   - `model`: 传给本地 Qwen3 TTS 服务的模型名。
+   - `voice`: 使用的音色名。建议在服务端把默认值做成可配置项。
+   - `api_key`: 本地服务一般不需要鉴权，可以保留 `not-needed`。
+   - `base_url`: 你的 FastAPI 服务地址，通常应包含 `/v1`。
+   - `file_extension`: 推荐使用 `wav`，与本地流式播放更容易兼容。
+   - `language`: 可选字段。如果你的服务支持显式语言控制，可以在这里填写。
+
+5. 使用建议
+   - 先单独测试本地 TTS 服务，再接入 Open-LLM-VTuber。
+   - 如果你计划开源自己的 Qwen3 TTS 服务，请把安装步骤、模型下载方式、提示资产生成流程写进 README。
+   - 不要在公开仓库中提交私人参考音频、生成后的提示资产，或写死的角色音色设定。
+
 ## Fish Audio TTS（在线、需要 API 密钥）
 > 自 `v0.3.0-beta` 版本起可用
 
