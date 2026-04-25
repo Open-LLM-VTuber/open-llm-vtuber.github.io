@@ -106,6 +106,8 @@ qwen3_tts:
 
 `voice_design` 在合成时内联生成声音特征——不会预编码可复用的声音提示。每次 `generate_audio` 调用都会根据 `instruct` 文本独立生成声音。在流式模式下，每句话是一次单独的调用，因此各句之间的声音会不一致。
 
+坦白说，`voice_design` 放在这里有点像方榫插圆孔。它本来就不是为逐句流式合成的运行时设计的，所以开箱即用的效果不要抱太高期望。如果你想折腾，功能是有的，但要真正用于实际场景，还是下面的设计→克隆工作流更靠谱。
+
 如需在整个会话中保持声音一致，推荐以下工作流：
 
 1. 使用 `voice_design` 生成一句话。
@@ -113,6 +115,10 @@ qwen3_tts:
 3. 切换到 `voice_clone` 模式，将该 wav 文件作为 `ref_audio`。
 
 这是将设计好的声音在完整会话中保持一致的推荐用法。
+
+:::tip
+在确定使用哪个声音之前，用 [ComfyUI](https://github.com/comfyanonymous/ComfyUI) 配合 Qwen3-TTS 自定义节点来生成和试听声音设计是个很方便的方案——你可以反复调整 `instruct` 提示词并即时听到效果，无需跑完整个 VTuber 运行栈。如果你用 NixOS，[这份配置](https://codeberg.org/yuuhikaze/nixos/src/commit/17c639eb5662620d4080c23d64d1ed8d24c50414/modules/features/comfyui.nix) 是一个真实的配置示例，可以参考。
+:::
 
 ## sherpa-onnx（本地 & 推荐）
 > 自 `v0.5.0-alpha.1` 版本起可用（[PR#50](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/pull/50)）

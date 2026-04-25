@@ -107,6 +107,8 @@ The `attention` parameter selects the attention mechanism. `auto` picks the fast
 
 `voice_design` generates voice characteristics inline during synthesis — it does not pre-encode a reusable voice prompt. Each `generate_audio` call generates an independent voice from the `instruct` text. In streaming mode, each sentence is a separate call, so the voice will differ across sentences.
 
+Honestly, `voice_design` is a bit of a square peg in a round hole here. It wasn't really designed with a sentence-by-sentence streaming runtime in mind, so don't expect seamless results out of the box. It's there if you want to experiment, but the design→clone workflow below is how you'd actually use it for anything consistent.
+
 To get a consistent voice from a design:
 
 1. Generate a single sentence with `voice_design`.
@@ -114,6 +116,10 @@ To get a consistent voice from a design:
 3. Switch to `voice_clone` mode and use that wav as `ref_audio`.
 
 This is the intended workflow for using a designed voice consistently across a full session.
+
+:::tip
+For generating and auditioning voice designs before committing to one, [ComfyUI](https://github.com/comfyanonymous/ComfyUI) with a Qwen3-TTS custom node is a convenient setup — you can iterate on the `instruct` prompt and immediately hear the result without running the full VTuber stack. If you're on NixOS, [this config](https://codeberg.org/yuuhikaze/nixos/src/commit/17c639eb5662620d4080c23d64d1ed8d24c50414/modules/features/comfyui.nix) is a real-world example of how to set it up.
+:::
 
 ## sherpa-onnx (Local & Recommended)
 > Available since version `v0.5.0-alpha.1` ([PR#50](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/pull/50))
