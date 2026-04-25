@@ -54,7 +54,7 @@ tts_model: 'qwen3_tts'
 
 qwen3_tts:
   model_type: 'voice_clone'    # 'voice_clone' | 'voice_design' | 'custom_voice'
-  model_size: '1.7B'           # '0.6B' (fast) or '1.7B' (recommended); voice_design only supports 1.7B
+  model_size: '1.7B'           # '0.6B' (faster, lower VRAM) or '1.7B' (higher capacity); voice_design only supports 1.7B
   model_path: ''               # optional: local directory path; overrides model_type + model_size if set
   language: 'english'          # english, spanish, french, german, japanese, korean, chinese, portuguese, russian, italian
 
@@ -102,6 +102,18 @@ The `attention` parameter selects the attention mechanism. `auto` picks the fast
 - `x_vector_only_mode: true` (default) encodes only the speaker embedding — no transcript needed.
 - `x_vector_only_mode: false` enables ICL (in-context learning) mode — set `ref_text` to the transcript for higher fidelity output.
 - The voice prompt is encoded once at startup, keeping generation latency low.
+
+### voice_design Notes
+
+`voice_design` generates voice characteristics inline during synthesis — it does not pre-encode a reusable voice prompt. Each `generate_audio` call generates an independent voice from the `instruct` text. In streaming mode, each sentence is a separate call, so the voice will differ across sentences.
+
+To get a consistent voice from a design:
+
+1. Generate a single sentence with `voice_design`.
+2. Save the output wav file.
+3. Switch to `voice_clone` mode and use that wav as `ref_audio`.
+
+This is the intended workflow for using a designed voice consistently across a full session.
 
 ## sherpa-onnx (Local & Recommended)
 > Available since version `v0.5.0-alpha.1` ([PR#50](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/pull/50))

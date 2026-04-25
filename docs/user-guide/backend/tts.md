@@ -55,7 +55,7 @@ tts_model: 'qwen3_tts'
 
 qwen3_tts:
   model_type: 'voice_clone'    # 'voice_clone' | 'voice_design' | 'custom_voice'
-  model_size: '1.7B'           # '0.6B'（快速）或 '1.7B'（推荐）；voice_design 仅支持 1.7B
+  model_size: '1.7B'           # '0.6B'（速度更快，显存占用更低）或 '1.7B'（容量更大）；voice_design 仅支持 1.7B
   model_path: ''               # 可选：本地目录路径；设置后将覆盖 model_type + model_size
   language: 'english'          # english, spanish, french, german, japanese, korean, chinese, portuguese, russian, italian
 
@@ -101,6 +101,18 @@ qwen3_tts:
 - `x_vector_only_mode: true`（默认）仅编码说话人嵌入，无需转录文本。
 - `x_vector_only_mode: false` 启用 ICL（上下文学习）模式——将 `ref_text` 设置为转录文本可获得更高音质。
 - 声音提示在启动时编码一次，保持较低的生成延迟。
+
+### voice_design 说明
+
+`voice_design` 在合成时内联生成声音特征——不会预编码可复用的声音提示。每次 `generate_audio` 调用都会根据 `instruct` 文本独立生成声音。在流式模式下，每句话是一次单独的调用，因此各句之间的声音会不一致。
+
+如需在整个会话中保持声音一致，推荐以下工作流：
+
+1. 使用 `voice_design` 生成一句话。
+2. 保存输出的 wav 文件。
+3. 切换到 `voice_clone` 模式，将该 wav 文件作为 `ref_audio`。
+
+这是将设计好的声音在完整会话中保持一致的推荐用法。
 
 ## sherpa-onnx（本地 & 推荐）
 > 自 `v0.5.0-alpha.1` 版本起可用（[PR#50](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/pull/50)）
