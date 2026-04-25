@@ -6,6 +6,103 @@ sidebar_position: 6
 
 After installing the required dependencies and configuring `conf.yaml`, enable the corresponding speech synthesis engine by modifying the `TTS_MODEL` option in `conf.yaml`.
 
+## Qwen3-TTS (Local, Highest Quality)
+
+Qwen3-TTS is Alibaba's autoregressive LLM-based text-to-speech model (1.7B parameters, Apache-2.0 license). It produces the highest-quality output of any TTS option in Open-LLM-VTuber. The inference package is vendored into the source tree — no separate runtime installation is required.
+
+### Installation
+
+Install the optional dependencies:
+
+```sh
+uv pip install ".[qwen3-tts]"
+```
+
+### Generation Modes
+
+Qwen3-TTS supports three generation modes, each using a different model variant:
+
+- **`voice_clone`** — clones a voice from a reference audio file. Uses the `*-Base` model. Most stable option.
+- **`voice_design`** — generates a voice from a natural language description. Uses the `*-VoiceDesign` model. Only supports 1.7B.
+- **`custom_voice`** — uses a predefined speaker name. Uses the `*-CustomVoice` model.
+
+### Model Variants
+
+The model is resolved automatically from `model_type` and `model_size`:
+
+| `model_type` | `model_size` | HuggingFace repo |
+|---|---|---|
+| `voice_clone` | `0.6B` | `Qwen/Qwen3-TTS-12Hz-0.6B-Base` |
+| `voice_clone` | `1.7B` | `Qwen/Qwen3-TTS-12Hz-1.7B-Base` |
+| `voice_design` | `1.7B` | `Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign` |
+| `custom_voice` | `0.6B` | `Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice` |
+| `custom_voice` | `1.7B` | `Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice` |
+
+Set `model_path` to a local directory to override automatic resolution.
+
+### Hardware Requirements
+
+- 1.7B model: ~6–8 GB VRAM (bf16)
+- 0.6B model: ~3 GB VRAM
+
+### Configuration
+
+Set `tts_model: qwen3_tts` and configure the `qwen3_tts` block in `conf.yaml`:
+
+```yaml
+tts_model: 'qwen3_tts'
+
+qwen3_tts:
+  model_type: 'voice_clone'    # 'voice_clone' | 'voice_design' | 'custom_voice'
+  model_size: '1.7B'           # '0.6B' (fast) or '1.7B' (recommended); voice_design only supports 1.7B
+  model_path: ''               # optional: local directory path; overrides model_type + model_size if set
+  language: 'english'          # english, spanish, french, german, japanese, korean, chinese, portuguese, russian, italian
+
+  # --- voice_clone (model: *-Base) ---
+  ref_audio: ''                # path to reference wav file (3–10s recommended; up to 15s for best quality)
+  ref_text: ''                 # transcript of ref_audio for ICL mode; leave empty to use x_vector_only_mode
+  x_vector_only_mode: true     # true = speaker embedding only (no transcript needed)
+                               # false = ICL mode (ref_text required, higher fidelity)
+
+  # --- voice_design (model: *-VoiceDesign) ---
+  instruct: 'A warm and expressive female voice'
+
+  # --- custom_voice (model: *-CustomVoice) ---
+  speaker: 'serena'            # serena, vivian, ryan, aiden, ono_anna, sohee
+
+  # --- generation parameters ---
+  device: 'cuda'               # 'cuda' — recommended default; PyTorch picks the GPU automatically,
+                               #           works on single- and multi-GPU machines
+                               # 'cuda:0'/'cuda:1'/... — targets a specific GPU by index
+                               #           (useful on multi-GPU machines to pin to a particular card)
+                               # 'cpu'  — CPU only, much slower
+  attention: 'auto'            # auto, sage_attn, flash_attn, sdpa, eager
+  temperature: 1.0
+  top_k: 20
+  top_p: 0.80
+  max_new_tokens: 2048
+  repetition_penalty: 1.05
+  seed: -1                     # -1 = random each time
+```
+
+### Attention Backends
+
+The `attention` parameter selects the attention mechanism. `auto` picks the fastest available option automatically.
+
+| Value | Speed | Notes |
+|---|---|---|
+| `sage_attn` | Fastest | Requires CUDA: `uv pip install sageattention` |
+| `flash_attn` | Fast | `uv pip install flash-attn` |
+| `sdpa` | Moderate | PyTorch built-in, no install needed |
+| `eager` | Slowest | Always available |
+
+### voice_clone Notes
+
+- Reference audio should be 3–15 seconds, clean and noise-free.
+- `x_vector_only_mode: true` (default) encodes only the speaker embedding — no transcript needed.
+- `x_vector_only_mode: false` enables ICL (in-context learning) mode — set `ref_text` to the transcript for higher fidelity output.
+- The voice prompt is encoded once at startup, keeping generation latency low.
+
 ## sherpa-onnx (Local & Recommended)
 > Available since version `v0.5.0-alpha.1` ([PR#50](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/pull/50))
 

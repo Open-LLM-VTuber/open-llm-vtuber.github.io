@@ -7,6 +7,101 @@ sidebar_position: 6
 安装所需的依赖并在 `conf.yaml` 进行配置后后，通过修改 `conf.yaml` 中的 `TTS_MODEL` 选项来启用相应的语音合成引擎。
 
 
+## Qwen3-TTS（本地，最高质量）
+
+Qwen3-TTS 是阿里巴巴基于自回归大语言模型的语音合成方案（1.7B 参数，Apache-2.0 协议），是 Open-LLM-VTuber 中音质最高的 TTS 选项。推理包已内置于源代码树中，无需单独安装运行时依赖。
+
+### 安装
+
+安装可选依赖：
+
+```sh
+uv pip install ".[qwen3-tts]"
+```
+
+### 生成模式
+
+Qwen3-TTS 支持三种生成模式，每种模式使用不同的模型变体：
+
+- **`voice_clone`** — 从参考音频文件克隆声音，使用 `*-Base` 模型，稳定性最佳。
+- **`voice_design`** — 根据自然语言描述生成声音，使用 `*-VoiceDesign` 模型，仅支持 1.7B。
+- **`custom_voice`** — 使用预定义的说话人名称，使用 `*-CustomVoice` 模型。
+
+### 模型变体
+
+根据 `model_type` 和 `model_size` 自动解析对应模型：
+
+| `model_type` | `model_size` | HuggingFace 仓库 |
+|---|---|---|
+| `voice_clone` | `0.6B` | `Qwen/Qwen3-TTS-12Hz-0.6B-Base` |
+| `voice_clone` | `1.7B` | `Qwen/Qwen3-TTS-12Hz-1.7B-Base` |
+| `voice_design` | `1.7B` | `Qwen/Qwen3-TTS-12Hz-1.7B-VoiceDesign` |
+| `custom_voice` | `0.6B` | `Qwen/Qwen3-TTS-12Hz-0.6B-CustomVoice` |
+| `custom_voice` | `1.7B` | `Qwen/Qwen3-TTS-12Hz-1.7B-CustomVoice` |
+
+将 `model_path` 设置为本地目录可覆盖自动解析。
+
+### 硬件要求
+
+- 1.7B 模型：约 6–8 GB 显存（bf16）
+- 0.6B 模型：约 3 GB 显存
+
+### 配置
+
+在 `conf.yaml` 中设置 `tts_model: qwen3_tts` 并配置 `qwen3_tts` 块：
+
+```yaml
+tts_model: 'qwen3_tts'
+
+qwen3_tts:
+  model_type: 'voice_clone'    # 'voice_clone' | 'voice_design' | 'custom_voice'
+  model_size: '1.7B'           # '0.6B'（快速）或 '1.7B'（推荐）；voice_design 仅支持 1.7B
+  model_path: ''               # 可选：本地目录路径；设置后将覆盖 model_type + model_size
+  language: 'english'          # english, spanish, french, german, japanese, korean, chinese, portuguese, russian, italian
+
+  # --- voice_clone（模型：*-Base）---
+  ref_audio: ''                # 参考音频文件路径（推荐 3–10 秒；最佳质量可用至 15 秒）
+  ref_text: ''                 # 参考音频的文本转录（ICL 模式需要）；留空则使用 x_vector_only_mode
+  x_vector_only_mode: true     # true = 仅使用说话人嵌入（无需转录文本）
+                               # false = ICL 模式（需要 ref_text，音质更高）
+
+  # --- voice_design（模型：*-VoiceDesign）---
+  instruct: 'A warm and expressive female voice'
+
+  # --- custom_voice（模型：*-CustomVoice）---
+  speaker: 'serena'            # serena, vivian, ryan, aiden, ono_anna, sohee
+
+  # --- 生成参数 ---
+  device: 'cuda'               # 'cuda'（推荐，PyTorch 自动选择 GPU，适用于单卡和多卡）
+                               # 'cuda:0'/'cuda:1'/...（按索引指定 GPU，多卡时用于固定特定显卡）
+                               # 'cpu'（仅用 CPU，速度较慢）
+  attention: 'auto'            # auto, sage_attn, flash_attn, sdpa, eager
+  temperature: 1.0
+  top_k: 20
+  top_p: 0.80
+  max_new_tokens: 2048
+  repetition_penalty: 1.05
+  seed: -1                     # -1 = 每次随机
+```
+
+### 注意力后端
+
+`attention` 参数用于选择注意力机制，`auto` 会自动选择当前可用的最快选项：
+
+| 值 | 速度 | 说明 |
+|---|---|---|
+| `sage_attn` | 最快 | 需要 CUDA：`uv pip install sageattention` |
+| `flash_attn` | 快 | `uv pip install flash-attn` |
+| `sdpa` | 中等 | PyTorch 内置，无需安装 |
+| `eager` | 最慢 | 始终可用 |
+
+### voice_clone 说明
+
+- 参考音频应为 3–15 秒，清晰无噪声。
+- `x_vector_only_mode: true`（默认）仅编码说话人嵌入，无需转录文本。
+- `x_vector_only_mode: false` 启用 ICL（上下文学习）模式——将 `ref_text` 设置为转录文本可获得更高音质。
+- 声音提示在启动时编码一次，保持较低的生成延迟。
+
 ## sherpa-onnx（本地 & 推荐）
 > 自 `v0.5.0-alpha.1` 版本起可用（[PR#50](https://github.com/Open-LLM-VTuber/Open-LLM-VTuber/pull/50)）
 
