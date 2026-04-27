@@ -8,7 +8,7 @@ After installing the required dependencies and configuring `conf.yaml`, enable t
 
 ## Qwen3-TTS (Local, Highest Quality)
 
-Qwen3-TTS is Alibaba's autoregressive LLM-based text-to-speech model (1.7B parameters, Apache-2.0 license). It produces the highest-quality output of any TTS option in Open-LLM-VTuber. The inference package is vendored into the source tree — no separate runtime installation is required.
+Qwen3-TTS is Alibaba's autoregressive LLM-based text-to-speech model (1.7B parameters, Apache-2.0 license). It produces the highest-quality output of any TTS option in Open-LLM-VTuber. The inference code is vendored into the source tree — only Python dependencies need to be installed via the optional dependency group.
 
 ### Installation
 
@@ -71,11 +71,11 @@ qwen3_tts:
   speaker: 'serena'            # serena, vivian, ryan, aiden, ono_anna, sohee
 
   # --- generation parameters ---
-  device: 'cuda'               # 'cuda' — recommended default; PyTorch picks the GPU automatically,
-                               #           works on single- and multi-GPU machines
-                               # 'cuda:0'/'cuda:1'/... — targets a specific GPU by index
-                               #           (useful on multi-GPU machines to pin to a particular card)
-                               # 'cpu'  — CPU only, much slower
+  device: 'cuda'               # 'cuda'    — equivalent to cuda:0 on most machines; uses the current
+                               #             CUDA device, which defaults to the first GPU
+                               # 'cuda:0'/'cuda:1'/... — targets a GPU explicitly by index;
+                               #             use this on multi-GPU machines to pin to a specific card
+                               # 'cpu'    — CPU only, much slower
   attention: 'auto'            # auto, sage_attn, flash_attn, sdpa, eager
   temperature: 1.0
   top_k: 20
@@ -107,7 +107,7 @@ The `attention` parameter selects the attention mechanism. `auto` picks the fast
 
 `voice_design` generates voice characteristics inline during synthesis — it does not pre-encode a reusable voice prompt. Each `generate_audio` call generates an independent voice from the `instruct` text. In streaming mode, each sentence is a separate call, so the voice will differ across sentences.
 
-Honestly, `voice_design` is a bit of a square peg in a round hole here. It wasn't really designed with a sentence-by-sentence streaming runtime in mind, so don't expect seamless results out of the box. It's there if you want to experiment, but the design→clone workflow below is how you'd actually use it for anything consistent.
+`voice_design` was not designed for sentence-by-sentence streaming — each call generates voice characteristics independently, so the voice will differ across sentences. It is available for experimentation, but the design→clone workflow below is the recommended path for consistent output.
 
 To get a consistent voice from a design:
 

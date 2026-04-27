@@ -9,7 +9,7 @@ sidebar_position: 6
 
 ## Qwen3-TTS（本地，最高质量）
 
-Qwen3-TTS 是阿里巴巴基于自回归大语言模型的语音合成方案（1.7B 参数，Apache-2.0 协议），是 Open-LLM-VTuber 中音质最高的 TTS 选项。推理包已内置于源代码树中，无需单独安装运行时依赖。
+Qwen3-TTS 是阿里巴巴基于自回归大语言模型的语音合成方案（1.7B 参数，Apache-2.0 协议），是 Open-LLM-VTuber 中音质最高的 TTS 选项。推理代码已内置于源代码树中，仅需通过可选依赖组安装 Python 依赖。
 
 ### 安装
 
@@ -72,9 +72,9 @@ qwen3_tts:
   speaker: 'serena'            # serena, vivian, ryan, aiden, ono_anna, sohee
 
   # --- 生成参数 ---
-  device: 'cuda'               # 'cuda'（推荐，PyTorch 自动选择 GPU，适用于单卡和多卡）
-                               # 'cuda:0'/'cuda:1'/...（按索引指定 GPU，多卡时用于固定特定显卡）
-                               # 'cpu'（仅用 CPU，速度较慢）
+  device: 'cuda'               # 'cuda'：在大多数机器上等同于 cuda:0，使用当前 CUDA 设备（默认为第一块 GPU）
+                               # 'cuda:0'/'cuda:1'/...：按索引显式指定 GPU；多卡机器上用于固定特定显卡
+                               # 'cpu'：仅用 CPU，速度较慢
   attention: 'auto'            # auto, sage_attn, flash_attn, sdpa, eager
   temperature: 1.0
   top_k: 20
@@ -104,7 +104,7 @@ qwen3_tts:
 
 ### voice_design 说明
 
-`voice_design` 在合成时内联生成声音特征——不会预编码可复用的声音提示。每次 `generate_audio` 调用都会根据 `instruct` 文本独立生成声音。在流式模式下，每句话是一次单独的调用，因此各句之间的声音会不一致。
+`voice_design` 在合成时内联生成声音特征——不会预编码可复用的声音提示。每次 `generate_audio` 调用都会根据 `instruct` 文本独立生成声音。在流式模式下，每句话是单独地调用一次，因此各句之间的声音会不一致。
 
 坦白说，`voice_design` 放在这里有点像方榫插圆孔。它本来就不是为逐句流式合成的运行时设计的，所以开箱即用的效果不要抱太高期望。如果你想折腾，功能是有的，但要真正用于实际场景，还是下面的设计→克隆工作流更靠谱。
 
