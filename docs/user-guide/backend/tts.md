@@ -25,7 +25,7 @@ Qwen3-TTS 支持三种生成模式，每种模式使用不同的模型变体：
 
 - **`voice_clone`** — 从参考音频文件克隆声音，使用 `*-Base` 模型，稳定性最佳。
 - **`voice_design`** — 根据自然语言描述生成声音，使用 `*-VoiceDesign` 模型，仅支持 1.7B。
-- **`custom_voice`** — 使用预定义的说话人名称，使用 `*-CustomVoice` 模型。
+- **`custom_voice`** — 使用预定义的说话人名称，使用 `*-CustomVoice` 模型；可选填 `instruct` 对说话人风格进行微调。
 
 ### 模型变体
 

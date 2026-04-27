@@ -24,7 +24,7 @@ Qwen3-TTS supports three generation modes, each using a different model variant:
 
 - **`voice_clone`** — clones a voice from a reference audio file. Uses the `*-Base` model. Most stable option.
 - **`voice_design`** — generates a voice from a natural language description. Uses the `*-VoiceDesign` model. Only supports 1.7B.
-- **`custom_voice`** — uses a predefined speaker name. Uses the `*-CustomVoice` model.
+- **`custom_voice`** — uses a predefined speaker name. Uses the `*-CustomVoice` model. The `instruct` field can optionally style-modify the speaker (e.g. `"speak slowly and warmly"`).
 
 ### Model Variants
 
