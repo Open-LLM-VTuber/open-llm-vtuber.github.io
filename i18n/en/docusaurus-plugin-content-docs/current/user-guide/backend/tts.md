@@ -57,20 +57,16 @@ qwen3_tts:
   model_size: '1.7B'           # '0.6B' (faster, lower VRAM) or '1.7B' (higher capacity); voice_design only supports 1.7B
   model_path: ''               # optional: local directory path; overrides model_type + model_size if set
   language: 'english'          # english, spanish, french, german, japanese, korean, chinese, portuguese, russian, italian
-
-  # --- voice_clone (model: *-Base) ---
+  # --- For model_type: 'voice_clone' ---
   ref_audio: ''                # path to reference wav file (3–10s recommended; up to 15s for best quality)
   ref_text: ''                 # transcript of ref_audio for ICL mode; leave empty to use x_vector_only_mode
   x_vector_only_mode: true     # true = speaker embedding only (no transcript needed)
                                # false = ICL mode (ref_text required, higher fidelity)
-
-  # --- voice_design (model: *-VoiceDesign) ---
-  instruct: 'A warm and expressive female voice'
-
-  # --- custom_voice (model: *-CustomVoice) ---
+  # --- For model_type: 'custom_voice' ---
   speaker: 'serena'            # serena, vivian, ryan, aiden, ono_anna, sohee
-
-  # --- generation parameters ---
+  # --- For model_type: 'custom_voice, voice_design' ---
+  instruct: 'A warm and expressive female voice'
+  # --- Generation parameters ---
   device: 'cuda'               # 'cuda'    — equivalent to cuda:0 on most machines; uses the current
                                #             CUDA device, which defaults to the first GPU
                                # 'cuda:0'/'cuda:1'/... — targets a GPU explicitly by index;

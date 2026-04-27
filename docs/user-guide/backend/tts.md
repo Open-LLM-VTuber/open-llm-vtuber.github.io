@@ -58,19 +58,15 @@ qwen3_tts:
   model_size: '1.7B'           # '0.6B'（速度更快，显存占用更低）或 '1.7B'（容量更大）；voice_design 仅支持 1.7B
   model_path: ''               # 可选：本地目录路径；设置后将覆盖 model_type + model_size
   language: 'english'          # english, spanish, french, german, japanese, korean, chinese, portuguese, russian, italian
-
-  # --- voice_clone（模型：*-Base）---
+  # --- 适用于 model_type: 'voice_clone' ---
   ref_audio: ''                # 参考音频文件路径（推荐 3–10 秒；最佳质量可用至 15 秒）
   ref_text: ''                 # 参考音频的文本转录（ICL 模式需要）；留空则使用 x_vector_only_mode
   x_vector_only_mode: true     # true = 仅使用说话人嵌入（无需转录文本）
                                # false = ICL 模式（需要 ref_text，音质更高）
-
-  # --- voice_design（模型：*-VoiceDesign）---
-  instruct: 'A warm and expressive female voice'
-
-  # --- custom_voice（模型：*-CustomVoice）---
+  # --- 适用于 model_type: 'custom_voice' ---
   speaker: 'serena'            # serena, vivian, ryan, aiden, ono_anna, sohee
-
+  # --- 适用于 model_type: 'custom_voice, voice_design' ---
+  instruct: 'A warm and expressive female voice'
   # --- 生成参数 ---
   device: 'cuda'               # 'cuda'：在大多数机器上等同于 cuda:0，使用当前 CUDA 设备（默认为第一块 GPU）
                                # 'cuda:0'/'cuda:1'/...：按索引显式指定 GPU；多卡机器上用于固定特定显卡
