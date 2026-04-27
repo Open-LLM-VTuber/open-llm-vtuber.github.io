@@ -105,9 +105,7 @@ The `attention` parameter selects the attention mechanism. `auto` picks the fast
 
 ### voice_design Notes
 
-`voice_design` generates voice characteristics inline during synthesis — it does not pre-encode a reusable voice prompt. Each `generate_audio` call generates an independent voice from the `instruct` text. In streaming mode, each sentence is a separate call, so the voice will differ across sentences.
-
-`voice_design` was not designed for sentence-by-sentence streaming — each call generates voice characteristics independently, so the voice will differ across sentences. It is available for experimentation, but the design→clone workflow below is the recommended path for consistent output.
+`voice_design` generates voice characteristics inline during synthesis — it does not pre-encode a reusable voice prompt. Each `generate_audio` call generates an independent voice from the `instruct` text. It was not designed for sentence-by-sentence streaming: in streaming mode, each sentence is a separate call, so the voice will differ across sentences. The design→clone workflow below is the recommended path for consistent output.
 
 To get a consistent voice from a design:
 
