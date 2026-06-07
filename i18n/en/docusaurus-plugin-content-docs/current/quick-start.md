@@ -524,6 +524,7 @@ For more information about the frontend, refer to the [Frontend Guide](./user-gu
 ## Next Step:
 - [Common Issues](faq.md)
 - [Long-Term Memory (Letta)](user-guide/backend/agent#letta-agent)
+- [Let Claude, Codex, or another agent help with first setup](user-guide/backend/agent-assisted-setup.md)
 - [Desktop Pet Mode](user-guide/frontend/mode)
 - [Modifying AI Character Settings (Prompt)](user-guide/backend/character_settings.md)
 - [AI Group Chat (currently lacking documentation)](user-guide/backend/group_chat.md)
