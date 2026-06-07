@@ -537,6 +537,7 @@ uv run run_server.py
 ## 下一步
 - [常见问题](faq.md)
 - [长期记忆 (Letta)](user-guide/backend/agent#letta-agent)
+- [让 Claude、Codex 或其他 Agent 协助初次设置](user-guide/backend/agent-assisted-setup.md)
 - [桌宠模式](user-guide/frontend/mode)
 - [修改 AI 角色的设定(提示词)](user-guide/backend/character_settings.md)
 - [AI 群聊 (目前文档欠缺)](user-guide/backend/group_chat.md)
