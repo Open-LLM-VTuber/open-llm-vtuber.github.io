@@ -32,11 +32,11 @@ sidebar_position: 5
 ## 2. 配置 Live2D 模型
 
 :::info
-Live2D 模型的配置文件是一个包含表情、动作等多个设置项的重要文件。由于配置方法多样且较为复杂，目前这部分的教程还没有正式开工。你可以选择:
+Live2D 模型的配置文件通常是 `*.model3.json`。在接入 Open-LLM-VTuber 之前，建议先确认三件事:
 
-1. 通过查找网络资料来学习配置方法
-2. 先跳过这部分，等对 Live2D 模型配置有更深入了解后再回来设置
-3. 如果你有相关经验，非常欢迎通过 PR 或 Issue 来帮助我们完善这部分内容
+1. `Expressions` 里有哪些表情，以及它们的名称或顺序
+2. `Motions` 里有哪些动作组，是否有可作为待机动作的 `idle` / `Idle`
+3. `HitAreas` 里有哪些点击区域，前端点击模型时可以触发哪些动作
 :::
 
 由于大多数 Live2D 模型是从游戏中提取或主要用于直播，它们的表情和动作可能并不完全适合本项目的使用场景。为了获得最佳的使用体验，建议你先查看模型的配置文件（`model3.json`），并根据需要进行适当的调整，获得更好的交互体验。
@@ -53,6 +53,42 @@ Live2D 模型的配置文件是一个包含表情、动作等多个设置项的�
 4. 创建自定义动作组
 5. 添加新的表情
 6. 制作新的动作
+
+### 快速检查 `model3.json`
+
+打开模型目录下的 `*.model3.json`，先找这些字段：
+
+```json
+{
+  "FileReferences": {
+    "Motions": {
+      "Idle": [
+        { "File": "motions/idle.motion3.json" }
+      ]
+    },
+    "Expressions": [
+      { "Name": "happy", "File": "expressions/happy.exp3.json" },
+      { "Name": "sad", "File": "expressions/sad.exp3.json" }
+    ]
+  },
+  "HitAreas": [
+    { "Id": "HitAreaHead", "Name": "Head" },
+    { "Id": "HitAreaBody", "Name": "Body" }
+  ]
+}
+```
+
+不同模型的字段大小写可能略有差异，例如 `Motions` / `motions`、`Expressions` / `expressions`。配置时以模型实际文件为准。
+
+### 配置前检查清单
+
+- 模型是 Cubism 3 / 4 / 5，不是 Cubism 2。
+- `url` 指向的是 `.model3.json`，不是模型文件夹。
+- 本地模型路径以 `/live2d-models/` 开头。
+- `model_dict.json` 里的 `name` 与角色配置里的 `live2d_model_name` 完全一致。
+- `idleMotionGroupName` 与模型 `Motions` 里的动作组名称完全一致。
+- `emotionMap` 使用的表情名称或索引能在模型 `Expressions` 中找到。
+- 如果要启用点击动作，`tapMotions` 里的动作组名称能在模型 `Motions` 中找到。
 
 ## 3. 放置模型文件
 
@@ -314,3 +350,63 @@ AI 会使用 `[emotion]` 格式在对话中触发表情变化，例如：
 - `conf_name`: 这个名称会显示在前端界面的角色选择中，你可以理解为配置名称 / 角色名称，可以随便命名。
 - `conf_uid`: 这是角色配置的唯一标识符，请确保它的值是唯一的
 :::
+
+### 5.1 角色配置模板
+
+如果你想把一个 Live2D 模型和一个角色人设绑定在一起，建议在 `characters` 目录下新建一个独立的角色配置文件。例如 `characters/shizuku_local.yaml`：
+
+```yaml
+conf_name: 'shizuku_local'
+conf_uid: 'shizuku_local_001'
+live2d_model_name: 'shizuku-local'
+character_name: 'Shizuku'
+avatar: 'shizuku.png'
+
+persona_prompt: |
+  You are Shizuku, a warm and curious AI companion.
+  Speak naturally and keep your replies concise unless the user asks for details.
+  Match your tone to the user's mood, but do not pretend to have real-world abilities you do not have.
+```
+
+字段对应关系：
+
+| 字段 | 作用 | 常见问题 |
+| --- | --- | --- |
+| `conf_name` | 前端角色选择中显示的配置名称 | 可以和文件名不同，但建议保持相近 |
+| `conf_uid` | 角色配置唯一 ID | 不要和其他角色重复 |
+| `live2d_model_name` | 使用哪个 Live2D 模型 | 必须等于 `model_dict.json` 中的 `name` |
+| `character_name` | AI 在对话和群聊中的角色名 | 建议与人设保持一致 |
+| `avatar` | 角色头像文件 | 放在 `avatars` 目录；建议使用正方形图片 |
+| `persona_prompt` | 角色人设与说话方式 | 不要写入密钥、私人资料或无法兑现的能力 |
+
+### 5.2 人设提示词与表情关键词
+
+如果启用了 `live2d_expression_prompt`，AI 可以在回复中使用 `[neutral]`、`[joy]`、`[sadness]`、`[surprise]` 等关键词触发表情。为了让角色更稳定地使用表情，可以在人设中补一句轻量说明：
+
+```yaml
+persona_prompt: |
+  You are Shizuku, a warm and curious AI companion.
+  When your emotion clearly changes, you may include one expression tag such as [joy], [sadness], [surprise], or [neutral].
+  Do not overuse expression tags; natural conversation is more important.
+```
+
+建议：
+
+- 使用 `emotionMap` 中已经配置的英文关键词。
+- 不要在一句话里塞多个表情标签。
+- 不要让人设依赖某个模型独有的表情名；如果之后换模型，通用关键词更容易复用。
+- 先确认表情能正确触发，再调角色说话风格。
+
+## 6. 常见排错
+
+| 问题 | 可能原因 | 处理方式 |
+| --- | --- | --- |
+| 模型没有显示 | `url` 不是有效的 `.model3.json` 路径，或模型文件没有放在 `live2d-models` 下 | 检查 `model_dict.json` 的 `url`，本地路径应类似 `/live2d-models/example/example.model3.json` |
+| 切换角色后还是旧模型 | 角色配置里的 `live2d_model_name` 和 `model_dict.json` 的 `name` 不一致 | 确认两个值完全相同，包含大小写和连字符 |
+| 模型大小看起来没有按 `kScale` 改变 | 浏览器 `localStorage` 已记住手动缩放后的大小 | 在前端重新调整缩放，或清理该站点的本地存储后再测试 |
+| 表情不变化 | `emotionMap` 的索引或名称与模型 `Expressions` 不一致，或没有启用表情提示 | 用模型的 `model3.json` 重新核对表情名称 / 索引，并确认 `tool_prompts` 中启用了 `live2d_expression_prompt` |
+| 待机动作不播放 | `idleMotionGroupName` 不存在，或模型没有对应动作组 | 检查 `Motions` 里的动作组名称，尝试 `idle` 或 `Idle` |
+| 点击动作无效 | `tapMotions` 的动作组名称或点击区域不匹配 | 检查模型 `HitAreas` 和 `Motions`，先用模型已有动作组做最小测试 |
+| 远程模型加载失败 | HTTP / HTTPS 混合内容、CORS、或远程链接不是直接的 `.model3.json` | 优先使用本地模型路径；远程模型需确认链接可直接访问并允许浏览器加载 |
+
+如果你不确定问题出在模型、`model_dict.json` 还是角色配置，建议按顺序做最小测试：先让模型显示出来，再配置待机动作，然后配置表情，最后再加点击动作和完整人设。

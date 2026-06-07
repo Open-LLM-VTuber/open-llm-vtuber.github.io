@@ -32,11 +32,11 @@ Here are some common sources for obtaining Live2D models (feel free to add more 
 ## 2. Configure Live2D Model
 
 :::info
-The Live2D model configuration file is an important file containing multiple settings such as expressions and motions. Since the configuration methods are diverse and complex, this part of the tutorial is not yet formally started. You can choose to:
+The Live2D model configuration file is usually a `*.model3.json` file. Before using a model in Open-LLM-VTuber, check three things:
 
-1. Learn configuration methods by searching online resources
-2. Skip this part for now and come back when you have a deeper understanding of Live2D model configuration
-3. If you have relevant experience, you're very welcome to help us improve this content through PR or Issue
+1. Which expressions are listed in `Expressions`, and what their names or array positions are
+2. Which motion groups are listed in `Motions`, and whether there is an `idle` / `Idle` group for idle animation
+3. Which clickable areas are listed in `HitAreas`, so frontend clicks can trigger suitable motions
 :::
 
 Since most Live2D models are extracted from games or primarily used for streaming, their expressions and motions may not be entirely suitable for this project's use case. For the best user experience, it's recommended to first check the model's configuration file (`model3.json`) and make appropriate adjustments as needed to achieve better interaction.
@@ -53,6 +53,42 @@ You can:
 4. Create custom motion groups
 5. Add new expressions
 6. Create new motions
+
+### Quick `model3.json` Check
+
+Open the model's `*.model3.json` file and look for these fields first:
+
+```json
+{
+  "FileReferences": {
+    "Motions": {
+      "Idle": [
+        { "File": "motions/idle.motion3.json" }
+      ]
+    },
+    "Expressions": [
+      { "Name": "happy", "File": "expressions/happy.exp3.json" },
+      { "Name": "sad", "File": "expressions/sad.exp3.json" }
+    ]
+  },
+  "HitAreas": [
+    { "Id": "HitAreaHead", "Name": "Head" },
+    { "Id": "HitAreaBody", "Name": "Body" }
+  ]
+}
+```
+
+Field names can differ slightly between models, such as `Motions` / `motions` or `Expressions` / `expressions`. Always follow the actual model file you are using.
+
+### Pre-configuration Checklist
+
+- The model is Cubism 3 / 4 / 5, not Cubism 2.
+- `url` points to a `.model3.json` file, not to the model folder.
+- Local model paths start with `/live2d-models/`.
+- The `name` in `model_dict.json` exactly matches `live2d_model_name` in the character config.
+- `idleMotionGroupName` exactly matches a motion group in the model's `Motions`.
+- The expression names or indices used by `emotionMap` exist in the model's `Expressions`.
+- If you enable click motions, the motion group names used by `tapMotions` exist in the model's `Motions`.
 
 ## 3. Place Model Files
 
@@ -314,3 +350,63 @@ Explanation of other configuration fields in the image:
 - `conf_name`: This name will be displayed in the character selection in the frontend interface. You can think of it as the configuration name / character name, and you can name it as you like.
 - `conf_uid`: This is the unique identifier for the character configuration. Please ensure its value is unique.
 :::
+
+### 5.1 Character Configuration Template
+
+If you want to bind a Live2D model to a specific character persona, create a separate character config file in the `characters` directory. For example, `characters/shizuku_local.yaml`:
+
+```yaml
+conf_name: 'shizuku_local'
+conf_uid: 'shizuku_local_001'
+live2d_model_name: 'shizuku-local'
+character_name: 'Shizuku'
+avatar: 'shizuku.png'
+
+persona_prompt: |
+  You are Shizuku, a warm and curious AI companion.
+  Speak naturally and keep your replies concise unless the user asks for details.
+  Match your tone to the user's mood, but do not pretend to have real-world abilities you do not have.
+```
+
+Field mapping:
+
+| Field | Purpose | Common issue |
+| --- | --- | --- |
+| `conf_name` | Displayed in the frontend character selector | It can differ from the file name, but keeping them similar is easier |
+| `conf_uid` | Unique ID for this character config | Do not reuse it across characters |
+| `live2d_model_name` | Which Live2D model to use | Must equal the `name` in `model_dict.json` |
+| `character_name` | AI name used in chat and group chat | Keep it aligned with the persona |
+| `avatar` | Character avatar image | Place it in the `avatars` folder; square images are recommended |
+| `persona_prompt` | Character personality and speaking style | Do not include secrets, private information, or impossible capabilities |
+
+### 5.2 Persona Prompt and Expression Tags
+
+If `live2d_expression_prompt` is enabled, the AI can use tags such as `[neutral]`, `[joy]`, `[sadness]`, and `[surprise]` to trigger expressions. You can add a light instruction to the persona:
+
+```yaml
+persona_prompt: |
+  You are Shizuku, a warm and curious AI companion.
+  When your emotion clearly changes, you may include one expression tag such as [joy], [sadness], [surprise], or [neutral].
+  Do not overuse expression tags; natural conversation is more important.
+```
+
+Suggestions:
+
+- Use the English keywords already configured in `emotionMap`.
+- Do not put several expression tags in one sentence.
+- Avoid relying on expression names that only exist in one model; generic keywords are easier to reuse when switching models.
+- First verify that expressions trigger correctly, then tune the character's speaking style.
+
+## 6. Troubleshooting
+
+| Problem | Possible cause | Fix |
+| --- | --- | --- |
+| The model does not appear | `url` is not a valid `.model3.json` path, or the model is not under `live2d-models` | Check `url` in `model_dict.json`; local paths should look like `/live2d-models/example/example.model3.json` |
+| Switching characters still shows the old model | `live2d_model_name` in the character config does not match `name` in `model_dict.json` | Make the two values exactly the same, including case and hyphens |
+| Changing `kScale` seems to do nothing | The browser has remembered a manually adjusted scale in `localStorage` | Resize the model in the frontend again, or clear this site's local storage before testing |
+| Expressions do not change | `emotionMap` indices or names do not match the model's `Expressions`, or expression prompting is not enabled | Re-check expression names / indices in `model3.json`, and make sure `live2d_expression_prompt` is enabled in `tool_prompts` |
+| Idle motion does not play | `idleMotionGroupName` does not exist, or the model has no matching motion group | Check the motion group names in `Motions`; try `idle` or `Idle` |
+| Click motion does not work | `tapMotions` uses mismatched motion group names or hit areas | Check the model's `HitAreas` and `Motions`; start with one known motion group as a minimal test |
+| A remote model fails to load | Mixed HTTP / HTTPS content, CORS, or a URL that is not a direct `.model3.json` link | Prefer a local model path; if using a remote model, confirm the URL opens directly and can be loaded by the browser |
+
+If you are not sure whether the problem is the model, `model_dict.json`, or the character config, test in order: make the model appear first, then configure idle motion, then expressions, and finally click motions and the full persona.
