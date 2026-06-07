@@ -132,8 +132,44 @@ Then adjust the settings here:
 ```yaml
 gemini_llm:
     llm_api_key: "Your Gemini API Key" # Gemini API key
-    model: "gemini-2.0-flash-exp" # Model to use
+    model: "gemini-2.5-flash" # Model to use
     temperature: 1.0 # Temperature, between 0 and 2
+```
+
+#### Use cloud Gemini models to reduce local hardware requirements
+
+`gemini_llm` uses the Google Gemini API [OpenAI-compatible endpoint](https://ai.google.dev/gemini-api/docs/openai). If you want to reduce local GPU/CPU load, you can move the main conversation model to cloud Gemini while keeping Live2D, TTS, ASR, or other local components on your machine.
+
+Common choices:
+
+- `gemini-2.5-flash-lite`: Good for high-frequency, lightweight, low-latency chat.
+- `gemini-2.5-flash`: Good for regular chat that needs stronger understanding and reasoning.
+- Other Gemini Flash / Flash-Lite models: Use the model name shown in the [Gemini model list](https://ai.google.dev/gemini-api/docs/models) and AI Studio.
+
+If you want to use hosted Gemma 4, first confirm the actual endpoint and model name exposed by your provider. Gemma 4 is Google's open model family and can be used through Google AI Studio, Vertex AI, or other hosted services; if the service exposes an OpenAI-compatible interface, configure it under `openai_compatible_llm` instead of assuming it belongs under `gemini_llm`. Local Gemma 4 setups still fit better under `ollama_llm`, `lmstudio_llm`, or `llama_cpp_llm`.
+
+:::tip
+Gemini RPM, TPM, and RPD limits vary by model, project, billing tier, and account status, and they are counted per Google Cloud / AI Studio project, not per individual API key. Check your current project limits in AI Studio and refer to the [Gemini API rate limits](https://ai.google.dev/gemini-api/docs/rate-limits). If you hit 429 errors, reduce concurrency, shorten context, avoid aggressive retries, or switch to a project with higher quota.
+:::
+
+#### Configuration prompt for Claude, Codex, or another agent
+
+You can give the following prompt to Claude, Codex, or another agent that edits project files. Do not put real API keys in public issues, PRs, chat logs, or commits.
+
+```text
+You are configuring Open-LLM-VTuber to use a cloud Gemini model to reduce local hardware requirements.
+
+Edit only the local conf.yaml file. Do not commit API keys, tokens, or private endpoint URLs.
+
+Tasks:
+1. Find character_config -> agent_config -> agent_settings -> basic_memory_agent.
+2. Set llm_provider to gemini_llm.
+3. Find character_config -> agent_config -> llm_configs -> gemini_llm.
+4. Set llm_api_key to a placeholder such as YOUR_GEMINI_API_KEY unless the user explicitly provides a local secret handling method.
+5. Set model to gemini-2.5-flash-lite for low-cost, high-frequency chat, or gemini-2.5-flash for stronger reasoning.
+6. Keep temperature between 0.7 and 1.0 unless the user asks for a different personality style.
+7. Remind the user to check Google AI Studio for the current model availability and RPM/TPM/RPD limits.
+8. Run the app only after confirming the key is stored locally and not committed.
 ```
 
 ### Zhipu API (`zhipu_llm`)
