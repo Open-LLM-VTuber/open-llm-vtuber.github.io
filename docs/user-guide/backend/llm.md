@@ -136,7 +136,7 @@ openai_llm:
 ```yaml
 gemini_llm:
     llm_api_key: "Your Gemini API Key" # Gemini API 密钥
-    model: "gemini-2.5-flash" # 使用的模型
+    model: "gemini-2.5-flash" # gemini-2.5-flash 已在 2026/10/16 停止服务，建议改用 gemini-3.5-flash
     temperature: 1.0 # 温度，介于 0 到 2 之间
 ```
 
@@ -146,8 +146,8 @@ gemini_llm:
 
 常见选择：
 
-- `gemini-2.5-flash-lite`：适合高频、轻量、低延迟对话。
-- `gemini-2.5-flash`：适合需要更强理解与推理能力的常规对话。
+- `gemini-3.1-flash-lite`：适合高频、轻量、低延迟对话。
+- `gemini-3.5-flash`：适合需要更强理解与推理能力的常规对话。
 - 其他 Gemini Flash / Flash-Lite 模型：请以 [Gemini 模型列表](https://ai.google.dev/gemini-api/docs/models) 和 AI Studio 中可用的模型名称为准。
 
 如果你想使用托管的 Gemma 4，请先确认服务提供的实际端点和模型名称。Gemma 4 是 Google 的开放模型系列，可以通过 Google AI Studio、Vertex AI 或其他托管服务使用；如果该服务提供 OpenAI 兼容接口，请优先把它配置到 `openai_compatible_llm`，而不是假设它一定属于 `gemini_llm`。Gemma 4 的本地运行路线仍然适合放在 `ollama_llm`、`lmstudio_llm` 或 `llama_cpp_llm`。
@@ -170,7 +170,7 @@ Tasks:
 2. Set llm_provider to gemini_llm.
 3. Find character_config -> agent_config -> llm_configs -> gemini_llm.
 4. Set llm_api_key to a placeholder such as YOUR_GEMINI_API_KEY unless the user explicitly provides a local secret handling method.
-5. Set model to gemini-2.5-flash-lite for low-cost, high-frequency chat, or gemini-2.5-flash for stronger reasoning.
+5. Set model to gemini-3.1-flash-lite for low-cost, high-frequency chat, or gemini-3.5-flash for stronger reasoning.
 6. Keep temperature between 0.7 and 1.0 unless the user asks for a different personality style.
 7. Remind the user to check Google AI Studio for the current model availability and RPM/TPM/RPD limits.
 8. Run the app only after confirming the key is stored locally and not committed.
