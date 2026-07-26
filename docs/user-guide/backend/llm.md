@@ -150,14 +150,14 @@ zhipu_llm:
     temperature: 1.0 # 温度，介于 0 到 2 之间
 ```
 
-### DeepSeek API (`deepseek`)
-前往 [DeepSeek](#deepseek-api-deepseek) 获取 API key
+### DeepSeek API (`deepseek_llm`)
+前往 [DeepSeek 平台](https://platform.deepseek.com/) 获取 API key
 
 ```yaml
-zhipu_llm:
-    llm_api_key: "Your ZhiPu AI API key" # 智谱 AI API 密钥
-    model: "glm-4-flash" # 使用的模型
-    temperature: 1.0 # 温度，介于 0 到 2 之间
+deepseek_llm:
+    llm_api_key: 'Your DeepSeek API key' # DeepSeek API 密钥
+    model: 'deepseek-chat' # 使用的模型
+    temperature: 0.7 # 注意，DeepSeek 的温度范围是 0 到 1
 ```
 
 ### Mistral API (`mistral_llm`)
