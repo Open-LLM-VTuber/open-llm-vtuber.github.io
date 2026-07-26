@@ -156,7 +156,7 @@ zhipu_llm:
 ```yaml
 deepseek_llm:
     llm_api_key: 'Your DeepSeek API key' # DeepSeek API 密钥
-    model: 'deepseek-chat' # 使用的模型
+    model: 'deepseek-v4-flash' # 使用的模型（自2026/7/24起，模型更名为‘deepseek-v4-flash’和‘deepseek-v4-pro’）
     temperature: 0.7 # 注意，DeepSeek 的温度范围是 0 到 1
 ```
 

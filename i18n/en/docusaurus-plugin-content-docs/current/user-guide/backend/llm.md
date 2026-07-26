@@ -152,7 +152,7 @@ Go to [DeepSeek Platform](https://platform.deepseek.com/) to obtain an API key.
 ```yaml
 deepseek_llm:
     llm_api_key: 'Your DeepSeek API key'
-    model: 'deepseek-chat'
+    model: 'deepseek-v4-flash' # (Starting from 2026/7/24, model names are changed into 'deepseek-v4-flash' and 'deepseek-v4-pro')
     temperature: 0.7  # note that DeepSeek's temperature ranges from 0 to 1
 ```
 
