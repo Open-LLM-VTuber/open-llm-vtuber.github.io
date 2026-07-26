@@ -146,14 +146,14 @@ zhipu_llm:
     temperature: 1.0 # Temperature, between 0 and 2
 ```
 
-### DeepSeek API (`deepseek`)
-Go to [DeepSeek](#deepseek-api-deepseek) to obtain an API key.
+### DeepSeek API (`deepseek_llm`)
+Go to [DeepSeek Platform](https://platform.deepseek.com/) to obtain an API key.
 
 ```yaml
-zhipu_llm:
-    llm_api_key: "Your ZhiPu AI API key" # Zhipu AI API key
-    model: "glm-4-flash" # Model to use
-    temperature: 1.0 # Temperature, between 0 and 2
+deepseek_llm:
+    llm_api_key: 'Your DeepSeek API key'
+    model: 'deepseek-v4-flash' # (Starting from 2026/7/24, model names are changed into 'deepseek-v4-flash' and 'deepseek-v4-pro')
+    temperature: 0.7  # note that DeepSeek's temperature ranges from 0 to 1
 ```
 
 ### Mistral API (`mistral_llm`)
