@@ -132,7 +132,7 @@ Then adjust the settings here:
 ```yaml
 gemini_llm:
     llm_api_key: "Your Gemini API Key" # Gemini API key
-    model: "gemini-2.5-flash" # gemini-2.5-flash is deprecated and scheduled for shutdown on Oct 16, 2026; switch to gemini-3.5-flash
+    model: "gemini-3.8-flash" # Stable Gemini Flash model
     temperature: 1.0 # Temperature, between 0 and 2
 ```
 
@@ -142,8 +142,8 @@ gemini_llm:
 
 Common choices:
 
-- `gemini-3.1-flash-lite`: Good for high-frequency, lightweight, low-latency chat.
-- `gemini-3.5-flash`: Good for regular chat that needs stronger understanding and reasoning.
+- `gemini-3.5-flash-lite`: Good for high-frequency, lightweight, low-latency chat.
+- `gemini-3.8-flash`: Good for regular chat that needs stronger understanding and reasoning.
 - Other Gemini Flash / Flash-Lite models: Use the model name shown in the [Gemini model list](https://ai.google.dev/gemini-api/docs/models) and AI Studio.
 
 If you want to use hosted Gemma 4, first confirm the actual endpoint and model name exposed by your provider. Gemma 4 is Google's open model family and can be used through Google AI Studio, Vertex AI, or other hosted services; if the service exposes an OpenAI-compatible interface, configure it under `openai_compatible_llm` instead of assuming it belongs under `gemini_llm`. Local Gemma 4 setups still fit better under `ollama_llm`, `lmstudio_llm`, or `llama_cpp_llm`.
@@ -166,7 +166,7 @@ Tasks:
 2. Set llm_provider to gemini_llm.
 3. Find character_config -> agent_config -> llm_configs -> gemini_llm.
 4. Set llm_api_key to a placeholder such as YOUR_GEMINI_API_KEY unless the user explicitly provides a local secret handling method.
-5. Set model to gemini-3.1-flash-lite for low-cost, high-frequency chat, or gemini-3.5-flash for stronger reasoning.
+5. Set model to gemini-3.5-flash-lite for low-cost, high-frequency chat, or gemini-3.8-flash for stronger reasoning.
 6. Keep temperature between 0.7 and 1.0 unless the user asks for a different personality style.
 7. Remind the user to check Google AI Studio for the current model availability and RPM/TPM/RPD limits.
 8. Run the app only after confirming the key is stored locally and not committed.
