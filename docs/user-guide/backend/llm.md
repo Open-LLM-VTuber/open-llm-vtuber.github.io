@@ -136,8 +136,44 @@ openai_llm:
 ```yaml
 gemini_llm:
     llm_api_key: "Your Gemini API Key" # Gemini API 密钥
-    model: "gemini-2.0-flash-exp" # 使用的模型
+    model: "gemini-3.8-flash" # 使用稳定版 Gemini Flash 模型
     temperature: 1.0 # 温度，介于 0 到 2 之间
+```
+
+#### 使用 Gemini 云端模型降低本地运行需求
+
+`gemini_llm` 使用 Google Gemini API 的 [OpenAI 兼容端点](https://ai.google.dev/gemini-api/docs/openai)。如果你希望减少本地 GPU/CPU 负担，可以把主要对话模型切到云端 Gemini，只在本地运行 Live2D、TTS、ASR 或其他你需要保留在本机的组件。
+
+常见选择：
+
+- `gemini-3.5-flash-lite`：适合高频、轻量、低延迟对话。
+- `gemini-3.8-flash`：适合需要更强理解与推理能力的常规对话。
+- 其他 Gemini Flash / Flash-Lite 模型：请以 [Gemini 模型列表](https://ai.google.dev/gemini-api/docs/models) 和 AI Studio 中可用的模型名称为准。
+
+如果你想使用托管的 Gemma 4，请先确认服务提供的实际端点和模型名称。Gemma 4 是 Google 的开放模型系列，可以通过 Google AI Studio、Vertex AI 或其他托管服务使用；如果该服务提供 OpenAI 兼容接口，请优先把它配置到 `openai_compatible_llm`，而不是假设它一定属于 `gemini_llm`。Gemma 4 的本地运行路线仍然适合放在 `ollama_llm`、`lmstudio_llm` 或 `llama_cpp_llm`。
+
+:::tip
+Gemini 的 RPM、TPM、RPD 限制会随模型、项目、计费层级和账号状态变化，并且是按 Google Cloud/AI Studio 项目计算，不是按单个 API key 计算。请在 AI Studio 查看当前项目的实际限制，并参考 [Gemini API rate limits](https://ai.google.dev/gemini-api/docs/rate-limits)。如果遇到 429，请降低并发、缩短上下文、减少连续重试，或换用更高配额的项目。
+:::
+
+#### 给 Claude、Codex 或其他 Agent 的配置提示词
+
+你可以把下面这段提示词交给 Claude、Codex 或其他会编辑项目文件的 Agent，让它帮你安全地修改 `conf.yaml`。不要把真实 API key 写进公开 issue、PR、聊天记录或提交记录。
+
+```text
+You are configuring Open-LLM-VTuber to use a cloud Gemini model to reduce local hardware requirements.
+
+Edit only the local conf.yaml file. Do not commit API keys, tokens, or private endpoint URLs.
+
+Tasks:
+1. Find character_config -> agent_config -> agent_settings -> basic_memory_agent.
+2. Set llm_provider to gemini_llm.
+3. Find character_config -> agent_config -> llm_configs -> gemini_llm.
+4. Set llm_api_key to a placeholder such as YOUR_GEMINI_API_KEY unless the user explicitly provides a local secret handling method.
+5. Set model to gemini-3.5-flash-lite for low-cost, high-frequency chat, or gemini-3.8-flash for stronger reasoning.
+6. Keep temperature between 0.7 and 1.0 unless the user asks for a different personality style.
+7. Remind the user to check Google AI Studio for the current model availability and RPM/TPM/RPD limits.
+8. Run the app only after confirming the key is stored locally and not committed.
 ```
 
 ### 智谱 API (`zhipu_llm`)
